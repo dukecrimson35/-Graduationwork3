@@ -11,6 +11,7 @@ public class SceneManagement : MonoBehaviour
     public enum SceneNames
     {
         TitleScene,
+        SelectScene,
         GameScene,
         GameClearScene,
         GameOverScene,
@@ -28,6 +29,10 @@ public class SceneManagement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (sceneName == SceneNames.TitleScene.ToString())
+            {
+                SceneManager.LoadScene(SceneNames.SelectScene.ToString());
+            }
+            else if (sceneName == SceneNames.SelectScene.ToString())
             {
                 SceneManager.LoadScene(SceneNames.GameScene.ToString());
             }
