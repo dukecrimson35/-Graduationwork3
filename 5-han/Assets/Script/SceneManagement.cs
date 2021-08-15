@@ -8,7 +8,11 @@ public class SceneManagement : MonoBehaviour
 
     private string sceneName = "";
 
-    public GameData gameData;
+    private GameData gameData;
+
+    public GameObject fade;
+
+    private bool oneFadeFlag = false;
 
     public enum SceneNames
     {
@@ -41,6 +45,13 @@ public class SceneManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!oneFadeFlag && fade != null)
+        {
+            fade.GetComponent<FadeStart>().FadeInA();
+            oneFadeFlag = true;
+        }
+
+
         //if(Input.GetKeyDown(KeyCode.Alpha1))
         //{
         //    if (sceneName == SceneNames.TitleScene.ToString())
@@ -79,7 +90,8 @@ public class SceneManagement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                SceneManager.LoadScene(SceneNames.SelectScene.ToString());
+                //SceneManager.LoadScene(SceneNames.SelectScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.SelectScene.ToString());
             }
            
         }
