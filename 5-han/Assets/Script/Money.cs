@@ -5,7 +5,7 @@ using UnityEngine;
 public class Money : MonoBehaviour
 {
     //プロパティ
-    int amount;//金額
+    public int amount;//金額
 
 
     // Start is called before the first frame update
