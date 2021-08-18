@@ -76,15 +76,9 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetButtonDown("A"))
         {
-            Vector3 senku = new Vector3(7, 0, 0);
-            if (currentDirec == Direc.Right)
-            {
-                transform.position += senku;
-            }
-            if (currentDirec == Direc.Left)
-            {
-                transform.position -= senku;
-            }
+            Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, -Input.GetAxis("Vertical") * 7, 0);
+            transform.position += senku;
+          
         }
         
     }
