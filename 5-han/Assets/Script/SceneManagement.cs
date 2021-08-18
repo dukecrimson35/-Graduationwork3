@@ -99,62 +99,73 @@ public class SceneManagement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SceneManager.LoadScene(SceneNames.Stage01.ToString());
+                //SceneManager.LoadScene(SceneNames.Stage01.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage01.ToString());
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                SceneManager.LoadScene(SceneNames.Stage02.ToString());
+                //SceneManager.LoadScene(SceneNames.Stage02.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage02.ToString());
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                SceneManager.LoadScene(SceneNames.Stage03.ToString());
+                //SceneManager.LoadScene(SceneNames.Stage03.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage03.ToString());
             }
         }
         else if (sceneName == "Stage01")
         {
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
+                //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
             }
             else if (Input.GetKeyDown(KeyCode.Alpha9))
             {
-                SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
+                //SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
             }
         }
         else if (sceneName == "Stage02")
         {
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
+                //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
             }
             else if (Input.GetKeyDown(KeyCode.Alpha9))
             {
-                SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
+                //SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
             }
         }
         else if (sceneName == "Stage03")
         {
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
+                //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
             }
             else if(Input.GetKeyDown(KeyCode.Alpha9))
             {
-                SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
+                //SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
             }
         }
         else if (sceneName == "GameClearScene")
         {
             if(Input.GetKeyDown(KeyCode.Alpha0))
             {
-                SceneManager.LoadScene(SceneNames.TitleScene.ToString());
+                //SceneManager.LoadScene(SceneNames.TitleScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
             }
         }
         else if (sceneName == "GameOverScene")
         {
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                SceneManager.LoadScene(SceneNames.TitleScene.ToString());
+                //SceneManager.LoadScene(SceneNames.TitleScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
             }
         }
 

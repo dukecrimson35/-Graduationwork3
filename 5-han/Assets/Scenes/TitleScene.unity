@@ -451,6 +451,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeObject
       objectReference: {fileID: 0}
+    - target: {fileID: 8600140046530557615, guid: 3cea377839021fc43b9799598eeaf05c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cea377839021fc43b9799598eeaf05c, type: 3}
 --- !u!1 &1724298505
@@ -625,6 +630,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SceneManagerObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648622591065998936, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1648622591065998937, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
         type: 3}
