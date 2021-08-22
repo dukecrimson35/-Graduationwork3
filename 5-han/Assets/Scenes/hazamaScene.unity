@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515c9e871a8eb8747b480f0e12a9480a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseEnemyHp: 5
 --- !u!1 &569906666
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515c9e871a8eb8747b480f0e12a9480a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseEnemyHp: 5
 --- !u!1 &1058487819
 GameObject:
   m_ObjectHideFlags: 0
