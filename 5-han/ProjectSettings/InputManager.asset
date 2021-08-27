@@ -35,7 +35,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 0
+    axis: 1
     joyNum: 0
   - serializedVersion: 3
     m_Name: A
@@ -246,7 +246,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Submit
+    m_Name: Cancel
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
