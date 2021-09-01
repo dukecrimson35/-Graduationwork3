@@ -41,25 +41,7 @@ public  class Data : MonoBehaviour
         makimono -= num;
     }
 
-    public static void BuyItem(string itemName)
-    {
-        if (itemName == "まきもの")
-        {
-            makimono++;
-        }
-        else if (itemName == "まきもの2")
-        {
-            makimono2++;
-        }
-        else if (itemName == "まきもの3")
-        {
-            makimono3++;
-        }
-        else if (itemName == "かいふく")
-        {
-            kaihuku++;
-        }
-    }
+    
 
 
 

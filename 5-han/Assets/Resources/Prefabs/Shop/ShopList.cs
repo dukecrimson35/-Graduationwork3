@@ -20,6 +20,8 @@ public class ShopList : MonoBehaviour
 
     public Text coinText;
 
+    public Text message;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,11 +105,74 @@ public class ShopList : MonoBehaviour
         {
             if(Data.coin >= coinList[yazirusiCout ])
             {
-                Data.coin -= coinList[yazirusiCout];
-                Data.BuyItem(itemList[yazirusiCout]);
+                
+                BuyItem(itemList[yazirusiCout]);
+            }
+            else
+            {
+                message.text = "お金が足りません...";
             }
         }
         
+    }
+
+    public void BuyItem(string itemName)
+    {
+        if (itemName == "まきもの")
+        {
+            if(Data.makimono < 1)
+            {
+                Data.makimono++;
+                Data.coin -= coinList[yazirusiCout];
+                message.text = itemName + "を買いました";
+            }
+            else
+            {
+                message.text = "すでに持っています";
+            }
+            
+        }
+        else if (itemName == "まきもの2")
+        {
+            
+            if (Data.makimono2 < 1)
+            {
+                Data.makimono2++;
+                Data.coin -= coinList[yazirusiCout];
+                message.text = itemName + "を買いました";
+            }
+            else
+            {
+                message.text = "すでに持っています";
+            }
+        }
+        else if (itemName == "まきもの3")
+        {          
+            if (Data.makimono3< 1)
+            {
+                Data.makimono3++;
+                Data.coin -= coinList[yazirusiCout];
+                message.text = itemName + "を買いました";
+            }
+            else
+            {
+                message.text = "すでに持っています";
+            }
+        }
+        else if (itemName == "かいふく")
+        {
+            
+            if (Data.kaihuku < 9)
+            {
+                Data.kaihuku++;
+                Data.coin -= coinList[yazirusiCout];
+                message.text = itemName + "を買いました";
+            }
+            else
+            {
+                message.text = "これ以上買えません";
+            }
+        }
     }
 
     public void HaveNumver()
