@@ -22,8 +22,8 @@ public class ItemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coin = GameData.coin;
-        makimono = GameData.makimono;
+        coin = Data.coin;
+        makimono = Data.makimono;
     }
 
     public int GetCoin()
@@ -53,12 +53,12 @@ public class ItemManager : MonoBehaviour
 
     public void UpCoin(int num)
     {
-        GameData.GetCoin(num);
+        Data.GetCoin(num);
     }
 
     public void UpMakimono(int num)
     {
-        GameData.GetMakimono(num);
+        Data.GetMakimono(num);
     }
 
     public void UseKaihuku(int num)

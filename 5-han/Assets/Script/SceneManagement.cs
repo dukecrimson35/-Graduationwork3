@@ -8,7 +8,7 @@ public class SceneManagement : MonoBehaviour
 
     private string sceneName = "";
 
-    private GameData gameData;
+    private Data gameData;
 
     public GameObject fade;
 

@@ -70,7 +70,7 @@ public class ShopList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinText.text = GameData.coin.ToString() + "銭";
+        coinText.text = Data.coin.ToString() + "銭";
         HaveItemUpdate();
         //メニューの矢印制御
         if (Input.GetKeyDown(KeyCode.UpArrow) && yazirusiCout > 0)
@@ -101,10 +101,10 @@ public class ShopList : MonoBehaviour
         //詳細はGameDataに書いてある
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            if(GameData.coin >= coinList[yazirusiCout ])
+            if(Data.coin >= coinList[yazirusiCout ])
             {
-                GameData.coin -= coinList[yazirusiCout];
-                GameData.BuyItem(itemList[yazirusiCout]);
+                Data.coin -= coinList[yazirusiCout];
+                Data.BuyItem(itemList[yazirusiCout]);
             }
         }
         
@@ -119,16 +119,16 @@ public class ShopList : MonoBehaviour
             switch(itemList[i])
             {
                 case "まきもの":
-                    haveItems.Add(GameData.makimono);
+                    haveItems.Add(Data.makimono);
                     break;
                 case "まきもの2":
-                    haveItems.Add(GameData.makimono2);
+                    haveItems.Add(Data.makimono2);
                     break;
                 case "まきもの3":
-                    haveItems.Add(GameData.makimono3);
+                    haveItems.Add(Data.makimono3);
                     break;
                 case "かいふく":
-                    haveItems.Add(GameData.kaihuku);
+                    haveItems.Add(Data.kaihuku);
                     break;
             }
         }
