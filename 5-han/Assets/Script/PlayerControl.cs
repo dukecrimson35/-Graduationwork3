@@ -25,7 +25,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        int a = 0;
+        
     }
     // Update is called once per frame
     void Update()
@@ -104,18 +104,24 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetButtonUp("A") && move.GetIsMove())
             {
                 stoptime = 1.5f;
+                GameObject col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
+                
                 Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, -Input.GetAxis("Vertical") * 7, 0);
+                col.transform.position = transform.position;
+                col.transform.position += senku / 2;
                 transform.position += senku;
                 Destroy(moveColider);
             }
         }
         float tes = Mathf.Atan2(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
         Debug.Log(tes);
+
         if (moveColider != null)
         {
             moveColider.transform.position = transform.position;
             moveColider.transform.rotation = Quaternion.Euler(0, 0, tes);
         }
+
         stoptime -= Time.deltaTime;
     }
 }
