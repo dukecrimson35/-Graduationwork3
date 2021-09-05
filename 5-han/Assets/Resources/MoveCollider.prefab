@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5562319726142421215}
   - component: {fileID: 6263225561154493990}
   - component: {fileID: -6012519795553092632}
+  - component: {fileID: -4316207342522222357}
   m_Layer: 9
   m_Name: MoveCollider
   m_TagString: SenkuGiri
@@ -123,3 +124,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4316207342522222357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496806248708875185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3216d41690957314f9430a69ac9922b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
