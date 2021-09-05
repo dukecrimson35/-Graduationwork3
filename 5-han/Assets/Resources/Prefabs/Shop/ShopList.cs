@@ -22,6 +22,11 @@ public class ShopList : MonoBehaviour
 
     public Text message;
 
+    private float yazirusiDelay = 0.2f;
+    private float dire = 180;
+    private float messegeDelay = 60;
+    private float messeDire = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,46 +79,106 @@ public class ShopList : MonoBehaviour
     {
         coinText.text = Data.coin.ToString() + "銭";
         HaveItemUpdate();
+
+        // ディレイ関係
+        if (yazirusiDelay > 0)
+        {
+            yazirusiDelay -= dire * Time.deltaTime;
+        }
+        if (messeDire > 0)
+        {
+            messeDire -= messegeDelay * Time.deltaTime;
+        }
+        else
+        {
+            message.text = "";
+        }
+
+
+        float vert = Input.GetAxis("Vertical");
+
         //メニューの矢印制御
-        if (Input.GetKeyDown(KeyCode.UpArrow) && yazirusiCout > 0)
+        if (vert < -0.3f && yazirusiCout > 0 && yazirusiDelay <= 0)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
                             yazirusiText.transform.position.y + 35,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
+            yazirusiDelay = 60;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && yazirusiCout < itemList.Count -1)
+        else if (vert > 0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
                            yazirusiText.transform.position.y - 35,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
+            yazirusiDelay = 60;
         }
 
+        //if (Input.GetKeyDown(KeyCode.UpArrow) && yazirusiCout > 0)
+        //{
+        //    yazirusiText.transform.position =
+        //        new Vector3(yazirusiText.transform.position.x,
+        //                    yazirusiText.transform.position.y + 35,
+        //                    yazirusiText.transform.position.z);
+        //    yazirusiCout -= 1;
+        //    yazirusiDelay = 60;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.DownArrow) && yazirusiCout < itemList.Count -1)
+        //{
+        //    yazirusiText.transform.position =
+        //       new Vector3(yazirusiText.transform.position.x,
+        //                   yazirusiText.transform.position.y - 35,
+        //                   yazirusiText.transform.position.z);
+        //    yazirusiCout += 1;
+        //    yazirusiDelay = 60;
+        //}
+
+        ////メニュー閉じる処理
+        //if(Input.GetKeyDown(KeyCode.Return) && yazirusiCout == itemList.Count -1)
+        //{
+        //    Destroy(this.gameObject.transform.parent.parent.gameObject);
+        //    return;
+        //}
+
+        ////アイテム買う時の処理
+        ////詳細はGameDataに書いてある
+        //if(Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    if(Data.coin >= coinList[yazirusiCout ])
+        //    {
+
+        //        BuyItem(itemList[yazirusiCout]);
+        //    }
+        //    else
+        //    {
+        //        message.text = "お金が足りません...";
+        //    }
+        //}
+
         //メニュー閉じる処理
-        if(Input.GetKeyDown(KeyCode.Return) && yazirusiCout == itemList.Count -1)
+        if (Input.GetKeyDown("joystick button 0") && yazirusiCout == itemList.Count - 1)
         {
             Destroy(this.gameObject.transform.parent.parent.gameObject);
             return;
         }
-
         //アイテム買う時の処理
         //詳細はGameDataに書いてある
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown("joystick button 0"))
         {
-            if(Data.coin >= coinList[yazirusiCout ])
+            if (Data.coin >= coinList[yazirusiCout])
             {
-                
                 BuyItem(itemList[yazirusiCout]);
             }
             else
             {
-                message.text = "お金が足りません...";
+                message.text = "お金が足りません";
+                MesseDelaySet();
             }
         }
-        
+
     }
 
     public void BuyItem(string itemName)
@@ -130,7 +195,8 @@ public class ShopList : MonoBehaviour
             {
                 message.text = "すでに持っています";
             }
-            
+            MesseDelaySet();
+
         }
         else if (itemName == "まきもの2")
         {
@@ -145,6 +211,7 @@ public class ShopList : MonoBehaviour
             {
                 message.text = "すでに持っています";
             }
+            MesseDelaySet();
         }
         else if (itemName == "まきもの3")
         {          
@@ -158,6 +225,7 @@ public class ShopList : MonoBehaviour
             {
                 message.text = "すでに持っています";
             }
+            MesseDelaySet();
         }
         else if (itemName == "かいふく")
         {
@@ -172,6 +240,7 @@ public class ShopList : MonoBehaviour
             {
                 message.text = "これ以上買えません";
             }
+            MesseDelaySet();
         }
     }
 
@@ -206,5 +275,9 @@ public class ShopList : MonoBehaviour
         {
             haveItemText[i].text = "(" + haveItems[i].ToString() + ")";
         }
+    }
+    public void MesseDelaySet()
+    {
+        messeDire = 40;
     }
 }
