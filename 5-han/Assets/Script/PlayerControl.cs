@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     Vector3 pos;
     GameObject moveColider;
     SenkuMove move;
+    float stoptime;
     enum Direc
     {
         Right,Left,
@@ -16,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stoptime = 0;
         moveColider = null;
         currentDirec = Direc.Right;
         velocity = Vector3.zero;
@@ -34,16 +36,20 @@ public class PlayerControl : MonoBehaviour
     }
     private void Move()
     {
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1)
+        if (stoptime < 0)
         {
-            currentDirec = Direc.Left;
-            pos.x -= 0.1f; 
-        }
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1)
+            {
+                currentDirec = Direc.Left;
+                pos.x -= 0.1f;
+            }
 
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1)
-        {
-            currentDirec = Direc.Right;
-            pos.x += 0.1f;
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1)
+            {
+                currentDirec = Direc.Right;
+                pos.x += 0.1f;
+            }
+
         }
 
         if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Y")) 
@@ -80,23 +86,28 @@ public class PlayerControl : MonoBehaviour
     }
     private void SenkuGiri()
     {
-        if (Input.GetButtonDown("A"))
+
+        if (stoptime < 0)
         {
-            if (moveColider == null)
+            if (Input.GetButtonDown("A"))
             {
-                moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
-                
-                move = moveColider.GetComponent<SenkuMove>();
-               // Instantiate(moveColider);
+                if (moveColider == null)
+                {
+                    moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
+
+                    move = moveColider.GetComponent<SenkuMove>();
+                    // Instantiate(moveColider);
+
+                }
 
             }
-
-        }
-        if (Input.GetButtonUp("A")&&move.GetIsMove()) 
-        {
-            Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, -Input.GetAxis("Vertical") * 7, 0);
-            transform.position += senku;
-            Destroy(moveColider);
+            if (Input.GetButtonUp("A") && move.GetIsMove())
+            {
+                stoptime = 1.5f;
+                Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, -Input.GetAxis("Vertical") * 7, 0);
+                transform.position += senku;
+                Destroy(moveColider);
+            }
         }
         float tes = Mathf.Atan2(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
         Debug.Log(tes);
@@ -105,6 +116,6 @@ public class PlayerControl : MonoBehaviour
             moveColider.transform.position = transform.position;
             moveColider.transform.rotation = Quaternion.Euler(0, 0, tes);
         }
-
+        stoptime -= Time.deltaTime;
     }
 }
