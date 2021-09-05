@@ -8,6 +8,8 @@ public  class Data : MonoBehaviour
     public static readonly int maxStageNumber = 3;
     public const int maxStageNumber2 = 3;
 
+    public static bool shopFlag = false;
+
     public static int coin = 0;
     public static int makimono = 0;
     public static int kaihuku = 0;

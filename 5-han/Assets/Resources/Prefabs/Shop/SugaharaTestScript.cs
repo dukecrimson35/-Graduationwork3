@@ -33,5 +33,10 @@ public class SugaharaTestScript : MonoBehaviour
                new Vector3(0, 0, 0.0f), Quaternion.identity);
         }
 
+        if(itemManagerScript.GetShopFlag())
+        {
+            Debug.Log(itemManagerScript.GetShopFlag());
+        }
+
     }
 }

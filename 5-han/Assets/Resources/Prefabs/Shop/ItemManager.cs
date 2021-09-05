@@ -63,7 +63,12 @@ public class ItemManager : MonoBehaviour
 
     public void UseKaihuku(int num)
     {
+        
+    }
 
+    public bool GetShopFlag()
+    {
+        return Data.shopFlag;
     }
 
 }

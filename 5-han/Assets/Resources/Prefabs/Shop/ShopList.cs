@@ -30,6 +30,7 @@ public class ShopList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Data.shopFlag = true;
         haveItems = new List<int>();
         haveItemText = new List<Text>();
         //矢印の初期Pos
@@ -122,6 +123,7 @@ public class ShopList : MonoBehaviour
         //メニュー閉じる処理
         if (Input.GetKeyDown("joystick button 0") && yazirusiCout == itemList.Count - 1)
         {
+            Data.shopFlag = false;
             Destroy(this.gameObject.transform.parent.parent.gameObject);
             return;
         }
