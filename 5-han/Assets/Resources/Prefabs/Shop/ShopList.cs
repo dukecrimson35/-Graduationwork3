@@ -81,10 +81,12 @@ public class ShopList : MonoBehaviour
         HaveItemUpdate();
 
         // ディレイ関係
+        //矢印移動ディレイ
         if (yazirusiDelay > 0)
         {
             yazirusiDelay -= dire * Time.deltaTime;
         }
+        //メッセージ消えるディレイ
         if (messeDire > 0)
         {
             messeDire -= messegeDelay * Time.deltaTime;
@@ -94,7 +96,7 @@ public class ShopList : MonoBehaviour
             message.text = "";
         }
 
-
+        //スティックの縦方向取得
         float vert = Input.GetAxis("Vertical");
 
         //メニューの矢印制御
@@ -117,47 +119,6 @@ public class ShopList : MonoBehaviour
             yazirusiDelay = 60;
         }
 
-        //if (Input.GetKeyDown(KeyCode.UpArrow) && yazirusiCout > 0)
-        //{
-        //    yazirusiText.transform.position =
-        //        new Vector3(yazirusiText.transform.position.x,
-        //                    yazirusiText.transform.position.y + 35,
-        //                    yazirusiText.transform.position.z);
-        //    yazirusiCout -= 1;
-        //    yazirusiDelay = 60;
-        //}
-        //else if (Input.GetKeyDown(KeyCode.DownArrow) && yazirusiCout < itemList.Count -1)
-        //{
-        //    yazirusiText.transform.position =
-        //       new Vector3(yazirusiText.transform.position.x,
-        //                   yazirusiText.transform.position.y - 35,
-        //                   yazirusiText.transform.position.z);
-        //    yazirusiCout += 1;
-        //    yazirusiDelay = 60;
-        //}
-
-        ////メニュー閉じる処理
-        //if(Input.GetKeyDown(KeyCode.Return) && yazirusiCout == itemList.Count -1)
-        //{
-        //    Destroy(this.gameObject.transform.parent.parent.gameObject);
-        //    return;
-        //}
-
-        ////アイテム買う時の処理
-        ////詳細はGameDataに書いてある
-        //if(Input.GetKeyDown(KeyCode.Return))
-        //{
-        //    if(Data.coin >= coinList[yazirusiCout ])
-        //    {
-
-        //        BuyItem(itemList[yazirusiCout]);
-        //    }
-        //    else
-        //    {
-        //        message.text = "お金が足りません...";
-        //    }
-        //}
-
         //メニュー閉じる処理
         if (Input.GetKeyDown("joystick button 0") && yazirusiCout == itemList.Count - 1)
         {
@@ -177,6 +138,11 @@ public class ShopList : MonoBehaviour
                 message.text = "お金が足りません";
                 MesseDelaySet();
             }
+        }
+
+        if(vert > -0.3f && vert < 0.3f)
+        {
+            yazirusiDelay = 0;
         }
 
     }
