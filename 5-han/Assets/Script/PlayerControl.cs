@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    private GameObject itemManager;
+    private ItemManager itemManagerScript;
+    public GameObject shopPrefab;
+
     Vector3 velocity;
     Vector3 pos;
     GameObject moveColider;
@@ -17,6 +21,9 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        itemManager = GameObject.Find("ItemManagerOBJ");
+        itemManagerScript = itemManager.GetComponent<ItemManager>();
+
         stoptime = 0;
         moveColider = null;
         currentDirec = Direc.Right;
@@ -54,7 +61,13 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Y")) 
         {
-            velocity = new Vector3(0, 0.5f, 0);
+            if (GameObject.Find("ShopPrefab(Clone)") == null)
+            {
+                GameObject instance =
+                   (GameObject)Instantiate(shopPrefab,
+                   new Vector3(0, 0, 0.0f), Quaternion.identity);
+            }
+            //velocity = new Vector3(0, 0.5f, 0);
         }
 
         if (Mathf.Abs(velocity.y) <= 0.1f)
