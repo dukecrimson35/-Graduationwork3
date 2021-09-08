@@ -101,7 +101,7 @@ public class ShopList : MonoBehaviour
         float vert = Input.GetAxis("Vertical");
 
         //メニューの矢印制御
-        if (vert < -0.3f && yazirusiCout > 0 && yazirusiDelay <= 0)
+        if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
@@ -110,7 +110,7 @@ public class ShopList : MonoBehaviour
             yazirusiCout -= 1;
             yazirusiDelay = 60;
         }
-        else if (vert > 0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0)
+        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
