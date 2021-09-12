@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
     private GameObject itemManager;
     private ItemManager itemManagerScript;
     public GameObject shopPrefab;
-
+    GameObject col;
     Vector3 velocity;
     Vector3 pos;
     GameObject moveColider;
@@ -39,6 +39,7 @@ public class PlayerControl : MonoBehaviour
     {
         Move();
         Direction();
+        IsSenkuHit();
         SenkuGiri();
     }
     private void Move()
@@ -117,7 +118,7 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetButtonUp("A") && move.GetIsMove())
             {
                 stoptime = 1.5f;
-                GameObject col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
+                col= Instantiate((GameObject)Resources.Load("SenkuCollider"));
                 
                 Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7,Input.GetAxis("Vertical") * 7, 0);
                 col.transform.position = transform.position;
@@ -137,5 +138,16 @@ public class PlayerControl : MonoBehaviour
         }
 
         stoptime -= Time.deltaTime;
+    }
+    void IsSenkuHit()
+    {
+        if (col != null)
+        {
+            SenkuSprict s = col.GetComponent<SenkuSprict>();
+            if(s.GetHitFlag())
+            {
+                stoptime = 0;
+            }
+        }
     }
 }
