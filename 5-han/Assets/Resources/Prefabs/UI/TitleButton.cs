@@ -10,10 +10,15 @@ public class TitleButton : MonoBehaviour
     public Button optionButton;
     public Button endButton;
 
+    public GameObject sceneManagerOBJ;
+    private SceneManagement sceneManagement;
+
     // Start is called before the first frame update
     void Start()
     {
         startButton.Select();
+
+        sceneManagement = sceneManagerOBJ.GetComponent<SceneManagement>();
     }
 
     // Update is called once per frame
@@ -25,5 +30,20 @@ public class TitleButton : MonoBehaviour
     public void OnClick()
     {
         Debug.Log("押した");
+    }
+
+    public void OnClickTitleStartButton()
+    {
+        sceneManagement.OnClickSelectButton();
+    }
+
+    public void OnClickEndButton()
+    {
+        sceneManagement.OnClickEndButton();
+    }
+
+    public void OnClickTitleOptionButton()
+    {
+        sceneManagement.OnClickOptionButton();
     }
 }
