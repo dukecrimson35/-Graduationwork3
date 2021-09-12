@@ -5,9 +5,12 @@ using UnityEngine;
 public class SenkuSprict : MonoBehaviour
 {
     float life = 0.2f;
+    bool hit;
     // Start is caled before the first frame update
     void Start()
     {
+
+        hit = false;
         life = 0.2f;
     }
 
@@ -19,5 +22,16 @@ public class SenkuSprict : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Enemy") 
+        {
+            hit = true;
+        }
+    }
+    public bool GetHitFlag()
+    {
+        return hit;
     }
 }
