@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int baseEnemyHp;
+    public int baseEnemyHp = 10;
     private float nextTime;
     float damageInterval = 1f;
     bool damage;
@@ -48,6 +48,13 @@ public class BaseEnemy : MonoBehaviour
                 damage = false;
                 count = 0;
             }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "SenkuGiri")
+        {
+            baseEnemyHp -= 10;
         }
     }
 }
