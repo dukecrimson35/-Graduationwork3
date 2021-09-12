@@ -21,4 +21,9 @@ public class TitleButton : MonoBehaviour
     {
         
     }
+
+    public void OnClick()
+    {
+        Debug.Log("押した");
+    }
 }

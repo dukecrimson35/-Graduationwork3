@@ -8,6 +8,7 @@ TagManager:
   - SenkuGiri
   - Block
   - Coin
+  - Shop
   layers:
   - Default
   - TransparentFX
