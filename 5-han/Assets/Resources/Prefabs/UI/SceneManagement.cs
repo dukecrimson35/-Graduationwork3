@@ -14,6 +14,8 @@ public class SceneManagement : MonoBehaviour
 
     private bool oneFadeFlag = false;
 
+   
+
     public enum SceneNames
     {
         TitleScene,
@@ -189,8 +191,6 @@ public class SceneManagement : MonoBehaviour
         {
             SceneManager.LoadScene(SceneNames.TitleScene.ToString());
         }
-
-
         else if (sceneName == SceneNames.GameScene.ToString())
         {
             SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
@@ -200,4 +200,58 @@ public class SceneManagement : MonoBehaviour
             SceneManager.LoadScene(SceneNames.TitleScene.ToString());
         }
     }
+
+    //シーンでのボタン処理----------------------------------------------------------------------------
+    public void OnClickSelectButton()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.SelectScene.ToString());        
+    }
+
+    public void OnClickOptionButton()
+    {
+        Debug.Log("これからオプションのUI作る");
+    }
+
+    public void OnClickEndButton()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;   // UnityEditorの実行を停止する処理
+#else
+        Application.Quit();                                // ゲームを終了する処理
+#endif
+    }
+
+    public void OnClickStage1Button()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage01.ToString());
+    }
+
+    public void OnClickStage2Button()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage02.ToString());
+    }
+
+    public void OnClickStage3Button()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage03.ToString());
+    }
+
+    public void OnClickTitleButton()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
+    }
+
+    public void OnClickClearButton()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
+    }
+    public void OnClickGameOverButton()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
+    }
+
+
+
+
+    //シーンでのボタン処理----------------------------------------------------------------------------
 }
