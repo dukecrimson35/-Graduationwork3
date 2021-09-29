@@ -9,6 +9,8 @@ TagManager:
   - Block
   - Coin
   - Shop
+  - RSide
+  - LSide
   layers:
   - Default
   - TransparentFX
