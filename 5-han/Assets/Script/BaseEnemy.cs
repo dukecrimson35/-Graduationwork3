@@ -9,6 +9,7 @@ public class BaseEnemy : MonoBehaviour
     private float nextTime;
     float damageInterval = 1f;
     bool damage;
+    bool deadFlag;
     int count=0;
     Renderer renderer;
     void Start()
@@ -16,6 +17,7 @@ public class BaseEnemy : MonoBehaviour
         damage = false;
         nextTime = Time.time;
         renderer = GetComponent<Renderer>();
+        deadFlag = false;
     }
 
     // Update is called once per frame
@@ -29,10 +31,12 @@ public class BaseEnemy : MonoBehaviour
         if (baseEnemyHp <= 0)
         {
             Destroy(gameObject);
+            deadFlag = true;
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             Destroy(gameObject);
+            deadFlag = true;
         }
         if (damage)
         {
@@ -56,5 +60,15 @@ public class BaseEnemy : MonoBehaviour
         {
             baseEnemyHp -= 10;
         }
+    }
+
+    public int GetHp()
+    {
+        return baseEnemyHp;
+    }
+
+    public bool GetDeadFlag()
+    {
+        return deadFlag;
     }
 }

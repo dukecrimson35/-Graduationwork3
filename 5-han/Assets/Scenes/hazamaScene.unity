@@ -203,6 +203,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8279830550465552687, guid: cb86c2d3bca8e4943a4857bbd175f9e4,
+        type: 3}
+      propertyPath: m_TagString
+      value: YMoveEnemy
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8279830550465552680, guid: cb86c2d3bca8e4943a4857bbd175f9e4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cb86c2d3bca8e4943a4857bbd175f9e4, type: 3}
@@ -813,6 +818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279830550465552687, guid: cb86c2d3bca8e4943a4857bbd175f9e4,
+        type: 3}
+      propertyPath: m_TagString
+      value: XMoveEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb86c2d3bca8e4943a4857bbd175f9e4, type: 3}

@@ -9,12 +9,14 @@ public class EnemyYMove : MonoBehaviour
     private float nextTime;
     float damageInterval = 1f;
     bool damage;
+    bool deadFlag;
     int count = 0;
     Renderer renderer;
     float nowPosY;
     void Start()
     {
         damage = false;
+        deadFlag = false;
         nextTime = Time.time;
         renderer = GetComponent<Renderer>();
         nowPosY = this.transform.position.y;
@@ -35,10 +37,12 @@ public class EnemyYMove : MonoBehaviour
         if (baseEnemyHp <= 0)
         {
             Destroy(gameObject);
+            deadFlag = true;
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Destroy(gameObject);
+            deadFlag = true;
         }
         if (damage)
         {
@@ -63,5 +67,15 @@ public class EnemyYMove : MonoBehaviour
             baseEnemyHp -= 10;
         }
 
+    }
+
+    public int GetHp()
+    {
+        return baseEnemyHp;
+    }
+
+    public bool GetDeadFlag()
+    {
+        return deadFlag;
     }
 }

@@ -11,6 +11,8 @@ TagManager:
   - Shop
   - RSide
   - LSide
+  - XMoveEnemy
+  - YMoveEnemy
   layers:
   - Default
   - TransparentFX
