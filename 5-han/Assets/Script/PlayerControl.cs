@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    int hp = 100;
     private GameObject itemManager;
     private ItemManager itemManagerScript;
     public GameObject shopPrefab;
@@ -12,6 +13,8 @@ public class PlayerControl : MonoBehaviour
     Vector3 pos;
     GameObject moveColider;
     SenkuMove move;
+    Rigidbody rigid;
+    bool kamae;
     float stoptime;
     enum Direc
     {
@@ -21,14 +24,17 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemManager = GameObject.Find("ItemManagerOBJ");
-        itemManagerScript = itemManager.GetComponent<ItemManager>();
-
         stoptime = 0;
         moveColider = null;
         currentDirec = Direc.Right;
         velocity = Vector3.zero;
         pos = Vector3.zero;
+        kamae = false;
+        rigid = GetComponent<Rigidbody>();
+        itemManager = GameObject.Find("ItemManagerOBJ");
+        itemManagerScript = itemManager.GetComponent<ItemManager>();
+
+      
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -46,13 +52,13 @@ public class PlayerControl : MonoBehaviour
     {
         if (stoptime < 0)
         {
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1)
+            if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1)) 
             {
                 currentDirec = Direc.Left;
                 pos.x -= 0.1f;
             }
 
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1)
+            if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1)) 
             {
                 currentDirec = Direc.Right;
                 pos.x += 0.1f;
@@ -71,18 +77,18 @@ public class PlayerControl : MonoBehaviour
             //velocity = new Vector3(0, 0.5f, 0);
         }
 
-        if (Mathf.Abs(velocity.y) <= 0.1f)
-        {
-            velocity.y = 0;
-        }
-        else if (velocity.y > 0.1f)
-        {
-            velocity.y -= 0.1f;
-        }
-        else if (velocity.y < -0.1f)
-        {
-            velocity.y += 0.1f;
-        }
+        //if (Mathf.Abs(velocity.y) <= 0.1f)
+        //{
+        //    velocity.y = 0;
+        //}
+        //else if (velocity.y > 0.1f)
+        //{
+        //    velocity.y -= 0.1f;
+        //}
+        //else if (velocity.y < -0.1f)
+        //{
+        //    velocity.y += 0.1f;
+        //}
         pos += velocity;
         transform.position += pos;
         pos = Vector3.zero;
@@ -103,26 +109,29 @@ public class PlayerControl : MonoBehaviour
 
         if (stoptime < 0)
         {
-            if (Input.GetButtonDown("A"))
+            if (Input.GetButton("A"))
             {
                 if (moveColider == null)
                 {
                     moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
-
                     move = moveColider.GetComponent<SenkuMove>();
-                    // Instantiate(moveColider);
-
                 }
-
+                rigid.velocity = new Vector3(0, 0, 0);
+                kamae = true;
             }
+        
             if (Input.GetButtonUp("A") && move.GetIsMove())
             {
+                kamae = false;
                 stoptime = 1.5f;
                 col= Instantiate((GameObject)Resources.Load("SenkuCollider"));
-                
+              
                 Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7,Input.GetAxis("Vertical") * 7, 0);
                 col.transform.position = transform.position;
                 col.transform.position += senku / 2;
+                float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
+                col.transform.rotation = Quaternion.Euler(0, 0, ang);
+
                 transform.position += senku;
                 Destroy(moveColider);
             }
@@ -149,5 +158,9 @@ public class PlayerControl : MonoBehaviour
                 stoptime = 0;
             }
         }
+    }
+    public int GetHp()
+    {
+        return hp;
     }
 }
