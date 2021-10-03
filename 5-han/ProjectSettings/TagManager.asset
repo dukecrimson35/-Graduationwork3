@@ -13,6 +13,7 @@ TagManager:
   - LSide
   - XMoveEnemy
   - YMoveEnemy
+  - PowerSlash
   layers:
   - Default
   - TransparentFX
