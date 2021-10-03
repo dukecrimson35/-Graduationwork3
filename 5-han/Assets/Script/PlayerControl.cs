@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
     SenkuMove move;
     Rigidbody rigid;
     bool kamae;
+    bool hitFlag;
     float stoptime;
     enum Direc
     {
@@ -47,6 +48,7 @@ public class PlayerControl : MonoBehaviour
         Direction();
         IsSenkuHit();
         SenkuGiri();
+    
     }
     private void Move()
     {
@@ -107,7 +109,7 @@ public class PlayerControl : MonoBehaviour
     private void SenkuGiri()
     {
 
-        if (stoptime < 0)
+        if (stoptime < 0 || hitFlag) 
         {
             if (Input.GetButton("A"))
             {
@@ -123,6 +125,7 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetButtonUp("A") && move.GetIsMove())
             {
                 kamae = false;
+                hitFlag = false;
                 stoptime = 1.5f;
                 col= Instantiate((GameObject)Resources.Load("SenkuCollider"));
               
@@ -155,7 +158,7 @@ public class PlayerControl : MonoBehaviour
             SenkuSprict s = col.GetComponent<SenkuSprict>();
             if(s.GetHitFlag())
             {
-                stoptime = 0;
+                hitFlag = true;
             }
         }
     }
