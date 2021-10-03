@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     bool kamae;
     bool hitFlag;
     float stoptime;
+    int hitCount;
     enum Direc
     {
         Right,Left,
@@ -48,7 +49,7 @@ public class PlayerControl : MonoBehaviour
         Direction();
         IsSenkuHit();
         SenkuGiri();
-    
+        Special();
     }
     private void Move()
     {
@@ -109,7 +110,7 @@ public class PlayerControl : MonoBehaviour
     private void SenkuGiri()
     {
 
-        if (stoptime < 0 || hitFlag) 
+        if (stoptime < 0 || hitFlag)
         {
             if (Input.GetButton("A"))
             {
@@ -121,15 +122,15 @@ public class PlayerControl : MonoBehaviour
                 rigid.velocity = new Vector3(0, 0, 0);
                 kamae = true;
             }
-        
+
             if (Input.GetButtonUp("A") && move.GetIsMove())
             {
                 kamae = false;
                 hitFlag = false;
                 stoptime = 1.5f;
-                col= Instantiate((GameObject)Resources.Load("SenkuCollider"));
-              
-                Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7,Input.GetAxis("Vertical") * 7, 0);
+                col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
+
+                Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
                 col.transform.position = transform.position;
                 col.transform.position += senku / 2;
                 float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
@@ -140,7 +141,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
         float tes = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
-        Debug.Log(tes);
+      
         float vert = Input.GetAxis("Vertical");
         //Debug.Log(vert);
         if (moveColider != null)
@@ -151,16 +152,59 @@ public class PlayerControl : MonoBehaviour
 
         stoptime -= Time.deltaTime;
     }
+    void Special()
+    {
+        if (stoptime < 0 || hitFlag)
+        {
+            if (Input.GetButton("X"))
+            {
+                if (moveColider == null)
+                {
+                    moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
+                    move = moveColider.GetComponent<SenkuMove>();
+                }
+                rigid.velocity = new Vector3(0, 0, 0);
+                kamae = true;
+            }
+
+            if (Input.GetButtonUp("X")) 
+            {
+                kamae = false;
+                hitFlag = false;
+                stoptime = 1.5f;
+                col = Instantiate((GameObject)Resources.Load("PowerSlash"));
+
+                Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
+                col.transform.position = transform.position;
+                col.transform.position += senku / 2;
+                float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
+                col.transform.rotation = Quaternion.Euler(0, 0, ang);
+
+               
+                Destroy(moveColider);
+            }
+        }
+    }
     void IsSenkuHit()
     {
         if (col != null)
         {
             SenkuSprict s = col.GetComponent<SenkuSprict>();
-            if(s.GetHitFlag())
+            if(s.GetHitFlag() && !hitFlag)
             {
                 hitFlag = true;
+                hitCount++;
+                Debug.Log(hitCount);
             }
         }
+        if (stoptime < 0 && !kamae)
+        {
+            hitCount = 0;
+        }
+    }
+    public int GetHitCount()
+    {
+        return hitCount;
     }
     public int GetHp()
     {

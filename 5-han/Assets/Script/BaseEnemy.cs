@@ -60,6 +60,13 @@ public class BaseEnemy : MonoBehaviour
         {
             baseEnemyHp -= 10;
         }
+        if (collision.gameObject.tag == "PowerSlash")
+        {
+            PowerSlashScript power = collision.gameObject.GetComponent<PowerSlashScript>();
+
+            baseEnemyHp -= 13 * (power.GetPlayerHitCount() + 1);
+            Debug.Log(13 * (power.GetPlayerHitCount() + 1));
+        }
     }
 
     public int GetHp()

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SenkuSprict : MonoBehaviour
+public class PowerSlashScript : MonoBehaviour
 {
     float life = 0.2f;
     bool hit;
-    
+    PlayerControl player;
     // Start is caled before the first frame update
     void Start()
     {
-
+        player = GameObject.Find("Player").GetComponent<PlayerControl>();
         hit = false;
         life = 0.2f;
     }
@@ -34,5 +34,9 @@ public class SenkuSprict : MonoBehaviour
     public bool GetHitFlag()
     {
         return hit;
+    }
+    public int GetPlayerHitCount()
+    {
+        return player.GetHitCount();
     }
 }
