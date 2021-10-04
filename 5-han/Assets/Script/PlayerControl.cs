@@ -90,21 +90,10 @@ public class PlayerControl : MonoBehaviour
                    (GameObject)Instantiate(shopPrefab,
                    new Vector3(0, 0, 0.0f), Quaternion.identity);
             }
-            //velocity = new Vector3(0, 0.5f, 0);
+            
         }
 
-        //if (Mathf.Abs(velocity.y) <= 0.1f)
-        //{
-        //    velocity.y = 0;
-        //}
-        //else if (velocity.y > 0.1f)
-        //{
-        //    velocity.y -= 0.1f;
-        //}
-        //else if (velocity.y < -0.1f)
-        //{
-        //    velocity.y += 0.1f;
-        //}
+     
         pos += velocity;
         transform.position += pos;
         pos = Vector3.zero;
@@ -122,10 +111,11 @@ public class PlayerControl : MonoBehaviour
     }
     private void SenkuGiri()
     {
+        Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
 
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("A"))
+            if (Input.GetButton("A")) 
             {
                 if (moveColider == null)
                 {
@@ -134,24 +124,41 @@ public class PlayerControl : MonoBehaviour
                 }
                 rigid.velocity = new Vector3(0, 0, 0);
                 kamae = true;
+                if (senku.magnitude == 0 && moveColider != null) 
+                {
+                    Destroy(moveColider);
+                }
             }
-
-            if (Input.GetButtonUp("A") && move.GetIsMove())
+          
+            if (Input.GetButtonUp("A") && move.GetIsMove() && senku.magnitude == 0)
+            {
+                kamae = false;
+                hitFlag = false;
+                if (moveColider != null)
+                {
+                    Destroy(moveColider);
+                }
+            }
+            else if (Input.GetButtonUp("A") && move.GetIsMove()) 
             {
                 kamae = false;
                 hitFlag = false;
                 stoptime = 1.5f;
                 col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
 
-                Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
+
                 col.transform.position = transform.position;
                 col.transform.position += senku / 2;
                 float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                 col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                 transform.position += senku;
-                Destroy(moveColider);
+                if (moveColider != null)
+                {
+                    Destroy(moveColider);
+                }
             }
+         
         }
         float tes = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
       
@@ -167,6 +174,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Special()
     {
+       
         if (stoptime < 0 || hitFlag)
         {
             if (Input.GetButton("X"))
@@ -182,6 +190,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetButtonUp("X")) 
             {
+               
                 kamae = false;
                 hitFlag = false;
                 stoptime = 1.5f;
@@ -229,6 +238,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void Damage(int damage)
     {
+        
         if (muteki > 0)
         {
             hp -= damage;
