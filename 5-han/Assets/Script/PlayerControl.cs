@@ -111,10 +111,11 @@ public class PlayerControl : MonoBehaviour
     }
     private void SenkuGiri()
     {
+        Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
 
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("A"))
+            if (Input.GetButton("A")) 
             {
                 if (moveColider == null)
                 {
@@ -123,15 +124,20 @@ public class PlayerControl : MonoBehaviour
                 }
                 rigid.velocity = new Vector3(0, 0, 0);
                 kamae = true;
+                if (senku.magnitude == 0 && moveColider != null) 
+                {
+                    Destroy(moveColider);
+                }
             }
-            Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
-
+          
             if (Input.GetButtonUp("A") && move.GetIsMove() && senku.magnitude == 0)
             {
                 kamae = false;
                 hitFlag = false;
-
-                Destroy(moveColider);
+                if (moveColider != null)
+                {
+                    Destroy(moveColider);
+                }
             }
             else if (Input.GetButtonUp("A") && move.GetIsMove()) 
             {
@@ -147,7 +153,10 @@ public class PlayerControl : MonoBehaviour
                 col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                 transform.position += senku;
-                Destroy(moveColider);
+                if (moveColider != null)
+                {
+                    Destroy(moveColider);
+                }
             }
          
         }
