@@ -45,11 +45,15 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Direction();
-        IsSenkuHit();
-        SenkuGiri();
-        Special();
+        if(!itemManagerScript.GetShopFlag())
+        {
+            Move();
+            Direction();
+            IsSenkuHit();
+            SenkuGiri();
+            Special();
+        }
+      
     }
     private void Move()
     {
