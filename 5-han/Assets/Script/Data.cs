@@ -9,7 +9,7 @@ public  class Data : MonoBehaviour
     public const int maxStageNumber2 = 3;
 
     public static bool shopFlag = false;
-
+    //デバックのため後で0に戻す
     public static int coin = 2000;
     public static int makimono = 0;
     public static int kaihuku = 0;
