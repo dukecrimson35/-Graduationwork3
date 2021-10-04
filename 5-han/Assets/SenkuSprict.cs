@@ -6,11 +6,13 @@ public class SenkuSprict : MonoBehaviour
 {
     float life = 0.2f;
     bool hit;
-    
+    private GameObject itemManager;
+    private ItemManager itemManagerScript;
     // Start is caled before the first frame update
     void Start()
     {
-
+        itemManager = GameObject.Find("ItemManagerOBJ");
+        itemManagerScript = itemManager.GetComponent<ItemManager>();
         hit = false;
         life = 0.2f;
     }
@@ -29,6 +31,13 @@ public class SenkuSprict : MonoBehaviour
         if (collision.transform.tag == "Enemy")
         {
             hit = true;
+        }
+
+        if (collision.gameObject.tag == "Coin")
+        {
+            Money moneyScript = collision.gameObject.GetComponent<Money>();
+            itemManagerScript.UpCoin(moneyScript.GetMoney());
+            Destroy(collision.gameObject);
         }
     }
     public bool GetHitFlag()
