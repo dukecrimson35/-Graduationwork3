@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     bool kamae;
     bool hitFlag;
     bool deadFlag;
+    float muteki;
     float stoptime;
     int hitCount;
     enum Direc
@@ -228,7 +229,10 @@ public class PlayerControl : MonoBehaviour
     }
     public void Damage(int damage)
     {
-        hp -= damage;
+        if (muteki > 0)
+        {
+            hp -= damage;
+        }
     }
     void CheckDead()
     {
