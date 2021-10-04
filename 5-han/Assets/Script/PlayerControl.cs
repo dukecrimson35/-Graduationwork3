@@ -68,16 +68,27 @@ public class PlayerControl : MonoBehaviour
     {
         if (stoptime < 0)
         {
-            if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1)) 
+            if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
             {
-                currentDirec = Direc.Left;
+               
                 pos.x -= 0.1f;
             }
 
-            if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1)) 
+            if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
+            {
+            
+                pos.x += 0.1f;
+            }
+            if ( (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
+            {
+                currentDirec = Direc.Left;
+             
+            }
+
+            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
             {
                 currentDirec = Direc.Right;
-                pos.x += 0.1f;
+               
             }
 
         }
@@ -243,6 +254,11 @@ public class PlayerControl : MonoBehaviour
         {
             hp -= damage;
         }
+    }
+    public void KnockBack(GameObject other)
+    {
+        Vector3 vel = (transform.position - other.transform.position).normalized;
+        rigid.velocity = vel * 7;
     }
     void CheckDead()
     {
