@@ -26,6 +26,10 @@ public class ShopList : MonoBehaviour
     private float dire = 180;
     private float messegeDelay = 60;
     private float messeDire = 0;
+    private int yazirusiMove = 90;
+    private int height = 50;
+    private int textWidthmove = 50;
+    private int textHeightmove = 40;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +45,12 @@ public class ShopList : MonoBehaviour
         {
             text.text = itemList[i];
 
+         
             Text instance =
                 (Text)Instantiate(text,
-                new Vector3(pos.x + 50.0f, pos.y - 15 - i * 35, 0.0f), Quaternion.identity, this.transform);
+                new Vector3(pos.x + 50.0f +textWidthmove, pos.y - 15  - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
 
-            instance.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
         }
 
         //リストに入っているテキストをメニューに並べる(アイテム値段)
@@ -55,9 +60,9 @@ public class ShopList : MonoBehaviour
 
             Text instance =
                 (Text)Instantiate(text,
-                new Vector3(pos.x + 400.0f, pos.y - 15 - i * 35, 0.0f), Quaternion.identity, this.transform);
+                new Vector3(pos.x + 400.0f +textWidthmove, pos.y - 15 - height *i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
 
-            instance.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
         }
 
         HaveNumver();
@@ -68,9 +73,9 @@ public class ShopList : MonoBehaviour
 
             Text instance =
                 (Text)Instantiate(text,
-                new Vector3(pos.x + 300.0f, pos.y - 15 - i * 35, 0.0f), Quaternion.identity, this.transform);
+                new Vector3(pos.x + 300.0f + textWidthmove, pos.y - 15  - height *i - i * textHeightmove,  0.0f), Quaternion.identity, this.transform);
 
-            instance.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
             haveItemText.Add(instance);
         }
     }
@@ -105,7 +110,7 @@ public class ShopList : MonoBehaviour
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
-                            yazirusiText.transform.position.y + 35,
+                            yazirusiText.transform.position.y + yazirusiMove,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
             yazirusiDelay = 60;
@@ -114,7 +119,7 @@ public class ShopList : MonoBehaviour
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
-                           yazirusiText.transform.position.y - 35,
+                           yazirusiText.transform.position.y - yazirusiMove,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             yazirusiDelay = 60;
