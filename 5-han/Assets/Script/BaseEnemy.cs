@@ -67,6 +67,12 @@ public class BaseEnemy : MonoBehaviour
             baseEnemyHp -= 13 * (power.GetPlayerHitCount() + 1);
             Debug.Log(13 * (power.GetPlayerHitCount() + 1));
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerControl p = collision.gameObject.GetComponent<PlayerControl>();
+            p.Damage(10);
+            p.KnockBack(gameObject);
+        }
     }
 
     public int GetHp()
