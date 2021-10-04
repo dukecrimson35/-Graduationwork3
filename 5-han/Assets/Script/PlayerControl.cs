@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     Rigidbody rigid;
     bool kamae;
     bool hitFlag;
+    bool deadFlag;
+    float muteki;
     float stoptime;
     int hitCount;
     enum Direc
@@ -35,12 +37,18 @@ public class PlayerControl : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         itemManager = GameObject.Find("ItemManagerOBJ");
         itemManagerScript = itemManager.GetComponent<ItemManager>();
-
+        deadFlag = false;
+        
       
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.tag == "Coin")
+        {
+            Money moneyScript = collision.gameObject.GetComponent<Money>();
+            itemManagerScript.UpCoin(moneyScript.GetMoney());
+            Destroy(collision.gameObject);
+        }
     }
     // Update is called once per frame
     void Update()
@@ -52,6 +60,7 @@ public class PlayerControl : MonoBehaviour
             IsSenkuHit();
             SenkuGiri();
             Special();
+            CheckDead();
         }
       
     }
@@ -183,7 +192,7 @@ public class PlayerControl : MonoBehaviour
                 col.transform.position += senku / 2;
                 float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                 col.transform.rotation = Quaternion.Euler(0, 0, ang);
-
+                col = null;
                
                 Destroy(moveColider);
             }
@@ -213,5 +222,23 @@ public class PlayerControl : MonoBehaviour
     public int GetHp()
     {
         return hp;
+    }
+    public bool GetDeadFlag()
+    {
+        return deadFlag;
+    }
+    public void Damage(int damage)
+    {
+        if (muteki > 0)
+        {
+            hp -= damage;
+        }
+    }
+    void CheckDead()
+    {
+        if (hp <= 0)
+        {
+            deadFlag = true;
+        }
     }
 }
