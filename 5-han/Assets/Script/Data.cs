@@ -15,7 +15,7 @@ public  class Data : MonoBehaviour
     public static int kaihuku = 0;
     public static int makimono2 = 0;
     public static int makimono3 = 0;
-
+    public static bool pauseWindFlag = false;
 
     public static int GetMaxStageNumber()
     {
