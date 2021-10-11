@@ -68,16 +68,17 @@ public class PlayerControl : MonoBehaviour
     {
         if (stoptime < 0)
         {
+            velocity = Vector3.zero;
             if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
             {
                
-                pos.x -= 0.1f;
+                velocity.x -= 11;
             }
 
             if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
             {
             
-                pos.x += 0.1f;
+                velocity.x += 11;
             }
             if ( (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
             {
@@ -106,7 +107,7 @@ public class PlayerControl : MonoBehaviour
 
      
         pos += velocity;
-        transform.position += pos;
+        transform.position += pos * Time.deltaTime ;
         pos = Vector3.zero;
     }
     private void Direction()
@@ -140,8 +141,8 @@ public class PlayerControl : MonoBehaviour
                     Destroy(moveColider);
                 }
             }
-          
-            if (Input.GetButtonUp("A") && move.GetIsMove() && senku.magnitude == 0)
+
+            if ((Input.GetButtonUp("A") && senku.magnitude == 0) || (Input.GetButtonUp("A") && !move.GetIsMove())) 
             {
                 kamae = false;
                 hitFlag = false;
@@ -253,6 +254,7 @@ public class PlayerControl : MonoBehaviour
         if (muteki > 0)
         {
             hp -= damage;
+            muteki = 1.5f;
         }
     }
     public void KnockBack(GameObject other)
@@ -262,6 +264,7 @@ public class PlayerControl : MonoBehaviour
     }
     void CheckDead()
     {
+        muteki -= Time.deltaTime;
         if (hp <= 0)
         {
             deadFlag = true;
