@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-public class PauseMenuList : MonoBehaviour
+public class PauseSoundScript : MonoBehaviour
 {
-
-    public GameObject pauseItemList;
-    public GameObject pauseSoundUI;
 
     public List<string> itemList;
 
@@ -19,6 +14,9 @@ public class PauseMenuList : MonoBehaviour
     private Vector3 pos;//矢印の初期Pos
 
     public Text text;
+
+    public Text message;
+
     private int yazirusiCout = 0;//矢印がどの段にいるかの
 
 
@@ -54,10 +52,26 @@ public class PauseMenuList : MonoBehaviour
 
     }
 
+    float delay = 1.0f;
+    bool delayFlag = false;
+    IEnumerator Coroutine()
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        delayFlag = false;
+
+        //ここに実行したい処理
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!delayFlag)
+        {
+            message.text = "";
+        }
 
+
+        Debug.Log(messeDire);
         // ディレイ関係
         //矢印移動ディレイ
         if (yazirusiDelay > 0)
@@ -68,7 +82,7 @@ public class PauseMenuList : MonoBehaviour
         float vert = Input.GetAxis("Vertical");
 
         //メニューの矢印制御
-        if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0 && !Data.pauseWindFlag)
+        if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0 )
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
@@ -77,7 +91,7 @@ public class PauseMenuList : MonoBehaviour
             yazirusiCout -= 1;
             yazirusiDelay = 60;
         }
-        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !Data.pauseWindFlag)
+        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 )
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
@@ -87,27 +101,21 @@ public class PauseMenuList : MonoBehaviour
             yazirusiDelay = 60;
         }
 
-        if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
+        if (Input.GetKeyDown("joystick button 0"))
         {
-            if(itemList[yazirusiCout] == "もちもの")
+            if (itemList[yazirusiCout] == "BGM")
             {
-                GameObject instance =
-              (GameObject)Instantiate(pauseItemList,
-              new Vector3(0, 0, 0.0f), Quaternion.identity);
 
-                Data.pauseWindFlag = true;
+                message.text = "BGMまだ作ってない";
+                delayFlag  = true;
             }
-        }
-        if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
-        {
-            if (itemList[yazirusiCout] == "音量")
+
+            if (itemList[yazirusiCout] == "SE")
             {
-                GameObject instance =
-              (GameObject)Instantiate(pauseSoundUI,
-              new Vector3(0, 0, 0.0f), Quaternion.identity);
-
-                Data.pauseWindFlag = true;
+                message.text = "SEまだ作ってない";
+                delayFlag = true;
             }
+            StartCoroutine(Coroutine());
         }
 
 

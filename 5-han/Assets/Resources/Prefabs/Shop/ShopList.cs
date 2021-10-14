@@ -35,8 +35,8 @@ public class ShopList : MonoBehaviour
     void Start()
     {
         Data.shopFlag = true;
-        haveItems = new List<int>();
-        haveItemText = new List<Text>();
+        haveItems = new List<int>(5);
+        haveItemText = new List<Text>(5);
         //矢印の初期Pos
         pos = yazirusiText.transform.position;       
 

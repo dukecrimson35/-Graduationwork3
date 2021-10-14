@@ -8,6 +8,9 @@ public  class Data : MonoBehaviour
     public static readonly int maxStageNumber = 3;
     public const int maxStageNumber2 = 3;
 
+    public static List<string> dataItemStringList = new List<string>();
+    public static List<int> dataItemIntList = new List<int>();
+
     public static bool shopFlag = false;
     //デバックのため後で0に戻す
     public static int coin = 2000;
@@ -16,6 +19,35 @@ public  class Data : MonoBehaviour
     public static int makimono2 = 0;
     public static int makimono3 = 0;
     public static bool pauseWindFlag = false;
+    public static bool pauseItemListFlag = false;
+
+
+    public static void GetPauseMenuItemCount()
+    {
+        dataItemIntList.Clear();
+        dataItemStringList.Clear();
+        if(makimono>0)
+        {
+            dataItemIntList.Add(makimono);
+            dataItemStringList.Add("まきもの");
+        }
+        if(makimono2 > 0)
+        {
+            dataItemIntList.Add(makimono2);
+            dataItemStringList.Add("まきもの2");
+        }
+        if (makimono3 > 0)
+        {
+            dataItemIntList.Add(makimono3);
+            dataItemStringList.Add("まきもの3");
+        }
+        if (kaihuku > 0)
+        {
+            dataItemIntList.Add(kaihuku);
+            dataItemStringList.Add("かいふく");
+        }
+        dataItemStringList.Add("もどる");
+    }
 
     public static int GetMaxStageNumber()
     {

@@ -31,6 +31,17 @@ public class PauseScript : MonoBehaviour
             else
             {
                 Destroy(pauseUIInstance);
+                if(GameObject.Find("PauseItemList(Clone)"))
+                {
+                    Destroy(GameObject.Find("PauseItemList(Clone)"));
+                    Data.pauseWindFlag = false;
+                }
+                if (GameObject.Find("PauseSoundUI(Clone)"))
+                {
+                    Destroy(GameObject.Find("PauseSoundUI(Clone)"));
+                    Data.pauseWindFlag = false;
+                }
+
                 Time.timeScale = 1f;
             }
 

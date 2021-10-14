@@ -229,6 +229,7 @@ MonoBehaviour:
   - "\u307E\u304D\u3082\u306E"
   - "\u307E\u304D\u3082\u306E2"
   - "\u307E\u304D\u3082\u306E3"
+  - "\u3068\u3058\u308B"
   yazirusiText: {fileID: 7909509958972247452}
   text: {fileID: 4021199938807867173, guid: 37468b69a1295344198d0b9bff45bec3, type: 3}
 --- !u!1 &7909509958972247454
