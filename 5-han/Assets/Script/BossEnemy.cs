@@ -119,10 +119,6 @@ public class BossEnemy : MonoBehaviour
         {
             BossEnemyHp -= 10;
         }
-
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
         if (collision.gameObject.tag == "LSide")
         {
             AtkModeMelee = false;
@@ -138,7 +134,6 @@ public class BossEnemy : MonoBehaviour
             RMove = false;
         }
     }
-
     public int GetHp()
     {
         return BossEnemyHp;
