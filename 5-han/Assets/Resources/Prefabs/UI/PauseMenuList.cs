@@ -13,7 +13,7 @@ public class PauseMenuList : MonoBehaviour
 
     public List<string> itemList;
 
-
+    private bool delayFlag = false;
 
     public Text yazirusiText;
     private Vector3 pos;//矢印の初期Pos
@@ -76,41 +76,45 @@ public class PauseMenuList : MonoBehaviour
         float vert2 = Input.GetAxis("CrossUpDown");
         //メニューの矢印制御vert2 > 0.3f 
 
-        if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0 && !Data.pauseWindFlag)
+        if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0 && !Data.pauseWindFlag && !delayFlag)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
                             yazirusiText.transform.position.y + yazirusiMove,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
-            yazirusiDelay = 60;
+            StartCoroutine(Coroutine());
+            //yazirusiDelay = 60;
         }
-        else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag)
+        else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag && !delayFlag)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
                             yazirusiText.transform.position.y + yazirusiMove,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
-            yazirusiDelay2 = 60;
+            StartCoroutine(Coroutine());
+            //yazirusiDelay2 = 60;
         }
-        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !Data.pauseWindFlag)
+        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !Data.pauseWindFlag && !delayFlag)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
                            yazirusiText.transform.position.y - yazirusiMove,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
-            yazirusiDelay = 60;
+            StartCoroutine(Coroutine());
+            //yazirusiDelay = 60;
         }
-        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag)
+        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag && !delayFlag)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
                            yazirusiText.transform.position.y - yazirusiMove,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
-            yazirusiDelay2 = 60;
+            StartCoroutine(Coroutine());
+            //yazirusiDelay2 = 60;
         }
 
         if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
@@ -160,4 +164,13 @@ public class PauseMenuList : MonoBehaviour
     {
         messeDire = 40;
     }
+
+    float delay = 0.2f;
+    IEnumerator Coroutine()
+    {
+        delayFlag = true;
+        yield return new WaitForSecondsRealtime(delay);
+        delayFlag = false;
+    }
+
 }

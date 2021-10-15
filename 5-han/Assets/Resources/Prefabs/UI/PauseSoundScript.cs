@@ -29,6 +29,12 @@ public class PauseSoundScript : MonoBehaviour
     private int height = 50;
     private int textWidthmove = 50;
     private int textHeightmove = 40;
+
+
+    private bool delayFlag = false;
+    private bool delayFlag2 = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +60,6 @@ public class PauseSoundScript : MonoBehaviour
     }
 
     float delay = 1.0f;
-    bool delayFlag = false;
     IEnumerator Coroutine()
     {
         yield return new WaitForSecondsRealtime(delay);
@@ -88,41 +93,41 @@ public class PauseSoundScript : MonoBehaviour
         float vert2 = Input.GetAxis("CrossUpDown");
 
         //メニューの矢印制御
-        if ( vert > 0.3f &&( yazirusiCout > 0 && yazirusiDelay <= 0 ))
+        if ( vert > 0.3f &&yazirusiCout > 0 && yazirusiDelay <= 0  && !delayFlag2)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
                             yazirusiText.transform.position.y + yazirusiMove,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
-            yazirusiDelay = 60;
+            StartCoroutine(Coroutine2());
         }
-        else if (vert2 > 0.3f && (yazirusiCout > 0 && yazirusiDelay2 <= 0))
+        else if (vert2 > 0.3f && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
                             yazirusiText.transform.position.y + yazirusiMove,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
-            yazirusiDelay2 = 60;
+            StartCoroutine(Coroutine2());
         }
-        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 )
+        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !delayFlag2)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
                            yazirusiText.transform.position.y - yazirusiMove,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
-            yazirusiDelay = 60;
+            StartCoroutine(Coroutine2());
         }
-        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0)
+        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
                            yazirusiText.transform.position.y - yazirusiMove,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
-            yazirusiDelay2 = 60;
+            StartCoroutine(Coroutine2());
         }
 
         if (Input.GetKeyDown("joystick button 0"))
@@ -161,5 +166,13 @@ public class PauseSoundScript : MonoBehaviour
         {
             yazirusiDelay2 = 0;
         }
+    }
+
+    float delay2 = 0.2f;
+    IEnumerator Coroutine2()
+    {
+        delayFlag2 = true;
+        yield return new WaitForSecondsRealtime(delay2);
+        delayFlag2 = false;
     }
 }
