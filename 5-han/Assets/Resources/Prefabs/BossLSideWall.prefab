@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3137719070406832677}
   - component: {fileID: 3137719070406832674}
   - component: {fileID: 8009829031818404894}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BossLSideWall
   m_TagString: LSide
   m_Icon: {fileID: 0}

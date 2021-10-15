@@ -697,6 +697,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossLSideWall
       objectReference: {fileID: 0}
+    - target: {fileID: 3137719070406832672, guid: fa8a5a85ca0790b458dacd813a4b5c26,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 3137719070406832676, guid: fa8a5a85ca0790b458dacd813a4b5c26,
         type: 3}
       propertyPath: m_RootOrder
@@ -858,6 +863,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BossRSideWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6764817168692141968, guid: daa7ff640778bb24fbe1bab30c82240c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6764817168692141972, guid: daa7ff640778bb24fbe1bab30c82240c,
         type: 3}
