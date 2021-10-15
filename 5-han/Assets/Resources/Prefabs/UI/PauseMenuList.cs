@@ -23,6 +23,7 @@ public class PauseMenuList : MonoBehaviour
 
 
     private float yazirusiDelay = 0.2f;
+    private float yazirusiDelay2 = 0.2f;
     private float dire = 180;
     private float messegeDelay = 60;
     private float messeDire = 0;
@@ -64,10 +65,17 @@ public class PauseMenuList : MonoBehaviour
         {
             yazirusiDelay -= dire * Time.deltaTime;
         }
+        if (yazirusiDelay2 > 0)
+        {
+            yazirusiDelay2 -= dire * Time.deltaTime;
+        }
+
+
         //スティックの縦方向取得
         float vert = Input.GetAxis("Vertical");
+        float vert2 = Input.GetAxis("CrossUpDown");
+        //メニューの矢印制御vert2 > 0.3f 
 
-        //メニューの矢印制御
         if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0 && !Data.pauseWindFlag)
         {
             yazirusiText.transform.position =
@@ -77,6 +85,15 @@ public class PauseMenuList : MonoBehaviour
             yazirusiCout -= 1;
             yazirusiDelay = 60;
         }
+        else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag)
+        {
+            yazirusiText.transform.position =
+                new Vector3(yazirusiText.transform.position.x,
+                            yazirusiText.transform.position.y + yazirusiMove,
+                            yazirusiText.transform.position.z);
+            yazirusiCout -= 1;
+            yazirusiDelay2 = 60;
+        }
         else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !Data.pauseWindFlag)
         {
             yazirusiText.transform.position =
@@ -85,6 +102,15 @@ public class PauseMenuList : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             yazirusiDelay = 60;
+        }
+        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag)
+        {
+            yazirusiText.transform.position =
+               new Vector3(yazirusiText.transform.position.x,
+                           yazirusiText.transform.position.y - yazirusiMove,
+                           yazirusiText.transform.position.z);
+            yazirusiCout += 1;
+            yazirusiDelay2 = 60;
         }
 
         if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
@@ -125,5 +151,13 @@ public class PauseMenuList : MonoBehaviour
         {
             yazirusiDelay = 0;
         }
+        if (vert2 > -0.3f && vert2 < 0.3f)
+        {
+            yazirusiDelay2 = 0;
+        }
+    }
+    public void MesseDelaySet()
+    {
+        messeDire = 40;
     }
 }

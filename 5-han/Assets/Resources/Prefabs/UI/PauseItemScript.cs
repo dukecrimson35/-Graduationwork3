@@ -15,6 +15,8 @@ public class PauseItemScript : MonoBehaviour
     private Vector3 pos;//矢印の初期Pos
 
     public Text text;
+    public Text message;
+
     private int yazirusiCout = 0;//矢印がどの段にいるかの
 
     private List<string> itemHavelistName = new List<string>();
@@ -25,6 +27,7 @@ public class PauseItemScript : MonoBehaviour
 
 
     private float yazirusiDelay = 0.2f;
+    private float yazirusiDelay2 = 0.2f;
     private float dire = 180;
     private float messegeDelay = 60;
     private float messeDire = 0;
@@ -32,6 +35,8 @@ public class PauseItemScript : MonoBehaviour
     private int height = 50;
     private int textWidthmove = 50;  
     private int textHeightmove = 40;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -123,12 +128,25 @@ public class PauseItemScript : MonoBehaviour
         {
             yazirusiDelay -= dire * Time.deltaTime;
         }
+        if (yazirusiDelay2 > 0)
+        {
+            yazirusiDelay2 -= dire * Time.deltaTime;
+        }
+        //メッセージディレイ
+        if (messeDire > 0)
+        {
+            messeDire -= messegeDelay * Time.deltaTime;
+        }
+        else
+        {
+            message.text = "";
+        }
 
         ItemCheckUpdate();
 
         //スティックの縦方向取得
         float vert = Input.GetAxis("Vertical");
-
+        float vert2 = Input.GetAxis("CrossUpDown");
         //メニューの矢印制御
         if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0)
         {
@@ -139,6 +157,15 @@ public class PauseItemScript : MonoBehaviour
             yazirusiCout -= 1;
             yazirusiDelay = 60;
         }
+        else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0)
+        {
+            yazirusiText.transform.position =
+                new Vector3(yazirusiText.transform.position.x,
+                            yazirusiText.transform.position.y + yazirusiMove,
+                            yazirusiText.transform.position.z);
+            yazirusiCout -= 1;
+            yazirusiDelay2 = 60;
+        }
         else if (vert < -0.3f && yazirusiCout < Data.dataItemStringList.Count - 1 && yazirusiDelay <= 0)
         {
             yazirusiText.transform.position =
@@ -147,6 +174,15 @@ public class PauseItemScript : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             yazirusiDelay = 60;
+        }
+        else if (vert2 < -0.3f && yazirusiCout < Data.dataItemStringList.Count - 1 && yazirusiDelay2 <= 0)
+        {
+            yazirusiText.transform.position =
+               new Vector3(yazirusiText.transform.position.x,
+                           yazirusiText.transform.position.y - yazirusiMove,
+                           yazirusiText.transform.position.z);
+            yazirusiCout += 1;
+            yazirusiDelay2 = 60;
         }
 
 
@@ -204,12 +240,22 @@ public class PauseItemScript : MonoBehaviour
             }
         }
 
-
+        //アイテムの説明
+        ItemExposition();
 
         if (vert > -0.3f && vert < 0.3f)
         {
             yazirusiDelay = 0;
         }
+        if (vert2 > -0.3f && vert2 < 0.3f)
+        {
+            yazirusiDelay2 = 0;
+        }
+    }
+
+    public void MesseDelaySet()
+    {
+        messeDire = 40;
     }
 
     public void ItemCheckUpdate()
@@ -253,6 +299,29 @@ public class PauseItemScript : MonoBehaviour
         }
 
     }
+
+    public void ItemExposition()
+    {
+        if (Data.dataItemStringList[yazirusiCout] == "かいふく")
+        {
+          
+            message.text = "HP20回復する";
+        }
+
+        if (Data.dataItemStringList[yazirusiCout] == "まきもの")
+        {
+            message.text = "必殺技1を使えるようになる";
+        }
+        if (Data.dataItemStringList[yazirusiCout] == "まきもの2")
+        {
+            message.text = "必殺技2を使えるようになる";
+        }
+        if (Data.dataItemStringList[yazirusiCout] == "まきもの3")
+        {
+            message.text = "必殺技3を使えるようになる";
+        }
+    }
+
 
     public void HaveNumver()
     {
