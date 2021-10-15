@@ -7,6 +7,8 @@ public class DirectionCamera : MonoBehaviour
     public GameObject player;//プレイヤー
     PlayerControl playerControl;//プレイヤーのスクリプト
     public GameObject otherCamera;//他のカメラオブジェクト
+    public GameObject enemymanager;
+    EnemyRespawn enemylist;//敵のリストもらうスクリプト
     Camera me;//このカメラ
     Camera other;//他のカメラ
 
