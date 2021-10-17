@@ -38,11 +38,21 @@ public class DirectionCamera : MonoBehaviour
             //演出カメラを使用
             DirectionMove();
         }*/
+
+        //デバッグ用コマンド
+        if (Input.GetButton("B"))
+        {
+            other.enabled = false;
+            me.enabled = true;
+            //演出カメラを使用
+            DirectionMove();
+        }
     }
 
     void DirectionMove()
     {
-        //倒した一番遠い敵とプレイヤーの位置の中間に移動し、両方をカメラ内にとらえるように引く
+        //連撃開始地点とプレイヤーの位置の中間に移動し、両方をカメラ内にとらえるように引く
+        //transform.position = player.transform.position + ((playerControl.GetStartPosition() - player.transform.position)/2);
         //連撃のエフェクトを倒した順番に行う
         //カメラを元に戻す
     }
