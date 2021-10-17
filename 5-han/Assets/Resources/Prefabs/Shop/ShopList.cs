@@ -21,8 +21,10 @@ public class ShopList : MonoBehaviour
     public Text coinText;
 
     public Text message;
+    public Text message2;
 
     private float yazirusiDelay = 0.2f;
+    private float yazirusiDelay2 = 0.2f;
     private float dire = 180;
     private float messegeDelay = 60;
     private float messeDire = 0;
@@ -92,6 +94,10 @@ public class ShopList : MonoBehaviour
         {
             yazirusiDelay -= dire * Time.deltaTime;
         }
+        if (yazirusiDelay2 > 0)
+        {
+            yazirusiDelay2 -= dire * Time.deltaTime;
+        }
         //メッセージ消えるディレイ
         if (messeDire > 0)
         {
@@ -104,7 +110,7 @@ public class ShopList : MonoBehaviour
 
         //スティックの縦方向取得
         float vert = Input.GetAxis("Vertical");
-
+        float vert2 = Input.GetAxis("CrossUpDown");
         //メニューの矢印制御
         if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0)
         {
@@ -115,6 +121,15 @@ public class ShopList : MonoBehaviour
             yazirusiCout -= 1;
             yazirusiDelay = 60;
         }
+        else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0)
+        {
+            yazirusiText.transform.position =
+                new Vector3(yazirusiText.transform.position.x,
+                            yazirusiText.transform.position.y + yazirusiMove,
+                            yazirusiText.transform.position.z);
+            yazirusiCout -= 1;
+            yazirusiDelay2 = 60;
+        }
         else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0)
         {
             yazirusiText.transform.position =
@@ -123,6 +138,15 @@ public class ShopList : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             yazirusiDelay = 60;
+        }
+        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0)
+        {
+            yazirusiText.transform.position =
+               new Vector3(yazirusiText.transform.position.x,
+                           yazirusiText.transform.position.y - yazirusiMove,
+                           yazirusiText.transform.position.z);
+            yazirusiCout += 1;
+            yazirusiDelay2 = 60;
         }
 
         //メニュー閉じる処理
@@ -147,9 +171,15 @@ public class ShopList : MonoBehaviour
             }
         }
 
-        if(vert > -0.3f && vert < 0.3f)
+        ItemExposition();
+
+        if (vert > -0.3f && vert < 0.3f)
         {
             yazirusiDelay = 0;
+        }
+        if (vert2 > -0.3f && vert2 < 0.3f)
+        {
+            yazirusiDelay2 = 0;
         }
 
     }
@@ -214,6 +244,30 @@ public class ShopList : MonoBehaviour
                 message.text = "これ以上買えません";
             }
             MesseDelaySet();
+        }
+
+       
+    }
+
+    public void ItemExposition()
+    {
+        if (itemList[yazirusiCout] == "かいふく")
+        {
+
+            message2.text = "HP20回復する";
+        }
+
+        if (itemList[yazirusiCout] == "まきもの")
+        {
+            message2.text = "必殺技1を使えるようになる";
+        }
+        if (itemList[yazirusiCout] == "まきもの2")
+        {
+            message2.text = "必殺技2を使えるようになる";
+        }
+        if (itemList[yazirusiCout] == "まきもの3")
+        {
+            message2.text = "必殺技3を使えるようになる";
         }
     }
 

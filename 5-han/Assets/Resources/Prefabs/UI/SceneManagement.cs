@@ -14,6 +14,10 @@ public class SceneManagement : MonoBehaviour
 
     private bool oneFadeFlag = false;
 
+    private GameObject boss;
+
+    private bool clearFlag = false;
+
    
 
     public enum SceneNames
@@ -38,6 +42,8 @@ public class SceneManagement : MonoBehaviour
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
 
+        boss = GameObject.FindGameObjectWithTag("BossEnemy");
+
         //for(int i = 0; i< GameData.maxStageNumber;i++)
         //{
         //    stages.Add("stage" + (i + 1).ToString());
@@ -53,6 +59,10 @@ public class SceneManagement : MonoBehaviour
             oneFadeFlag = true;
         }
 
+        if(boss == null)
+        {
+            clearFlag = true;
+        }
 
         //if(Input.GetKeyDown(KeyCode.Alpha1))
         //{
@@ -117,7 +127,7 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage01")
         {
-            if (Input.GetKeyDown(KeyCode.Alpha0))
+            if (Input.GetKeyDown(KeyCode.Alpha0) || clearFlag)
             {
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
