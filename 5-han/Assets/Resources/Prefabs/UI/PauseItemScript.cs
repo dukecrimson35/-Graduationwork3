@@ -39,22 +39,35 @@ public class PauseItemScript : MonoBehaviour
 
     private bool delayFlag = false;
 
+    private GameObject player;
+    private PlayerControl playerControl;
+
+    public GameObject playerHPUI;
+    public PlayerHpGauge hpGauge;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
 
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerControl = player.GetComponent<PlayerControl>();
+
+        if(GameObject.Find("HPBar"))
+        {
+            playerHPUI = GameObject.Find("HPBar");
+            hpGauge = playerHPUI.GetComponent<PlayerHpGauge>();
+        }
+
         //矢印の初期Pos
         pos = yazirusiText.transform.position;
         Data.GetPauseMenuItemCount();
-
 
         //リストに入っているテキストをメニューに並べる(アイテム名)
         for (int i = 0; i < Data.dataItemStringList.Count ; i++)
         {
             text.text = Data.dataItemStringList[i];
-
 
             Text instance =
                 (Text)Instantiate(text,
@@ -79,8 +92,6 @@ public class PauseItemScript : MonoBehaviour
             itemNumTexts.Add(instance);
             itemHavelistNum.Add(Data.dataItemIntList[i]);
         }
-
-
     }
 
     // Update is called once per frame
@@ -170,6 +181,8 @@ public class PauseItemScript : MonoBehaviour
                     int num = itemHavelistName.IndexOf("かいふく");
                     itemHavelistNum[num]--;
                     Data.kaihuku--;
+                    hpGauge.Heal(20);
+                    //player.HealHp(20);
                 }
 
 
