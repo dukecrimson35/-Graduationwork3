@@ -43,6 +43,15 @@ public class PlayerControl : MonoBehaviour
         
       
     }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Coin")
+        {
+            Money moneyScript = collision.gameObject.GetComponent<Money>();
+            itemManagerScript.UpCoin(moneyScript.GetMoney());
+            Destroy(collision.gameObject);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Coin")
