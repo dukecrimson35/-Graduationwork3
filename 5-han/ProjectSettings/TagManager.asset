@@ -32,8 +32,8 @@ TagManager:
   - Coin
   - Bullet
   - Wall
-  - 
-  - 
+  - CointoGround
+  - Ground
   - 
   - 
   - 

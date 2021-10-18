@@ -5,8 +5,9 @@ using UnityEngine;
 public class EnemyRespawn : MonoBehaviour
 {
     public GameObject StopEnemy;
-    public GameObject coinMidlle;
-    public GameObject coinSmall;
+    public GameObject coinMidlle;//ドロップするコイン１
+    public GameObject coinSmall;//ドロップするコイン２
+    public GameObject DeathAnimation;
 
     GameObject[] enemys;
     List<Vector3> positions = new List<Vector3>();
@@ -45,6 +46,8 @@ public class EnemyRespawn : MonoBehaviour
                 {
                     delays.Add(i);
                     delays2.Add(i);
+                    //敵の死亡アニメーション
+                    DeadAnimation(positions[i]);
                 }
                 if(delays.Contains(i))
                 {
@@ -62,6 +65,7 @@ public class EnemyRespawn : MonoBehaviour
                     if (coincounts[i] >= 0.5f)
                     {
                         coincounts[i] = 0;
+                        //コインドロップ
                         CoinDrop(positions[i]);
                         delays2.Remove(i);
                     }
@@ -83,5 +87,10 @@ public class EnemyRespawn : MonoBehaviour
         Instantiate(coinSmall, position, new Quaternion());
         Instantiate(coinMidlle, position, new Quaternion());
         Instantiate(coinMidlle, position, new Quaternion());
+    }
+
+    void DeadAnimation(Vector3 position)//死亡アニメーション
+    {
+        Instantiate(DeathAnimation, position, new Quaternion());
     }
 }
