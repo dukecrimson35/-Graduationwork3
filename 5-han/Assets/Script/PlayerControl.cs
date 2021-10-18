@@ -13,6 +13,8 @@ public class PlayerControl : MonoBehaviour
     Vector3 pos;
     GameObject moveColider;
     SenkuMove move;
+    GameObject lookColider;
+    LookOn look;
     Rigidbody rigid;
     bool kamae;
     bool hitFlag;
@@ -133,6 +135,12 @@ public class PlayerControl : MonoBehaviour
                 {
                     moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
                     move = moveColider.GetComponent<SenkuMove>();
+                   
+                }
+                if (lookColider == null) 
+                {
+                    lookColider = Instantiate((GameObject)Resources.Load("LookOn"));
+                    look = lookColider.GetComponentInChildren<LookOn>();
                 }
                 rigid.velocity = new Vector3(0, 0, 0);
                 kamae = true;
@@ -150,25 +158,62 @@ public class PlayerControl : MonoBehaviour
                 {
                     Destroy(moveColider);
                 }
+                if (lookColider != null)
+                {
+                    Destroy(lookColider);
+                }
             }
+        
             else if (Input.GetButtonUp("A") && move.GetIsMove()) 
             {
-                kamae = false;
-                hitFlag = false;
-                stoptime = 1.5f;
-                col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
-
-
-                col.transform.position = transform.position;
-                col.transform.position += senku / 2;
-                float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
-                col.transform.rotation = Quaternion.Euler(0, 0, ang);
-
-                transform.position += senku;
-                if (moveColider != null)
+                if (look.GetLookObject() != null)
                 {
-                    Destroy(moveColider);
+                    senku = (look.GetLookObject().transform.position - transform.position).normalized;
+                    float len = (transform.position - look.GetLookObject().transform.position).magnitude;
+                    kamae = false;
+                    hitFlag = false;
+                    stoptime = 1.5f;
+                    col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
+
+                    col.transform.position = transform.position;
+                    col.transform.position += senku * len / 2;
+                    float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
+                    col.transform.rotation = Quaternion.Euler(0, 0, ang);
+
+                    transform.position += senku * len + senku ;
+                    if (moveColider != null)
+                    {
+                        Destroy(moveColider);
+                    }
+                    if (lookColider != null)
+                    {
+                        Destroy(lookColider);
+                    }
                 }
+                else
+                {
+                    kamae = false;
+                    hitFlag = false;
+                    stoptime = 1.5f;
+                    col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
+
+
+                    col.transform.position = transform.position;
+                    col.transform.position += senku / 2;
+                    float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
+                    col.transform.rotation = Quaternion.Euler(0, 0, ang);
+
+                    transform.position += senku;
+                    if (moveColider != null)
+                    {
+                        Destroy(moveColider);
+                    }
+                    if (lookColider != null)
+                    {
+                        Destroy(lookColider);
+                    }
+                }
+              
             }
          
         }
@@ -181,7 +226,11 @@ public class PlayerControl : MonoBehaviour
             moveColider.transform.position = transform.position;
             moveColider.transform.rotation = Quaternion.Euler(0, 0, tes);
         }
-
+        if(lookColider!=null)
+        {
+            lookColider.transform.position = transform.position;
+            lookColider.transform.rotation = Quaternion.Euler(0, 0, tes);
+        }
         stoptime -= Time.deltaTime;
     }
     void Special()
@@ -251,11 +300,15 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         
-        if (muteki > 0)
+        if (muteki < 0)
         {
             hp -= damage;
             muteki = 1.5f;
         }
+    }
+    public void HealHp(int num)
+    {
+        hp += num;
     }
     public void KnockBack(GameObject other)
     {
