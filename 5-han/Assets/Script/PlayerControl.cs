@@ -251,7 +251,7 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         
-        if (muteki > 0)
+        if (muteki < 0)
         {
             hp -= damage;
             muteki = 1.5f;
