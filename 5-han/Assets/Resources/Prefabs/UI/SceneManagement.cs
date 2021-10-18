@@ -22,6 +22,9 @@ public class SceneManagement : MonoBehaviour
     private GameObject player;
     private PlayerControl playerControl;
 
+    public AudioSource audioSource;
+    public AudioClip bgm;
+
     public enum SceneNames
     {
         TitleScene,
@@ -34,11 +37,6 @@ public class SceneManagement : MonoBehaviour
         GameOverScene,
     };
 
-    //public List<string> stages = new List<string>();
-
-    //private int maxStageNumber = 3;
-
-    // Start is called before the first frame update
     void Start()
     {
         //gameData = GetComponent<GameData>();
@@ -57,6 +55,17 @@ public class SceneManagement : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             playerControl = player.GetComponent<PlayerControl>();
         }
+
+        if(bgm != null)
+        {
+            audioSource.clip = bgm;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.Log("BGMが入ってないよ");
+        }
+      
 
 
     }
