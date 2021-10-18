@@ -49,14 +49,16 @@ public class SceneManagement : MonoBehaviour
         //for(int i = 0; i< GameData.maxStageNumber;i++)
         //{
         //    stages.Add("stage" + (i + 1).ToString());
+
         //}
-        if(GameObject.FindGameObjectWithTag("Player"))
+
+        if (sceneName == "Stage01" || sceneName == "Stage02" || sceneName == "Stage03")
         {
             player = GameObject.FindGameObjectWithTag("Player");
             playerControl = player.GetComponent<PlayerControl>();
         }
 
-       
+
     }
 
     // Update is called once per frame
@@ -68,15 +70,20 @@ public class SceneManagement : MonoBehaviour
             oneFadeFlag = true;
         }
 
-        if(playerControl.GetHp()<=0 && playerControl != null)
+        if (sceneName == "Stage01" || sceneName == "Stage02" || sceneName == "Stage03")
         {
-            deadFlag = true;
+            if (playerControl.GetHp() <= 0 && playerControl != null)
+            {
+                deadFlag = true;
+            }
+
+            if (boss == null)
+            {
+                clearFlag = true;
+            }
         }
 
-        if(boss == null)
-        {
-            clearFlag = true;
-        }
+        
 
         //if(Input.GetKeyDown(KeyCode.Alpha1))
         //{
