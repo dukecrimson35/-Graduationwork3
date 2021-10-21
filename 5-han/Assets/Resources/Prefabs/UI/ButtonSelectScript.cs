@@ -55,6 +55,7 @@ public class ButtonSelectScript : MonoBehaviour
             pos--;
             buttons[pos].Select();
             SentakuSEPlay();
+            //buttons[pos].image.color =  
             //yazirusiDelay = 60;
         }
         else if (vert2 > 0.3f && !delayFlag && pos > 0)

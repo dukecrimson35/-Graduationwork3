@@ -39,6 +39,10 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
+
+
+     
+
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
 

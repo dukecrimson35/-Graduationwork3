@@ -19,6 +19,8 @@ public class TitleButton : MonoBehaviour
         startButton.Select();
 
         sceneManagement = sceneManagerOBJ.GetComponent<SceneManagement>();
+
+        //Screen.lockCursor = false;
     }
 
     // Update is called once per frame
