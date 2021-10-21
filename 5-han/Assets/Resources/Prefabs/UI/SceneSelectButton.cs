@@ -24,7 +24,7 @@ public class SceneSelectButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage1Button.Select();
+        //stage1Button.Select();
 
         sceneManagement = sceneManagerOBJ.GetComponent<SceneManagement>();
 
@@ -53,46 +53,46 @@ public class SceneSelectButton : MonoBehaviour
        
 
         //スティックの縦方向取得
-        float vert = Input.GetAxis("Vertical");
-        float vert2 = Input.GetAxis("CrossUpDown");
+        //float vert = Input.GetAxis("Vertical");
+        //float vert2 = Input.GetAxis("CrossUpDown");
 
 
-        if (vert > 0.3f  && !delayFlag  && pos >0)
-        {
+        //if (vert > 0.3f  && !delayFlag  && pos >0)
+        //{
      
-            StartCoroutine(Coroutine());
-            pos--;
-            buttons[pos].Select();
+        //    StartCoroutine(Coroutine());
+        //    pos--;
+        //    buttons[pos].Select();
            
-            //yazirusiDelay = 60;
-        }
-        else if (vert2 > 0.3f && !delayFlag && pos > 0)
-        {
+        //    //yazirusiDelay = 60;
+        //}
+        //else if (vert2 > 0.3f && !delayFlag && pos > 0)
+        //{
          
-            StartCoroutine(Coroutine());
-            pos--;
-            buttons[pos].Select();
+        //    StartCoroutine(Coroutine());
+        //    pos--;
+        //    buttons[pos].Select();
            
-            //yazirusiDelay2 = 60;
-        }
-        else if (vert < -0.3f && !delayFlag && pos< buttons.Count-1)
-        {
+        //    //yazirusiDelay2 = 60;
+        //}
+        //else if (vert < -0.3f && !delayFlag && pos< buttons.Count-1)
+        //{
           
-            StartCoroutine(Coroutine());
-            pos++;
-            buttons[pos].Select();
+        //    StartCoroutine(Coroutine());
+        //    pos++;
+        //    buttons[pos].Select();
             
-            //yazirusiDelay = 60;
-        }
-        else if (vert2 < -0.3f && !delayFlag && pos < buttons.Count-1)
-        {
+        //    //yazirusiDelay = 60;
+        //}
+        //else if (vert2 < -0.3f && !delayFlag && pos < buttons.Count-1)
+        //{
           
-            StartCoroutine(Coroutine());
-            pos++;
-            buttons[pos].Select();
+        //    StartCoroutine(Coroutine());
+        //    pos++;
+        //    buttons[pos].Select();
           
-            //yazirusiDelay2 = 60;
-        }
+        //    //yazirusiDelay2 = 60;
+        //}
     }
 
     public void OnClickStage1Button()
