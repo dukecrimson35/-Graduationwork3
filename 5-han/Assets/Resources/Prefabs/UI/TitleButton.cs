@@ -7,7 +7,7 @@ public class TitleButton : MonoBehaviour
 {
 
     public Button startButton;
-    public Button optionButton;
+    //public Button optionButton;
     public Button endButton;
 
     public GameObject sceneManagerOBJ;

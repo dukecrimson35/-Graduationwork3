@@ -31,10 +31,15 @@ public class PauseMenuList : MonoBehaviour
     private int height = 50;
     private int textWidthmove = 50;
     private int textHeightmove = 40;
+
+    private AudioSource audioSource;
+    public AudioClip senntakuSE;
+    public AudioClip ketteiSE;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
 
         //矢印の初期Pos
         pos = yazirusiText.transform.position;
@@ -84,6 +89,7 @@ public class PauseMenuList : MonoBehaviour
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
             //yazirusiDelay = 60;
         }
         else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag && !delayFlag)
@@ -94,6 +100,7 @@ public class PauseMenuList : MonoBehaviour
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
             //yazirusiDelay2 = 60;
         }
         else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !Data.pauseWindFlag && !delayFlag)
@@ -104,6 +111,7 @@ public class PauseMenuList : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
             //yazirusiDelay = 60;
         }
         else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag && !delayFlag)
@@ -114,6 +122,7 @@ public class PauseMenuList : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
             //yazirusiDelay2 = 60;
         }
 
@@ -126,6 +135,7 @@ public class PauseMenuList : MonoBehaviour
               new Vector3(0, 0, 0.0f), Quaternion.identity);
 
                 Data.pauseWindFlag = true;
+                KetteiSEPlay();
             }
         }
         if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
@@ -137,6 +147,7 @@ public class PauseMenuList : MonoBehaviour
               new Vector3(0, 0, 0.0f), Quaternion.identity);
 
                 Data.pauseWindFlag = true;
+                KetteiSEPlay();
             }
         }
 
@@ -144,9 +155,11 @@ public class PauseMenuList : MonoBehaviour
         //メニュー閉じる処理
         if (Input.GetKeyDown("joystick button 0") && yazirusiCout == itemList.Count - 1)
         {
+            KetteiSEPlay();
             Data.pauseWindFlag = false;
             Destroy(this.gameObject.transform.parent.parent.gameObject);
             Time.timeScale = 1f;
+            
             return;
         }
 
@@ -160,6 +173,17 @@ public class PauseMenuList : MonoBehaviour
             yazirusiDelay2 = 0;
         }
     }
+
+    public void SentakuSEPlay()
+    {
+        audioSource.PlayOneShot(senntakuSE);
+    }
+
+    public void KetteiSEPlay()
+    {
+        audioSource.PlayOneShot(ketteiSE);
+    }
+
     public void MesseDelaySet()
     {
         messeDire = 40;
