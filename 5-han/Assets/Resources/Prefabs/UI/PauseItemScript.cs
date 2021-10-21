@@ -192,7 +192,7 @@ public class PauseItemScript : MonoBehaviour
                     itemHavelistNum[num]--;
                     Data.kaihuku--;
                     hpGauge.Heal(20);
-                    //player.HealHp(20);
+                    playerControl.HealHp(20);
                 }
 
 
