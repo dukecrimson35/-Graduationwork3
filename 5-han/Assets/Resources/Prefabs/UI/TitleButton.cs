@@ -7,7 +7,7 @@ public class TitleButton : MonoBehaviour
 {
 
     public Button startButton;
-    public Button optionButton;
+    //public Button optionButton;
     public Button endButton;
 
     public GameObject sceneManagerOBJ;
@@ -19,6 +19,8 @@ public class TitleButton : MonoBehaviour
         startButton.Select();
 
         sceneManagement = sceneManagerOBJ.GetComponent<SceneManagement>();
+
+        //Screen.lockCursor = false;
     }
 
     // Update is called once per frame
