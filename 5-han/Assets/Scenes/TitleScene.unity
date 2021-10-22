@@ -596,6 +596,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1648622591065998938, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
         type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: a7b89eea4459ea745b07ceeba0fe884f, type: 3}
+    - target: {fileID: 1648622591065998938, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
+        type: 3}
       propertyPath: fade
       value: 
       objectReference: {fileID: 509820419}
@@ -947,6 +952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 6560682565568872062}
+  text: {fileID: 6560682567248989439}
 --- !u!114 &6560682565568872062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,6 +1103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 6560682566329326296}
+  text: {fileID: 6560682565912186660}
 --- !u!114 &6560682566329326296
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -270,7 +270,7 @@ public class SceneManagement : MonoBehaviour
         StartCoroutine(Coroutine(SceneNames.GameOverScene.ToString()));
     }
 
-    float delay = 0.9f;
+    float delay = 1.2f;
     IEnumerator Coroutine(string str)
     {
         yield return new WaitForSecondsRealtime(delay);

@@ -25,6 +25,7 @@ public class EnemyYMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;
         //PingPong関数:指定した振幅や周期で往復させる
         //PingPong(時間,値) 値は-値にすることはできない
         //今の位置から＋値の数値まで行って往復してくる処理

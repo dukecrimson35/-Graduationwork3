@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 754569525667924463}
+  text: {fileID: 7288093099309478959}
 --- !u!1 &6330144282384092068
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 6573026775016992812}
+  text: {fileID: 1532129075727301767}
 --- !u!114 &6573026775016992812
 MonoBehaviour:
   m_ObjectHideFlags: 0

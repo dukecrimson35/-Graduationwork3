@@ -12,6 +12,13 @@ public class ButtonAniScript : MonoBehaviour
     private int count = 20;
 
     private bool backFlag = false;
+
+    public Text text;
+
+    private bool textFlag = false;
+
+    private float alpha = 0; 
+
     void Start()
     {
         for(int i = 1; i< count+1;i++)
@@ -21,16 +28,36 @@ public class ButtonAniScript : MonoBehaviour
             sprites.Add(sp);
         }
         StartCoroutine(Coroutine());
+        alpha = text.color.a;
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(backFlag)
+
+        if (text.color.a < 1 && !textFlag)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + Time.deltaTime * 0.5f);
+        }
+       
+
+        if (backFlag)
         {
             backFlag = false;
             StartCoroutine(BackCoroutine());
+            text.fontSize = 350;
+            textFlag = true;
+            text.color = new Color(text.color.r, text.color.g, text.color.b,alpha);
         }
+
+        if(textFlag)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 1);
+        }
+
+
     }
 
     public void SetBackFlag(bool fl)
@@ -52,10 +79,11 @@ public class ButtonAniScript : MonoBehaviour
         
     }
 
-    float delay2 = 0.035f;
+    float delay2 = 0.03f;
 
     IEnumerator BackCoroutine()
     {
+        yield return new WaitForSecondsRealtime(0.5f);
         for (int i = count-1; i >-1 ; i--)
         {
             image.sprite = sprites[i];
@@ -64,4 +92,17 @@ public class ButtonAniScript : MonoBehaviour
 
 
     }
+
+    IEnumerator TextCoroutine()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        
+        while(text.color.a >0)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 1);
+            //text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 2f);
+        }
+
+    }
+
 }

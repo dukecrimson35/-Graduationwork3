@@ -12,6 +12,7 @@ public class BossEnemy : MonoBehaviour
     bool deadFlag;
     int count = 0;
     Renderer renderer;
+    SpriteRenderer spr;
     bool LMove;
     bool RMove;
     bool MoveMode;
@@ -24,12 +25,17 @@ public class BossEnemy : MonoBehaviour
     public GameObject bullet;
     public GameObject MeleeWepon;
     float wepRot;
+    public Sprite aliveBoss;
+    public Sprite deadBoss;
+    float scenechangetime;
     void Start()
     {
         damage = false;
         deadFlag = false;
         nextTime = Time.time;
         renderer = GetComponent<Renderer>();
+        spr = GetComponent<SpriteRenderer>();
+        spr.sprite = aliveBoss;
         LMove = true;
         RMove = false;
         MoveMode = false;
@@ -39,6 +45,7 @@ public class BossEnemy : MonoBehaviour
         Meleesecond = 0;
         Rangesecond = 0;
         ResetMelee = 0;
+        scenechangetime = 0;
         MeleeWepon.SetActive(false);
         wepRot = 0.1f;
     }
@@ -46,6 +53,7 @@ public class BossEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;
         //移動処理
         if (BossEnemyHp <= 25)
         {
@@ -64,7 +72,7 @@ public class BossEnemy : MonoBehaviour
         }
         //近接攻撃処理
         Meleesecond += Time.deltaTime;
-        if (Meleesecond >= 10)
+        if (Meleesecond >= 5)
         {
             //MeleeSecが10になったら近接攻撃モードON
             AtkModeMelee = true;
@@ -100,7 +108,7 @@ public class BossEnemy : MonoBehaviour
         }
         //遠距離攻撃処理
         Rangesecond += Time.deltaTime;
-        if(Rangesecond>=15)
+        if(Rangesecond>=7.5f)
         {
             Instantiate(bullet, this.transform.position, Quaternion.identity);
             Rangesecond = 0;
@@ -113,18 +121,29 @@ public class BossEnemy : MonoBehaviour
         }
         if (BossEnemyHp <= 0)
         {
-            Destroy(gameObject);
-            deadFlag = true;
+            scenechangetime += Time.deltaTime;
+            spr.sprite = deadBoss;
+            //if(scenechangetime>=2)
+            //{
+                deadFlag = true;
+                Destroy(gameObject);
+            //}
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Destroy(gameObject);
-            deadFlag = true;
+            scenechangetime += Time.deltaTime;
+            spr.sprite = deadBoss;
+            //if (scenechangetime >= 2)
+            //{
+                deadFlag = true;
+                Destroy(gameObject);
+            //}
         }
         if (damage)
         {
              if (Time.time > nextTime)
              {
+                renderer.material.color = Color.red;
                  renderer.enabled = !renderer.enabled;
                  nextTime += damageInterval;
                  count++;
@@ -134,6 +153,10 @@ public class BossEnemy : MonoBehaviour
                  damage = false;
                  count = 0;
              }
+        }
+        if(!damage)
+        {
+            renderer.material.color = Color.white;
         }
         transform.position += pos;
         pos = Vector3.zero;

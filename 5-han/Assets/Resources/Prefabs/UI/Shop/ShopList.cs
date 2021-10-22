@@ -164,6 +164,7 @@ public class ShopList : MonoBehaviour
         {
             Data.shopFlag = false;
             Destroy(this.gameObject.transform.parent.parent.gameObject);
+            //Time.timeScale = 1;
             return;
         }
         //アイテム買う時の処理
