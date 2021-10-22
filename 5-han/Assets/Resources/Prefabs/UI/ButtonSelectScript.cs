@@ -48,6 +48,8 @@ public class ButtonSelectScript : MonoBehaviour
         float vert2 = Input.GetAxis("CrossUpDown");
 
 
+
+
         if (vert > 0.3f && !delayFlag && pos > 0)
         {
 

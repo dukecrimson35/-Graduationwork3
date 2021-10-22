@@ -10,6 +10,8 @@ public class ButtonAniScript : MonoBehaviour
 
     public Image image;
     private int count = 20;
+
+    private bool backFlag = false;
     void Start()
     {
         for(int i = 1; i< count+1;i++)
@@ -24,7 +26,10 @@ public class ButtonAniScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(backFlag)
+        {
+            StartCoroutine(BackCoroutine());
+        }
     }
 
     float delay = 0.08f;
@@ -37,5 +42,18 @@ public class ButtonAniScript : MonoBehaviour
         }
        
         
+    }
+
+    float delay2 = 0.05f;
+
+    IEnumerator BackCoroutine()
+    {
+        for (int i = count-1; i >-1 ; i--)
+        {
+            image.sprite = sprites[i];
+            yield return new WaitForSecondsRealtime(delay2);
+        }
+
+
     }
 }
