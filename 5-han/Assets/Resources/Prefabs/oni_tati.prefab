@@ -132,6 +132,8 @@ MonoBehaviour:
   ResetMelee: 0
   bullet: {fileID: 9040234923941241914, guid: 0d47685f3a3d1ce408964c2199466f8b, type: 3}
   MeleeWepon: {fileID: 2928239365364829501}
+  aliveBoss: {fileID: 21300000, guid: 672eb0106eb2316449f94413973e6310, type: 3}
+  deadBoss: {fileID: 21300000, guid: 58bd36f544732584eb47c2c1a70e0da4, type: 3}
 --- !u!1001 &7633230152410133265
 PrefabInstance:
   m_ObjectHideFlags: 0

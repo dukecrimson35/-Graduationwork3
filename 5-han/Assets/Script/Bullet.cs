@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
             pos.x += 0.01f;
         }
         deadSecond += Time.deltaTime;
-        if (deadSecond >= 5)
+        if (deadSecond >= 2)
         {
             Destroy(gameObject);
         }
