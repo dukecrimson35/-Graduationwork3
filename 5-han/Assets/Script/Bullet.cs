@@ -24,14 +24,14 @@ public class Bullet : MonoBehaviour
     {
         if (LMove && !RMove)
         {
-            pos.x -= 0.01f;
+            pos.x -= 0.1f;
         }
         if (!LMove && RMove)
         {
             pos.x += 0.01f;
         }
         deadSecond += Time.deltaTime;
-        if (deadSecond >= 3)
+        if (deadSecond >= 5)
         {
             Destroy(gameObject);
         }
@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
         {
             PlayerControl p = collision.gameObject.GetComponent<PlayerControl>();
             p.Damage(10);
-            p.KnockBack(gameObject);
+            //p.KnockBack(gameObject);
         }
     }
 }
