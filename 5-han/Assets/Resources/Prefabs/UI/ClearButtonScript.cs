@@ -29,11 +29,15 @@ public class ClearButtonScript : MonoBehaviour
 
     public void OnClickTitleButton()
     {
+        ButtonAniScript bas = titleButton.GetComponent<ButtonAniScript>();
+        if (bas.GetButtonStopFlag()) return;
         sceneManagement.OnClickTitleButton();
     }
 
     public void OnClickSelectButton()
     {
+        ButtonAniScript bas = selectButton.GetComponent<ButtonAniScript>();
+        if (bas.GetButtonStopFlag()) return;
         sceneManagement.OnClickSelectButton();
     }
 }

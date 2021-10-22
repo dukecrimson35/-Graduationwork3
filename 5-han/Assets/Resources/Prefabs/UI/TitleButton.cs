@@ -38,16 +38,22 @@ public class TitleButton : MonoBehaviour
 
     public void OnClickTitleStartButton()
     {
+        ButtonAniScript bas = startButton.GetComponent<ButtonAniScript>();
+        if (bas.GetButtonStopFlag()) return;
         sceneManagement.OnClickSelectButton();
     }
 
     public void OnClickEndButton()
     {
+        ButtonAniScript bas = endButton.GetComponent<ButtonAniScript>();
+        if (bas.GetButtonStopFlag()) return;
         sceneManagement.OnClickEndButton();
     }
 
     public void OnClickTitleOptionButton()
     {
+        //ButtonAniScript bas = GetComponent<ButtonAniScript>();
+        //if (bas.GetButtonStopFlag()) return;
         sceneManagement.OnClickOptionButton();
     }
 }

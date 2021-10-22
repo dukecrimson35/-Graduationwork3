@@ -88,9 +88,13 @@ public class ButtonSelectScript : MonoBehaviour
             //yazirusiDelay2 = 60;
         }
 
-        if(Input.GetKeyDown("joystick button 0") && !onSEFlag)
+        if(Input.GetKeyDown("joystick button 0") && !onSEFlag )
         {
+            
             ButtonAniScript bas = buttons[pos].GetComponent<ButtonAniScript>();
+
+            if (bas.GetButtonStopFlag()) return;
+
             bas.SetBackFlag(true);
             KetteiSEPlay();
             StartCoroutine(Timer());
