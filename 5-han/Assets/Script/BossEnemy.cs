@@ -144,20 +144,20 @@ public class BossEnemy : MonoBehaviour
         {
             BossEnemyHp -= 10;
         }
-        //if (collision.gameObject.tag == "LSide")
-        //{
-        //    AtkModeMelee = false;
-        //    Meleesecond = 0;
-        //    LMove = false;
-        //    RMove = true;
-        //}
-        //if (collision.gameObject.tag == "RSide")
-        //{
-        //    AtkModeMelee = false;
-        //    Meleesecond = 0;
-        //    LMove = true;
-        //    RMove = false;
-        //}
+        if (collision.gameObject.tag == "LSide")
+        {
+            //AtkModeMelee = false;
+            //Meleesecond = 0;
+            LMove = false;
+            RMove = true;
+        }
+        if (collision.gameObject.tag == "RSide")
+        {
+            //AtkModeMelee = false;
+            //Meleesecond = 0;
+            LMove = true;
+            RMove = false;
+        }
     }
     public int GetHp()
     {
