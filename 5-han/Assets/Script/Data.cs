@@ -16,6 +16,7 @@ public  class Data : MonoBehaviour
     public static int coin = 0;
     public static int makimono = 0;
     public static int kaihuku = 0;
+    public static int kaihuku2 = 0;
     public static int makimono2 = 0;
     public static int makimono3 = 0;
     public static bool pauseWindFlag = false;
@@ -47,6 +48,11 @@ public  class Data : MonoBehaviour
         {
             dataItemIntList.Add(kaihuku);
             dataItemStringList.Add("かいふく");
+        }
+        if (kaihuku2 > 0)
+        {
+            dataItemIntList.Add(kaihuku2);
+            dataItemStringList.Add("かいふく2");
         }
         dataItemStringList.Add("もどる");
     }

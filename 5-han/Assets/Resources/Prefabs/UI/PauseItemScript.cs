@@ -191,6 +191,19 @@ public class PauseItemScript : MonoBehaviour
                     int num = itemHavelistName.IndexOf("かいふく");
                     itemHavelistNum[num]--;
                     Data.kaihuku--;
+                    hpGauge.Heal(10);
+                    playerControl.HealHp(10);
+                }
+
+
+            }
+            if (Data.dataItemStringList[yazirusiCout] == "かいふく2")
+            {
+                if (Data.kaihuku2 > 0)
+                {
+                    int num = itemHavelistName.IndexOf("かいふく2");
+                    itemHavelistNum[num]--;
+                    Data.kaihuku2--;
                     hpGauge.Heal(20);
                     playerControl.HealHp(20);
                 }
@@ -291,6 +304,10 @@ public class PauseItemScript : MonoBehaviour
     {
         if (Data.dataItemStringList[yazirusiCout] == "かいふく")
         {         
+            message.text = "HP10回復する";
+        }
+        if (Data.dataItemStringList[yazirusiCout] == "かいふく2")
+        {
             message.text = "HP20回復する";
         }
 
