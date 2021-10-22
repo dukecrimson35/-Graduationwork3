@@ -34,6 +34,8 @@ public class TitleButton : MonoBehaviour
         Debug.Log("押した");
     }
 
+    
+
     public void OnClickTitleStartButton()
     {
         sceneManagement.OnClickSelectButton();

@@ -39,8 +39,7 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
-
-
+        audioSource.volume = 0.3f;
      
 
         //gameData = GetComponent<GameData>();
@@ -99,39 +98,6 @@ public class SceneManagement : MonoBehaviour
         }
 
         
-
-        //if(Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    if (sceneName == SceneNames.TitleScene.ToString())
-        //    {
-        //        SceneManager.LoadScene(SceneNames.SelectScene.ToString());
-        //    }
-        //    else if (sceneName == SceneNames.SelectScene.ToString())
-        //    {
-        //        SceneManager.LoadScene(SceneNames.GameScene.ToString());
-        //    }
-        //    else if (sceneName == SceneNames.GameScene.ToString())
-        //    {
-        //        SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
-        //    }
-        //    else if (sceneName == SceneNames.GameClearScene.ToString())
-        //    {
-        //        SceneManager.LoadScene(SceneNames.TitleScene.ToString());
-        //    }
-        //    else if (sceneName == SceneNames.GameOverScene.ToString())
-        //    {
-        //        SceneManager.LoadScene(SceneNames.TitleScene.ToString());
-        //    }
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    if (sceneName == SceneNames.GameScene.ToString())
-        //    {
-        //        SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
-        //    }
-            
-        //}
 
 
         if(sceneName == "TitleScene")
@@ -250,7 +216,8 @@ public class SceneManagement : MonoBehaviour
     //シーンでのボタン処理----------------------------------------------------------------------------
     public void OnClickSelectButton()
     {
-        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.SelectScene.ToString());        
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.SelectScene.ToString());
+        StartCoroutine(Coroutine(SceneNames.SelectScene.ToString()));
     }
 
     public void OnClickOptionButton()
@@ -260,40 +227,68 @@ public class SceneManagement : MonoBehaviour
 
     public void OnClickEndButton()
     {
+        StartCoroutine(EndCoroutine());
+//#if UNITY_EDITOR
+//        UnityEditor.EditorApplication.isPlaying = false;   // UnityEditorの実行を停止する処理
+//#else
+//        Application.Quit();                                // ゲームを終了する処理
+//#endif
+    }
+
+    public void OnClickStage1Button()
+    {
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage01.ToString());
+        StartCoroutine(Coroutine(SceneNames.Stage01.ToString()));
+    }
+
+    public void OnClickStage2Button()
+    {
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage02.ToString());
+        StartCoroutine(Coroutine(SceneNames.Stage02.ToString()));
+    }
+
+    public void OnClickStage3Button()
+    {
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage03.ToString());
+        StartCoroutine(Coroutine(SceneNames.Stage03.ToString()));
+    }
+
+    public void OnClickTitleButton()
+    {
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
+        StartCoroutine(Coroutine(SceneNames.TitleScene.ToString()));
+    }
+
+    public void OnClickClearButton()
+    {
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
+        StartCoroutine(Coroutine(SceneNames.GameClearScene.ToString()));
+    }
+    public void OnClickGameOverButton()
+    {
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
+        StartCoroutine(Coroutine(SceneNames.GameOverScene.ToString()));
+    }
+
+    float delay = 0.9f;
+    IEnumerator Coroutine(string str)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        fade.GetComponent<FadeStart>().FadeOutNextScene(str);
+    }
+
+    IEnumerator EndCoroutine()
+    {
+
+        yield return new WaitForSecondsRealtime(delay);
+        fade.GetComponent<FadeStart>().FadeOut();
+        yield return new WaitForSecondsRealtime(1f);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;   // UnityEditorの実行を停止する処理
 #else
         Application.Quit();                                // ゲームを終了する処理
 #endif
-    }
 
-    public void OnClickStage1Button()
-    {
-        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage01.ToString());
-    }
-
-    public void OnClickStage2Button()
-    {
-        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage02.ToString());
-    }
-
-    public void OnClickStage3Button()
-    {
-        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage03.ToString());
-    }
-
-    public void OnClickTitleButton()
-    {
-        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
-    }
-
-    public void OnClickClearButton()
-    {
-        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
-    }
-    public void OnClickGameOverButton()
-    {
-        fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
     }
 
 

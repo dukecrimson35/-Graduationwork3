@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         pos = Vector3.zero;
-        bossEnemy = GameObject.Find("BossEnemy");
+        bossEnemy = GameObject.FindGameObjectWithTag("BossEnemy");
         RMove = bossEnemy.GetComponent<BossEnemy>().GetRight();
         LMove = bossEnemy.GetComponent<BossEnemy>().GetLeft();
         deadSecond = 0;
@@ -24,18 +24,27 @@ public class Bullet : MonoBehaviour
     {
         if (LMove && !RMove)
         {
-            pos.x -= 0.01f;
+            pos.x -= 0.1f;
         }
         if (!LMove && RMove)
         {
             pos.x += 0.01f;
         }
         deadSecond += Time.deltaTime;
-        if (deadSecond >= 3)
+        if (deadSecond >= 5)
         {
             Destroy(gameObject);
         }
         transform.position += pos;
         pos = Vector3.zero;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerControl p = collision.gameObject.GetComponent<PlayerControl>();
+            p.Damage(10);
+            //p.KnockBack(gameObject);
+        }
     }
 }
