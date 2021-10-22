@@ -207,7 +207,7 @@ public class PlayerControl : MonoBehaviour
             if ((Input.GetButtonUp("A") && senku.magnitude == 0) || (Input.GetButtonUp("A") && !move.GetIsMove()))
             {
                 anim.SetBool("Senku", false);
-
+                
                 kamae = false;
                 hitFlag = false;
                 if (moveColider != null)
@@ -225,6 +225,7 @@ public class PlayerControl : MonoBehaviour
 
                 anim.SetBool("Senku2", true);
 
+                audio.PlayOneShot(senkugiri);
 
                 if (look.GetLookObject() != null)
                 {
@@ -253,6 +254,7 @@ public class PlayerControl : MonoBehaviour
                 else
                 {
 
+                    audio.PlayOneShot(senkugiri);
                     anim.SetBool("Senku2", true);
 
                     kamae = false;
