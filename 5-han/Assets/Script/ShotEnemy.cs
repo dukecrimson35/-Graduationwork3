@@ -9,11 +9,15 @@ public class ShotEnemy : MonoBehaviour
     public GameObject searchRange;
     SearchRange search;//索敵範囲スクリプト
 
+    private AudioSource audioSource;
+    public AudioClip SE;
+
     // Start is called before the first frame update
     void Start()
     {
         timeCount = 0;
         search = searchRange.GetComponent<SearchRange>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +30,15 @@ public class ShotEnemy : MonoBehaviour
             {
                 Attack();
                 timeCount = 0;
+                //攻撃音
+                if (SE != null)
+                {
+                    audioSource.PlayOneShot(SE);
+                }
+                else
+                {
+                    Debug.Log("～のSE入ってない");
+                }
             }
         }
     }
