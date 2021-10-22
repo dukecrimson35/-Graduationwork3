@@ -23,6 +23,7 @@ public class BossEnemy : MonoBehaviour
     Vector3 pos;
     public GameObject bullet;
     public GameObject MeleeWepon;
+    float wepRot;
     void Start()
     {
         damage = false;
@@ -39,6 +40,7 @@ public class BossEnemy : MonoBehaviour
         Rangesecond = 0;
         ResetMelee = 0;
         MeleeWepon.SetActive(false);
+        wepRot = 0.1f;
     }
 
     // Update is called once per frame
@@ -82,9 +84,10 @@ public class BossEnemy : MonoBehaviour
             //武器表示
             MeleeWepon.SetActive(true);
             //武器回転
-            MeleeWepon.transform.Rotate(new Vector3(0, 0, 3));
+            MeleeWepon.transform.Rotate(0, 0, wepRot);
             if(ResetMelee>=5)
             {
+                MeleeWepon.transform.rotation = Quaternion.Euler(0, 0, 28);
                 //武器非表示
                 MeleeWepon.SetActive(false);
                 //モード変更とモードリセットの時間をリセットで再度使用できるようにしておく
@@ -141,20 +144,20 @@ public class BossEnemy : MonoBehaviour
         {
             BossEnemyHp -= 10;
         }
-        //if (collision.gameObject.tag == "LSide")
-        //{
-        //    AtkModeMelee = false;
-        //    Meleesecond = 0;
-        //    LMove = false;
-        //    RMove = true;
-        //}
-        //if (collision.gameObject.tag == "RSide")
-        //{
-        //    AtkModeMelee = false;
-        //    Meleesecond = 0;
-        //    LMove = true;
-        //    RMove = false;
-        //}
+        if (collision.gameObject.tag == "LSide")
+        {
+            //AtkModeMelee = false;
+            //Meleesecond = 0;
+            LMove = false;
+            RMove = true;
+        }
+        if (collision.gameObject.tag == "RSide")
+        {
+            //AtkModeMelee = false;
+            //Meleesecond = 0;
+            LMove = true;
+            RMove = false;
+        }
     }
     public int GetHp()
     {

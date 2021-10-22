@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public AudioClip senkugiri;
+    public AudioClip damage;
+    public AudioClip dead;
+    public AudioClip powerslash;
+    public AudioClip coin;
+    AudioSource audio;
     int hp = 100;
     private GameObject itemManager;
     private ItemManager itemManagerScript;
@@ -31,6 +37,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         stoptime = 0;
         moveColider = null;
@@ -101,30 +108,54 @@ public class PlayerControl : MonoBehaviour
 
                 velocity.x += 11;
             }
-            if ( (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
+            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
             {
                 currentDirec = Direc.Left;
-             
+
             }
 
             if ((Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
             {
                 currentDirec = Direc.Right;
-               
+
             }
 
         }
-
-        if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Y")) 
+        else
         {
-            if (GameObject.Find("ShopPrefab(Clone)") == null)
+            //anim.SetTrigger("Stand");
+            velocity = Vector3.zero;
+
+
+            anim.SetBool("Walk", false);
+
+
+            if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
             {
-                GameObject instance =
-                   (GameObject)Instantiate(shopPrefab,
-                   new Vector3(0, 0, 0.0f), Quaternion.identity);
+
+                anim.SetBool("Walk", true);
+                velocity.x -= 3;
             }
-            
+
+            if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
+            {
+                anim.SetBool("Walk", true);
+
+                velocity.x += 3;
+            }
+            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
+            {
+                currentDirec = Direc.Left;
+
+            }
+
+            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
+            {
+                currentDirec = Direc.Right;
+
+            }
         }
+    
 
      
         pos += velocity;
