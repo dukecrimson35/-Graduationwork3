@@ -16,6 +16,7 @@ TagManager:
   - PowerSlash
   - BossEnemy
   - Bullet
+  - EnemyWepon
   layers:
   - Default
   - TransparentFX

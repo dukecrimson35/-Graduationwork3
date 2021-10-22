@@ -45,11 +45,15 @@ public class PauseItemScript : MonoBehaviour
     public GameObject playerHPUI;
     public PlayerHpGauge hpGauge;
 
+    private AudioSource audioSource;
+    public AudioClip ketteiSE;
+    public AudioClip senntakuSE;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerControl = player.GetComponent<PlayerControl>();
@@ -131,6 +135,7 @@ public class PauseItemScript : MonoBehaviour
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
         }
         else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0 && !delayFlag)
         {
@@ -140,6 +145,7 @@ public class PauseItemScript : MonoBehaviour
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
         }
         else if (vert < -0.3f && yazirusiCout < Data.dataItemStringList.Count - 1 && yazirusiDelay <= 0 && !delayFlag)
         {
@@ -149,6 +155,7 @@ public class PauseItemScript : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
         }
         else if (vert2 < -0.3f && yazirusiCout < Data.dataItemStringList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag)
         {
@@ -158,6 +165,7 @@ public class PauseItemScript : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             StartCoroutine(Coroutine());
+            SentakuSEPlay();
         }
 
 
@@ -174,6 +182,8 @@ public class PauseItemScript : MonoBehaviour
 
         if (Input.GetKeyDown("joystick button 0"))
         {
+            KetteiSEPlay();
+
             if (Data.dataItemStringList[yazirusiCout] == "かいふく")
             {
                 if (Data.kaihuku > 0)
@@ -182,7 +192,7 @@ public class PauseItemScript : MonoBehaviour
                     itemHavelistNum[num]--;
                     Data.kaihuku--;
                     hpGauge.Heal(20);
-                    //player.HealHp(20);
+                    playerControl.HealHp(20);
                 }
 
 
@@ -306,6 +316,14 @@ public class PauseItemScript : MonoBehaviour
         delayFlag = false;
     }
 
+    public void SentakuSEPlay()
+    {
+        audioSource.PlayOneShot(senntakuSE);
+    }
 
+    public void KetteiSEPlay()
+    {
+        audioSource.PlayOneShot(ketteiSE);
+    }
 
 }

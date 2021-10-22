@@ -19,8 +19,10 @@ public class BossEnemy : MonoBehaviour
     bool AtkModeRange;
     public float Meleesecond;
     public float Rangesecond;
+    public float ResetMelee;
     Vector3 pos;
     public GameObject bullet;
+    public GameObject MeleeWepon;
     void Start()
     {
         damage = false;
@@ -35,6 +37,8 @@ public class BossEnemy : MonoBehaviour
         pos = Vector3.zero;
         Meleesecond = 0;
         Rangesecond = 0;
+        ResetMelee = 0;
+        MeleeWepon.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,18 +64,36 @@ public class BossEnemy : MonoBehaviour
         Meleesecond += Time.deltaTime;
         if (Meleesecond >= 10)
         {
+            //MeleeSecが10になったら近接攻撃モードON
             AtkModeMelee = true;
         }
         if(AtkModeMelee)
         {
-            if (LMove && !RMove)
+            //if (LMove && !RMove)
+            //{
+            //    pos.x -= 0.01f;
+            //}
+            //if (!LMove && RMove)
+            //{
+            //    pos.x += 0.01f;
+            //}
+            //モードリセットの時間計算
+            ResetMelee += Time.deltaTime;
+            //武器表示
+            MeleeWepon.SetActive(true);
+            //武器回転
+            MeleeWepon.transform.Rotate(new Vector3(0, 0, 3));
+            if(ResetMelee>=5)
             {
-                pos.x -= 0.01f;
+                //武器非表示
+                MeleeWepon.SetActive(false);
+                //モード変更とモードリセットの時間をリセットで再度使用できるようにしておく
+                Meleesecond = 0;
+                ResetMelee = 0;
+                //攻撃モードをOFFにする
+                AtkModeMelee = false;
             }
-            if (!LMove && RMove)
-            {
-                pos.x += 0.01f;
-            }
+
         }
         //遠距離攻撃処理
         Rangesecond += Time.deltaTime;
@@ -119,20 +141,20 @@ public class BossEnemy : MonoBehaviour
         {
             BossEnemyHp -= 10;
         }
-        if (collision.gameObject.tag == "LSide")
-        {
-            AtkModeMelee = false;
-            Meleesecond = 0;
-            LMove = false;
-            RMove = true;
-        }
-        if (collision.gameObject.tag == "RSide")
-        {
-            AtkModeMelee = false;
-            Meleesecond = 0;
-            LMove = true;
-            RMove = false;
-        }
+        //if (collision.gameObject.tag == "LSide")
+        //{
+        //    AtkModeMelee = false;
+        //    Meleesecond = 0;
+        //    LMove = false;
+        //    RMove = true;
+        //}
+        //if (collision.gameObject.tag == "RSide")
+        //{
+        //    AtkModeMelee = false;
+        //    Meleesecond = 0;
+        //    LMove = true;
+        //    RMove = false;
+        //}
     }
     public int GetHp()
     {

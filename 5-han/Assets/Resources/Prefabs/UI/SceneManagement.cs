@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 public class SceneManagement : MonoBehaviour
 {
 
@@ -39,6 +39,10 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
+
+
+     
+
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
 
@@ -49,6 +53,8 @@ public class SceneManagement : MonoBehaviour
         //    stages.Add("stage" + (i + 1).ToString());
 
         //}
+
+      
 
         if (sceneName == "Stage01" || sceneName == "Stage02" || sceneName == "Stage03")
         {

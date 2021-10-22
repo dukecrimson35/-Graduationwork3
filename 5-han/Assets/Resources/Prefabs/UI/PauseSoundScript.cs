@@ -34,12 +34,16 @@ public class PauseSoundScript : MonoBehaviour
     private bool delayFlag = false;
     private bool delayFlag2 = false;
 
+    private AudioSource audioSource;
+    public AudioClip senntakuSE;
+    public AudioClip ketteiSE;
+
 
     // Start is called before the first frame update
     void Start()
     {
 
-
+        audioSource = GetComponent<AudioSource>();
         //矢印の初期Pos
         pos = yazirusiText.transform.position;
 
@@ -101,6 +105,7 @@ public class PauseSoundScript : MonoBehaviour
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
             StartCoroutine(Coroutine2());
+            SentakuSEPlay();
         }
         else if (vert2 > 0.3f && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
         {
@@ -110,6 +115,7 @@ public class PauseSoundScript : MonoBehaviour
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
             StartCoroutine(Coroutine2());
+            SentakuSEPlay();
         }
         else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !delayFlag2)
         {
@@ -119,6 +125,7 @@ public class PauseSoundScript : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             StartCoroutine(Coroutine2());
+            SentakuSEPlay();
         }
         else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
         {
@@ -128,19 +135,21 @@ public class PauseSoundScript : MonoBehaviour
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
             StartCoroutine(Coroutine2());
+            SentakuSEPlay();
         }
 
         if (Input.GetKeyDown("joystick button 0"))
         {
             if (itemList[yazirusiCout] == "BGM")
             {
-
+                KetteiSEPlay();
                 message.text = "BGMまだ作ってない";
                 delayFlag  = true;
             }
 
             if (itemList[yazirusiCout] == "SE")
             {
+                KetteiSEPlay();
                 message.text = "SEまだ作ってない";
                 delayFlag = true;
             }
@@ -174,5 +183,15 @@ public class PauseSoundScript : MonoBehaviour
         delayFlag2 = true;
         yield return new WaitForSecondsRealtime(delay2);
         delayFlag2 = false;
+    }
+
+    public void SentakuSEPlay()
+    {
+        audioSource.PlayOneShot(senntakuSE);
+    }
+
+    public void KetteiSEPlay()
+    {
+        audioSource.PlayOneShot(ketteiSE);
     }
 }
