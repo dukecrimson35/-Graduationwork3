@@ -17,10 +17,15 @@ public class ButtonAniScript : MonoBehaviour
 
     private bool textFlag = false;
 
-    private float alpha = 0; 
+    private float alpha = 0;
+
+    private bool stopButtonFlag = false;
+
+    private Button button;
 
     void Start()
     {
+        button = GetComponent<Button>();
         for(int i = 1; i< count+1;i++)
         {
             string str = "Prefabs/UI/makimonoAni/(" + i.ToString() + ")";
@@ -57,6 +62,15 @@ public class ButtonAniScript : MonoBehaviour
             text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 1);
         }
 
+        //if (stopButtonFlag)
+        //{
+        //    button.interactable = false;
+        //}
+        //else
+        //{
+        //    button.interactable = true;
+        //}
+
 
     }
 
@@ -70,13 +84,14 @@ public class ButtonAniScript : MonoBehaviour
     float delay = 0.08f;
     IEnumerator Coroutine()
     {
+        stopButtonFlag = true;
         for(int i = 0; i< count;i++)
         {
             image.sprite = sprites[i];
             yield return new WaitForSecondsRealtime(delay);
         }
-       
-        
+
+        stopButtonFlag = false;
     }
 
     float delay2 = 0.03f;
@@ -103,6 +118,11 @@ public class ButtonAniScript : MonoBehaviour
             //text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 2f);
         }
 
+    }
+
+    public bool GetButtonStopFlag()
+    {
+        return stopButtonFlag;
     }
 
 }
