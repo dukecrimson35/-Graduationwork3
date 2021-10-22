@@ -1299,8 +1299,8 @@ MonoBehaviour:
   buttons:
   - {fileID: 6560682565568872057}
   - {fileID: 6560682566329326299}
-  ketteiSE: {fileID: 8300000, guid: 769955e185af6384f952ebf53ca01164, type: 3}
-  senntakuSE: {fileID: 8300000, guid: 7194bb830844f824690e8c4434a87911, type: 3}
+  ketteiSE: {fileID: 8300000, guid: 932994c7604b79e4288979eaa76aa9f5, type: 3}
+  senntakuSE: {fileID: 8300000, guid: d8d3f99f301bf5645b964580790ebf7a, type: 3}
 --- !u!223 &6560682566348724566
 Canvas:
   m_ObjectHideFlags: 0
