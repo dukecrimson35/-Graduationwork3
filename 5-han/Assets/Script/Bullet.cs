@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;
         if (LMove && !RMove)
         {
             pos.x -= 0.1f;

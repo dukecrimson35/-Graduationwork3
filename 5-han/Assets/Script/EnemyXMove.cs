@@ -29,6 +29,7 @@ public class EnemyXMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;
         if (LMove&&!RMove)
         {
             pos.x -= 0.01f;
