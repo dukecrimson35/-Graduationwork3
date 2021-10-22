@@ -6,6 +6,7 @@ public class Money : MonoBehaviour
 {
     //プロパティ
     public int amount;//金額
+    Rigidbody rb;
 
 
     // Start is called before the first frame update
@@ -15,12 +16,16 @@ public class Money : MonoBehaviour
         {
             SetAount(20);
         }
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Data.shopFlag == true)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 
     public void SetAount(int amount)
