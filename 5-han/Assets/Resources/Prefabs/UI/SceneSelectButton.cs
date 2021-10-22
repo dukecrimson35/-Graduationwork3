@@ -30,8 +30,8 @@ public class SceneSelectButton : MonoBehaviour
 
 
         buttons.Add(stage1Button);
-        buttons.Add(stage2Button);
-        buttons.Add(stage3Button);
+        //buttons.Add(stage2Button);
+        //buttons.Add(stage3Button);
         buttons.Add(titleButton);
         //矢印の初期Pos
        

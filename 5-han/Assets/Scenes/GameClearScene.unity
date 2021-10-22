@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 593593102}
+  text: {fileID: 0}
 --- !u!1001 &638847262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -308,6 +309,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1648622591065998938, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
+        type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: c73d28e97a92c434783dd3aca25da3dd, type: 3}
     - target: {fileID: 1648622591065998938, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
         type: 3}
       propertyPath: fade
@@ -900,6 +906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1576430968}
+  text: {fileID: 0}
 --- !u!1001 &1985122662042721352
 PrefabInstance:
   m_ObjectHideFlags: 0

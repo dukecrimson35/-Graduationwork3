@@ -36,6 +36,7 @@ public class SyouninShopScript : MonoBehaviour
                 GameObject instance =
                    (GameObject)Instantiate(shopPrefab,
                    new Vector3(0, 0, 0.0f), Quaternion.identity);
+                //Time.timeScale = 0;
             }
         }
     }
