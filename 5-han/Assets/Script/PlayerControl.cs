@@ -29,6 +29,7 @@ public class PlayerControl : MonoBehaviour
     float stoptime;
     int hitCount;
     Animator anim;
+    float blinktime = 0;
     enum Direc
     {
         Right,Left,
@@ -81,6 +82,7 @@ public class PlayerControl : MonoBehaviour
             SenkuGiri();
             Special();
             CheckDead();
+            Blink();
         }
       
     }
@@ -395,6 +397,11 @@ public class PlayerControl : MonoBehaviour
         {
             anim.SetBool("Damage", false);
 
+            gameObject.layer = 8;
+        }
+        else if (muteki > 0)
+        {
+            gameObject.layer = 17;
         }
         if (hp <= 0)
         {
@@ -408,6 +415,34 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Dead", true);
 
             deadFlag = true;
+        }
+    }
+    void Blink()
+    {
+        SpriteRenderer sp = GetComponent<SpriteRenderer>();
+        if (muteki > 0)
+
+        {
+            blinktime += Time.deltaTime;
+            if (blinktime % 0.3 < 0.1f)
+            {
+                blinktime += 0.1f;
+                if (sp.color.a == 0)
+                {
+
+                    sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1.0f);
+                }
+                else if (sp.color.a == 1.0f)
+                {
+
+                    sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0);
+                }
+            }
+        }
+        else
+        {
+
+            sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1.0f);
         }
     }
 }
