@@ -158,6 +158,12 @@ public class BossEnemy : MonoBehaviour
             LMove = true;
             RMove = false;
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerControl p = collision.gameObject.GetComponent<PlayerControl>();
+            p.Damage(10);
+            p.KnockBack(gameObject);
+        }
     }
     public int GetHp()
     {
