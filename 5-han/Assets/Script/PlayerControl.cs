@@ -74,7 +74,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!itemManagerScript.GetShopFlag())
+        if (Time.timeScale <= 0) return;
+        if (!itemManagerScript.GetShopFlag())
         {
             Move();
             Direction();
@@ -97,26 +98,26 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Walk", false);
 
 
-            if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
+            if (!kamae&&  Input.GetAxis("Horizontal") == -1)
             {
 
                 anim.SetBool("Walk", true);
                 velocity.x -= 11;
             }
 
-            if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
+            if (!kamae && Input.GetAxis("Horizontal") == 1)
             {
                 anim.SetBool("Walk", true);
 
                 velocity.x += 11;
             }
-            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
+            if (Input.GetAxis("Horizontal") == -1)
             {
                 currentDirec = Direc.Left;
 
             }
 
-            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
+            if (( Input.GetAxis("Horizontal") == 1))
             {
                 currentDirec = Direc.Right;
 
@@ -132,26 +133,26 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Walk", false);
 
 
-            if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
+            if (!kamae && Input.GetAxis("Horizontal") == -1)
             {
 
                 anim.SetBool("Walk", true);
                 velocity.x -= 3;
             }
 
-            if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
+            if (!kamae &&  Input.GetAxis("Horizontal") == 1)
             {
                 anim.SetBool("Walk", true);
 
                 velocity.x += 3;
             }
-            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
+            if (( Input.GetAxis("Horizontal") == -1))
             {
                 currentDirec = Direc.Left;
 
             }
 
-            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
+            if (( Input.GetAxis("Horizontal") == 1))
             {
                 currentDirec = Direc.Right;
 

@@ -53,6 +53,7 @@ public class BossEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;
         //移動処理
         if (BossEnemyHp <= 25)
         {
