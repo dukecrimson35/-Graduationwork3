@@ -133,14 +133,14 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Walk", false);
 
 
-            if (!kamae && Input.GetAxis("Horizontal") == -1))
+            if (!kamae && Input.GetAxis("Horizontal") == -1)
             {
 
                 anim.SetBool("Walk", true);
                 velocity.x -= 3;
             }
 
-            if (!kamae &&  Input.GetAxis("Horizontal") == 1))
+            if (!kamae &&  Input.GetAxis("Horizontal") == 1)
             {
                 anim.SetBool("Walk", true);
 
