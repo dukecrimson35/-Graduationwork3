@@ -53,17 +53,24 @@ public class LookOn : MonoBehaviour
 
         if (collision.transform.tag == "Enemy")
         {
+            bool check = false;
             if (LookList.Count == 0)
             {
+                Debug.Log(111);
                 LookList.Add(collision.gameObject);
                 LookObject = collision.gameObject;
             }
             for (int a = 0; a < LookList.Count; a++)
-            {
-                if (LookList[a] != collision.gameObject)
+            {            
+                if (LookList[a] == collision.gameObject)
                 {
-                    LookList.Add(collision.gameObject);
+                    check = true;
+                    break;
                 }
+            }
+            if (check == false) 
+            {
+                LookList.Add(collision.gameObject);
             }
         }
     }

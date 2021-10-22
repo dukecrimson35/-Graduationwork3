@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    int hp = 100;
+    int hp = 10;
     private GameObject itemManager;
     private ItemManager itemManagerScript;
     public GameObject shopPrefab;
@@ -22,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     float muteki;
     float stoptime;
     int hitCount;
+    Animator anim;
     enum Direc
     {
         Right,Left,
@@ -30,6 +31,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         stoptime = 0;
         moveColider = null;
         currentDirec = Direc.Right;
@@ -79,16 +81,24 @@ public class PlayerControl : MonoBehaviour
     {
         if (stoptime < 0)
         {
+            //anim.SetTrigger("Stand");
             velocity = Vector3.zero;
+
+
+            anim.SetBool("Walk", false);
+
+
             if (!kamae && (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
             {
-               
+
+                anim.SetBool("Walk", true);
                 velocity.x -= 11;
             }
 
             if (!kamae && (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") == 1))
             {
-            
+                anim.SetBool("Walk", true);
+
                 velocity.x += 11;
             }
             if ( (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") == -1))
@@ -138,8 +148,12 @@ public class PlayerControl : MonoBehaviour
 
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("A")) 
+            
+            if (Input.GetButton("A"))
             {
+                anim.SetBool("Senku", true);
+                anim.SetBool("Senku2", false);
+
                 if (moveColider == null)
                 {
                     moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
@@ -159,8 +173,10 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            if ((Input.GetButtonUp("A") && senku.magnitude == 0) || (Input.GetButtonUp("A") && !move.GetIsMove())) 
+            if ((Input.GetButtonUp("A") && senku.magnitude == 0) || (Input.GetButtonUp("A") && !move.GetIsMove()))
             {
+                anim.SetBool("Senku", false);
+
                 kamae = false;
                 hitFlag = false;
                 if (moveColider != null)
@@ -175,6 +191,10 @@ public class PlayerControl : MonoBehaviour
         
             else if (Input.GetButtonUp("A") && move.GetIsMove()) 
             {
+
+                anim.SetBool("Senku2", true);
+
+
                 if (look.GetLookObject() != null)
                 {
                     senku = (look.GetLookObject().transform.position - transform.position).normalized;
@@ -189,7 +209,7 @@ public class PlayerControl : MonoBehaviour
                     float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                     col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
-                    transform.position += senku * len + senku ;
+                    transform.position += senku * len + senku * 2;
                     if (moveColider != null)
                     {
                         Destroy(moveColider);
@@ -201,6 +221,9 @@ public class PlayerControl : MonoBehaviour
                 }
                 else
                 {
+
+                    anim.SetBool("Senku2", true);
+
                     kamae = false;
                     hitFlag = false;
                     stoptime = 1.5f;
@@ -291,6 +314,9 @@ public class PlayerControl : MonoBehaviour
         }
         if (stoptime < 0 && !kamae)
         {
+            anim.SetBool("Senku2", false);
+            anim.SetBool("Senku", false);
+
             hitCount = 0;
         }
     }
@@ -308,7 +334,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void Damage(int damage)
     {
-        
+
         if (muteki < 0)
         {
             hp -= damage;
@@ -327,8 +353,22 @@ public class PlayerControl : MonoBehaviour
     void CheckDead()
     {
         muteki -= Time.deltaTime;
+        if (muteki < 0)
+        {
+            anim.SetBool("Damage", false);
+
+        }
         if (hp <= 0)
         {
+            anim.SetBool("Senku", false);
+
+            anim.SetBool("Senku2", false);
+
+            anim.SetBool("Walk", false);
+
+            anim.SetBool("Damage", false);
+            anim.SetBool("Dead", true);
+
             deadFlag = true;
         }
     }
