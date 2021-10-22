@@ -32,6 +32,10 @@ public class SenkuSprict : MonoBehaviour
         {
             hit = true;
         }
+        if (collision.transform.tag == "BossEnemy")
+        {
+            hit = true;
+        }
 
         if (collision.gameObject.tag == "Coin")
         {
