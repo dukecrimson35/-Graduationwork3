@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    int hp = 10;
+    int hp = 100;
     private GameObject itemManager;
     private ItemManager itemManagerScript;
     public GameObject shopPrefab;
@@ -272,6 +272,9 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetButton("X"))
             {
+
+                anim.SetBool("Power", true);
+
                 if (moveColider == null)
                 {
                     moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
@@ -283,7 +286,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetButtonUp("X")) 
             {
-               
+                anim.SetBool("Power2", true);
                 kamae = false;
                 hitFlag = false;
                 stoptime = 1.5f;
@@ -316,6 +319,8 @@ public class PlayerControl : MonoBehaviour
         {
             anim.SetBool("Senku2", false);
             anim.SetBool("Senku", false);
+            anim.SetBool("Power2", false);
+            anim.SetBool("Power", false);
 
             hitCount = 0;
         }
