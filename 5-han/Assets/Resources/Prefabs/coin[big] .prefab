@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 515364026098489513}
   - component: {fileID: 8357988549390289983}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: senryo_kirakira
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1554769443955413875}
   - component: {fileID: 3541423781744239929}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: senryo_koban
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 7582601458019788944}
   - component: {fileID: 7582601458019788950}
   - component: {fileID: 7582601458019788945}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 'coin[big] '
   m_TagString: Coin
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 598258334582024450}
   - component: {fileID: 1303260777389348772}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: GroundCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}

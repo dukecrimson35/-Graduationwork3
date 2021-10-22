@@ -39,8 +39,7 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
-
-
+        audioSource.volume = 0.3f;
      
 
         //gameData = GetComponent<GameData>();
