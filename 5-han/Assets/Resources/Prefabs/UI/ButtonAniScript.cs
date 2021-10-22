@@ -28,9 +28,17 @@ public class ButtonAniScript : MonoBehaviour
     {
         if(backFlag)
         {
+            backFlag = false;
             StartCoroutine(BackCoroutine());
         }
     }
+
+    public void SetBackFlag(bool fl)
+    {
+        backFlag = fl;
+    }
+    public bool GetBackFlag()
+    { return backFlag; }
 
     float delay = 0.08f;
     IEnumerator Coroutine()
@@ -44,7 +52,7 @@ public class ButtonAniScript : MonoBehaviour
         
     }
 
-    float delay2 = 0.05f;
+    float delay2 = 0.035f;
 
     IEnumerator BackCoroutine()
     {

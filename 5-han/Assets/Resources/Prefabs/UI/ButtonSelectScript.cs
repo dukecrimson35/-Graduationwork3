@@ -90,6 +90,8 @@ public class ButtonSelectScript : MonoBehaviour
 
         if(Input.GetKeyDown("joystick button 0") && !onSEFlag)
         {
+            ButtonAniScript bas = buttons[pos].GetComponent<ButtonAniScript>();
+            bas.SetBackFlag(true);
             KetteiSEPlay();
             StartCoroutine(Timer());
         }
