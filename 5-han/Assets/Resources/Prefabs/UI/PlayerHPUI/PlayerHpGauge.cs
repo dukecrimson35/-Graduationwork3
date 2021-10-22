@@ -43,15 +43,6 @@ public class PlayerHpGauge : MonoBehaviour
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Damage(10);
-            
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Heal(10);
-        }
 
 
         if(playerHp < oldplayerHp)
