@@ -267,13 +267,33 @@ public class ShopList : MonoBehaviour
             }
             MesseDelaySet();
         }
+        else if (itemName == "かいふく2")
+        {
 
-       
+            if (Data.kaihuku < 9)
+            {
+                Data.kaihuku2++;
+                Data.coin -= coinList[yazirusiCout];
+                message.text = itemName + "を買いました";
+            }
+            else
+            {
+                message.text = "これ以上買えません";
+            }
+            MesseDelaySet();
+        }
+
+
     }
 
     public void ItemExposition()
     {
         if (itemList[yazirusiCout] == "かいふく")
+        {
+
+            message2.text = "HP10回復する";
+        }
+        if (itemList[yazirusiCout] == "かいふく2")
         {
 
             message2.text = "HP20回復する";
@@ -312,6 +332,9 @@ public class ShopList : MonoBehaviour
                     break;
                 case "かいふく":
                     haveItems.Add(Data.kaihuku);
+                    break;
+                case "かいふく2":
+                    haveItems.Add(Data.kaihuku2);
                     break;
             }
         }
