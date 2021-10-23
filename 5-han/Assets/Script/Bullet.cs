@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         }
         if (!LMove && RMove)
         {
-            pos.x += 0.01f;
+            pos.x += 0.1f;
         }
         deadSecond += Time.deltaTime;
         if (deadSecond >= 2)
