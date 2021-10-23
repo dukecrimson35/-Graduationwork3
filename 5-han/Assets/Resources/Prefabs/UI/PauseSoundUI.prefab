@@ -616,8 +616,8 @@ MonoBehaviour:
   yazirusiText: {fileID: 3044192273320619687}
   text: {fileID: 4021199938807867173, guid: 37468b69a1295344198d0b9bff45bec3, type: 3}
   message: {fileID: 7533282025757534880}
-  senntakuSE: {fileID: 8300000, guid: d8d3f99f301bf5645b964580790ebf7a, type: 3}
-  ketteiSE: {fileID: 8300000, guid: 932994c7604b79e4288979eaa76aa9f5, type: 3}
+  senntakuSE: {fileID: 8300000, guid: c8525477c3f615446b31b9513c63bfa1, type: 3}
+  ketteiSE: {fileID: 8300000, guid: d8d3f99f301bf5645b964580790ebf7a, type: 3}
 --- !u!82 &7794206263197447655
 AudioSource:
   m_ObjectHideFlags: 0

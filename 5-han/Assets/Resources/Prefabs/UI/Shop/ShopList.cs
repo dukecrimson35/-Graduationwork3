@@ -36,6 +36,8 @@ public class ShopList : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip senntakuSE;
     public AudioClip ketteiSE;
+    public AudioClip kauSE;
+    public AudioClip kaenaiSE;
 
     // Start is called before the first frame update
     void Start()
@@ -174,11 +176,12 @@ public class ShopList : MonoBehaviour
             if (Data.coin >= coinList[yazirusiCout])
             {
                 BuyItem(itemList[yazirusiCout]);
-                KetteiSEPlay();
+                audioSource.PlayOneShot(kauSE);
             }
             else
             {
                 message.text = "お金が足りません";
+                audioSource.PlayOneShot(kaenaiSE);
                 MesseDelaySet();
             }
         }
@@ -291,25 +294,25 @@ public class ShopList : MonoBehaviour
         if (itemList[yazirusiCout] == "かいふく")
         {
 
-            message2.text = "HP10回復する";
+            message2.text = "効果:HP10回復する";
         }
         if (itemList[yazirusiCout] == "かいふく2")
         {
 
-            message2.text = "HP20回復する";
+            message2.text = "効果:HP20回復する";
         }
 
         if (itemList[yazirusiCout] == "まきもの")
         {
-            message2.text = "必殺技1を使えるようになる";
+            message2.text = "効果:必殺技1を使えるようになる";
         }
         if (itemList[yazirusiCout] == "まきもの2")
         {
-            message2.text = "必殺技2を使えるようになる";
+            message2.text = "効果:必殺技2を使えるようになる";
         }
         if (itemList[yazirusiCout] == "まきもの3")
         {
-            message2.text = "必殺技3を使えるようになる";
+            message2.text = "効果:必殺技3を使えるようになる";
         }
     }
 

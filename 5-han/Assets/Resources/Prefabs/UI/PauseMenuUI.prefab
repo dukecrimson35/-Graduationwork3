@@ -355,8 +355,8 @@ MonoBehaviour:
   - "\u3068\u3058\u308B"
   yazirusiText: {fileID: 8454292536606203913}
   text: {fileID: 4021199938807867173, guid: 37468b69a1295344198d0b9bff45bec3, type: 3}
-  senntakuSE: {fileID: 8300000, guid: d8d3f99f301bf5645b964580790ebf7a, type: 3}
-  ketteiSE: {fileID: 8300000, guid: 932994c7604b79e4288979eaa76aa9f5, type: 3}
+  senntakuSE: {fileID: 8300000, guid: c8525477c3f615446b31b9513c63bfa1, type: 3}
+  ketteiSE: {fileID: 8300000, guid: d8d3f99f301bf5645b964580790ebf7a, type: 3}
 --- !u!82 &4211938911655600272
 AudioSource:
   m_ObjectHideFlags: 0
