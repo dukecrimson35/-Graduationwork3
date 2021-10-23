@@ -39,7 +39,7 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
-        audioSource.volume = 0.3f;
+        audioSource.volume = 0.1f;
      
 
         //gameData = GetComponent<GameData>();
@@ -97,10 +97,10 @@ public class SceneManagement : MonoBehaviour
             }
         }
 
-        
 
+        PauseSceneChange();
 
-        if(sceneName == "TitleScene")
+        if (sceneName == "TitleScene")
         {
             //if (Input.GetKeyDown(KeyCode.Alpha0))
             //{
@@ -176,7 +176,7 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "GameOverScene")
         {
-            //if (Input.GetKeyDown(KeyCode.Alpha0) )
+            //if (Input.GetKeyDown(KeyCode.Alpha0))
             //{
             //    //SceneManager.LoadScene(SceneNames.TitleScene.ToString());
             //    fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
@@ -233,6 +233,20 @@ public class SceneManagement : MonoBehaviour
 //#else
 //        Application.Quit();                                // ゲームを終了する処理
 //#endif
+    }
+
+    public void PauseSceneChange()
+    {
+        if(Data.titleSceneFlag)
+        {
+            Data.titleSceneFlag = false;
+            fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
+        }
+        else if(Data.selectSceneFlag)
+        {
+            Data.selectSceneFlag = true;
+            fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.SelectScene.ToString());
+        }
     }
 
     public void OnClickStage1Button()

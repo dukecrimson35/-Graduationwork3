@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-public class PauseMenuList : MonoBehaviour
+public class PauseSceneJump : MonoBehaviour
 {
-
-    public GameObject pauseItemList;
-    public GameObject pauseSoundUI;
-    public GameObject titleJumpUI;
-
     public List<string> itemList;
 
-    private bool delayFlag = false;
+
 
     public Text yazirusiText;
     private Vector3 pos;//矢印の初期Pos
 
     public Text text;
+
+    public Text message;
+
     private int yazirusiCout = 0;//矢印がどの段にいるかの
 
 
@@ -33,15 +29,20 @@ public class PauseMenuList : MonoBehaviour
     private int textWidthmove = 50;
     private int textHeightmove = 40;
 
+
+    private bool delayFlag = false;
+    private bool delayFlag2 = false;
+
     private AudioSource audioSource;
     public AudioClip senntakuSE;
     public AudioClip ketteiSE;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
 
+        audioSource = GetComponent<AudioSource>();
         //矢印の初期Pos
         pos = yazirusiText.transform.position;
 
@@ -61,10 +62,25 @@ public class PauseMenuList : MonoBehaviour
 
     }
 
+    float delay = 1.0f;
+    IEnumerator Coroutine()
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        delayFlag = false;
+
+        //ここに実行したい処理
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!delayFlag)
+        {
+            message.text = "";
+        }
 
+
+        Debug.Log(messeDire);
         // ディレイ関係
         //矢印移動ディレイ
         if (yazirusiDelay > 0)
@@ -75,105 +91,78 @@ public class PauseMenuList : MonoBehaviour
         {
             yazirusiDelay2 -= dire * Time.deltaTime;
         }
-
-
         //スティックの縦方向取得
         float vert = Input.GetAxis("Vertical");
         float vert2 = Input.GetAxis("CrossUpDown");
-        //メニューの矢印制御vert2 > 0.3f 
 
-        if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0 && !Data.pauseWindFlag && !delayFlag)
+        //メニューの矢印制御
+        if (vert > 0.3f && yazirusiCout > 0 && yazirusiDelay <= 0 && !delayFlag2)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
                             yazirusiText.transform.position.y + yazirusiMove,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
-            StartCoroutine(Coroutine());
+            StartCoroutine(Coroutine2());
             SentakuSEPlay();
-            //yazirusiDelay = 60;
         }
-        else if (vert2 > 0.3f && yazirusiCout > 0 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag && !delayFlag)
+        else if (vert2 > 0.3f && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
                             yazirusiText.transform.position.y + yazirusiMove,
                             yazirusiText.transform.position.z);
             yazirusiCout -= 1;
-            StartCoroutine(Coroutine());
+            StartCoroutine(Coroutine2());
             SentakuSEPlay();
-            //yazirusiDelay2 = 60;
         }
-        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !Data.pauseWindFlag && !delayFlag)
+        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !delayFlag2)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
                            yazirusiText.transform.position.y - yazirusiMove,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
-            StartCoroutine(Coroutine());
+            StartCoroutine(Coroutine2());
             SentakuSEPlay();
-            //yazirusiDelay = 60;
         }
-        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !Data.pauseWindFlag && !delayFlag)
+        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
                            yazirusiText.transform.position.y - yazirusiMove,
                            yazirusiText.transform.position.z);
             yazirusiCout += 1;
-            StartCoroutine(Coroutine());
+            StartCoroutine(Coroutine2());
             SentakuSEPlay();
-            //yazirusiDelay2 = 60;
         }
 
-        if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
+        if (Input.GetKeyDown("joystick button 0"))
         {
-            if(itemList[yazirusiCout] == "もちもの")
+            if (itemList[yazirusiCout] == "タイトルへ")
             {
-                GameObject instance =
-              (GameObject)Instantiate(pauseItemList,
-              new Vector3(0, 0, 0.0f), Quaternion.identity);
-
-                Data.pauseWindFlag = true;
-                KetteiSEPlay();
+                Data.pauseWindFlag = false;
+                Data.titleSceneFlag = true;
+                Time.timeScale = 1.0f;
             }
-        }
-        if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
-        {
-            if (itemList[yazirusiCout] == "音量")
+
+            if (itemList[yazirusiCout] == "ステージ選択")
             {
-                GameObject instance =
-              (GameObject)Instantiate(pauseSoundUI,
-              new Vector3(0, 0, 0.0f), Quaternion.identity);
-
-                Data.pauseWindFlag = true;
-                KetteiSEPlay();
+                //Data.pauseWindFlag = false;
+                //Data.selectSceneFlag = true;
+                //Time.timeScale = 1.0f;
+             
             }
-        }
-
-        if (Input.GetKeyDown("joystick button 0") && !Data.pauseWindFlag)
-        {
-            if (itemList[yazirusiCout] == "シーン移動")
-            {
-                GameObject instance =
-              (GameObject)Instantiate(titleJumpUI,
-              new Vector3(0, 0, 0.0f), Quaternion.identity);
-
-                Data.pauseWindFlag = true;
-                KetteiSEPlay();
-            }
+            StartCoroutine(Coroutine());
         }
 
 
         //メニュー閉じる処理
         if (Input.GetKeyDown("joystick button 0") && yazirusiCout == itemList.Count - 1)
         {
-            KetteiSEPlay();
             Data.pauseWindFlag = false;
             Destroy(this.gameObject.transform.parent.parent.gameObject);
             Time.timeScale = 1f;
-            
             return;
         }
 
@@ -188,6 +177,14 @@ public class PauseMenuList : MonoBehaviour
         }
     }
 
+    float delay2 = 0.2f;
+    IEnumerator Coroutine2()
+    {
+        delayFlag2 = true;
+        yield return new WaitForSecondsRealtime(delay2);
+        delayFlag2 = false;
+    }
+
     public void SentakuSEPlay()
     {
         audioSource.PlayOneShot(senntakuSE);
@@ -197,18 +194,4 @@ public class PauseMenuList : MonoBehaviour
     {
         audioSource.PlayOneShot(ketteiSE);
     }
-
-    public void MesseDelaySet()
-    {
-        messeDire = 40;
-    }
-
-    float delay = 0.2f;
-    IEnumerator Coroutine()
-    {
-        delayFlag = true;
-        yield return new WaitForSecondsRealtime(delay);
-        delayFlag = false;
-    }
-
 }

@@ -22,6 +22,10 @@ public  class Data : MonoBehaviour
     public static bool pauseWindFlag = false;
     public static bool pauseItemListFlag = false;
 
+    //急遽作ったやつ、後で別仕様に変更
+    public static bool titleSceneFlag = false;
+    public static bool selectSceneFlag = false;
+
     //public static bool shopOpenFlag = false;
 
 
