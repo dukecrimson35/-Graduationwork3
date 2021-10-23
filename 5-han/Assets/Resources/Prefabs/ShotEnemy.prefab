@@ -128,7 +128,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1645311880904165710
 MonoBehaviour:
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3329547587427490186, guid: 35aa5d680a9725743bd1ded00506ab15, type: 3}
   searchRange: {fileID: 4824003087761051762}
+  SE: {fileID: 0}
 --- !u!82 &5132597027726589948
 AudioSource:
   m_ObjectHideFlags: 0

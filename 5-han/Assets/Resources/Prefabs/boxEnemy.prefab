@@ -98,8 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseEnemyHp: 10
-  damageUI: {fileID: 2911411596630972763, guid: 55d1d6151bdc4484380277a7d6de475a,
-    type: 3}
 --- !u!65 &2736146270167994345
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127,7 +125,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &7975861766214840684
 GameObject:

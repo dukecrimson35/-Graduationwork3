@@ -13,7 +13,8 @@ public class EnemyRespawn : MonoBehaviour
 
     GameObject[] enemys;
     List<string> enemyNames = new List<string>();//敵の名前判別用
-    List<Vector3> positions = new List<Vector3>();
+    List<Vector3> positions1 = new List<Vector3>();//敵の初期地点(リスポーン用
+    List<Vector3> positions2 = new List<Vector3>();//敵の現在位置(アニメーション用
     List<int> delays = new List<int>();
     List<int> delays2 = new List<int>();
     List<float> counts = new List<float>();
@@ -27,7 +28,8 @@ public class EnemyRespawn : MonoBehaviour
 
         foreach(var x in enemys)
         {
-            positions.Add(x.transform.position);
+            positions1.Add(x.transform.position);
+            positions2.Add(x.transform.position);
             enemyNames.Add(x.name);
             i++;
         }
@@ -41,8 +43,16 @@ public class EnemyRespawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < enemys.Length; i++)
+        {
+            if (enemys[i] != null)
+            {
+                positions2[i] = enemys[i].transform.position;
+            }
+        }
+
         #region 敵の再生成
-        for(int i = 0; i < enemys.Length;i++)
+        for (int i = 0; i < enemys.Length;i++)
         {
             if (enemys[i] == null)//敵が死んでいたとき
             {
@@ -53,11 +63,11 @@ public class EnemyRespawn : MonoBehaviour
                     //敵の死亡アニメーション生成
                     if (enemyNames[i].Contains("boxEnemy")) 
                     {
-                        DeadAnimation(positions[i], stopenemyDeath); 
+                        DeadAnimation(positions2[i], stopenemyDeath); 
                     }
                     if (enemyNames[i].Contains("ShotEnemy"))
                     {
-                        DeadAnimation(positions[i], flyenemyDeath);
+                        DeadAnimation(positions2[i], flyenemyDeath);
                     }
                 }
                 if(delays.Contains(i))
@@ -69,11 +79,11 @@ public class EnemyRespawn : MonoBehaviour
                         //敵を再生成
                         if (enemyNames[i].Contains("boxEnemy"))
                         {
-                            enemys[i] = Instantiate(StopEnemy, positions[i], new Quaternion());
+                            enemys[i] = Instantiate(StopEnemy, positions1[i], new Quaternion());
                         }
                         if(enemyNames[i].Contains("ShotEnemy"))
                         {
-                            enemys[i] = Instantiate(FlyingEnemy, positions[i], new Quaternion());
+                            enemys[i] = Instantiate(FlyingEnemy, positions1[i], new Quaternion());
                         }
                         delays.Remove(i);
                     }
@@ -85,7 +95,7 @@ public class EnemyRespawn : MonoBehaviour
                     {
                         coincounts[i] = 0;
                         //コインドロップ
-                        CoinDrop(positions[i]);
+                        CoinDrop(positions2[i]);
                         delays2.Remove(i);
                     }
                 }
@@ -93,9 +103,9 @@ public class EnemyRespawn : MonoBehaviour
         }
         #endregion
 
-        for (int i = 0; i< positions.Count;i++)
+        for (int i = 0; i< positions2.Count;i++)
         {
-            Debug.Log(positions[i]);
+            Debug.Log(positions2[i]);
         }
     }
 
