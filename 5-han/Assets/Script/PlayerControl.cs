@@ -386,6 +386,10 @@ public class PlayerControl : MonoBehaviour
     public void HealHp(int num)
     {
         hp += num;
+        if(hp > 100)
+        {
+            hp = 100;
+        }
     }
     public void KnockBack(GameObject other)
     {

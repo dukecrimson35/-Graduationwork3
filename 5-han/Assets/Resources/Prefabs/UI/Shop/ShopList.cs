@@ -273,7 +273,7 @@ public class ShopList : MonoBehaviour
         else if (itemName == "かいふく2")
         {
 
-            if (Data.kaihuku < 9)
+            if (Data.kaihuku2 < 9)
             {
                 Data.kaihuku2++;
                 Data.coin -= coinList[yazirusiCout];

@@ -118,7 +118,11 @@ public class PauseItemScript : MonoBehaviour
         }
         else
         {
-            message.text = "";
+            if(!flag)
+            {
+                message.text = "";
+            }
+            
         }
 
         ItemCheckUpdate();
@@ -186,7 +190,7 @@ public class PauseItemScript : MonoBehaviour
 
             if (Data.dataItemStringList[yazirusiCout] == "かいふく")
             {
-                if (Data.kaihuku > 0)
+                if (Data.kaihuku > 0 && playerControl.GetHp() < 100)
                 {
                     int num = itemHavelistName.IndexOf("かいふく");
                     itemHavelistNum[num]--;
@@ -194,18 +198,28 @@ public class PauseItemScript : MonoBehaviour
                     hpGauge.Heal(10);
                     playerControl.HealHp(10);
                 }
+                else
+                {
+                    message.text = "hpが満タンです";
+                    StartCoroutine(Coroutine2());
+                }
 
 
             }
             if (Data.dataItemStringList[yazirusiCout] == "かいふく2")
             {
-                if (Data.kaihuku2 > 0)
+                if (Data.kaihuku2 > 0 && playerControl.GetHp()<100)
                 {
                     int num = itemHavelistName.IndexOf("かいふく2");
                     itemHavelistNum[num]--;
                     Data.kaihuku2--;
                     hpGauge.Heal(20);
                     playerControl.HealHp(20);
+                }
+                else
+                {
+                    message.text = "hpが満タンです";
+                    StartCoroutine(Coroutine2());
                 }
 
 
@@ -302,6 +316,7 @@ public class PauseItemScript : MonoBehaviour
 
     public void ItemExposition()
     {
+        if (flag) return;
         if (Data.dataItemStringList[yazirusiCout] == "かいふく")
         {         
             message.text = "HP10回復する";
@@ -331,6 +346,16 @@ public class PauseItemScript : MonoBehaviour
         delayFlag = true;
         yield return new WaitForSecondsRealtime(delay);
         delayFlag = false;
+    }
+
+    float delay2 = 0.5f;
+    bool flag = false;
+
+    IEnumerator Coroutine2()
+    {
+        flag = true;
+        yield return new WaitForSecondsRealtime(delay2);
+        flag = false;
     }
 
     public void SentakuSEPlay()
