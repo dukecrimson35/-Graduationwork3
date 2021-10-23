@@ -98,7 +98,9 @@ public class ButtonSelectScript : MonoBehaviour
             if (bas.GetButtonStopFlag()) return;
 
             bas.SetBackFlag(true);
+            audioSource.volume = 2.0f;
             KetteiSEPlay();
+            audioSource.volume = 1.0f;
             StartCoroutine(Timer());
         }
     }

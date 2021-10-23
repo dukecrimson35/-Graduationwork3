@@ -970,5 +970,10 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 557022670}
+    - target: {fileID: 4789631413210565778, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 433eb9f8f3f5aa847b927ef9a41aba12, type: 3}
