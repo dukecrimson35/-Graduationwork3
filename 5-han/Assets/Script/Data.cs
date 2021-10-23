@@ -13,7 +13,7 @@ public  class Data : MonoBehaviour
 
     public static bool shopFlag = false;
     //デバックのため後で0に戻す
-    public static int coin = 10000;
+    public static int coin = 0;
     public static int makimono = 0;
     public static int kaihuku = 0;
     public static int kaihuku2 = 0;
