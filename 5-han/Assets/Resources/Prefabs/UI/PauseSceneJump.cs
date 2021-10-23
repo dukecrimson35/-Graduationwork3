@@ -162,7 +162,7 @@ public class PauseSceneJump : MonoBehaviour
         {
             Data.pauseWindFlag = false;
             Destroy(this.gameObject.transform.parent.parent.gameObject);
-            Time.timeScale = 1f;
+            
             return;
         }
 
