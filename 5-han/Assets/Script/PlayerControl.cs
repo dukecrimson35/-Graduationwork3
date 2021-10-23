@@ -57,6 +57,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Coin")
         {
+            audio.PlayOneShot(coin);
             Money moneyScript = collision.gameObject.GetComponent<Money>();
             itemManagerScript.UpCoin(moneyScript.GetMoney());
             Destroy(collision.gameObject);
@@ -348,7 +349,7 @@ public class PlayerControl : MonoBehaviour
             {
                 hitFlag = true;
                 hitCount++;
-                Debug.Log(hitCount);
+              
             }
         }
         if (stoptime < 0 && !kamae)
@@ -373,12 +374,12 @@ public class PlayerControl : MonoBehaviour
     {
         return deadFlag;
     }
-    public void Damage(int damage)
+    public void Damage(int _damage)
     {
-
+        audio.PlayOneShot(damage);
         if (muteki < 0)
         {
-            hp -= damage;
+            hp -= _damage;
             muteki = 1.5f;
         }
     }

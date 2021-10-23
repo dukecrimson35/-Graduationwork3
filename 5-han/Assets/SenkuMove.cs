@@ -20,7 +20,7 @@ public class SenkuMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Block")
         {
-            Debug.Log("s");
+          
             isMove = false;
         }
     }
@@ -28,7 +28,7 @@ public class SenkuMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Block")
         {
-            Debug.Log("s");
+         
             isMove = false;
         }
 
@@ -37,7 +37,7 @@ public class SenkuMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Block")
         {
-            Debug.Log("s");
+            
             isMove = true;
         }
     }

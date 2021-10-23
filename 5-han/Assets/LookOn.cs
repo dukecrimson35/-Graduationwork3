@@ -56,7 +56,6 @@ public class LookOn : MonoBehaviour
             bool check = false;
             if (LookList.Count == 0)
             {
-                Debug.Log(111);
                 LookList.Add(collision.gameObject);
                 LookObject = collision.gameObject;
             }
