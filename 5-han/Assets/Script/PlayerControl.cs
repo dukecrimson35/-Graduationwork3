@@ -348,7 +348,7 @@ public class PlayerControl : MonoBehaviour
             {
                 hitFlag = true;
                 hitCount++;
-                Debug.Log(hitCount);
+              
             }
         }
         if (stoptime < 0 && !kamae)
