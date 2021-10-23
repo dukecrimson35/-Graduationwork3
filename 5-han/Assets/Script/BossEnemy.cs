@@ -33,7 +33,7 @@ public class BossEnemy : MonoBehaviour
     {
         damage = false;
         deadFlag = false;
-        nextTime = Time.time;
+        nextTime = 0;
         renderer = GetComponent<Renderer>();
         spr = GetComponent<SpriteRenderer>();
         spr.sprite = aliveBoss;
@@ -49,7 +49,7 @@ public class BossEnemy : MonoBehaviour
         scenechangetime = 0;
         MeleeWepon.SetActive(false);
         RMeleeWepon.SetActive(false);
-        wepRot = 0.2f;
+        wepRot = 0.3f;
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class BossEnemy : MonoBehaviour
     {
         if (Time.timeScale <= 0) return;
         //移動処理
-        if (BossEnemyHp <= 25)
+        if (BossEnemyHp <= 180)
         {
             MoveMode = true;
         }
@@ -65,11 +65,11 @@ public class BossEnemy : MonoBehaviour
         {
             if (LMove && !RMove)
             {
-                pos.x -= 0.01f;
+                pos.x -= 0.03f;
             }
             if (!LMove && RMove)
             {
-                pos.x += 0.01f;
+                pos.x += 0.03f;
             }
         }
         //近接攻撃処理
@@ -95,11 +95,13 @@ public class BossEnemy : MonoBehaviour
             {
                 //武器表示
                 MeleeWepon.SetActive(true);
+                RMeleeWepon.SetActive(false);
                 //武器回転
                 MeleeWepon.transform.Rotate(0, 0, wepRot);
             }
             if(!LMove&&RMove)
             {
+                MeleeWepon.SetActive(false);
                 RMeleeWepon.SetActive(true);
                 RMeleeWepon.transform.Rotate(0, 0, wepRot);
             }
@@ -120,7 +122,7 @@ public class BossEnemy : MonoBehaviour
         }
         //遠距離攻撃処理
         Rangesecond += Time.deltaTime;
-        if(Rangesecond>=3.5f)
+        if(Rangesecond>=2.5f)
         {
             Instantiate(bullet, this.transform.position, Quaternion.identity);
             Rangesecond = 0;
@@ -153,18 +155,13 @@ public class BossEnemy : MonoBehaviour
         }
         if (damage)
         {
-             if (Time.time > nextTime)
-             {
-                renderer.material.color = Color.red;
-                 renderer.enabled = !renderer.enabled;
-                 nextTime += damageInterval;
-                 count++;
-             }
-             if (count == 4)
-             {
-                 damage = false;
-                 count = 0;
-             }
+            renderer.material.color = Color.red;
+            nextTime += Time.deltaTime;
+            if (nextTime>=2)
+            {
+                damage = false;
+                nextTime = 0;
+            }
         }
         if(!damage)
         {
@@ -177,6 +174,7 @@ public class BossEnemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "SenkuGiri")
         {
+            damage = true;
             BossEnemyHp -= 10;
         }
         if (collision.gameObject.tag == "LSide")
