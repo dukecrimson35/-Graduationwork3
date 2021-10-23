@@ -24,6 +24,7 @@ public class BossEnemy : MonoBehaviour
     Vector3 pos;
     public GameObject bullet;
     public GameObject MeleeWepon;
+    public GameObject RMeleeWepon;
     float wepRot;
     public Sprite aliveBoss;
     public Sprite deadBoss;
@@ -47,7 +48,8 @@ public class BossEnemy : MonoBehaviour
         ResetMelee = 0;
         scenechangetime = 0;
         MeleeWepon.SetActive(false);
-        wepRot = 0.1f;
+        RMeleeWepon.SetActive(false);
+        wepRot = 0.2f;
     }
 
     // Update is called once per frame
@@ -89,15 +91,25 @@ public class BossEnemy : MonoBehaviour
             //}
             //モードリセットの時間計算
             ResetMelee += Time.deltaTime;
-            //武器表示
-            MeleeWepon.SetActive(true);
-            //武器回転
-            MeleeWepon.transform.Rotate(0, 0, wepRot);
+            if (LMove && !RMove)
+            {
+                //武器表示
+                MeleeWepon.SetActive(true);
+                //武器回転
+                MeleeWepon.transform.Rotate(0, 0, wepRot);
+            }
+            if(!LMove&&RMove)
+            {
+                RMeleeWepon.SetActive(true);
+                RMeleeWepon.transform.Rotate(0, 0, wepRot);
+            }
             if(ResetMelee>=5)
             {
                 MeleeWepon.transform.rotation = Quaternion.Euler(0, 0, 28);
+                RMeleeWepon.transform.rotation = Quaternion.Euler(0, 180, 28);
                 //武器非表示
                 MeleeWepon.SetActive(false);
+                RMeleeWepon.SetActive(false);
                 //モード変更とモードリセットの時間をリセットで再度使用できるようにしておく
                 Meleesecond = 0;
                 ResetMelee = 0;
@@ -108,7 +120,7 @@ public class BossEnemy : MonoBehaviour
         }
         //遠距離攻撃処理
         Rangesecond += Time.deltaTime;
-        if(Rangesecond>=7.5f)
+        if(Rangesecond>=3.5f)
         {
             Instantiate(bullet, this.transform.position, Quaternion.identity);
             Rangesecond = 0;
