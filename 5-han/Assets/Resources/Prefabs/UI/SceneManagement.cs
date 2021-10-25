@@ -25,6 +25,8 @@ public class SceneManagement : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip bgm;
 
+    public bool destroyFlag = false;
+
     public enum SceneNames
     {
         TitleScene,
@@ -40,7 +42,8 @@ public class SceneManagement : MonoBehaviour
     void Start()
     {
         audioSource.volume = 0.1f;
-     
+
+       
 
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
@@ -53,8 +56,6 @@ public class SceneManagement : MonoBehaviour
 
         //}
 
-      
-
         if (sceneName == "Stage01" || sceneName == "Stage02" || sceneName == "Stage03")
         {
             player = GameObject.FindGameObjectWithTag("Player");
@@ -63,22 +64,38 @@ public class SceneManagement : MonoBehaviour
 
         if(bgm != null)
         {
-            audioSource.clip = bgm;
-            audioSource.Play();
+            if(sceneName != "SelectScene" && sceneName != "TitleScene")
+            {
+                audioSource.clip = bgm;
+                audioSource.Play();
+
+                if (GameObject.Find("TitleBGM"))
+                {
+                    Destroy(GameObject.Find("TitleBGM"));
+                }
+                if (GameObject.Find("SelectBGM"))
+                {
+                    Destroy(GameObject.Find("SelectBGM"));
+                }
+
+            }         
         }
         else
         {
             Debug.Log("BGMが入ってないよ");
         }
-      
 
+
+       
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!oneFadeFlag && fade != null)
+
+
+        if (!oneFadeFlag && fade != null)
         {
             fade.GetComponent<FadeStart>().FadeInA();
             oneFadeFlag = true;
@@ -129,6 +146,9 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage01")
         {
+
+       
+
             if ( clearFlag)
             {
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
@@ -270,6 +290,7 @@ public class SceneManagement : MonoBehaviour
     public void OnClickTitleButton()
     {
         //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.TitleScene.ToString());
+        
         StartCoroutine(Coroutine(SceneNames.TitleScene.ToString()));
     }
 
@@ -289,6 +310,10 @@ public class SceneManagement : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         fade.GetComponent<FadeStart>().FadeOutNextScene(str);
+        if (GameObject.Find("TitleBGM") && SceneNames.SelectScene.ToString() == sceneName)
+        {
+            Destroy(GameObject.Find("TitleBGM"));
+        }
     }
 
     IEnumerator EndCoroutine()
