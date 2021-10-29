@@ -11,6 +11,9 @@ public class WasShoot : MonoBehaviour
     PlayerControl playerScript;//プレイヤーのスクリプト(ダメージ与えるよう)
     Vector3 toPlayer;//プレイヤーの単位ベクトル
 
+    bool cuted;//斬られた
+    SpriteRenderer sprite;
+
     float c;
 
     // Start is called before the first frame update
@@ -24,13 +27,20 @@ public class WasShoot : MonoBehaviour
         player = GameObject.Find("Player");
         //プレイヤーがいる方向の単位ベクトルを取得
         toPlayer = Vector3.Normalize(player.transform.position - transform.position);
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rigidbody.velocity = toPlayer*speed;
-
+        if (cuted == false)
+        {
+            rigidbody.velocity = toPlayer * speed;
+        }
+        if(cuted)
+        {
+            rigidbody.velocity = new Vector3();
+        }
         //そのうち消える処理
         c += Time.deltaTime;
         if(c >= 5)
@@ -40,14 +50,30 @@ public class WasShoot : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
-            playerScript = collision.gameObject.GetComponent<PlayerControl>();
+            playerScript = other.gameObject.GetComponent<PlayerControl>();
             playerScript.Damage(10);
             Destroy(this.gameObject);
             Destroy(this);
         }
+
+        if(other.gameObject.tag == "SenkuGiri")
+        {
+            cuted = true;
+            sprite.enabled = false;
+        }
+        if (other.gameObject.tag == "PowerSlash")
+        {
+            cuted = true;
+            sprite.enabled = false;
+        }
+    }
+
+    public bool GetCut()
+    {
+        return cuted;
     }
 }
