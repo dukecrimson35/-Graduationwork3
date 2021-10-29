@@ -30,7 +30,13 @@ public class GaugeEnergyControl : MonoBehaviour
 
     public GameObject aaa;
 
-   
+    public GameObject col;
+    private bool updateFlag = false;
+    private bool oneFlag = false;
+
+    private Rigidbody rigidbody;
+
+    public Vector3 acc;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +52,8 @@ public class GaugeEnergyControl : MonoBehaviour
         var direction = targetscreenPos - screenPos;
         var angle = GetAim(Vector3.zero, direction);
         transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle - 180);
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.AddForce(acc);
     }
 
     public float GetAim(Vector2 from, Vector2 to)
@@ -56,12 +64,47 @@ public class GaugeEnergyControl : MonoBehaviour
         return rad * Mathf.Rad2Deg;
     }
 
+    float delay = 0.05f;
+    IEnumerator Coroutine()
+    {
+        int count = 10;
+        Vector3 ac = acc / count;
+
+        for(int i= 0; i< count;i++)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            rigidbody.AddForce(-ac);
+        }
+      
+      
+        updateFlag = true;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+
+        if (!updateFlag)
+        {
+            if (!oneFlag)
+            {
+                oneFlag = true;
+                StartCoroutine(Coroutine());
+            }
+            return;
+        }
+        else
+        {
+            if(oneFlag)
+            {
+                
+                oneFlag = false;
+                col.SetActive(false);
+            }
+        }
 
         playerPos = player.transform.position;
         //playerPos = gauge.transform.position;

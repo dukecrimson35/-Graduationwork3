@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &57298229617655921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152848761084076762}
+  - component: {fileID: 5205810253550673062}
+  m_Layer: 15
+  m_Name: GroundCol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1152848761084076762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57298229617655921}
+  m_LocalRotation: {x: -0, y: -0, z: 0.10088261, w: 0.9948983}
+  m_LocalPosition: {x: 4.1985626, y: 6.3112655, z: 0}
+  m_LocalScale: {x: 0.08888, y: 0.08888, z: 0.088879995}
+  m_Children: []
+  m_Father: {fileID: 956122239005918990}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5205810253550673062
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57298229617655921}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &956122239005918985
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +79,7 @@ Transform:
   - {fileID: 1114943889793788678}
   - {fileID: 3862061293592246612}
   - {fileID: 8705668808961995531}
+  - {fileID: 1152848761084076762}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -11.58}
@@ -110,9 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c30fc3a76f9a84c9b32d5c2c2a5c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 1000
+  num: 400
   maxSpeed: 20
   aaa: {fileID: 8904795021255427907}
+  col: {fileID: 57298229617655921}
+  acc: {x: 500, y: 500, z: 0}
 --- !u!54 &8242349437201159368
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,7 +174,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!1 &3478003993038135941
 GameObject:

@@ -111,11 +111,14 @@ public class EnemyRespawn : MonoBehaviour
 
     void CoinDrop(Vector3 position)//お金ドロップ
     {
-
-        Instantiate(coinSmall, position, new Quaternion());
-        Instantiate(coinSmall, position, new Quaternion());
-        Instantiate(coinMidlle, position, new Quaternion());
-        Instantiate(coinMidlle, position, new Quaternion());
+        Vector3 pos = position;
+        Instantiate(coinSmall, pos, new Quaternion());
+        //pos.y += 0.05f;
+        //Instantiate(coinSmall, pos, new Quaternion());
+        //pos.y -= 0.05f;
+        //Instantiate(coinMidlle, pos, new Quaternion());
+        //pos.x += 0.05f;
+        //Instantiate(coinMidlle, pos, new Quaternion());
     }
 
     void DeadAnimation(Vector3 position,GameObject animation)//死亡アニメーション
