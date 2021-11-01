@@ -1079,7 +1079,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1de18880c6aa442448dab07c996c0dcf, type: 3}
+    m_Font: {fileID: 12800000, guid: cb742fe486d815f478b9ec57d4016029, type: 3}
     m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 0
@@ -1091,9 +1091,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'End
-
-'
+  m_Text: "\u7D42\u4E86\n"
 --- !u!222 &6560682565912186661
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1660,7 +1658,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1de18880c6aa442448dab07c996c0dcf, type: 3}
+    m_Font: {fileID: 12800000, guid: cb742fe486d815f478b9ec57d4016029, type: 3}
     m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 0
@@ -1672,7 +1670,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: "\u958B\u59CB"
 --- !u!114 &6560682567331002564
 MonoBehaviour:
   m_ObjectHideFlags: 0
