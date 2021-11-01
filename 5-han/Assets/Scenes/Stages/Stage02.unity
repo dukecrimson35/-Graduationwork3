@@ -2803,9 +2803,9 @@ MonoBehaviour:
     type: 3}
   FlyingEnemy: {fileID: 1012788992456724242, guid: 46889c3ff443f804dbb4d72e6bd609da,
     type: 3}
-  coinMidlle: {fileID: 4441838272635568245, guid: c1f4a760665b09e479e7552377737cde,
+  coinMidlle: {fileID: 7045010097545598045, guid: 56dbc985da814344ca9b5c097313b518,
     type: 3}
-  coinSmall: {fileID: 7984203624625270251, guid: 2f7a06ccc4384e149b9f0721af99cd45,
+  coinSmall: {fileID: 7045010097545598045, guid: 56dbc985da814344ca9b5c097313b518,
     type: 3}
   stopenemyDeath: {fileID: 168126461193745488, guid: 5e288cb8efb68014b86f75af03372d9a,
     type: 3}
