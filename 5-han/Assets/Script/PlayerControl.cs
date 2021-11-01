@@ -246,6 +246,7 @@ public class PlayerControl : MonoBehaviour
                     col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                     transform.position += senku * len + senku * 2;
+                    AfterImage(-(senku * len + senku * 2) / 2, -(senku * len + senku * 2));
                     if (moveColider != null)
                     {
                         Destroy(moveColider);
@@ -273,6 +274,7 @@ public class PlayerControl : MonoBehaviour
                     col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                     transform.position += senku;
+                    AfterImage(-(senku), - (senku) / 2);
                     if (moveColider != null)
                     {
                         Destroy(moveColider);
@@ -301,6 +303,18 @@ public class PlayerControl : MonoBehaviour
             lookColider.transform.rotation = Quaternion.Euler(0, 0, tes);
         }
         stoptime -= Time.deltaTime;
+    }
+    void AfterImage(Vector3 pos1, Vector3 pos2)
+    {
+        GameObject after = Instantiate((GameObject)Resources.Load("Afterimage"));
+        after.transform.position = transform.position;
+        Afterimage af = after.GetComponent<Afterimage>();
+        if(currentDirec==Direc.Left)
+        {
+            af.Left();
+        }
+        af.SetPositition(pos1, pos2);
+        Debug.Log(1);
     }
     void Special()
     {
