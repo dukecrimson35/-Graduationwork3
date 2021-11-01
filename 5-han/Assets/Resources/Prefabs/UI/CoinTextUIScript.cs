@@ -16,6 +16,12 @@ public class CoinTextUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = Data.coin.ToString() + "銭";
+        text.text = "×" + Data.coin.ToString();
+
+
+        if(Input.GetKey(KeyCode.A))
+        {
+            Data.coin += 100;
+        }
     }
 }
