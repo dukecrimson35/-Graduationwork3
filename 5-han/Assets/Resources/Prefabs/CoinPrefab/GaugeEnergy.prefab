@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 956122239005918987}
   - component: {fileID: 956122239005918986}
   - component: {fileID: 8242349437201159368}
+  - component: {fileID: 3056219183342730905}
   m_Layer: 0
   m_Name: GaugeEnergy
   m_TagString: GaugeEnergy
@@ -160,6 +161,10 @@ MonoBehaviour:
   aaa: {fileID: 8904795021255427907}
   col: {fileID: 57298229617655921}
   acc: {x: 500, y: 500, z: 0}
+  money: {fileID: 21300000, guid: a22d913d55c235c40a9a0d774ef27e50, type: 3}
+  money2: {fileID: 21300000, guid: f6aff08878af7af4ca3d30c5756b8569, type: 3}
+  spriteCheck: 0
+  sprite: {fileID: 3478003993038135941}
 --- !u!54 &8242349437201159368
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -176,6 +181,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &3056219183342730905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956122239005918985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84a72c4df24d8a47bf535094c6df043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 20
 --- !u!1 &3478003993038135941
 GameObject:
   m_ObjectHideFlags: 0

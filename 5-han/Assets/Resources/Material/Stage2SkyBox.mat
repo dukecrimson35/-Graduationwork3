@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BaseSkyBox
+  m_Name: Stage2SkyBox
   m_Shader: {fileID: 108, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _MAPPING_LATITUDE_LONGITUDE_LAYOUT _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3bd3c6bdee7961e4f8ca34e750c18027, type: 3}
+        m_Texture: {fileID: 2800000, guid: d13bc09214ce6c840a0d1605dcbf5ea4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

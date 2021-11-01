@@ -38,9 +38,22 @@ public class GaugeEnergyControl : MonoBehaviour
 
     public Vector3 acc;
 
+    public Sprite money;
+    public Sprite money2;
+
+    public bool spriteCheck = false;
+
+    public GameObject sprite;
+    private SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
+        if(spriteCheck)
+        {
+            spriteRenderer = sprite.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = money2;
+        }
         player = GameObject.FindGameObjectWithTag("Player");
         //gauge = GameObject.FindGameObjectWithTag("GaugeTarget");
         //target = GameObject.FindGameObjectWithTag("GaugeTarget2");
@@ -188,6 +201,8 @@ public class GaugeEnergyControl : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            Money money = GetComponent<Money>();
+            Data.GetCoin(money.GetMoney());
             Destroy(this.gameObject);
         }
 

@@ -146,6 +146,11 @@ PrefabInstance:
       propertyPath: acc.y
       value: 800
       objectReference: {fileID: 0}
+    - target: {fileID: 956122239005918986, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
+        type: 3}
+      propertyPath: spriteCheck
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_RootOrder
@@ -235,6 +240,11 @@ PrefabInstance:
         type: 3}
       propertyPath: acc.y
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 956122239005918986, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
+        type: 3}
+      propertyPath: spriteCheck
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
