@@ -26,6 +26,9 @@ public  class Data : MonoBehaviour
     public static bool titleSceneFlag = false;
     public static bool selectSceneFlag = false;
 
+    //プレイしたステージ番号　
+    public static int stageNum = 0;
+
     //public static bool shopOpenFlag = false;
 
 

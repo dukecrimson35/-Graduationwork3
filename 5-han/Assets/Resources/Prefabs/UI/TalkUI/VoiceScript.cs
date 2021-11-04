@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class VoiceScript : MonoBehaviour
 {
@@ -17,10 +18,10 @@ public class VoiceScript : MonoBehaviour
     [Header("鬼ボス終了セリフ")]
     public bool oniBossEndFlag = false;
 
-    [Header("鬼ボス開始セリフ")]
-    public string[] bossStartTexts;
-    [Header("鬼ボス終了セリフ")]
-    public string[] bossEndTexts;
+    //[Header("鬼ボス開始セリフ")]
+    //public string[] bossStartTexts;
+    //[Header("鬼ボス終了セリフ")]
+    //public string[] bossEndTexts;
   
 
 
@@ -29,10 +30,12 @@ public class VoiceScript : MonoBehaviour
   
     int novelListIndex = 0; //配列の何個目を呼んでいるか
 
-    private bool oneFlag = false;
+    private bool oneFlag = false;//一回しか呼ばないため
 
-   
+    private bool endFlag = false;//会話終了フラグ
 
+    public TextAsset oniStartTxt;
+    public TextAsset oniEndTxt;
 
     void Start()
     {
@@ -46,18 +49,24 @@ public class VoiceScript : MonoBehaviour
 
 
         if(oniBossStartFlag)
-        {
-            for(int i = 0; i< bossStartTexts.Length;i++)
+        {          
+
+            StringReader reader = new StringReader(oniStartTxt.text);
+            while (reader.Peek() != -1) 
             {
-                messageList.Add(bossStartTexts[i]);
+                string line = reader.ReadLine(); // 一行ずつ読み込み
+                messageList.Add(line);
             }
+
             oneFlag = true;
         }
         else if(oniBossEndFlag)
         {
-            for (int i = 0; i < bossEndTexts.Length; i++)
+            StringReader reader = new StringReader(oniEndTxt.text);
+            while (reader.Peek() != -1)
             {
-                messageList.Add(bossEndTexts[i]);
+                string line = reader.ReadLine(); // 一行ずつ読み込み
+                messageList.Add(line);
             }
             oneFlag = true;
         }
@@ -73,7 +82,8 @@ public class VoiceScript : MonoBehaviour
         yield return new WaitForSeconds(startTime);//読み初めまでの待ち時間
 
         int messageCount = 0; 
-        text.text = ""; 
+        text.text = "";
+        bool endChack = true;
 
         while (messageList[novelListIndex].Length > messageCount)
         {
@@ -97,9 +107,29 @@ public class VoiceScript : MonoBehaviour
         if (novelListIndex < messageList.Count)//配列がすべて読み終わっていないならもう一回
         {
             StartCoroutine(Novel());
+            endChack = false;
         }
 
-       
+        if(endChack)
+        {
+            endFlag = true;
+            text.text = "";
+        }
+        
+    }
+
+    public bool GetEndFlag()
+    {
+        return endFlag;
+    }
+
+    public void SetOniStartFlag()
+    {
+        oniBossStartFlag = true;
+    }
+    public void SetOniEndFlag()
+    {
+        oniBossEndFlag = true;
     }
 
 
