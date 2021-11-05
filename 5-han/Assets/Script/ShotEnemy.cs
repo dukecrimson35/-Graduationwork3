@@ -28,7 +28,7 @@ public class ShotEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bossspawn.GetEnemyMove())
+        if(bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
             if (search.GetinRange())
             {
