@@ -9,13 +9,13 @@ public class bossspawn : MonoBehaviour
     public BossEnemy boss;
     public Camera BossCamera;
     float count;
-    ParticleSystem particle;
+    //public ParticleSystem particle;
     // Start is called before the first frame update
     void Start()
     {
         BossCamera.depth = -2;
         EnemyMove = true;
-      //  particle = boss.Getparticle();
+        //particle = boss.Getparticle();
     }
 
     // Update is called once per frame
