@@ -9400,6 +9400,11 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 377989328}
+    - target: {fileID: 1648622591065998938, guid: 433eb9f8f3f5aa847b927ef9a41aba12,
+        type: 3}
+      propertyPath: bossSoawnObj
+      value: 
+      objectReference: {fileID: 1981861731}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 433eb9f8f3f5aa847b927ef9a41aba12, type: 3}
 --- !u!1 &1305374290
@@ -15503,7 +15508,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1919803837
 PrefabInstance:
