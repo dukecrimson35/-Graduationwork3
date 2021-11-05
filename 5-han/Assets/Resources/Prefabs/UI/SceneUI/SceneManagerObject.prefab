@@ -47,6 +47,9 @@ MonoBehaviour:
   fade: {fileID: 0}
   audioSource: {fileID: 4789631413210565778}
   bgm: {fileID: 0}
+  destroyFlag: 0
+  bossSoawnObj: {fileID: 0}
+  talkUI: {fileID: 5396844019894130117, guid: a4e71ca848195204e8a8e9ef68a932ed, type: 3}
 --- !u!82 &4789631413210565778
 AudioSource:
   m_ObjectHideFlags: 0

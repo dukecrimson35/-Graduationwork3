@@ -26,6 +26,10 @@ public class SceneManagement : MonoBehaviour
 
     public bool destroyFlag = false;
 
+    public GameObject bossSoawnObj;
+    private bossspawn bossspawnScript;
+    public GameObject talkUI;
+
     public enum SceneNames
     {
         TitleScene,
@@ -46,6 +50,10 @@ public class SceneManagement : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
 
         boss = GameObject.FindGameObjectWithTag("BossEnemy");
+        if(bossSoawnObj != null)
+        {
+            bossspawnScript = bossSoawnObj.GetComponent<bossspawn>();
+        }
 
         //for(int i = 0; i< GameData.maxStageNumber;i++)
         //{
@@ -190,7 +198,18 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage01")
         {
-
+            if(!bossspawnScript.GetEnemyMove())
+            {
+                if (GameObject.Find("TalkUICanvas(Clone)") == null)
+                {
+                    GameObject instance =
+                       (GameObject)Instantiate(talkUI,
+                       new Vector3(0, 0, 0.0f), Quaternion.identity);
+                    VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
+                    voiceScript.SetOniStartFlag();
+                    //voiceScript.SetOniEndFlag();
+                }
+            }
        
 
             if ( clearFlag)
