@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 public class SceneManagement : MonoBehaviour
 {
 
@@ -41,9 +40,7 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
-        audioSource.volume = 0.1f;
-
-       
+        audioSource.volume = 0.1f;     
 
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
@@ -96,16 +93,51 @@ public class SceneManagement : MonoBehaviour
         {
             Debug.Log("BGMが入ってないよ");
         }
+    }
 
+    float second = 100;
+    float bgmDelay = 0.01f;
+    float vol = 0;
+    IEnumerator BGMFadeOutCoroutine()
+    {   
+        vol = audioSource.volume / second;
 
-       
+        for (int i = 0; i < second; i++)
+        {
+            audioSource.volume = audioSource.volume - vol;
+            yield return new WaitForSecondsRealtime(bgmDelay);
+        }
+        audioSource.Pause();
+    }
 
+    IEnumerator BGMFadeInCoroutine()
+    {
+
+       // Vector3 move = new Vector3(0, 210f / second, 0);
+        //float vol = audioSource.volume / second;
+        //Vector3 move2 = new Vector3(0, 209f/second, 0);
+
+        audioSource.UnPause();
+
+        for (int i = 0; i < second; i++)
+        {
+            audioSource.volume = audioSource.volume + vol;
+            yield return new WaitForSecondsRealtime(bgmDelay);
+        }
+    }
+
+    public void BGMFadeOut()
+    {
+        StartCoroutine(BGMFadeOutCoroutine());
+    }
+    public void BGMFadeIn()
+    {
+        StartCoroutine(BGMFadeInCoroutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-
 
         if (!oneFadeFlag && fade != null)
         {

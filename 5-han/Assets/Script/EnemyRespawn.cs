@@ -105,7 +105,7 @@ public class EnemyRespawn : MonoBehaviour
 
         for (int i = 0; i< positions2.Count;i++)
         {
-            Debug.Log(positions2[i]);
+            //Debug.Log(positions2[i]);
         }
     }
 

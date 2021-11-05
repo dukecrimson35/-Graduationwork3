@@ -15,11 +15,16 @@ public class UIMoveScript : MonoBehaviour
     private VoiceScript voiceScript;
     bool oneFlag = false;
 
+    private GameObject sceneManeOBJ;
+    private SceneManagement sceneManagement;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(GameObject.Find("GamePlayUI"))
+        sceneManeOBJ = GameObject.Find("SceneManagerObject");
+        sceneManagement = sceneManeOBJ.GetComponent<SceneManagement>();
+
+        if (GameObject.Find("GamePlayUI"))
         {
             coinObjUI = GameObject.Find("GamePlayUI");
             coinUI = coinObjUI.transform.GetChild(0).gameObject;
@@ -38,11 +43,11 @@ public class UIMoveScript : MonoBehaviour
     }
     float delay = 0.01f;
 
-    float second = 50;
+    float second = 100;
 
     IEnumerator StartCoroutine()
     {
-      
+        sceneManagement.BGMFadeOut();
         Vector3 move = new Vector3(0, 210f/second, 0);
         //Vector3 move2 = new Vector3(0, 209f/second, 0);
 
@@ -65,6 +70,7 @@ public class UIMoveScript : MonoBehaviour
     IEnumerator EndCoroutine()
     {
         Vector3 move = new Vector3(0, 210f / second, 0);
+        sceneManagement.BGMFadeIn();
 
         for (int i = 0; i < second; i++)
         {
