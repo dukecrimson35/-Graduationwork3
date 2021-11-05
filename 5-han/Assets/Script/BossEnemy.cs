@@ -29,6 +29,9 @@ public class BossEnemy : MonoBehaviour
     public Sprite aliveBoss;
     public Sprite deadBoss;
     float scenechangetime;
+    public bool hitGround;
+    public bossspawn bossspawn;
+    Rigidbody rigid;
     void Start()
     {
         damage = false;
@@ -36,6 +39,8 @@ public class BossEnemy : MonoBehaviour
         nextTime = 0;
         renderer = GetComponent<Renderer>();
         spr = GetComponent<SpriteRenderer>();
+        rigid = GetComponent<Rigidbody>();
+        rigid.useGravity = false;
         spr.sprite = aliveBoss;
         LMove = true;
         RMove = false;
@@ -55,6 +60,10 @@ public class BossEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(bossspawn.hitBossSpawn)
+        {
+            rigid.useGravity = true;
+        }
         if (Time.timeScale <= 0) return;
         //移動処理
         if (BossEnemyHp <= 180)
@@ -66,10 +75,12 @@ public class BossEnemy : MonoBehaviour
             if (LMove && !RMove)
             {
                 pos.x -= 0.03f;
+                this.transform.rotation = new Quaternion(0, 0, 0, 0);
             }
             if (!LMove && RMove)
             {
                 pos.x += 0.03f;
+                this.transform.rotation = new Quaternion(0, 180, 0, 0);
             }
         }
         //近接攻撃処理
@@ -196,6 +207,10 @@ public class BossEnemy : MonoBehaviour
             PlayerControl p = collision.gameObject.GetComponent<PlayerControl>();
             p.Damage(10);
             p.KnockBack(gameObject);
+        }
+        if(collision.gameObject.tag=="Block")
+        {
+            hitGround = true;
         }
     }
     public int GetHp()
