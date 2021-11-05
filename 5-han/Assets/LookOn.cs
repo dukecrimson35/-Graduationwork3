@@ -33,7 +33,6 @@ public class LookOn : MonoBehaviour
     }
     void SetLookObject()
     {
-
         for (int a = 0; a < LookList.Count; a++)
         {
             if (Mathf.Abs((LookList[a].transform.position - transform.position).magnitude) <
