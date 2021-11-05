@@ -24,11 +24,18 @@ public class LooKCamera : MonoBehaviour
     void Update()
     {
         velocity = target.transform.position - (transform.position - length - lengthX);
-        velocity = velocity.normalized * 11;
+        velocity = velocity.normalized * 3;
         //    velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
         if (Mathf.Abs((target.transform.position - (transform.position - length - lengthX)).magnitude) > 1f &&
-           Mathf.Abs((target.transform.position - (transform.position - length - lengthX)).magnitude) < 2f)
+           Mathf.Abs((target.transform.position - (transform.position - length - lengthX)).magnitude) < 3f)
         {
+            transform.position += velocity * Time.deltaTime;
+        }
+        
+        else if (Mathf.Abs((target.transform.position - (transform.position - length - lengthX)).magnitude) > 3f &&
+           Mathf.Abs((target.transform.position - (transform.position - length - lengthX)).magnitude) < 5f)
+        {
+            velocity = velocity.normalized * 11;
             transform.position += velocity * Time.deltaTime;
         }
         else if (Mathf.Abs((target.transform.position - (transform.position - length - lengthX)).magnitude) > 2) 

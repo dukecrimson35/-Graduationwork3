@@ -20,7 +20,10 @@ public class PlayerControl : MonoBehaviour
     GameObject moveColider;
     SenkuMove move;
     GameObject lookColider;
+    GameObject lockSp;
     LookOn look;
+
+    LockSpecial sp;
     Rigidbody rigid;
     bool kamae;
     bool hitFlag;
@@ -83,6 +86,7 @@ public class PlayerControl : MonoBehaviour
             IsSenkuHit();
             SenkuGiri();
             Special();
+            SpecialY();
             CheckDead();
             Blink();
         }
@@ -343,7 +347,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Special()
     {
-       
+
         if (stoptime < 0 || hitFlag)
         {
             if (Input.GetButton("X"))
@@ -360,7 +364,7 @@ public class PlayerControl : MonoBehaviour
                 kamae = true;
             }
 
-            if (Input.GetButtonUp("X")) 
+            if (Input.GetButtonUp("X"))
             {
                 anim.SetBool("Power2", true);
                 kamae = false;
@@ -374,8 +378,38 @@ public class PlayerControl : MonoBehaviour
                 float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                 col.transform.rotation = Quaternion.Euler(0, 0, ang);
                 col = null;
-               
+
                 Destroy(moveColider);
+            }
+        }
+    }
+    void SpecialY()
+    {
+      
+    //    if (stoptime < 0 || hitFlag)
+        {
+            if (Input.GetButton("Y"))
+            {
+                
+                if (lockSp == null) 
+                {
+                    lockSp = Instantiate((GameObject)Resources.Load("LockSpecial"));
+                    sp = lockSp.GetComponent<LockSpecial>();
+                }
+                lockSp.transform.position = transform.position;
+                anim.SetBool("Power", true);
+                kamae = true;
+            }
+
+            if (Input.GetButtonUp("Y"))
+            {
+                if(lockSp!=null)
+                {
+                    Destroy(lockSp);
+                }
+                anim.SetBool("Power2", true);
+                kamae = false;
+            
             }
         }
     }
