@@ -30,10 +30,16 @@ public class SenkuSprict : MonoBehaviour
     {
         if (collision.transform.tag == "Enemy")
         {
+            GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
+            after.transform.position = collision.transform.position;
+
             hit = true;
         }
         if (collision.transform.tag == "BossEnemy")
         {
+            GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
+            after.transform.position = collision.transform.position;
+
             hit = true;
         }
 
