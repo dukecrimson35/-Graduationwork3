@@ -29,6 +29,7 @@ public class bossspawn : MonoBehaviour
                 if(count>=4.0)
                 {
                     BossCamera.depth = -2;
+                    EnemyMove = true;
                 }
             }
         }
@@ -45,5 +46,10 @@ public class bossspawn : MonoBehaviour
     private bool GetBossSpawn()
     {
         return hitBossSpawn;
+    }
+
+    private bool GetEnemyMove()
+    {
+        return EnemyMove;
     }
 }
