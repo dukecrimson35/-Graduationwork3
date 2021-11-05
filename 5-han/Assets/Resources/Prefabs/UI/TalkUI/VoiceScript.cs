@@ -43,6 +43,7 @@ public class VoiceScript : MonoBehaviour
     void Start()
     {
         StartCoroutine(Novel());
+        audioSource.volume = 0.5f;
     }
 
     // Update is called once per frame
@@ -88,14 +89,11 @@ public class VoiceScript : MonoBehaviour
         int messageCount = 0; 
         text.text = "";
         bool endChack = true;
+       
         if(!oneBGMFlag)
         {
-            audioSource.clip = katakata;
-            audioSource.Play();
-            audioSource.volume = 0.5f;
-            oneBGMFlag = true;
+            StartCoroutine(BGMFadeInCoroutine());
         }
-
       
 
         while (messageList[novelListIndex].Length > messageCount)
@@ -123,11 +121,57 @@ public class VoiceScript : MonoBehaviour
             StartCoroutine(Novel());
             endChack = false;
         }
+        if(endFlag)
+        {
+            StartCoroutine(BGMFadeOutCoroutine());
+        }
+       
 
-        if(endChack)
+
+        yield return new WaitForSeconds(0.6f);//待ち時間
+
+
+        if (endChack)
         {
             endFlag = true;
             text.text = "";
+        }
+        
+    }
+
+    float second = 200;
+    float bgmDelay = 0.01f;
+    float vol = 0;
+    IEnumerator BGMFadeOutCoroutine()
+    {
+        vol = audioSource.volume / second;
+
+        for (int i = 0; i < second; i++)
+        {
+            audioSource.volume = audioSource.volume - vol;
+            yield return new WaitForSecondsRealtime(bgmDelay);
+        }
+        audioSource.Pause();
+    }
+
+    IEnumerator BGMFadeInCoroutine()
+    {
+       
+
+        if (!oneBGMFlag)
+        {
+            vol = audioSource.volume / second;
+            audioSource.volume = 0.0f;
+            audioSource.clip = katakata;
+            audioSource.Play();
+            //audioSource.volume = 0.5f;
+            oneBGMFlag = true;
+        }
+
+        for (int i = 0; i < second; i++)
+        {
+            audioSource.volume = audioSource.volume + vol;
+            yield return new WaitForSecondsRealtime(bgmDelay);
         }
         
     }
