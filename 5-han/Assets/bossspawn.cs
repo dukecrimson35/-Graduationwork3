@@ -15,7 +15,7 @@ public class bossspawn : MonoBehaviour
     {
         BossCamera.depth = -2;
         EnemyMove = true;
-        particle = boss.Getparticle();
+      //  particle = boss.Getparticle();
     }
 
     // Update is called once per frame
