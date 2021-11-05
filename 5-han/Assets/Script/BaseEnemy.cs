@@ -6,23 +6,37 @@ public class BaseEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public int baseEnemyHp = 10;
+    public GameObject Texture;//自分の画像
     private float nextTime;
     float damageInterval = 1f;
     bool damage;
     bool deadFlag;
     int count=0;
     Renderer renderer;
+    GameObject player;//プレイヤー
+    Vector3 playerPos;//プレイヤーのポジション
     void Start()
     {
         damage = false;
         nextTime = Time.time;
         renderer = GetComponent<Renderer>();
         deadFlag = false;
+        player = GameObject.Find("Player");
+        playerPos = player.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        playerPos = player.transform.position;//プレイヤーの位置取得
+        if(playerPos.x - transform.position.x >= 0)
+        {
+            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        if (playerPos.x - transform.position.x < 0)
+        {
+            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
         if (Time.timeScale <= 0) return;
         if (Input.GetKeyDown(KeyCode.W))
         {
