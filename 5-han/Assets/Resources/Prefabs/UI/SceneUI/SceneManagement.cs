@@ -198,6 +198,9 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage01")
         {
+
+            //Debug.Log(Data.voiceFlag);
+
             if(!bossspawnScript.GetEnemyMove())
             {
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
@@ -207,6 +210,8 @@ public class SceneManagement : MonoBehaviour
                        new Vector3(0, 0, 0.0f), Quaternion.identity);
                     VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
                     voiceScript.SetOniStartFlag();
+                    Data.voiceFlag = true;
+
                     //voiceScript.SetOniEndFlag();
                 }
             }

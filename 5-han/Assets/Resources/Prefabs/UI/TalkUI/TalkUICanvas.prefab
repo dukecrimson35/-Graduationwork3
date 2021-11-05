@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0940f0363616e4744a06fda1d35c2289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 1
+  startTime: 3
   novelSpeed: 0.1
   oniBossStartFlag: 0
   oniBossEndFlag: 0

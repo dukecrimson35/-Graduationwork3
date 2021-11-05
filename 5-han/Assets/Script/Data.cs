@@ -28,6 +28,8 @@ public  class Data : MonoBehaviour
 
     //プレイしたステージ番号　
     public static int stageNum = 0;
+    //
+    public static bool voiceFlag = false;
 
     //public static bool shopOpenFlag = false;
 

@@ -86,6 +86,7 @@ public class UIMoveScript : MonoBehaviour
             }
             yield return new WaitForSecondsRealtime(delay);
         }
+        Data.voiceFlag = false;
         Destroy(GameObject.Find("TalkUICanvas(Clone)"));
     }
 

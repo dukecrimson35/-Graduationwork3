@@ -114,7 +114,7 @@ public class VoiceScript : MonoBehaviour
             yield return new WaitForSeconds(novelSpeed);//読むスピード
         }
 
-        yield return new WaitForSeconds(1.5f);//1行出してからの待ち時間
+        yield return new WaitForSeconds(1.0f);//1行出してからの待ち時間
 
         novelListIndex++; //次の配列へ
 
