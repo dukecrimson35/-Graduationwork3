@@ -30,13 +30,17 @@ public class bossspawn : MonoBehaviour
                 BossCamera.transform.position = new Vector3(BossCamera.transform.position.x, Mathf.PingPong(Time.time, 0.2f), BossCamera.transform.position.z);
                 count = count + Time.deltaTime;
                 //particle.Play();
-                if(count>=4.0)
+                if(count>=4)
                 {
                     //particle.Stop();
-                    BossCamera.depth = -2;
+                    //BossCamera.depth = -2;
                     EnemyMove = true;
                 }
             }
+        }
+        if(EnemyMove&&!Data.voiceFlag)
+        {
+            BossCamera.depth = -2;
         }
     }
 
