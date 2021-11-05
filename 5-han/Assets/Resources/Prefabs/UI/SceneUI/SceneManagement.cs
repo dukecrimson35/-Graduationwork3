@@ -44,7 +44,8 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
-        audioSource.volume = 0.1f;     
+        audioSource.volume = 0.1f;
+        Application.targetFrameRate = 60;
 
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
