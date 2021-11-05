@@ -37,6 +37,9 @@ public class VoiceScript : MonoBehaviour
     public TextAsset oniStartTxt;
     public TextAsset oniEndTxt;
 
+    public AudioSource audioSource;
+    public AudioClip katakata;
+
     void Start()
     {
         StartCoroutine(Novel());
@@ -76,6 +79,7 @@ public class VoiceScript : MonoBehaviour
         Debug.Log("テキストが読み込めない");
 
     }
+    bool oneBGMFlag = false;
 
     IEnumerator Novel()
     {
@@ -84,6 +88,15 @@ public class VoiceScript : MonoBehaviour
         int messageCount = 0; 
         text.text = "";
         bool endChack = true;
+        if(!oneBGMFlag)
+        {
+            audioSource.clip = katakata;
+            audioSource.Play();
+            audioSource.volume = 0.5f;
+            oneBGMFlag = true;
+        }
+
+      
 
         while (messageList[novelListIndex].Length > messageCount)
         {
@@ -94,13 +107,14 @@ public class VoiceScript : MonoBehaviour
             else
             {
                 text.text += messageList[novelListIndex][messageCount];//追加していく
+                
             }
             
             messageCount++;//現在の文字数
             yield return new WaitForSeconds(novelSpeed);//読むスピード
         }
 
-        yield return new WaitForSeconds(1.5f);//1行出してからの待ち時間
+        yield return new WaitForSeconds(1.0f);//1行出してからの待ち時間
 
         novelListIndex++; //次の配列へ
 
