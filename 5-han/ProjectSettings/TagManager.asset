@@ -17,6 +17,8 @@ TagManager:
   - BossEnemy
   - Bullet
   - EnemyWepon
+  - GaugeEnergy
+  - BossSpawn
   layers:
   - Default
   - TransparentFX
@@ -36,7 +38,7 @@ TagManager:
   - CointoGround
   - Ground
   - Muteki
-  - 
+  - BossSpawn
   - 
   - 
   - 

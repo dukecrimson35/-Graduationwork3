@@ -23,7 +23,7 @@ public class PauseSoundScript : MonoBehaviour
     private float yazirusiDelay = 0.2f;
     private float yazirusiDelay2 = 0.2f;
     private float dire = 180;
-    private float messegeDelay = 60;
+   // private float messegeDelay = 60;
     private float messeDire = 0;
     private int yazirusiMove = 90;
     private int height = 50;

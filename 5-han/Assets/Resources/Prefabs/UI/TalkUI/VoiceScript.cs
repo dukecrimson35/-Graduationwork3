@@ -37,9 +37,13 @@ public class VoiceScript : MonoBehaviour
     public TextAsset oniStartTxt;
     public TextAsset oniEndTxt;
 
+    public AudioSource audioSource;
+    public AudioClip katakata;
+
     void Start()
     {
         StartCoroutine(Novel());
+        audioSource.volume = 0.5f;
     }
 
     // Update is called once per frame
@@ -76,6 +80,7 @@ public class VoiceScript : MonoBehaviour
         Debug.Log("テキストが読み込めない");
 
     }
+    bool oneBGMFlag = false;
 
     IEnumerator Novel()
     {
@@ -84,6 +89,12 @@ public class VoiceScript : MonoBehaviour
         int messageCount = 0; 
         text.text = "";
         bool endChack = true;
+       
+        if(!oneBGMFlag)
+        {
+            StartCoroutine(BGMFadeInCoroutine());
+        }
+      
 
         while (messageList[novelListIndex].Length > messageCount)
         {
@@ -94,13 +105,14 @@ public class VoiceScript : MonoBehaviour
             else
             {
                 text.text += messageList[novelListIndex][messageCount];//追加していく
+                
             }
             
             messageCount++;//現在の文字数
             yield return new WaitForSeconds(novelSpeed);//読むスピード
         }
 
-        yield return new WaitForSeconds(1.5f);//1行出してからの待ち時間
+        yield return new WaitForSeconds(1.0f);//1行出してからの待ち時間
 
         novelListIndex++; //次の配列へ
 
@@ -109,11 +121,57 @@ public class VoiceScript : MonoBehaviour
             StartCoroutine(Novel());
             endChack = false;
         }
+        if(endFlag)
+        {
+            StartCoroutine(BGMFadeOutCoroutine());
+        }
+       
 
-        if(endChack)
+
+        yield return new WaitForSeconds(0.6f);//待ち時間
+
+
+        if (endChack)
         {
             endFlag = true;
             text.text = "";
+        }
+        
+    }
+
+    float second = 200;
+    float bgmDelay = 0.01f;
+    float vol = 0;
+    IEnumerator BGMFadeOutCoroutine()
+    {
+        vol = audioSource.volume / second;
+
+        for (int i = 0; i < second; i++)
+        {
+            audioSource.volume = audioSource.volume - vol;
+            yield return new WaitForSecondsRealtime(bgmDelay);
+        }
+        audioSource.Pause();
+    }
+
+    IEnumerator BGMFadeInCoroutine()
+    {
+       
+
+        if (!oneBGMFlag)
+        {
+            vol = audioSource.volume / second;
+            audioSource.volume = 0.0f;
+            audioSource.clip = katakata;
+            audioSource.Play();
+            //audioSource.volume = 0.5f;
+            oneBGMFlag = true;
+        }
+
+        for (int i = 0; i < second; i++)
+        {
+            audioSource.volume = audioSource.volume + vol;
+            yield return new WaitForSecondsRealtime(bgmDelay);
         }
         
     }

@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseEnemyHp: 10
+  Texture: {fileID: 6536852726436813979}
 --- !u!65 &2736146270167994345
 BoxCollider:
   m_ObjectHideFlags: 0

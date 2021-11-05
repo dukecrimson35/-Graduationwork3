@@ -23,8 +23,8 @@ public class TalkDebudScript : MonoBehaviour
                    (GameObject)Instantiate(talkUI,
                    new Vector3(0, 0, 0.0f), Quaternion.identity);
                 VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
-                //voiceScript.SetOniStartFlag();
-                voiceScript.SetOniEndFlag();
+                voiceScript.SetOniStartFlag();
+                //voiceScript.SetOniEndFlag();
             }
         }
        

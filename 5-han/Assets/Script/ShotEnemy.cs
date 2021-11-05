@@ -9,6 +9,9 @@ public class ShotEnemy : MonoBehaviour
     public GameObject searchRange;
     SearchRange search;//索敵範囲スクリプト
 
+    bossspawn bossspawn;//ボス演出用
+    GameObject bossArea;//ボス演出判定
+
     private AudioSource audioSource;
     public AudioClip SE;
 
@@ -18,26 +21,27 @@ public class ShotEnemy : MonoBehaviour
         timeCount = 0;
         search = searchRange.GetComponent<SearchRange>();
         audioSource = GetComponent<AudioSource>();
+        bossArea = GameObject.Find("BossSpawn");
+        bossspawn = bossArea.GetComponent<bossspawn>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (search.GetinRange())
+        if(bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
-            timeCount += Time.deltaTime;
-            if (timeCount >= 2)
+            if (search.GetinRange())
             {
-                Attack();
-                timeCount = 0;
-                //攻撃音
-                if (SE != null)
+                timeCount += Time.deltaTime;
+                if (timeCount >= 2)
                 {
-                    audioSource.PlayOneShot(SE);
-                }
-                else
-                {
-                    Debug.Log("～のSE入ってない");
+                    Attack();
+                    timeCount = 0;
+                    //攻撃音
+                    if (SE != null)
+                    {
+                        audioSource.PlayOneShot(SE);
+                    }
                 }
             }
         }
