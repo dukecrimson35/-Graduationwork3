@@ -226,7 +226,10 @@ public class PlayerControl : MonoBehaviour
         
             else if (Input.GetButtonUp("A") && move.GetIsMove()) 
             {
-
+                if (muteki < 0)
+                {
+                    muteki = 0.1f;
+                }
                 anim.SetBool("Senku2", true);
 
                 audio.PlayOneShot(senkugiri);
@@ -246,7 +249,8 @@ public class PlayerControl : MonoBehaviour
                     col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                     transform.position += senku * len + senku * 2;
-                    AfterImage(-(senku * len + senku * 2) / 2, -(senku * len + senku * 2));
+                    AfterImage(-(senku * len + senku * 2), -(senku * len + senku * 2) / 2);
+                 //   SenkuEffect((senku * len + senku * 2) / 2);
                     if (moveColider != null)
                     {
                         Destroy(moveColider);
@@ -258,7 +262,10 @@ public class PlayerControl : MonoBehaviour
                 }
                 else
                 {
-
+                    if (muteki < 0)
+                    {
+                        muteki = 0.1f;
+                    }
                     audio.PlayOneShot(senkugiri);
                     anim.SetBool("Senku2", true);
 
@@ -274,7 +281,8 @@ public class PlayerControl : MonoBehaviour
                     col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                     transform.position += senku;
-                    AfterImage(-(senku), - (senku) / 2);
+                    AfterImage(-(senku), -(senku) / 2);
+            //        SenkuEffect((senku) / 2);
                     if (moveColider != null)
                     {
                         Destroy(moveColider);
@@ -309,12 +317,29 @@ public class PlayerControl : MonoBehaviour
         GameObject after = Instantiate((GameObject)Resources.Load("Afterimage"));
         after.transform.position = transform.position;
         Afterimage af = after.GetComponent<Afterimage>();
-        if(currentDirec==Direc.Left)
+        if (currentDirec == Direc.Left)
         {
             af.Left();
         }
         af.SetPositition(pos1, pos2);
         Debug.Log(1);
+    }
+ 
+    void SenkuEffect(Vector3 pos)
+    {
+        GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
+        after.transform.position += pos;
+        if (currentDirec == Direc.Left)
+        {
+            SenkuEffect se = after.GetComponent<SenkuEffect>();
+            se.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+    }
+    void SenkuEffect()
+    {
+      
+
     }
     void Special()
     {
@@ -440,8 +465,7 @@ public class PlayerControl : MonoBehaviour
     void Blink()
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
-        if (muteki > 0)
-
+        if (muteki > 0.1) 
         {
             blinktime += Time.deltaTime;
             if (blinktime % 0.3 < 0.1f)
