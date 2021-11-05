@@ -70,6 +70,12 @@ public class WasShoot : MonoBehaviour
             cuted = true;
             sprite.enabled = false;
         }
+
+        if(other.gameObject.tag == "Block")
+        {
+            Destroy(this.gameObject);
+            Destroy(this);
+        }
     }
 
     public bool GetCut()
