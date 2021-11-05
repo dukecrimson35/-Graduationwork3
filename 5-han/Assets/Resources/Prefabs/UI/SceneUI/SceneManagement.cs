@@ -60,6 +60,18 @@ public class SceneManagement : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
             playerControl = player.GetComponent<PlayerControl>();
+            if(sceneName == "Stage01")
+            {
+                Data.stageNum = 1;
+            }
+            else if (sceneName == "Stage02")
+            {
+                Data.stageNum = 2;
+            }
+            else if (sceneName == "Stage03")
+            {
+                Data.stageNum = 3;
+            }
         }
 
         if(bgm != null)
@@ -267,6 +279,24 @@ public class SceneManagement : MonoBehaviour
             Data.selectSceneFlag = true;
             fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.SelectScene.ToString());
         }
+    }
+
+    public void OnClickReStartButton()
+    {
+       
+        if(Data.stageNum == 1)
+        {
+            StartCoroutine(Coroutine(SceneNames.Stage01.ToString()));
+        }
+        if (Data.stageNum == 2)
+        {
+            StartCoroutine(Coroutine(SceneNames.Stage02.ToString()));
+        }
+        if (Data.stageNum == 3)
+        {
+            StartCoroutine(Coroutine(SceneNames.Stage03.ToString()));
+        }
+
     }
 
     public void OnClickStage1Button()
