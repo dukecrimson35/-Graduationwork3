@@ -6,6 +6,9 @@ public class EnemyRespawn : MonoBehaviour
 {
     public GameObject StopEnemy;//止まってる敵
     public GameObject FlyingEnemy;//飛ぶ敵
+    public GameObject BirdEnemy;//鳥の敵
+    public GameObject GoblinEnemy;//鬼ザコ敵
+    public GameObject DogEnemy;//犬の敵
     public GameObject coinMidlle;//ドロップするコイン１
     public GameObject coinSmall;//ドロップするコイン２
     public GameObject stopenemyDeath;
@@ -84,6 +87,18 @@ public class EnemyRespawn : MonoBehaviour
                         if(enemyNames[i].Contains("ShotEnemy"))
                         {
                             enemys[i] = Instantiate(FlyingEnemy, positions1[i], new Quaternion());
+                        }
+                        if (enemyNames[i].Contains("BirdEnemy"))
+                        {
+                            enemys[i] = Instantiate(BirdEnemy, positions1[i], new Quaternion());
+                        }
+                        if (enemyNames[i].Contains("GoblinEnemy"))
+                        {
+                            enemys[i] = Instantiate(GoblinEnemy, positions1[i], new Quaternion());
+                        }
+                        if (enemyNames[i].Contains("BeastEnemy"))
+                        {
+                            enemys[i] = Instantiate(DogEnemy, positions1[i], new Quaternion());
                         }
                         delays.Remove(i);
                     }
