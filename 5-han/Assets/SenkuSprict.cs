@@ -32,13 +32,16 @@ public class SenkuSprict : MonoBehaviour
         {
             GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
             after.transform.position = collision.transform.position;
-
+            float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI;
+            after.transform.rotation = Quaternion.Euler(0, 0, ang);
             hit = true;
         }
         if (collision.transform.tag == "BossEnemy")
         {
             GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
             after.transform.position = collision.transform.position;
+            float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI ;
+            after.transform.rotation = Quaternion.Euler(0, 0, ang);
 
             hit = true;
         }
