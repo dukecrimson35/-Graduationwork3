@@ -84,7 +84,7 @@ public class VoiceScript : MonoBehaviour
 
     IEnumerator Novel()
     {
-        yield return new WaitForSeconds(startTime);//読み初めまでの待ち時間
+       
 
         int messageCount = 0; 
         text.text = "";
@@ -92,6 +92,7 @@ public class VoiceScript : MonoBehaviour
        
         if(!oneBGMFlag)
         {
+            yield return new WaitForSeconds(startTime);//読み初めまでの待ち時間
             StartCoroutine(BGMFadeInCoroutine());
         }
       
@@ -112,7 +113,7 @@ public class VoiceScript : MonoBehaviour
             yield return new WaitForSeconds(novelSpeed);//読むスピード
         }
 
-        yield return new WaitForSeconds(1.0f);//1行出してからの待ち時間
+        yield return new WaitForSeconds(1.3f);//1行出してからの待ち時間
 
         novelListIndex++; //次の配列へ
 
@@ -128,7 +129,7 @@ public class VoiceScript : MonoBehaviour
        
 
 
-        yield return new WaitForSeconds(0.6f);//待ち時間
+        yield return new WaitForSeconds(0.4f);//待ち時間
 
 
         if (endChack)
