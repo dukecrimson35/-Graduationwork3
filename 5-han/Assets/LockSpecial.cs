@@ -27,7 +27,7 @@ public class LockSpecial : MonoBehaviour
     {
         if(Input.GetButton("Y"))
         {
-            scale += Time.deltaTime * 5;
+            scale += Time.deltaTime * 15;
         }
         transform.localScale = new Vector3(scale, scale, scale);
         if (scale >= 25) 

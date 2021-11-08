@@ -81,7 +81,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         if (Time.timeScale <= 0) return;
-        if (!itemManagerScript.GetShopFlag() && Data.voiceFlag) 
+        if (!itemManagerScript.GetShopFlag() && !Data.voiceFlag) 
         {
             Move();
             Direction();
@@ -92,7 +92,6 @@ public class PlayerControl : MonoBehaviour
             CheckDead();
             Blink();
         }
-      
     }
     private void Move()
     {
