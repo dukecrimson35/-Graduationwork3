@@ -138,10 +138,13 @@ public class BossEnemy : MonoBehaviour
             }
             //遠距離攻撃処理
             Rangesecond += Time.deltaTime;
-            if (Rangesecond >= 2.5f)
+            if (hitGround)
             {
-                Instantiate(bullet, this.transform.position, Quaternion.identity);
-                Rangesecond = 0;
+                if (Rangesecond >= 2.5f)
+                {
+                    Instantiate(bullet, this.transform.position, Quaternion.identity);
+                    Rangesecond = 0;
+                }
             }
             //終わり
             if (Input.GetKeyDown(KeyCode.W))
