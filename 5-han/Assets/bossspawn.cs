@@ -32,7 +32,7 @@ public class bossspawn : MonoBehaviour
                 //particle.Play();
                 if(count>=4)
                 {
-                    BossCamera.transform.position = new Vector3(BossCamera.transform.position.x, 6.5f, BossCamera.transform.position.z);
+                    BossCamera.transform.position = new Vector3(BossCamera.transform.position.x, 0f, BossCamera.transform.position.z);
                     //particle.Stop();
                     //BossCamera.depth = -2;
                     EnemyMove = true;
