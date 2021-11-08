@@ -81,7 +81,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         if (Time.timeScale <= 0) return;
-        if (!itemManagerScript.GetShopFlag())
+        if (!itemManagerScript.GetShopFlag() && Data.voiceFlag) 
         {
             Move();
             Direction();
