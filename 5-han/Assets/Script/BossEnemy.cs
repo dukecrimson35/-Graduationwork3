@@ -217,7 +217,7 @@ public class BossEnemy : MonoBehaviour
         if(collision.gameObject.tag=="Block")
         {
             hitGround = true;
-            particle.Play();
+            //particle.Play();
         }
     }
     public int GetHp()
