@@ -825,6 +825,9 @@ MonoBehaviour:
     type: 3}
   FlyingEnemy: {fileID: 1012788992456724242, guid: 46889c3ff443f804dbb4d72e6bd609da,
     type: 3}
+  BirdEnemy: {fileID: 0}
+  GoblinEnemy: {fileID: 0}
+  DogEnemy: {fileID: 0}
   coinMidlle: {fileID: 7045010097545598045, guid: 56dbc985da814344ca9b5c097313b518,
     type: 3}
   coinSmall: {fileID: 7045010097545598045, guid: 56dbc985da814344ca9b5c097313b518,
@@ -5515,6 +5518,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7127c7e3ee4eeb14b9a85f24f0f0b40b, type: 3}
+--- !u!1 &1182920370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1182920372}
+  - component: {fileID: 1182920371}
+  m_Layer: 0
+  m_Name: CoinSEObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1182920371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182920370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acb537ab70fb494fbb3a819cdd2fbe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seFlagList: 
+  timeList: 
+  audioSource: {fileID: 0}
+  se: {fileID: 0}
+--- !u!4 &1182920372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182920370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 204.84079, y: 8.947447, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1187747983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7582601458019788946, guid: 25956bb98c8a3b94a91faf7b38f6e666,
@@ -9992,6 +10042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseEnemyHp: 10
+  Texture: {fileID: 0}
 --- !u!212 &1012788990939314997
 SpriteRenderer:
   m_ObjectHideFlags: 0
