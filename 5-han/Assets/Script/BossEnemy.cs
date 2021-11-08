@@ -32,6 +32,7 @@ public class BossEnemy : MonoBehaviour
     public bool hitGround;
     public bossspawn bossspawn;
     Rigidbody rigid;
+    ParticleSystem particle;
     void Start()
     {
         damage = false;
@@ -55,6 +56,8 @@ public class BossEnemy : MonoBehaviour
         MeleeWepon.SetActive(false);
         RMeleeWepon.SetActive(false);
         wepRot = 0.3f;
+        particle = GetComponent<ParticleSystem>();
+        //particle.Stop();
     }
 
     // Update is called once per frame
@@ -66,7 +69,7 @@ public class BossEnemy : MonoBehaviour
         }
         if (Time.timeScale <= 0) return;
         //移動処理
-        if (bossspawn.EnemyMove)
+        if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
             if (BossEnemyHp <= 180)
             {
@@ -214,6 +217,7 @@ public class BossEnemy : MonoBehaviour
         if(collision.gameObject.tag=="Block")
         {
             hitGround = true;
+            particle.Play();
         }
     }
     public int GetHp()
@@ -233,5 +237,9 @@ public class BossEnemy : MonoBehaviour
     public bool GetRight()
     {
         return RMove;
+    }
+    public ParticleSystem Getparticle()
+    {
+        return particle;
     }
 }
