@@ -99,4 +99,8 @@ public class BaseEnemy : MonoBehaviour
     {
         return deadFlag;
     }
+    public void Damage(int damage)
+    {
+        baseEnemyHp -= damage;
+    }
 }

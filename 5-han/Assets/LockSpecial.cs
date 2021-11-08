@@ -19,21 +19,26 @@ public class LockSpecial : MonoBehaviour
         Charge();   
     }
 
-    List<GameObject> GetObjList()
+   public List<GameObject> GetObjList()
     {
         return objList;
     }
-    void Charge()
+   void Charge()
     {
         if(Input.GetButton("Y"))
         {
-            scale += Time.deltaTime*5;
+            scale += Time.deltaTime * 5;
         }
-        transform.localScale = new Vector3(scale, scale, 1);
-        if (scale>=25)
+        transform.localScale = new Vector3(scale, scale, scale);
+        if (scale >= 25) 
         {
             transform.localScale = new Vector3(25, 25, 1);
         }
+    }
+    
+   public int GetListCount()
+    {
+        return objList.Count;
     }
     private void OnTriggerEnter(Collider collision)
     {
