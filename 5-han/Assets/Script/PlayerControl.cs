@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     SenkuMove move;
     GameObject lookColider;
     GameObject lockSp;
+    float lockSpTime;
     LookOn look;
 
     LockSpecial sp;
@@ -31,6 +32,7 @@ public class PlayerControl : MonoBehaviour
     float muteki;
     float stoptime;
     int hitCount;
+    int loopCount;
     Animator anim;
     float blinktime = 0;
     enum Direc
@@ -79,7 +81,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         if (Time.timeScale <= 0) return;
-        if (!itemManagerScript.GetShopFlag())
+        if (!itemManagerScript.GetShopFlag() && !Data.voiceFlag) 
         {
             Move();
             Direction();
@@ -90,7 +92,6 @@ public class PlayerControl : MonoBehaviour
             CheckDead();
             Blink();
         }
-      
     }
     private void Move()
     {
@@ -242,6 +243,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     senku = (look.GetLookObject().transform.position - transform.position).normalized;
                     float len = (transform.position - look.GetLookObject().transform.position).magnitude;
+                    
                     kamae = false;
                     hitFlag = false;
                     stoptime = 1.5f;
@@ -395,22 +397,56 @@ public class PlayerControl : MonoBehaviour
                 {
                     lockSp = Instantiate((GameObject)Resources.Load("LockSpecial"));
                     sp = lockSp.GetComponent<LockSpecial>();
+                    loopCount = 0;
                 }
                 lockSp.transform.position = transform.position;
                 anim.SetBool("Power", true);
                 kamae = true;
+                lockSpTime = 0;
             }
 
-            if (Input.GetButtonUp("Y"))
+           else if (!Input.GetButton("Y"))
             {
-                if(lockSp!=null)
+                if (lockSpTime >= 0.1f && sp != null) 
                 {
-                    Destroy(lockSp);
+                    Debug.Log(loopCount);
+                    Debug.Log(sp.GetListCount());
+
+                    Vector3 senku;
+                    if (loopCount < sp.GetListCount())
+                    {
+                        senku = (sp.GetObjList()[loopCount].transform.position - transform.position).normalized;
+                        float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
+                        transform.position += senku * len + senku * 2;
+                        loopCount++;
+                        lockSpTime = 0;
+                        audio.PlayOneShot(senkugiri);
+
+                    }
+
                 }
-                anim.SetBool("Power2", true);
-                kamae = false;
-            
+                if (lockSp != null && sp.GetListCount() == loopCount)
+                {
+                    for (int i = 0; i < sp.GetListCount(); i++) 
+                    {
+                        BaseEnemy be = sp.GetObjList()[i].GetComponent<BaseEnemy>();
+                        be.Damage(100);
+                        if (be == null)
+                        {
+
+                            ShotEnemy st = sp.GetObjList()[i].GetComponent<ShotEnemy>();
+                        }
+                    }
+                    Destroy(lockSp);
+                    kamae = false;
+                }
             }
+            if(sp!=null)
+            {
+                lockSpTime += Time.deltaTime;
+            }
+        
+        
         }
     }
     void IsSenkuHit()
