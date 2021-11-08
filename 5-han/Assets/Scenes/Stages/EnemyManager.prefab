@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1592976883457519996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592976883457519986}
+  - component: {fileID: 1592976883457519987}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1592976883457519986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592976883457519996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592976883457519987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592976883457519996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6be1e8ba38a9f646b48991fc65b1683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StopEnemy: {fileID: 1012788992456724242, guid: 7127c7e3ee4eeb14b9a85f24f0f0b40b,
+    type: 3}
+  FlyingEnemy: {fileID: 1012788992456724242, guid: 46889c3ff443f804dbb4d72e6bd609da,
+    type: 3}
+  BirdEnemy: {fileID: 1012788992456724242, guid: 023173de2ca763d41b3ad82f15111f9f,
+    type: 3}
+  GoblinEnemy: {fileID: 1012788992456724242, guid: 9c76ec09d0d991546a2965d27a3d06b9,
+    type: 3}
+  DogEnemy: {fileID: 1012788992456724242, guid: 2811dcbc61b321142be3cc6ef8172c53,
+    type: 3}
+  coinMidlle: {fileID: 7045010097545598045, guid: 56dbc985da814344ca9b5c097313b518,
+    type: 3}
+  coinSmall: {fileID: 7045010097545598045, guid: 56dbc985da814344ca9b5c097313b518,
+    type: 3}
+  stopenemyDeath: {fileID: 168126461193745488, guid: 5e288cb8efb68014b86f75af03372d9a,
+    type: 3}
+  flyenemyDeath: {fileID: 7976731375437133016, guid: 5361eced7f5c08b47b8275c40c67513f,
+    type: 3}
