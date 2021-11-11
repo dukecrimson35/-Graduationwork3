@@ -8,8 +8,12 @@ public class CoinSEScript : MonoBehaviour
 
     public List<int> timeList = new List<int>();
 
-    private bool[] seFlags = new bool[10];
+    private const int Num = 2;
 
+    private bool[] seFlags = new bool[Num];
+    private bool[] seCheckFlags = new bool[Num];
+
+    private int count = 0;
 
     public AudioSource audioSource;
     public AudioClip se;
@@ -23,13 +27,38 @@ public class CoinSEScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        for(int i = 0; i< seFlags.Length;i++)
+        {
+            if(seCheckFlags[i] == false && seFlags[i] == true)
+            {
+                seCheckFlags[i] = true;               
+            }
+        }
+    }
+
+   
+    IEnumerator FlagsCheckCoroutine(int num)
+    {
+      
+        yield return new WaitForSecondsRealtime(0.25f);
+        seFlags[num] = false;
+        seCheckFlags[num] = false;
+
     }
 
     public void PlaySE()
-    {
-        audioSource.PlayOneShot(se);
-        seFlagList.Add(true);
-
+    {    
+        if (seFlags[count] == false)
+        {
+            seFlags[count] = true;
+            StartCoroutine(FlagsCheckCoroutine(count));
+            count++;
+            audioSource.PlayOneShot(se);
+           
+            if (count>seFlags.Length-1)
+            {
+                count = 0;
+            }
+        }
     }
 }
