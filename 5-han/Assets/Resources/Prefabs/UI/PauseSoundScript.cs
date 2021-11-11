@@ -38,6 +38,14 @@ public class PauseSoundScript : MonoBehaviour
     public AudioClip senntakuSE;
     public AudioClip ketteiSE;
 
+    public Text seCursor;
+    public Text bgmCursor;
+
+    private float alpha;
+    private float alpha2;
+    private bool alphaFlag = false;
+    private bool alphaFlag2 = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -80,8 +88,37 @@ public class PauseSoundScript : MonoBehaviour
             message.text = "";
         }
 
+        switch (Data.bgm)
+        {
+            case 1:
+                bgmCursor.transform.position = new Vector3(910, 760, 0);
+                break;
+            case 2:
+                bgmCursor.transform.position = new Vector3(1030, 760, 0);
+                break;
+            case 3:
+                bgmCursor.transform.position = new Vector3(1150, 760, 0);//1150
+                break;
 
-        Debug.Log(messeDire);
+        }
+
+
+        switch (Data.se)
+        {
+            case 1:
+                seCursor.transform.position = new Vector3(910, 660, 0);
+                break;
+            case 2:
+                seCursor.transform.position = new Vector3(1030, 660, 0);
+                break;
+            case 3:
+                seCursor.transform.position = new Vector3(1150, 660, 0);//1150
+                break;
+
+        }
+
+
+
         // ディレイ関係
         //矢印移動ディレイ
         if (yazirusiDelay > 0)
@@ -96,8 +133,13 @@ public class PauseSoundScript : MonoBehaviour
         float vert = Input.GetAxis("Vertical");
         float vert2 = Input.GetAxis("CrossUpDown");
 
+        float hol = Input.GetAxis("Horizontal");
+        float hol2 = Input.GetAxis("CrossUpDown");
+
+        float stick = 0.5f;
+
         //メニューの矢印制御
-        if ( vert > 0.3f &&yazirusiCout > 0 && yazirusiDelay <= 0  && !delayFlag2)
+        if ( vert > stick &&yazirusiCout > 0 && yazirusiDelay <= 0  && !delayFlag2)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
@@ -107,7 +149,7 @@ public class PauseSoundScript : MonoBehaviour
             StartCoroutine(Coroutine2());
             SentakuSEPlay();
         }
-        else if (vert2 > 0.3f && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
+        else if (vert2 > stick && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
         {
             yazirusiText.transform.position =
                 new Vector3(yazirusiText.transform.position.x,
@@ -117,7 +159,7 @@ public class PauseSoundScript : MonoBehaviour
             StartCoroutine(Coroutine2());
             SentakuSEPlay();
         }
-        else if (vert < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !delayFlag2)
+        else if (vert < -stick && yazirusiCout < itemList.Count - 1 && yazirusiDelay <= 0 && !delayFlag2)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
@@ -127,7 +169,7 @@ public class PauseSoundScript : MonoBehaviour
             StartCoroutine(Coroutine2());
             SentakuSEPlay();
         }
-        else if (vert2 < -0.3f && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
+        else if (vert2 < -stick && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
         {
             yazirusiText.transform.position =
                new Vector3(yazirusiText.transform.position.x,
@@ -140,21 +182,120 @@ public class PauseSoundScript : MonoBehaviour
 
         if (Input.GetKeyDown("joystick button 0"))
         {
-            if (itemList[yazirusiCout] == "BGM")
-            {
-                KetteiSEPlay();
-                message.text = "BGMまだ作ってない";
-                delayFlag  = true;
-            }
-
-            if (itemList[yazirusiCout] == "SE")
-            {
-                KetteiSEPlay();
-                message.text = "SEまだ作ってない";
-                delayFlag = true;
-            }
+           
             StartCoroutine(Coroutine());
         }
+
+
+     
+        if (itemList[yazirusiCout] == "BGM")
+        {
+            if (alphaFlag == false)
+            {
+                StartCoroutine(CoroutineDown());
+                
+            }
+            else if (alphaFlag == true)
+            {
+                StartCoroutine(CoroutineUp());
+            }
+            bgmCursor.color = new Color(bgmCursor.color.r, bgmCursor.color.g, bgmCursor.color.b,alpha);
+
+            
+
+            if (hol > stick && Data.bgm < 3 && yazirusiDelay <= 0 && !delayFlag2)
+            {
+                Data.bgm++;
+                StartCoroutine(Coroutine2());
+                
+            }
+            //else if (hol2 > stick && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
+            //{
+             
+            //    StartCoroutine(Coroutine2());
+               
+            //}
+            else if (hol < -stick && Data.bgm > 1 && yazirusiDelay <= 0 && !delayFlag2)
+            {
+                Data.bgm--;
+                StartCoroutine(Coroutine2());
+
+            }
+            //else if (hol2 < -stick && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
+            //{
+            //    yazirusiText.transform.position =
+            //       new Vector3(yazirusiText.transform.position.x,
+            //                   yazirusiText.transform.position.y - yazirusiMove,
+            //                   yazirusiText.transform.position.z);
+            //    yazirusiCout += 1;
+            //    StartCoroutine(Coroutine2());
+            //    SentakuSEPlay();
+            //}
+
+        }
+        else
+        {
+            if(alpha < 1)
+            {
+                StartCoroutine(CoroutineUp());
+                bgmCursor.color = new Color(bgmCursor.color.r, bgmCursor.color.g, bgmCursor.color.b, alpha);
+            }
+           
+        }
+
+        if (itemList[yazirusiCout] == "SE")
+        {
+
+            if (alphaFlag2 == false)
+            {
+                StartCoroutine(CoroutineDown2());
+
+            }
+            else if (alphaFlag2 == true)
+            {
+                StartCoroutine(CoroutineUp2());
+            }
+            seCursor.color = new Color(seCursor.color.r, seCursor.color.g, seCursor.color.b, alpha2);
+
+            if (hol > stick && Data.se < 3 && yazirusiDelay <= 0 && !delayFlag2)
+            {
+                Data.se++;
+                StartCoroutine(Coroutine2());
+
+            }
+            //else if (hol2 > stick && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
+            //{
+
+            //    StartCoroutine(Coroutine2());
+
+            //}
+            else if (hol < -stick && Data.se > 1 && yazirusiDelay <= 0 && !delayFlag2)
+            {
+                Data.se--;
+                StartCoroutine(Coroutine2());
+
+            }
+            //else if (hol2 < -stick && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
+            //{
+            //    yazirusiText.transform.position =
+            //       new Vector3(yazirusiText.transform.position.x,
+            //                   yazirusiText.transform.position.y - yazirusiMove,
+            //                   yazirusiText.transform.position.z);
+            //    yazirusiCout += 1;
+            //    StartCoroutine(Coroutine2());
+            //    SentakuSEPlay();
+            //}
+        }
+        else
+        {
+            if(alpha < 1)
+            {
+                StartCoroutine(CoroutineUp2());
+                seCursor.color = new Color(seCursor.color.r, seCursor.color.g, seCursor.color.b, alpha2);
+            }
+          
+        }
+
 
 
         //メニュー閉じる処理
@@ -185,6 +326,48 @@ public class PauseSoundScript : MonoBehaviour
         delayFlag2 = false;
     }
 
+
+    float delay3 = 0.075f;
+    IEnumerator CoroutineUp()
+    {
+        while(alpha < 1)
+        {
+            yield return new WaitForSecondsRealtime(delay3);
+            alpha += 0.01f;
+        }
+        alphaFlag = false;
+    }
+    IEnumerator CoroutineDown()
+    {
+        while (alpha > 0.2f)
+        {
+            yield return new WaitForSecondsRealtime(delay3);
+            alpha -= 0.01f;
+        }
+        alphaFlag = true;
+    }
+
+
+    IEnumerator CoroutineUp2()
+    {
+        while (alpha2 < 1)
+        {
+            yield return new WaitForSecondsRealtime(delay3);
+            alpha2 += 0.01f;
+        }
+        alphaFlag2 = false;
+    }
+    IEnumerator CoroutineDown2()
+    {
+        while (alpha2 > 0.2f)
+        {
+            yield return new WaitForSecondsRealtime(delay3);
+            alpha2 -= 0.01f;
+        }
+        alphaFlag2 = true;
+    }
+
+
     public void SentakuSEPlay()
     {
         audioSource.PlayOneShot(senntakuSE);
@@ -194,4 +377,15 @@ public class PauseSoundScript : MonoBehaviour
     {
         audioSource.PlayOneShot(ketteiSE);
     }
+
+    float time;
+    float speed = 1.0f;
+
+    Color GetAlphaColor(Color color)
+    {
+        time += Time.deltaTime * 5 * speed;
+        color.a = Mathf.Sign(time);
+        return color;
+    }
+
 }

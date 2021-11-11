@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class CoinSEScript : MonoBehaviour
 {
-    public List<bool> seFlagList = new List<bool>();
-
-    public List<int> timeList = new List<int>();
-
     private const int Num = 2;
-
     private bool[] seFlags = new bool[Num];
     private bool[] seCheckFlags = new bool[Num];
-
     private int count = 0;
-
     public AudioSource audioSource;
     public AudioClip se;
 
@@ -27,7 +20,7 @@ public class CoinSEScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i< seFlags.Length;i++)
+        for(int i = 0; i< seFlags.Length;i++)//フラグの更新
         {
             if(seCheckFlags[i] == false && seFlags[i] == true)
             {
@@ -36,22 +29,19 @@ public class CoinSEScript : MonoBehaviour
         }
     }
 
-   
-    IEnumerator FlagsCheckCoroutine(int num)
+    IEnumerator FlagsCheckCoroutine(int num)//クールタイム
     {
-      
         yield return new WaitForSecondsRealtime(0.25f);
         seFlags[num] = false;
         seCheckFlags[num] = false;
-
     }
 
-    public void PlaySE()
+    public void PlaySE()//SE鳴らす
     {    
-        if (seFlags[count] == false)
+        if (seFlags[count] == false)//鳴らす空きがあれば
         {
             seFlags[count] = true;
-            StartCoroutine(FlagsCheckCoroutine(count));
+            StartCoroutine(FlagsCheckCoroutine(count));//クールタイム
             count++;
             audioSource.PlayOneShot(se);
            
