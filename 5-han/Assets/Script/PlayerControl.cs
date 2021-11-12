@@ -100,6 +100,15 @@ public class PlayerControl : MonoBehaviour
             CheckDead();
             Blink();
         }
+        else
+        {
+            anim.SetBool("Senku", false);
+            anim.SetBool("Senku2", false);
+            anim.SetBool("Walk", false);
+            anim.SetBool("Damage", false);
+            anim.SetBool("Power", false);
+            anim.SetBool("Power2", false);
+        }
     }
     private void Move()
     {
@@ -367,7 +376,9 @@ public class PlayerControl : MonoBehaviour
             {
                 inC = InputControl.X;
                 anim.SetBool("Power", true);
-
+                anim.SetBool("Senku2", false);
+                anim.SetBool("Senku", false);
+                anim.SetBool("Power2", false);
                 if (moveColider == null)
                 {
                     moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
@@ -404,6 +415,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetButton("Y") && (inC == InputControl.Y || inC == InputControl.N))
             {
+               
                 rigid.velocity = new Vector3(0, 0, 0);
                 inC = InputControl.Y;
                 if (lockSp == null)
@@ -415,6 +427,9 @@ public class PlayerControl : MonoBehaviour
               
                 lockSp.transform.position = transform.position;
                 anim.SetBool("Senku", true);
+                anim.SetBool("Senku2", false);
+                anim.SetBool("Power2", false);
+                anim.SetBool("Power", false);
                 kamae = true;
                 lockSpTime = 0;
             }
@@ -456,7 +471,7 @@ public class PlayerControl : MonoBehaviour
                     for (int i = 0; i < sp.GetListCount(); i++) 
                     {
                         BaseEnemy be = sp.GetObjList()[i].GetComponent<BaseEnemy>();
-                        be.Damage(100);
+                        be.Damage(10);
                         if (be == null)
                         {
 

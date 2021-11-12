@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
+    Animator anim;
     public int BossEnemyHp = 50;
     private float nextTime;
     float damageInterval = 1f;
@@ -26,15 +27,16 @@ public class BossEnemy : MonoBehaviour
     public GameObject MeleeWepon;
     public GameObject RMeleeWepon;
     float wepRot;
-    public Sprite aliveBoss;
-    public Sprite deadBoss;
-    float scenechangetime;
+    //public Sprite aliveBoss;
+    //public Sprite deadBoss;
+    public float scenechangetime;
     public bool hitGround;
     public bossspawn bossspawn;
     Rigidbody rigid;
     ParticleSystem particle;
     void Start()
     {
+        anim = GetComponent<Animator>();
         damage = false;
         deadFlag = false;
         nextTime = 0;
@@ -42,7 +44,7 @@ public class BossEnemy : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody>();
         rigid.useGravity = false;
-        spr.sprite = aliveBoss;
+        //spr.sprite = aliveBoss;
         LMove = true;
         RMove = false;
         MoveMode = false;
@@ -52,11 +54,13 @@ public class BossEnemy : MonoBehaviour
         Meleesecond = 0;
         Rangesecond = 0;
         ResetMelee = 0;
-        scenechangetime = 0;
+        scenechangetime = 0f;
         MeleeWepon.SetActive(false);
         RMeleeWepon.SetActive(false);
-        wepRot = 0.3f;
+        wepRot = 2.0f;
         particle = GetComponent<ParticleSystem>();
+        anim.SetBool("Dead", false);
+        //anim.Play("OniStand");
         //particle.Stop();
     }
 
@@ -106,6 +110,7 @@ public class BossEnemy : MonoBehaviour
                 //    pos.x += 0.01f;
                 //}
                 //モードリセットの時間計算
+                anim.SetBool("Melee", true);
                 ResetMelee += Time.deltaTime;
                 if (LMove && !RMove)
                 {
@@ -118,10 +123,10 @@ public class BossEnemy : MonoBehaviour
                 if (!LMove && RMove)
                 {
                     MeleeWepon.SetActive(false);
-                    RMeleeWepon.SetActive(true);
+                    RMeleeWepon.SetActive(true);    
                     RMeleeWepon.transform.Rotate(0, 0, wepRot);
                 }
-                if (ResetMelee >= 5)
+                if (ResetMelee >= 2)
                 {
                     MeleeWepon.transform.rotation = Quaternion.Euler(0, 0, 28);
                     RMeleeWepon.transform.rotation = Quaternion.Euler(0, 180, 28);
@@ -132,6 +137,7 @@ public class BossEnemy : MonoBehaviour
                     Meleesecond = 0;
                     ResetMelee = 0;
                     //攻撃モードをOFFにする
+                    anim.SetBool("Melee", false);
                     AtkModeMelee = false;
                 }
 
@@ -140,11 +146,19 @@ public class BossEnemy : MonoBehaviour
             Rangesecond += Time.deltaTime;
             if (hitGround)
             {
+                if (Rangesecond >= 1.5f)
+                {
+                    anim.SetBool("Shot",true);
+                }
                 if (Rangesecond >= 2.5f)
                 {
                     Instantiate(bullet, this.transform.position, Quaternion.identity);
                     Rangesecond = 0;
                 }
+            }
+            if(Rangesecond==0.0f)
+            {
+                anim.SetBool("Shot", false);
             }
             //終わり
             if (Input.GetKeyDown(KeyCode.W))
@@ -154,22 +168,36 @@ public class BossEnemy : MonoBehaviour
             }
             if (BossEnemyHp <= 0)
             {
-                scenechangetime += Time.deltaTime;
-                spr.sprite = deadBoss;
+                deadFlag = true;
+                //scenechangetime += Time.deltaTime;
+                //spr.sprite = deadBoss;
                 //if(scenechangetime>=2)
-                //{
-                deadFlag = true;
-                Destroy(gameObject);
-                //}
+                //{;
+                Destroy(MeleeWepon);
+                Destroy(RMeleeWepon);
+                anim.SetBool("Dead", true);
+                //anim.Play("OniBossDead");
+                //Destroy(gameObject);
+                if (scenechangetime >= 1.5f)
+                {
+                    Destroy(gameObject);
+                }
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKey(KeyCode.Q))
             {
-                scenechangetime += Time.deltaTime;
-                spr.sprite = deadBoss;
-                //if (scenechangetime >= 2)
+                BossEnemyHp = 0;
+                //deadFlag = true;
+                ////scenechangetime += Time.deltaTime;
+                //Destroy(MeleeWepon);
+                //Destroy(RMeleeWepon);
+                ////spr.sprite = deadBoss;
+                ////if (scenechangetime >= 2)
+                ////{
+                ////anim.Play("OniBossDead"); 
+                //anim.SetBool("Dead", true);
+                //if (scenechangetime >= 1.0f)
                 //{
-                deadFlag = true;
-                Destroy(gameObject);
+                //    Destroy(gameObject);
                 //}
             }
             if (damage)
@@ -185,6 +213,10 @@ public class BossEnemy : MonoBehaviour
             if (!damage)
             {
                 renderer.material.color = Color.white;
+            }
+            if (deadFlag)
+            {
+                scenechangetime += Time.deltaTime;
             }
             transform.position += pos;
             pos = Vector3.zero;
