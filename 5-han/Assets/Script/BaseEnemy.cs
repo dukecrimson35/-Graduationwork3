@@ -6,7 +6,7 @@ public class BaseEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public int baseEnemyHp = 10;
-    public GameObject Texture;//自分の画像
+    //public GameObject Texture;//自分の画像
     private float nextTime;
     float damageInterval = 1f;
     bool damage;
@@ -29,14 +29,14 @@ public class BaseEnemy : MonoBehaviour
     void Update()
     {
         playerPos = player.transform.position;//プレイヤーの位置取得
-        if(playerPos.x - transform.position.x >= 0)
-        {
-            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        }
-        if (playerPos.x - transform.position.x < 0)
-        {
-            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        }
+        //if(playerPos.x - transform.position.x >= 0)
+        //{
+        //    Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        //}
+        //if (playerPos.x - transform.position.x < 0)
+        //{
+        //    Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        //}
         if (Time.timeScale <= 0) return;
         if (Input.GetKeyDown(KeyCode.W))
         {

@@ -17,6 +17,8 @@ public class BirdEnemy : MonoBehaviour
     public GameObject searchRange;//索敵範囲
     SearchRange searchScript;//索敵範囲のスクリプト
     float size = 0.08f;
+    public GameObject Texture;//自分の画像
+    GameObject player;
 
     Vector3 playerPos;//プレイヤーのポジション
     float alfa;//関数上の傾き
@@ -43,12 +45,14 @@ public class BirdEnemy : MonoBehaviour
         playerPos = GameObject.Find("Player").transform.position;
         alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);//傾きの設定
         searchScript = searchRange.GetComponent<SearchRange>();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+
         if (state == State.nomal)
         {
             if (transform.position.y >= defaultY + Ymove)
@@ -95,7 +99,16 @@ public class BirdEnemy : MonoBehaviour
                     rigidbody.velocity = new Vector3(speed, -speed, 0);
                 }
             }
-            if(searchScript.GetinRange())//プレイヤーが索敵範囲に入ったら
+            //画像の表示
+            if(LeftMove)
+            {
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            else
+            {
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            if (searchScript.GetinRange())//プレイヤーが索敵範囲に入ったら
             {
                 state = State.wait;
             }
@@ -122,8 +135,17 @@ public class BirdEnemy : MonoBehaviour
                     moveX = -moveX;
                 }
             }
+            playerPos = player.transform.position;//プレイヤーの位置取得
+            if (playerPos.x - transform.position.x >= 0)
+            {
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            if (playerPos.x - transform.position.x < 0)
+            {
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
 
-            if(searchScript.GetinRange() == false)
+            if (searchScript.GetinRange() == false)
             {
                 count = 0;
                 state = State.nomal;
@@ -146,6 +168,7 @@ public class BirdEnemy : MonoBehaviour
             {
                 state = State.wait;
             }
+
         }
     }
 

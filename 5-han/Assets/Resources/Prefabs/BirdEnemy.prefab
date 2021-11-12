@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseEnemyHp: 10
-  Texture: {fileID: 3041528547773007738}
 --- !u!65 &2736146270167994345
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243,6 +242,7 @@ MonoBehaviour:
   Xmove: 5
   speed: 5
   searchRange: {fileID: 4824003087761051762}
+  Texture: {fileID: 3041528547773007738}
 --- !u!1 &3041528547773007738
 GameObject:
   m_ObjectHideFlags: 0
