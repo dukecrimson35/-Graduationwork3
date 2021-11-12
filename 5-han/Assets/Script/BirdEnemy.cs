@@ -12,15 +12,20 @@ public class BirdEnemy : MonoBehaviour
     bool Upmove;//縦移動フラグ
     bool LeftMove;//横移動フラグ
     public float speed;//移動速度
-    int a = 1;
+    float moveX = 0.03f;
+    float count;//攻撃までのカウント
+    public GameObject searchRange;//索敵範囲
+    SearchRange searchScript;//索敵範囲のスクリプト
+    float size = 0.08f;
 
-    public Vector3 playerPos;//プレイヤーのポジション
+    Vector3 playerPos;//プレイヤーのポジション
     float alfa;//関数上の傾き
 
     enum State
     {
         nomal,//通常
-        attack//攻撃
+        attack,//攻撃
+        wait//攻撃待機
     }
     State state;
 
@@ -34,12 +39,16 @@ public class BirdEnemy : MonoBehaviour
         Upmove = true;
         LeftMove = true;
         rigidbody = GetComponent<Rigidbody>();
-        state = State.attack;
+        state = State.nomal;
+        playerPos = GameObject.Find("Player").transform.position;
+        alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);//傾きの設定
+        searchScript = searchRange.GetComponent<SearchRange>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (state == State.nomal)
         {
             if (transform.position.y >= defaultY + Ymove)
@@ -86,14 +95,57 @@ public class BirdEnemy : MonoBehaviour
                     rigidbody.velocity = new Vector3(speed, -speed, 0);
                 }
             }
+            if(searchScript.GetinRange())//プレイヤーが索敵範囲に入ったら
+            {
+                state = State.wait;
+            }
+        }
+        if(state == State.wait)
+        {
+            rigidbody.velocity = new Vector3();
+            count += Time.deltaTime;
+            //攻撃待機
+            if(count >= 0.75f)//カウントが進んだら
+            {
+                //攻撃状態に切り替え
+                state = State.attack;
+                count = 0;
+                playerPos = GameObject.Find("Player").transform.position;
+                alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);//傾きの設定
+                moveX = (transform.position.x - playerPos.x) * 0.005f;
+                if (playerPos.x <= transform.position.x && moveX <=0)
+                {
+                    moveX = -moveX;
+                }
+                else if(playerPos.x > transform.position.x && moveX >= 0)
+                {
+                    moveX = -moveX;
+                }
+            }
+
+            if(searchScript.GetinRange() == false)
+            {
+                count = 0;
+                state = State.nomal;
+            }
         }
         //降下攻撃
         if(state == State.attack)
         {
-            alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);
-            Debug.Log(alfa);
-            //プレイヤーを頂点とした二次関数敵挙動　y=a(x-プレイヤーX)²+プレイヤーY 　→横移動させるだけで放物線を作る
-            transform.position = new Vector3(transform.position.x-0.03f*speed,alfa*Mathf.Pow(transform.position.x-playerPos.x,2)+playerPos.y,0);
+            //攻撃中
+            float x, y;
+            x = transform.position.x - moveX * speed;
+            y = alfa * Mathf.Pow(x - playerPos.x, 2) + playerPos.y+0.2f;
+            if(double.IsNaN(y) == false)
+            {
+                //プレイヤーを頂点とした二次関数敵挙動　y=a(x-プレイヤーX)²+プレイヤーY 　→横移動させるだけで放物線を作る
+                transform.position = new Vector3(x, y, 0);
+            }
+            
+            if(transform.position.y >= defaultY)//元の高さに戻ったら
+            {
+                state = State.wait;
+            }
         }
     }
 
@@ -104,6 +156,8 @@ public class BirdEnemy : MonoBehaviour
             //フラグの転換
             LeftMove = !LeftMove;
             Upmove = !Upmove;
+            playerPos = new Vector3(((transform.position.x - playerPos.x) * 2) + playerPos.x, playerPos.y, 0);//左右反転の放物線作る
+            moveX = -moveX;
         }
         if(collision.gameObject.tag == "Enemy")
         {
