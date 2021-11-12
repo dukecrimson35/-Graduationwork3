@@ -147,6 +147,35 @@ public class SceneManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        audioSource.volume = 0.1f * Data.bgmVol;
+        switch (Data.bgm)
+        {
+            case 1:
+                Data.bgmVol = 0.5f;
+                break;
+            case 2:
+                Data.bgmVol = 1.0f;
+                break;
+            case 3:
+                Data.bgmVol = 1.25f;
+                break;
+
+        }
+
+
+        switch (Data.se)
+        {
+            case 1:
+                Data.seVol = 0.5f;
+                break;
+            case 2:
+                Data.seVol = 1.0f;
+                break;
+            case 3:
+                Data.seVol = 1.25f;
+                break;
+
+        }
 
         if (!oneFadeFlag && fade != null)
         {

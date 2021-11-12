@@ -203,6 +203,8 @@ public class GaugeEnergyControl : MonoBehaviour
         {
             Money money = GetComponent<Money>();
             Data.GetCoin(money.GetMoney());
+            CoinSEScript coinSE = GameObject.Find("CoinSEObj").GetComponent<CoinSEScript>();
+            coinSE.PlaySE();
             Destroy(this.gameObject);
         }
 
