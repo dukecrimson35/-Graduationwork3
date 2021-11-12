@@ -8,7 +8,8 @@ public class LooKCamera : MonoBehaviour
     Rigidbody rigid;
     Vector3 length;
     Vector3 lengthX;
-
+    int shock = 0;
+    Vector3 cameraPos;
     Vector3 velocity;
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,28 @@ public class LooKCamera : MonoBehaviour
         }
       
         transform.LookAt(transform.position - length);
-     
+        cameraPos = transform.position;
+        CameraShock();
+    }
+    public void CameraShock()
+    {
+
+        if (shock > 0) 
+        {
+            if (shock % 2 == 1) 
+            {
+                transform.position += new Vector3(0, 0.3f, 0);
+            }
+            else if (shock % 2==0)
+            {
+                transform.position -= new Vector3(0, 0.3f, 0);
+            }
+            shock--;
+        }
+        
+    }
+    public void StartCameraShock()
+    {
+        shock = 6;
     }
 }
