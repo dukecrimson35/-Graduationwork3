@@ -12,7 +12,7 @@ public class PowerSlashScript : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<PlayerControl>();
         hit = false;
-        life = 0.2f;
+        life = 0.5f;
     }
 
     // Update is called once per frame

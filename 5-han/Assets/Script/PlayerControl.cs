@@ -23,7 +23,7 @@ public class PlayerControl : MonoBehaviour
     GameObject lockSp;
     float lockSpTime;
     LookOn look;
-
+    LooKCamera camera;
     LockSpecial sp;
     Rigidbody rigid;
     bool kamae;
@@ -62,7 +62,7 @@ public class PlayerControl : MonoBehaviour
         itemManager = GameObject.Find("ItemManagerOBJ");
         itemManagerScript = itemManager.GetComponent<ItemManager>();
         deadFlag = false;
-        
+        camera = GameObject.Find("Main Camera").GetComponent<LooKCamera>();
       
     }
     private void OnTriggerEnter(Collider collision)
@@ -350,16 +350,34 @@ public class PlayerControl : MonoBehaviour
         af.SetPositition(pos1, pos2);
    
     }
- 
+
     void SenkuEffect(Vector3 pos)
     {
         GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
         after.transform.position += pos;
+        float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI;
+        after.transform.rotation = Quaternion.Euler(0, 0, ang);
         if (currentDirec == Direc.Left)
         {
             SenkuEffect se = after.GetComponent<SenkuEffect>();
             se.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
+
+    }
+    void PowerSlashEffect(Vector3 pos)
+    {
+        GameObject after = Instantiate((GameObject)Resources.Load("PowerSlashEffect"));
+        after.transform.position = transform.position;
+        after.transform.position += pos;
+
+        float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI;
+        after.transform.rotation = Quaternion.Euler(0, 0, ang);
+        if (currentDirec == Direc.Left)
+        {
+            SenkuEffect se = after.GetComponent<SenkuEffect>();
+            se.gameObject.GetComponent<SpriteRenderer>().flipY = true;
+        }
+        camera.StartCameraShock();
 
     }
     void SenkuEffect()
@@ -390,16 +408,18 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetButtonUp("X") && inC == InputControl.X)
             {
+                audio.PlayOneShot(powerslash);
                 inC = InputControl.N;
                 anim.SetBool("Power2", true);
                 kamae = false;
                 hitFlag = false;
                 stoptime = 1.5f;
                 col = Instantiate((GameObject)Resources.Load("PowerSlash"));
-
+               
                 Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
                 col.transform.position = transform.position;
                 col.transform.position += senku / 2;
+                PowerSlashEffect(senku / 2);
                 float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                 col.transform.rotation = Quaternion.Euler(0, 0, ang);
                 col = null;
