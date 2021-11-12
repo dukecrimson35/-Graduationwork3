@@ -190,7 +190,7 @@ public class PauseItemScript : MonoBehaviour
 
             if (Data.dataItemStringList[yazirusiCout] == "かいふく")
             {
-                if (Data.kaihuku > 0 && playerControl.GetHp() < 100)
+                if (Data.kaihuku > 0 && playerControl.GetHp() < 100 && playerControl.GetHp() >0)
                 {
                     int num = itemHavelistName.IndexOf("かいふく");
                     itemHavelistNum[num]--;
@@ -208,7 +208,7 @@ public class PauseItemScript : MonoBehaviour
             }
             if (Data.dataItemStringList[yazirusiCout] == "かいふく2")
             {
-                if (Data.kaihuku2 > 0 && playerControl.GetHp()<100)
+                if (Data.kaihuku2 > 0 && playerControl.GetHp()<100 && playerControl.GetHp() > 0)
                 {
                     int num = itemHavelistName.IndexOf("かいふく2");
                     itemHavelistNum[num]--;
