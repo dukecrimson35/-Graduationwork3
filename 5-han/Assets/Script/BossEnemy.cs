@@ -237,7 +237,7 @@ public class BossEnemy : MonoBehaviour
             PowerSlashScript power = collision.gameObject.GetComponent<PowerSlashScript>();
 
             BossEnemyHp -= 13 * (power.GetPlayerHitCount() + 1);
-            //  Debug.Log(13 * (power.GetPlayerHitCount() + 1));
+              Debug.Log(13 * (power.GetPlayerHitCount() + 1));
         }
         if (collision.gameObject.tag == "LSide")
         {

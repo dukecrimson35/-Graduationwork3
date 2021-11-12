@@ -59,14 +59,35 @@ public class LookOn : MonoBehaviour
                 LookObject = collision.gameObject;
             }
             for (int a = 0; a < LookList.Count; a++)
-            {            
+            {
                 if (LookList[a] == collision.gameObject)
                 {
                     check = true;
                     break;
                 }
             }
-            if (check == false) 
+            if (check == false)
+            {
+                LookList.Add(collision.gameObject);
+            }
+        }
+        if (collision.transform.tag == "BossEnemy")
+        {
+            bool check = false;
+            if (LookList.Count == 0)
+            {
+                LookList.Add(collision.gameObject);
+                LookObject = collision.gameObject;
+            }
+            for (int a = 0; a < LookList.Count; a++)
+            {
+                if (LookList[a] == collision.gameObject)
+                {
+                    check = true;
+                    break;
+                }
+            }
+            if (check == false)
             {
                 LookList.Add(collision.gameObject);
             }
@@ -75,6 +96,16 @@ public class LookOn : MonoBehaviour
     private void OnTriggerExit(Collider collision)
     {
         if (collision.transform.tag == "Enemy")
+        {
+            for (int a = 0; a < LookList.Count; a++)
+            {
+                if (LookList[a] == collision.gameObject)
+                {
+                    LookList.RemoveAt(a);
+                }
+            }
+        }
+        if (collision.transform.tag == "BossEnemy")
         {
             for (int a = 0; a < LookList.Count; a++)
             {
