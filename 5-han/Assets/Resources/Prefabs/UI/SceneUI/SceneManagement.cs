@@ -150,6 +150,9 @@ public class SceneManagement : MonoBehaviour
         audioSource.volume = 0.1f * Data.bgmVol;
         switch (Data.bgm)
         {
+            case 0:
+                Data.bgmVol = 0f;
+                break;
             case 1:
                 Data.bgmVol = 0.5f;
                 break;
@@ -165,6 +168,9 @@ public class SceneManagement : MonoBehaviour
 
         switch (Data.se)
         {
+            case 0:
+                Data.seVol = 0f;
+                break;
             case 1:
                 Data.seVol = 0.5f;
                 break;

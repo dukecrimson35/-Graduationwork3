@@ -90,14 +90,18 @@ public class PauseSoundScript : MonoBehaviour
 
         switch (Data.bgm)
         {
-            case 1:
+           
+            case 0:
                 bgmCursor.transform.position = new Vector3(910, 760, 0);
                 break;
-            case 2:
+            case 1:
                 bgmCursor.transform.position = new Vector3(1030, 760, 0);
                 break;
-            case 3:
+            case 2:
                 bgmCursor.transform.position = new Vector3(1150, 760, 0);//1150
+                break;
+            case 3:
+                bgmCursor.transform.position = new Vector3(1270, 760, 0);//1150
                 break;
 
         }
@@ -105,14 +109,18 @@ public class PauseSoundScript : MonoBehaviour
 
         switch (Data.se)
         {
-            case 1:
+
+            case 0:
                 seCursor.transform.position = new Vector3(910, 660, 0);
                 break;
-            case 2:
+            case 1:
                 seCursor.transform.position = new Vector3(1030, 660, 0);
                 break;
-            case 3:
+            case 2:
                 seCursor.transform.position = new Vector3(1150, 660, 0);//1150
+                break;
+            case 3:
+                seCursor.transform.position = new Vector3(1270, 660, 0);//1150
                 break;
 
         }
@@ -215,7 +223,7 @@ public class PauseSoundScript : MonoBehaviour
             //    StartCoroutine(Coroutine2());
                
             //}
-            else if (hol < -stick && Data.bgm > 1 && yazirusiDelay <= 0 && !delayFlag2)
+            else if (hol < -stick && Data.bgm > 0 && yazirusiDelay <= 0 && !delayFlag2)
             {
                 Data.bgm--;
                 StartCoroutine(Coroutine2());
@@ -269,7 +277,7 @@ public class PauseSoundScript : MonoBehaviour
             //    StartCoroutine(Coroutine2());
 
             //}
-            else if (hol < -stick && Data.se > 1 && yazirusiDelay <= 0 && !delayFlag2)
+            else if (hol < -stick && Data.se > 0 && yazirusiDelay <= 0 && !delayFlag2)
             {
                 Data.se--;
                 StartCoroutine(Coroutine2());
