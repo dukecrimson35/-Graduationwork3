@@ -38,11 +38,12 @@ public class CoinSEScript : MonoBehaviour
 
     public void PlaySE()//SE鳴らす
     {    
-        if (seFlags[count] == false)//鳴らす空きがあれば
+        if (seFlags[count] == false && !Data.voiceFlag)//鳴らす空きがあれば
         {
             seFlags[count] = true;
             StartCoroutine(FlagsCheckCoroutine(count));//クールタイム
             count++;
+            
             audioSource.PlayOneShot(se);
            
             if (count>seFlags.Length-1)
