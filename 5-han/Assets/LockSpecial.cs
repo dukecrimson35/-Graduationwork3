@@ -16,12 +16,29 @@ public class LockSpecial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Charge();   
+        Charge();
+        DeadCheck();
     }
 
-   public List<GameObject> GetObjList()
+    public List<GameObject> GetObjList()
     {
         return objList;
+    }
+    void DeadCheck()
+    {
+        for (int a = 0; a < objList.Count; a++)
+        {
+            if(objList[a]==null)
+            {
+                objList.RemoveAt(a);
+                continue;
+            }
+            BaseEnemy ba = objList[a].GetComponent<BaseEnemy>();
+            if(ba.GetHp()<=0)
+            {
+                objList.RemoveAt(a);
+            }
+        }
     }
    void Charge()
     {

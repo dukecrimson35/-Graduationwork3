@@ -388,7 +388,7 @@ public class PlayerControl : MonoBehaviour
     void SpecialY()
     {
       
-    //    if (stoptime < 0 || hitFlag)
+        if (stoptime < 0 || hitFlag)
         {
             if (Input.GetButton("Y"))
             {
@@ -399,16 +399,19 @@ public class PlayerControl : MonoBehaviour
                     sp = lockSp.GetComponent<LockSpecial>();
                     loopCount = 0;
                 }
+                stoptime = 0.1f;
                 lockSp.transform.position = transform.position;
-                anim.SetBool("Power", true);
+                anim.SetBool("Senku", true);
                 kamae = true;
                 lockSpTime = 0;
             }
 
            else if (!Input.GetButton("Y"))
             {
-                if (lockSpTime >= 0.1f && sp != null) 
+                if (lockSpTime >= 0.3f && sp != null) 
                 {
+                    anim.SetBool("Senku2", true);
+                    stoptime = 0.1f;
                     Debug.Log(loopCount);
                     Debug.Log(sp.GetListCount());
 
@@ -416,6 +419,14 @@ public class PlayerControl : MonoBehaviour
                     if (loopCount < sp.GetListCount())
                     {
                         senku = (sp.GetObjList()[loopCount].transform.position - transform.position).normalized;
+                        if(senku.x<0)
+                        {
+                            currentDirec = Direc.Left;
+                        }
+                        else if(senku.x>0)
+                        {
+                            currentDirec = Direc.Right;
+                        }
                         float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
                         transform.position += senku * len + senku * 2;
                         loopCount++;
@@ -437,6 +448,7 @@ public class PlayerControl : MonoBehaviour
                             ShotEnemy st = sp.GetObjList()[i].GetComponent<ShotEnemy>();
                         }
                     }
+                    stoptime = 1.5f;
                     Destroy(lockSp);
                     kamae = false;
                 }

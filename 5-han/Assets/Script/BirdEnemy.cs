@@ -28,6 +28,7 @@ public class BirdEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);
         //初期値の設定
         defaultX = transform.position.x;
         defaultY = transform.position.y;
@@ -90,10 +91,15 @@ public class BirdEnemy : MonoBehaviour
         //降下攻撃
         if(state == State.attack)
         {
-            alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);
+            
             Debug.Log(alfa);
             //プレイヤーを頂点とした二次関数敵挙動　y=a(x-プレイヤーX)²+プレイヤーY 　→横移動させるだけで放物線を作る
-            transform.position = new Vector3(transform.position.x-0.03f*speed,alfa*Mathf.Pow(transform.position.x-playerPos.x,2)+playerPos.y,0);
+            float x, y;
+            x = transform.position.x - 0.03f * speed;
+            y = alfa * Mathf.Pow(x - playerPos.x, 2) + playerPos.y;
+            //transform.position = new Vector3(transform.position.x - 0.03f * speed, alfa * Mathf.Pow(transform.position.x - playerPos.x, 2) + playerPos.y, 0);
+            transform.position = new Vector3(x, y, 0);
+           // alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);
         }
     }
 
