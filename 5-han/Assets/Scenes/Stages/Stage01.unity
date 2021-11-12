@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.34418112, g: 0.5113318, b: 0.58550245, a: 1}
+  m_IndirectSpecularColor: {r: 0.34437764, g: 0.51147354, b: 0.58556676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2570,12 +2570,12 @@ PrefabInstance:
     - target: {fileID: 22360988927207515, guid: 03489c61db68ec74794717c2033ad7a2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -85
+      value: 191
       objectReference: {fileID: 0}
     - target: {fileID: 22360988927207515, guid: 03489c61db68ec74794717c2033ad7a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 22360988927207515, guid: 03489c61db68ec74794717c2033ad7a2,
         type: 3}
@@ -9586,6 +9586,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1470531897}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1041659206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7320754751282558487, guid: cc0937082f0cec1408d3cc5fb130f238,
+    type: 3}
+  m_PrefabInstance: {fileID: 1101908810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3ebcd2bcd62c34fb9db144e3a722e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1055052232
 GameObject:
   m_ObjectHideFlags: 0
@@ -10039,6 +10051,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4895808891451525601, guid: cc0937082f0cec1408d3cc5fb130f238,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351674766406942686, guid: cc0937082f0cec1408d3cc5fb130f238,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320754751282558487, guid: cc0937082f0cec1408d3cc5fb130f238,
+        type: 3}
+      propertyPath: bossspawn
+      value: 
+      objectReference: {fileID: 1981861733}
     - target: {fileID: 7681459552849642218, guid: cc0937082f0cec1408d3cc5fb130f238,
         type: 3}
       propertyPath: m_Name
@@ -16940,7 +16967,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804756003}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 10, y: -5.4, z: 0}
+  m_LocalPosition: {x: 10, y: -5.37, z: 0}
   m_LocalScale: {x: 10, y: 2, z: 1.5}
   m_Children: []
   m_Father: {fileID: 1055052233}
@@ -18195,7 +18222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitBossSpawn: 0
   EnemyMove: 0
-  boss: {fileID: 0}
+  boss: {fileID: 1041659206}
   BossCamera: {fileID: 1918829871}
 --- !u!65 &1981861734
 BoxCollider:
