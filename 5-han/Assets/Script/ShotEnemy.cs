@@ -8,6 +8,9 @@ public class ShotEnemy : MonoBehaviour
     float timeCount;//時間のカウント
     public GameObject searchRange;
     SearchRange search;//索敵範囲スクリプト
+    GameObject player;
+    Vector3 playerPos;
+    public GameObject Texture;
 
     bossspawn bossspawn;//ボス演出用
     GameObject bossArea;//ボス演出判定
@@ -23,12 +26,24 @@ public class ShotEnemy : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         bossArea = GameObject.Find("BossSpawn");
         bossspawn = bossArea.GetComponent<bossspawn>();
+        player = GameObject.Find("Player");
+        playerPos = player.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(bossspawn.GetEnemyMove() && Data.voiceFlag == false)
+        playerPos = player.transform.position;//プレイヤーの位置取得
+        if (playerPos.x - transform.position.x >= 0)
+        {
+            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        if (playerPos.x - transform.position.x < 0)
+        {
+            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+
+        if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
             if (search.GetinRange())
             {
