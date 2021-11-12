@@ -39,10 +39,17 @@ public class PlayerControl : MonoBehaviour
     {
         Right,Left,
     }
+    enum InputControl
+    { 
+        A,B,X,Y,N
+    }
+
     Direc currentDirec;
+    InputControl inC;
     // Start is called before the first frame update
     void Start()
     {
+        inC = InputControl.N;
         audio = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         stoptime = 0;
@@ -85,10 +92,11 @@ public class PlayerControl : MonoBehaviour
         {
             Move();
             Direction();
-            IsSenkuHit();
+            
             SenkuGiri();
             Special();
             SpecialY();
+            IsSenkuHit();
             CheckDead();
             Blink();
         }
@@ -189,8 +197,9 @@ public class PlayerControl : MonoBehaviour
         if (stoptime < 0 || hitFlag)
         {
             
-            if (Input.GetButton("A"))
+            if (Input.GetButton("A") && (inC == InputControl.A || inC == InputControl.N))
             {
+                inC = InputControl.A;
                 anim.SetBool("Senku", true);
                 anim.SetBool("Senku2", false);
 
@@ -216,7 +225,8 @@ public class PlayerControl : MonoBehaviour
             if ((Input.GetButtonUp("A") && senku.magnitude == 0) || (Input.GetButtonUp("A") && !move.GetIsMove()))
             {
                 anim.SetBool("Senku", false);
-                
+
+                inC = InputControl.N;
                 kamae = false;
                 hitFlag = false;
                 if (moveColider != null)
@@ -229,8 +239,9 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         
-            else if (Input.GetButtonUp("A") && move.GetIsMove()) 
+            else if (Input.GetButtonUp("A") && move.GetIsMove())
             {
+                inC = InputControl.N;
                 if (muteki < 0)
                 {
                     muteki = 0.1f;
@@ -328,7 +339,7 @@ public class PlayerControl : MonoBehaviour
             af.Left();
         }
         af.SetPositition(pos1, pos2);
-        Debug.Log(1);
+   
     }
  
     void SenkuEffect(Vector3 pos)
@@ -352,9 +363,9 @@ public class PlayerControl : MonoBehaviour
 
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("X"))
+            if (Input.GetButton("X") && (inC == InputControl.X || inC == InputControl.N))
             {
-
+                inC = InputControl.X;
                 anim.SetBool("Power", true);
 
                 if (moveColider == null)
@@ -366,8 +377,9 @@ public class PlayerControl : MonoBehaviour
                 kamae = true;
             }
 
-            if (Input.GetButtonUp("X"))
+            if (Input.GetButtonUp("X") && inC == InputControl.X)
             {
+                inC = InputControl.N;
                 anim.SetBool("Power2", true);
                 kamae = false;
                 hitFlag = false;
@@ -390,53 +402,56 @@ public class PlayerControl : MonoBehaviour
       
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("Y"))
+            if (Input.GetButton("Y") && (inC == InputControl.Y || inC == InputControl.N))
             {
-                
-                if (lockSp == null) 
+                rigid.velocity = new Vector3(0, 0, 0);
+                inC = InputControl.Y;
+                if (lockSp == null)
                 {
                     lockSp = Instantiate((GameObject)Resources.Load("LockSpecial"));
                     sp = lockSp.GetComponent<LockSpecial>();
                     loopCount = 0;
                 }
-                stoptime = 0.1f;
+              
                 lockSp.transform.position = transform.position;
                 anim.SetBool("Senku", true);
                 kamae = true;
                 lockSpTime = 0;
             }
 
-           else if (!Input.GetButton("Y"))
+        }
+       if (!Input.GetButton("Y") && inC == InputControl.Y) 
             {
                 if (lockSpTime >= 0.3f && sp != null) 
                 {
-                    anim.SetBool("Senku2", true);
-                    stoptime = 0.1f;
-                    Debug.Log(loopCount);
-                    Debug.Log(sp.GetListCount());
+                rigid.velocity = new Vector3(0, 0, 0);
+                anim.SetBool("Senku2", true);
+                stoptime = 1.5f;
+                Debug.Log(loopCount);
+                Debug.Log(sp.GetListCount());
 
-                    Vector3 senku;
-                    if (loopCount < sp.GetListCount())
+                Vector3 senku;
+                if (loopCount < sp.GetListCount())
+                {
+                    senku = (sp.GetObjList()[loopCount].transform.position - transform.position).normalized;
+                    if (senku.x < 0)
                     {
-                        senku = (sp.GetObjList()[loopCount].transform.position - transform.position).normalized;
-                        if(senku.x<0)
-                        {
-                            currentDirec = Direc.Left;
-                        }
-                        else if(senku.x>0)
-                        {
-                            currentDirec = Direc.Right;
-                        }
-                        float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
-                        transform.position += senku * len + senku * 2;
-                        loopCount++;
-                        lockSpTime = 0;
-                        audio.PlayOneShot(senkugiri);
-
+                        currentDirec = Direc.Left;
                     }
+                    else if (senku.x > 0)
+                    {
+                        currentDirec = Direc.Right;
+                    }
+                    float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
+                    transform.position += senku * len + senku * 2;
+                    loopCount++;
+                    lockSpTime = 0;
+                    audio.PlayOneShot(senkugiri);
 
                 }
-                if (lockSp != null && sp.GetListCount() == loopCount)
+
+            }
+            if (lockSp != null && sp.GetListCount() == loopCount)
                 {
                     for (int i = 0; i < sp.GetListCount(); i++) 
                     {
@@ -448,6 +463,8 @@ public class PlayerControl : MonoBehaviour
                             ShotEnemy st = sp.GetObjList()[i].GetComponent<ShotEnemy>();
                         }
                     }
+
+                    inC = InputControl.N;
                     stoptime = 1.5f;
                     Destroy(lockSp);
                     kamae = false;
@@ -459,7 +476,6 @@ public class PlayerControl : MonoBehaviour
             }
         
         
-        }
     }
     void IsSenkuHit()
     {
@@ -470,7 +486,7 @@ public class PlayerControl : MonoBehaviour
             {
                 hitFlag = true;
                 hitCount++;
-              
+                Debug.Log(hitCount);
             }
         }
         if (stoptime < 0 && !kamae)
@@ -479,7 +495,7 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Senku", false);
             anim.SetBool("Power2", false);
             anim.SetBool("Power", false);
-
+            inC = InputControl.N;
             hitCount = 0;
         }
     }
