@@ -34,8 +34,11 @@ public class BossEnemy : MonoBehaviour
     public bossspawn bossspawn;
     Rigidbody rigid;
     ParticleSystem particle;
+    BoxCollider collider;
+    float changeColSize;
     void Start()
     {
+        changeColSize = 0.5f;
         anim = GetComponent<Animator>();
         damage = false;
         deadFlag = false;
@@ -43,6 +46,7 @@ public class BossEnemy : MonoBehaviour
         renderer = GetComponent<Renderer>();
         spr = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody>();
+        collider = GetComponent<BoxCollider>();
         rigid.useGravity = false;
         //spr.sprite = aliveBoss;
         LMove = true;
@@ -77,6 +81,7 @@ public class BossEnemy : MonoBehaviour
         {
             if (BossEnemyHp <= 180)
             {
+                Destroy(particle);
                 MoveMode = true;
             }
             if (MoveMode)
@@ -169,19 +174,16 @@ public class BossEnemy : MonoBehaviour
             if (BossEnemyHp <= 0)
             {
                 deadFlag = true;
-                //scenechangetime += Time.deltaTime;
+                collider.size = new Vector3(1, 0.5f, 1);
                 //spr.sprite = deadBoss;
                 //if(scenechangetime>=2)
                 //{;
                 Destroy(MeleeWepon);
                 Destroy(RMeleeWepon);
-                anim.SetBool("Dead", true);
+                //anim.SetBool("Dead", true);
                 //anim.Play("OniBossDead");
                 //Destroy(gameObject);
-                if (scenechangetime >= 1.5f)
-                {
-                    Destroy(gameObject);
-                }
+                Destroy(gameObject,2.0f);
             }
             if (Input.GetKey(KeyCode.Q))
             {
@@ -216,7 +218,8 @@ public class BossEnemy : MonoBehaviour
             }
             if (deadFlag)
             {
-                scenechangetime += Time.deltaTime;
+                //scenechangetime += Time.deltaTime;
+                anim.SetBool("Dead", true);
             }
             transform.position += pos;
             pos = Vector3.zero;
@@ -259,7 +262,7 @@ public class BossEnemy : MonoBehaviour
         if(collision.gameObject.tag=="Block")
         {
             hitGround = true;
-            //particle.Play();
+            particle.Play();
         }
     }
     public int GetHp()
