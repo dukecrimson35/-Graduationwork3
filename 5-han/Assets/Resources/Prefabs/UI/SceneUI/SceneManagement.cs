@@ -271,7 +271,27 @@ public class SceneManagement : MonoBehaviour
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha9) || deadFlag)
+            if (!bossspawnScript.GetEnemyMove())
+            {
+                if (GameObject.Find("TalkUICanvas(Clone)") == null)
+                {
+                    GameObject instance =
+                       (GameObject)Instantiate(talkUI,
+                       new Vector3(0, 0, 0.0f), Quaternion.identity);
+                    VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
+                    voiceScript.SetOniStartFlag();
+                    Data.voiceFlag = true;
+
+                    //voiceScript.SetOniEndFlag();
+                }
+            }
+
+            if (clearFlag)
+            {
+                //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
+            }
+            else if (deadFlag)
             {
                 //SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
