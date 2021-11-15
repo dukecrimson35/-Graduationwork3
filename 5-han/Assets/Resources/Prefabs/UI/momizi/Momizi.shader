@@ -10,6 +10,7 @@
 		LOD 100
 		Cull off
 		Blend SrcAlpha OneMinusSrcAlpha
+		ZTest Always
 
 		Pass
 		{
@@ -54,6 +55,10 @@
 			UNITY_APPLY_FOG(i.fogCoord, col);
 			return col;
 		}
+
+
+
+
 		ENDCG
 	}
 	}

@@ -194,6 +194,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4165043009092599738, guid: 5022183e443835b4a8b8ac207139029e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165043009092599738, guid: 5022183e443835b4a8b8ac207139029e,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165043009092599738, guid: 5022183e443835b4a8b8ac207139029e,
+        type: 3}
+      propertyPath: m_ApplyActiveColorSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4165043009092599739, guid: 5022183e443835b4a8b8ac207139029e,
         type: 3}
       propertyPath: m_Name
