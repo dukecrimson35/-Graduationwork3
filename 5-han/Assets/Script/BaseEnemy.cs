@@ -6,7 +6,7 @@ public class BaseEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public int baseEnemyHp = 10;
-    //public GameObject Texture;//自分の画像
+    public GameObject Texture;//自分の画像
     private float nextTime;
     float damageInterval = 1f;
     bool damage;
@@ -15,6 +15,9 @@ public class BaseEnemy : MonoBehaviour
     Renderer renderer;
     GameObject player;//プレイヤー
     Vector3 playerPos;//プレイヤーのポジション
+
+    public int enemyType;//種類
+    public GameObject deathAnim;//死亡アニメーションオブジェクト
     void Start()
     {
         damage = false;
@@ -45,6 +48,10 @@ public class BaseEnemy : MonoBehaviour
         }
         if (baseEnemyHp <= 0)
         {
+            if (enemyType != 0)
+            {
+                Instantiate(deathAnim, this.transform.position, Texture.transform.rotation);
+            }
             Destroy(gameObject);
             deadFlag = true;
         }

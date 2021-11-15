@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 425018590387762623}
   - component: {fileID: 6958735500096378960}
   - component: {fileID: 8330146118382375260}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: die_onryo_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
