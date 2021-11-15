@@ -119,6 +119,8 @@ public class GaugeEnergyControl : MonoBehaviour
             }
         }
 
+        this.gameObject.layer = 19;
+
         playerPos = player.transform.position;
         //playerPos = gauge.transform.position;
 

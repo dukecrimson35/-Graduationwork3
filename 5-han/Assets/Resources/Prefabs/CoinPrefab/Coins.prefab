@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7045010097545598045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2756760267741490428}
@@ -46,6 +46,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GaugeEnergy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 956122239005918986, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: acc.x
@@ -64,12 +69,12 @@ PrefabInstance:
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.03100586
+      value: -0.068
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.22299805
+      value: 0.245
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
@@ -159,12 +164,12 @@ PrefabInstance:
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.06899414
+      value: 0.031999994
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.32299805
+      value: 0.34499997
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
@@ -231,6 +236,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GaugeEnergy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 956122239005918986, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: acc.x
@@ -254,12 +264,12 @@ PrefabInstance:
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.131
+      value: -0.16799414
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.323
+      value: 0.345002
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
@@ -326,6 +336,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GaugeEnergy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 956122239005918986, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: acc.x
@@ -344,12 +359,12 @@ PrefabInstance:
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.03100586
+      value: -0.068
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42299804
+      value: 0.445
       objectReference: {fileID: 0}
     - target: {fileID: 956122239005918990, guid: 290abd1f2d9b09b40baa65fbdb4e09a3,
         type: 3}
