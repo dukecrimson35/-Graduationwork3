@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1152848761084076762}
   - component: {fileID: 5205810253550673062}
-  m_Layer: 15
+  m_Layer: 19
   m_Name: GroundCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 956122239005918986}
   - component: {fileID: 8242349437201159368}
   - component: {fileID: 3056219183342730905}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: GaugeEnergy
   m_TagString: GaugeEnergy
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1114943889793788678}
   - component: {fileID: 7863789884339729815}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 3862061293592246613}
   - component: {fileID: 3862061293592246698}
   - component: {fileID: 2606300979751454857}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PlayerEnergyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5138,7 +5138,7 @@ GameObject:
   - component: {fileID: 4324277282467610407}
   - component: {fileID: 7600840061058297015}
   - component: {fileID: 4610853655652337800}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
