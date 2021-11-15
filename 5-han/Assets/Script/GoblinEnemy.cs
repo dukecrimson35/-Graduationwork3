@@ -18,13 +18,13 @@ public class GoblinEnemy : MonoBehaviour
 
     bool onGround;//地面にいるかどうか
 
-    public enum State
+    enum State
     {
         normal,
         careful,
         attack,
     }
-    public State state;
+    State state;
 
     // Start is called before the first frame update
     void Start()
@@ -40,11 +40,13 @@ public class GoblinEnemy : MonoBehaviour
         {
             range = searchRange.GetComponent<SearchRange>();
         }
+        onGround = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         #region 通常モード
         if (state == State.normal)
         {
@@ -88,19 +90,19 @@ public class GoblinEnemy : MonoBehaviour
         #region 警戒モード
         if (state == State.careful)
         {
-            playerPos = player.transform.position;
+            playerPos = player.transform.position;//プレイヤーのポジション取得
             animator.Play("GoblinEnemy");
             if (Mathf.Abs(transform.position.x - playerPos.x) > 3)//遠くにいるなら
             {
                 //プレイヤーに向かう
                 if (transform.position.x - playerPos.x >= 0)//プレイヤーが左側
                 {
-                    rigidbody.velocity = new Vector3(-speed * 1.5f, rigidbody.velocity.y, 0);
+                    rigidbody.velocity = new Vector3(-speed * 1.75f, rigidbody.velocity.y, 0);
                     Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 }
                 if (transform.position.x - playerPos.x < 0)//プレイヤーが右側
                 {
-                    rigidbody.velocity = new Vector3(speed * 1.5f, rigidbody.velocity.y, 0);
+                    rigidbody.velocity = new Vector3(speed * 1.75f, rigidbody.velocity.y, 0);
                     Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
             }
@@ -127,11 +129,22 @@ public class GoblinEnemy : MonoBehaviour
             {
                 animator.Play("oni_wait");
                 count += Time.deltaTime;
+                if (transform.position.x - playerPos.x >= 0)
+                {
+                    Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
+                if (transform.position.x - playerPos.x < 0)
+                {
+                    Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                }
+            }
+            else
+            {
+                animator.Play("oni_attack");
             }
             playerPos = player.transform.position;
             if(count >= 1)//攻撃に入って３秒後
             {
-                animator.Play("oni_attack");
                 //ジャンプ攻撃
                 if (transform.position.x - playerPos.x >= 0)
                 {
@@ -146,20 +159,15 @@ public class GoblinEnemy : MonoBehaviour
                 count = 0;
             }
 
-            if(onGround == true && count == 0 && Mathf.Abs(transform.position.x - playerPos.x) > 5)
+            if(onGround == true && count < 0.3f && Mathf.Abs(transform.position.x - playerPos.x) > 5)
             {
-                state = State.careful;
+                if (count >= 0.2f)
+                {
+                    state = State.careful;
+                }
             }
         }
         #endregion
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Block")//地面と衝突したとき
-        {
-            onGround = true;
-        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -167,6 +175,14 @@ public class GoblinEnemy : MonoBehaviour
         if(collision.gameObject.tag == "Block")
         {
             onGround = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Block")//地面と衝突したとき
+        {
+            onGround = true;
         }
     }
 }
