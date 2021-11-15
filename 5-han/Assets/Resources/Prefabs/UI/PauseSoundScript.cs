@@ -125,6 +125,8 @@ public class PauseSoundScript : MonoBehaviour
 
         }
 
+        audioSource.volume = Data.seVol;
+
 
 
         // ディレイ関係
@@ -215,7 +217,7 @@ public class PauseSoundScript : MonoBehaviour
             {
                 Data.bgm++;
                 StartCoroutine(Coroutine2());
-                
+                SentakuSEPlay();
             }
             //else if (hol2 > stick && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
             //{
@@ -227,7 +229,7 @@ public class PauseSoundScript : MonoBehaviour
             {
                 Data.bgm--;
                 StartCoroutine(Coroutine2());
-
+                SentakuSEPlay();
             }
             //else if (hol2 < -stick && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
             //{
@@ -269,6 +271,7 @@ public class PauseSoundScript : MonoBehaviour
             {
                 Data.se++;
                 StartCoroutine(Coroutine2());
+                SentakuSEPlay();
 
             }
             //else if (hol2 > stick && (yazirusiCout > 0 && yazirusiDelay2 <= 0) && !delayFlag2)
@@ -281,6 +284,7 @@ public class PauseSoundScript : MonoBehaviour
             {
                 Data.se--;
                 StartCoroutine(Coroutine2());
+                SentakuSEPlay();
 
             }
             //else if (hol2 < -stick && yazirusiCout < itemList.Count - 1 && yazirusiDelay2 <= 0 && !delayFlag2)
@@ -296,7 +300,7 @@ public class PauseSoundScript : MonoBehaviour
         }
         else
         {
-            if(alpha < 1)
+            if(alpha2 < 1)
             {
                 StartCoroutine(CoroutineUp2());
                 seCursor.color = new Color(seCursor.color.r, seCursor.color.g, seCursor.color.b, alpha2);
@@ -338,7 +342,7 @@ public class PauseSoundScript : MonoBehaviour
     float delay3 = 0.075f;
     IEnumerator CoroutineUp()
     {
-        while(alpha < 1)
+        while(alpha <= 1)
         {
             yield return new WaitForSecondsRealtime(delay3);
             alpha += 0.01f;
