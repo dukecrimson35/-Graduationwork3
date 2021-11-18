@@ -7,38 +7,49 @@ public class ComboSystem : MonoBehaviour
 {
 
     public Text text;
+    public GameObject player;
+    private PlayerControl playerControl;
 
-    private int count = 0;
-
-    private bool downFlag = false;
+    private int poolNum;
+   
  
 
     void Start()
     {
-       
+        playerControl = player.GetComponent<PlayerControl>();
+        poolNum = playerControl.GetHitCount();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+
+        if(playerControl.GetHitCount()> 0)
         {
-            downFlag = true;
-            count++;
-            num = 1;
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+            text.text = playerControl.GetHitCount().ToString() + "連撃";
+        }
+        else
+        {
+            while (text.color.a > 0)
+            {
+                text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 1);
+                //text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 2f);
+            }
+        }
+
+        if(poolNum != playerControl.GetHitCount())
+        {
             text.transform.localScale = new Vector3(0.2f,0.2f,text.transform.localScale.z);
 
             iTween.ShakePosition(this.gameObject, iTween.Hash("x", 10f, "y", 10f, "time", 0.8f));
             StartCoroutine(TextUpAni());
         }
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            count = 0;
-        }
 
-       
-        
+        poolNum = playerControl.GetHitCount();
+
+
     }
-    bool a = false;
+    bool checkFlag = false;
     public float stop = 0.0001f;
     IEnumerator TextUpAni()
     {
@@ -51,7 +62,7 @@ public class ComboSystem : MonoBehaviour
 
         if(down)
         {
-            a = true;
+            checkFlag = true;
             down = false;
         }
        
@@ -70,7 +81,7 @@ public class ComboSystem : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            if(a)
+            if(checkFlag)
             {
                 down = false;
                 yield return null;

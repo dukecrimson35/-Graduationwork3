@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4289456972649368350}
+  player: {fileID: 0}
   stop: 0.01
 --- !u!114 &4289456972649368350
 MonoBehaviour:
@@ -80,7 +81,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: cb742fe486d815f478b9ec57d4016029, type: 3}
     m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 0
