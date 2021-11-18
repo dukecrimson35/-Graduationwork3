@@ -79,7 +79,10 @@ public class BossEnemy : MonoBehaviour
         //移動処理
         if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
-            Destroy(particle);
+            if (BossEnemyHp <= 170)
+            {
+                Destroy(particle);
+            }
             MoveMode = true;
             if (MoveMode)
             {
