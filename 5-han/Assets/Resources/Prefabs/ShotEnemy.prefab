@@ -101,6 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseEnemyHp: 10
+  Texture: {fileID: 0}
+  enemyType: 0
+  deathAnim: {fileID: 0}
+  se: {fileID: 0}
 --- !u!65 &2736146270167994345
 BoxCollider:
   m_ObjectHideFlags: 0
