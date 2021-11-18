@@ -79,11 +79,8 @@ public class BossEnemy : MonoBehaviour
         //移動処理
         if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
-            if (BossEnemyHp <= 180)
-            {
-                Destroy(particle);
-                MoveMode = true;
-            }
+            Destroy(particle);
+            MoveMode = true;
             if (MoveMode)
             {
                 if (LMove && !RMove)
@@ -119,6 +116,7 @@ public class BossEnemy : MonoBehaviour
                 ResetMelee += Time.deltaTime;
                 if (LMove && !RMove)
                 {
+                    pos.x -= 0.03f;
                     //武器表示
                     MeleeWepon.SetActive(true);
                     RMeleeWepon.SetActive(false);
@@ -127,6 +125,7 @@ public class BossEnemy : MonoBehaviour
                 }
                 if (!LMove && RMove)
                 {
+                    pos.x += 0.03f;
                     MeleeWepon.SetActive(false);
                     RMeleeWepon.SetActive(true);    
                     RMeleeWepon.transform.Rotate(0, 0, wepRot);
@@ -174,7 +173,7 @@ public class BossEnemy : MonoBehaviour
             if (BossEnemyHp <= 0)
             {
                 deadFlag = true;
-                collider.size = new Vector3(1, 0.5f, 1);
+                collider.size = new Vector3(1, 0.4f, 1);
                 //spr.sprite = deadBoss;
                 //if(scenechangetime>=2)
                 //{;
