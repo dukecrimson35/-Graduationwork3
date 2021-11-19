@@ -243,9 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8f6ba15a3791c41be62eecce72b5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 3
   Texture: {fileID: 6633446218100394350}
   searchRange: {fileID: 4824003087761051762}
+  junpP: 2
 --- !u!1 &4824003087761051762
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +290,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30, y: 10, z: 1}
+  m_Size: {x: 50, y: 10, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5496872749637759395
 MonoBehaviour:

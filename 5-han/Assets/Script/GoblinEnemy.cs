@@ -15,6 +15,7 @@ public class GoblinEnemy : MonoBehaviour
     Animator animator;
     GameObject player;
     Vector3 playerPos;
+    public int junpP;//ジャンプ力
 
     bool onGround;//地面にいるかどうか
 
@@ -148,12 +149,12 @@ public class GoblinEnemy : MonoBehaviour
                 //ジャンプ攻撃
                 if (transform.position.x - playerPos.x >= 0)
                 {
-                    rigidbody.AddForce(new Vector3(-700, 300, 0));
+                    rigidbody.AddForce(new Vector3(-700, 300, 0)*junpP);
                     Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 }
                 if (transform.position.x - playerPos.x < 0)
                 {
-                    rigidbody.AddForce(new Vector3(700, 300, 0));
+                    rigidbody.AddForce(new Vector3(700, 300, 0)*junpP);
                     Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
                 count = 0;
