@@ -45,7 +45,7 @@ public class SceneManagement : MonoBehaviour
     void Start()
     {
         audioSource.volume = 0.1f;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 144;
 
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
@@ -55,12 +55,6 @@ public class SceneManagement : MonoBehaviour
         {
             bossspawnScript = bossSoawnObj.GetComponent<bossspawn>();
         }
-
-        //for(int i = 0; i< GameData.maxStageNumber;i++)
-        //{
-        //    stages.Add("stage" + (i + 1).ToString());
-
-        //}
 
         if (sceneName == "Stage01" || sceneName == "Stage02" || sceneName == "Stage03")
         {
@@ -122,10 +116,6 @@ public class SceneManagement : MonoBehaviour
     IEnumerator BGMFadeInCoroutine()
     {
 
-       // Vector3 move = new Vector3(0, 210f / second, 0);
-        //float vol = audioSource.volume / second;
-        //Vector3 move2 = new Vector3(0, 209f/second, 0);
-
         audioSource.UnPause();
 
         for (int i = 0; i < second; i++)
@@ -164,8 +154,6 @@ public class SceneManagement : MonoBehaviour
                 break;
 
         }
-
-
         switch (Data.se)
         {
             case 0:
@@ -207,30 +195,12 @@ public class SceneManagement : MonoBehaviour
 
         if (sceneName == "TitleScene")
         {
-            //if (Input.GetKeyDown(KeyCode.Alpha0))
-            //{
-            //    //SceneManager.LoadScene(SceneNames.SelectScene.ToString());
-            //    fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.SelectScene.ToString());
-            //}
+           
            
         }
         else if( sceneName == "SelectScene")
         {
-            //if (Input.GetKeyDown(KeyCode.Alpha1))
-            //{
-            //    //SceneManager.LoadScene(SceneNames.Stage01.ToString());
-            //    fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage01.ToString());
-            //}
-            //else if (Input.GetKeyDown(KeyCode.Alpha2))
-            //{
-            //    //SceneManager.LoadScene(SceneNames.Stage02.ToString());
-            //    fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage02.ToString());
-            //}
-            //else if (Input.GetKeyDown(KeyCode.Alpha3))
-            //{
-            //    //SceneManager.LoadScene(SceneNames.Stage03.ToString());
-            //    fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage03.ToString());
-            //}
+          
         }
         else if (sceneName == "Stage01")
         {
@@ -266,11 +236,6 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage02")
         {
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
-                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
-            }
             if (!bossspawnScript.GetEnemyMove())
             {
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
@@ -279,7 +244,7 @@ public class SceneManagement : MonoBehaviour
                        (GameObject)Instantiate(talkUI,
                        new Vector3(0, 0, 0.0f), Quaternion.identity);
                     VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
-                    voiceScript.SetOniStartFlag();
+                    voiceScript.SetToriStartFlag();
                     Data.voiceFlag = true;
 
                     //voiceScript.SetOniEndFlag();
@@ -299,15 +264,29 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage03")
         {
-            if (Input.GetKeyDown(KeyCode.Alpha0))
+            if (clearFlag)
             {
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
             }
-            else if(Input.GetKeyDown(KeyCode.Alpha9) || deadFlag)
+            else if (deadFlag)
             {
                 //SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
+            }
+            if (!bossspawnScript.GetEnemyMove())
+            {
+                if (GameObject.Find("TalkUICanvas(Clone)") == null)
+                {
+                    GameObject instance =
+                       (GameObject)Instantiate(talkUI,
+                       new Vector3(0, 0, 0.0f), Quaternion.identity);
+                    VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
+                    voiceScript.SetKituneStartFlag();
+                    Data.voiceFlag = true;
+
+                    //voiceScript.SetOniEndFlag();
+                }
             }
         }
         else if (sceneName == "GameClearScene")
