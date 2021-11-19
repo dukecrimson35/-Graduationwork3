@@ -14,13 +14,12 @@ public class SenkuMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //  isMove = true;
+       // isMove = true;
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Block")
         {
-          
             isMove = false;
         }
     }
@@ -28,7 +27,6 @@ public class SenkuMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Block")
         {
-         
             isMove = false;
         }
 
