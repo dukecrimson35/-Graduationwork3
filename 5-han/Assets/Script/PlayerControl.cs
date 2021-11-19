@@ -237,7 +237,7 @@ public class PlayerControl : MonoBehaviour
                     float ang = Mathf.Atan2(vel.y, vel.x) * 180 / Mathf.PI + 180;
                     float len = (transform.position - look.GetLookObject().transform.position).magnitude;
                    // move.gameObject.transform.localScale = new Vector3(len + 3, 1, 1);
-                    moveColider.transform.rotation = Quaternion.Euler(1, 1, ang);
+                    moveColider.transform.rotation = Quaternion.Euler(0, 0, ang);
                 }
                 //else
                 //{
