@@ -7,6 +7,8 @@ public class bossspawn : MonoBehaviour
     public bool hitBossSpawn;
     public bool EnemyMove;
     public BossEnemy boss;
+    public BirdBoss birdboss;
+    public KyuubiBoss kyuubiboss;
     public Camera BossCamera;
     float count;
     //public ParticleSystem particle;
@@ -25,7 +27,7 @@ public class bossspawn : MonoBehaviour
         {
             EnemyMove = false;
             BossCamera.depth = 0;
-            if(boss.hitGround)
+            if(boss.hitGround||birdboss.hitGround||kyuubiboss.hitGround)
             {
                 BossCamera.transform.position = new Vector3(BossCamera.transform.position.x, Mathf.PingPong(Time.time, 0.2f), BossCamera.transform.position.z);
                 count = count + Time.deltaTime;
