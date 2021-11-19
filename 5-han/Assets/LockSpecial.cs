@@ -16,7 +16,7 @@ public class LockSpecial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Charge();
+     //   Charge();
         DeadCheck();
     }
 
@@ -40,11 +40,11 @@ public class LockSpecial : MonoBehaviour
             }
         }
     }
-   void Charge()
+   public void Charge(int hitcount)
     {
         if(Input.GetButton("Y"))
         {
-            scale += Time.deltaTime * 15;
+            scale += Time.deltaTime * 15 *( hitcount+1);
         }
         transform.localScale = new Vector3(scale, scale, scale);
         if (scale >= 25) 
