@@ -18,6 +18,8 @@ public class BaseEnemy : MonoBehaviour
 
     public int enemyType;//種類
     public GameObject deathAnim;//死亡アニメーションオブジェクト
+    private AudioSource audioSource;
+    public AudioClip se;//死亡時se
     void Start()
     {
         damage = false;
@@ -26,6 +28,7 @@ public class BaseEnemy : MonoBehaviour
         deadFlag = false;
         player = GameObject.Find("Player");
         playerPos = player.transform.position;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +51,14 @@ public class BaseEnemy : MonoBehaviour
         }
         if (baseEnemyHp <= 0)
         {
+            if (se != null)
+            {
+                audioSource.PlayOneShot(se);
+            }
+            else
+            {
+
+            }
             if (enemyType != 0)
             {
                 Instantiate(deathAnim, this.transform.position, Texture.transform.rotation);
