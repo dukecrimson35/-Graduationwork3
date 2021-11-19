@@ -6,7 +6,7 @@ public class BossEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
     Animator anim;
-    public int BossEnemyHp = 50;
+    public int BossEnemyHp = 200;
     private float nextTime;
     float damageInterval = 1f;
     bool damage;
@@ -79,11 +79,13 @@ public class BossEnemy : MonoBehaviour
         //移動処理
         if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
-            if (BossEnemyHp <= 170)
+            if (BossEnemyHp <= 190)
             {
+                MoveMode = true;
+                Meleesecond += Time.deltaTime;
                 Destroy(particle);
             }
-            MoveMode = true;
+            //MoveMode = true;
             if (MoveMode)
             {
                 if (LMove && !RMove)
@@ -98,7 +100,6 @@ public class BossEnemy : MonoBehaviour
                 }
             }
             //近接攻撃処理
-            Meleesecond += Time.deltaTime;
             if (Meleesecond >= 5)
             {
                 //MeleeSecが10になったら近接攻撃モードON
@@ -227,13 +228,16 @@ public class BossEnemy : MonoBehaviour
             pos = Vector3.zero;
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "SenkuGiri")
         {
             damage = true;
             BossEnemyHp -= 10;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
         if (collision.gameObject.tag == "PowerSlash")
         {
             PowerSlashScript power = collision.gameObject.GetComponent<PowerSlashScript>();

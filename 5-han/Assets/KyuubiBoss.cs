@@ -158,13 +158,16 @@ public class KyuubiBoss : MonoBehaviour
             pos = Vector3.zero;
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "SenkuGiri")
         {
             damage = true;
             BossEnemyHp -= 10;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
         if (collision.gameObject.tag == "PowerSlash")
         {
             PowerSlashScript power = collision.gameObject.GetComponent<PowerSlashScript>();
