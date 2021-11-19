@@ -54,7 +54,6 @@ public class VoiceScript : MonoBehaviour
 
         if(oniBossStartFlag)
         {          
-
             StringReader reader = new StringReader(oniStartTxt.text);
             while (reader.Peek() != -1) 
             {
@@ -83,9 +82,7 @@ public class VoiceScript : MonoBehaviour
     bool oneBGMFlag = false;
 
     IEnumerator Novel()
-    {
-       
-
+    {      
         int messageCount = 0; 
         text.text = "";
         bool endChack = true;
