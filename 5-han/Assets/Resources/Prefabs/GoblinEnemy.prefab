@@ -246,6 +246,7 @@ MonoBehaviour:
   speed: 3
   Texture: {fileID: 7893980005378198442}
   searchRange: {fileID: 5645140616508207908}
+  junpP: 2
 --- !u!1 &5645140616508207908
 GameObject:
   m_ObjectHideFlags: 0

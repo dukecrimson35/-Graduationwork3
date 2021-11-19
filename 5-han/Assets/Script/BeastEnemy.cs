@@ -15,6 +15,8 @@ public class BeastEnemy : MonoBehaviour
     Animator animator;
     GameObject player;
     Vector3 playerPos;
+    public int junpP;//ジャンプ力
+    bool leftMove;//左右どちらに移動するか
 
     bool onGround;//地面にいるかどうか
 
@@ -88,25 +90,41 @@ public class BeastEnemy : MonoBehaviour
         #region 警戒モード
         if (state == State.careful)
         {
+            speed += Time.deltaTime;
             playerPos = player.transform.position;//プレイヤーのポジション取得
-            if (Mathf.Abs(transform.position.x - playerPos.x) > 3)//遠くにいるなら
+            //if (Mathf.Abs(transform.position.x - playerPos.x) > 3)//遠くにいるなら
+            //{
+            //    //プレイヤーに向かう
+            //    if (transform.position.x - playerPos.x >= 0)//プレイヤーが左側
+            //    {
+            //        rigidbody.velocity = new Vector3(-speed * 1.75f, rigidbody.velocity.y, 0);
+            //        Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            //    }
+            //    if (transform.position.x - playerPos.x < 0)//プレイヤーが右側
+            //    {
+            //        rigidbody.velocity = new Vector3(speed * 1.75f, rigidbody.velocity.y, 0);
+            //        Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            //    }
+            //}
+            if(leftMove)//左に移動
             {
-                //プレイヤーに向かう
-                if (transform.position.x - playerPos.x >= 0)//プレイヤーが左側
+                rigidbody.velocity = new Vector3(-Mathf.Pow(speed ,2) * 1.75f, rigidbody.velocity.y, 0);
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                if(transform.position.x - playerPos.x <= -5)
                 {
-                    rigidbody.velocity = new Vector3(-speed * 1.75f, rigidbody.velocity.y, 0);
-                    Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                }
-                if (transform.position.x - playerPos.x < 0)//プレイヤーが右側
-                {
-                    rigidbody.velocity = new Vector3(speed * 1.75f, rigidbody.velocity.y, 0);
-                    Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    leftMove = false;
+                    speed = 1;
                 }
             }
-            if (Mathf.Abs(transform.position.x - playerPos.x) <= 5)//近づいたら
+            if (leftMove == false)//右に移動
             {
-                state = State.attack;//攻撃待機モードに
-                count = 0;
+                rigidbody.velocity = new Vector3(Mathf.Pow(speed,2) * 1.75f, rigidbody.velocity.y, 0);
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                if (transform.position.x - playerPos.x >= 5)
+                {
+                    leftMove = true;
+                    speed = 1;
+                }
             }
 
             if (range != null)
@@ -140,12 +158,12 @@ public class BeastEnemy : MonoBehaviour
                 //ジャンプ攻撃
                 if (transform.position.x - playerPos.x >= 0)
                 {
-                    rigidbody.AddForce(new Vector3(-700, 300, 0));
+                    rigidbody.AddForce(new Vector3(-700, 300, 0)*junpP);
                     Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 }
                 if (transform.position.x - playerPos.x < 0)
                 {
-                    rigidbody.AddForce(new Vector3(700, 300, 0));
+                    rigidbody.AddForce(new Vector3(700, 300, 0)*junpP);
                     Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
                 count = 0;

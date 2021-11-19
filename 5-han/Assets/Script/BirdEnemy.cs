@@ -82,11 +82,11 @@ public class BirdEnemy : MonoBehaviour
                 //上下に移動
                 if (Upmove)
                 {
-                    rigidbody.velocity = new Vector3(-speed, speed, 0);
+                    rigidbody.velocity = new Vector3(-speed*Time.deltaTime, speed * Time.deltaTime, 0);
                 }
                 else
                 {
-                    rigidbody.velocity = new Vector3(-speed, -speed, 0);
+                    rigidbody.velocity = new Vector3(-speed * Time.deltaTime, -speed * Time.deltaTime, 0);
                 }
             }
             //右に移動
@@ -95,11 +95,11 @@ public class BirdEnemy : MonoBehaviour
                 //上下に移動
                 if (Upmove)
                 {
-                    rigidbody.velocity = new Vector3(speed, speed, 0);
+                    rigidbody.velocity = new Vector3(speed * Time.deltaTime, speed * Time.deltaTime, 0);
                 }
                 else
                 {
-                    rigidbody.velocity = new Vector3(speed, -speed, 0);
+                    rigidbody.velocity = new Vector3(speed * Time.deltaTime, -speed * Time.deltaTime, 0);
                 }
             }
             //画像の表示
@@ -159,7 +159,7 @@ public class BirdEnemy : MonoBehaviour
         {
             //攻撃中
             float x, y;
-            x = transform.position.x - moveX * speed;
+            x = transform.position.x - moveX * speed * Time.deltaTime;
             y = alfa * Mathf.Pow(x - playerPos.x, 2) + playerPos.y+0.2f;
             if(double.IsNaN(y) == false)
             {
