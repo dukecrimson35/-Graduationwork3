@@ -36,6 +36,14 @@ public class SenkuSprict : MonoBehaviour
             after.transform.rotation = Quaternion.Euler(0, 0, ang);
             hit = true;
         }
+        if (collision.transform.tag == "Bullet")
+        {
+            GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
+            after.transform.position = collision.transform.position;
+            float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI;
+            after.transform.rotation = Quaternion.Euler(0, 0, ang);
+            hit = true;
+        }
         if (collision.transform.tag == "BossEnemy")
         {
             GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
@@ -51,6 +59,17 @@ public class SenkuSprict : MonoBehaviour
             Money moneyScript = collision.gameObject.GetComponent<Money>();
             itemManagerScript.UpCoin(moneyScript.GetMoney());
             Destroy(collision.gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Bullet")
+        {
+            GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
+            after.transform.position = other.transform.position;
+            float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI;
+            after.transform.rotation = Quaternion.Euler(0, 0, ang);
+            hit = true;
         }
     }
     public bool GetHitFlag()

@@ -223,7 +223,7 @@ public class PlayerControl : MonoBehaviour
                     lookColider = Instantiate((GameObject)Resources.Load("LookOn"));
                     look = lookColider.GetComponentInChildren<LookOn>();
                 }
-             
+                rigid.velocity = new Vector3(0, 0, 0);
                 kamae = true;
                 if (senku.magnitude == 0 && moveColider != null) 
                 {
