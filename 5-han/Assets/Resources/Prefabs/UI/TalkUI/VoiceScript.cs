@@ -17,12 +17,16 @@ public class VoiceScript : MonoBehaviour
     public bool oniBossStartFlag = false;
     [Header("鬼ボス終了セリフ")]
     public bool oniBossEndFlag = false;
+    [Header("鳥ボス開始セリフ")]
+    public bool toriBossStartFlag = false;
+    [Header("狐ボス開始セリフ")]
+    public bool kituneBossStartFlag = false;
 
     //[Header("鬼ボス開始セリフ")]
     //public string[] bossStartTexts;
     //[Header("鬼ボス終了セリフ")]
     //public string[] bossEndTexts;
-  
+
 
 
     [SerializeField] List<string> messageList = new List<string>();//会話文リスト
@@ -36,6 +40,8 @@ public class VoiceScript : MonoBehaviour
 
     public TextAsset oniStartTxt;
     public TextAsset oniEndTxt;
+    public TextAsset toriStartTxt;
+    public TextAsset kituneStartTxt;
 
     public AudioSource audioSource;
     public AudioClip katakata;
@@ -66,6 +72,26 @@ public class VoiceScript : MonoBehaviour
         else if(oniBossEndFlag)
         {
             StringReader reader = new StringReader(oniEndTxt.text);
+            while (reader.Peek() != -1)
+            {
+                string line = reader.ReadLine(); // 一行ずつ読み込み
+                messageList.Add(line);
+            }
+            oneFlag = true;
+        }
+        else if (toriBossStartFlag)
+        {
+            StringReader reader = new StringReader(toriStartTxt.text);
+            while (reader.Peek() != -1)
+            {
+                string line = reader.ReadLine(); // 一行ずつ読み込み
+                messageList.Add(line);
+            }
+            oneFlag = true;
+        }
+        else if (kituneBossStartFlag)
+        {
+            StringReader reader = new StringReader(kituneStartTxt.text);
             while (reader.Peek() != -1)
             {
                 string line = reader.ReadLine(); // 一行ずつ読み込み
@@ -186,6 +212,15 @@ public class VoiceScript : MonoBehaviour
     public void SetOniEndFlag()
     {
         oniBossEndFlag = true;
+    }
+
+    public void SetToriStartFlag()
+    {
+        toriBossStartFlag = true;
+    }
+    public void SetKituneStartFlag()
+    {
+        kituneBossStartFlag = true;
     }
 
 

@@ -487,7 +487,7 @@ public class PlayerControl : MonoBehaviour
                     moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
                     move = moveColider.GetComponent<SenkuMove>();
                     rend = moveColider.GetComponentInChildren<SpriteRenderer>();
-                    // rend.enabled = false;
+                    rend.enabled = false;
                 }
             }
             if (moveColider != null && sp != null) 
@@ -541,6 +541,7 @@ public class PlayerControl : MonoBehaviour
                     }
 
                 }
+                
 
             }
             if (lockSp != null && sp.GetListCount() == loopCount)
@@ -559,15 +560,16 @@ public class PlayerControl : MonoBehaviour
                 inC = InputControl.N;
                 stoptime = 1.5f;
                 Destroy(lockSp);
+                Destroy(moveColider);
                 kamae = false;
             }
         }
-        if (sp != null) 
-            {
-                lockSpTime += Time.deltaTime;
-            }
-        
-        
+        if (sp != null)
+        {
+            lockSpTime += Time.deltaTime;
+        }
+
+
     }
     void IsSenkuHit()
     {

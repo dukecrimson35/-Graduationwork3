@@ -69,7 +69,7 @@ public class ComboSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        StartCoroutine(TextDownAni());
+       // StartCoroutine(TextDownAni());
        
         
     }
