@@ -19,6 +19,10 @@ public class PlayerControl : MonoBehaviour
     Vector3 pos;
     Vector3 lastinp;
     Vector3 currentinp;
+
+    Vector3 secondinp;
+    Vector3 thirdinp;
+
     GameObject moveColider;
     SenkuMove move;
     GameObject lookColider;
@@ -203,7 +207,10 @@ public class PlayerControl : MonoBehaviour
     }
     private void SenkuGiri()
     {
+        Physics.Simulate(Time.deltaTime);
         Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
+        thirdinp = secondinp;
+        secondinp = lastinp;
         lastinp = currentinp;
         currentinp = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
         if (stoptime < 0 || hitFlag)
@@ -232,8 +239,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     Destroy(moveColider);
                 }
-                move.Invoke("OnCollisionEnter", 0);
-               
+            
             }
 
             if ((Input.GetButtonUp("A") && senku.magnitude == 0) || (Input.GetButtonUp("A") && !move.GetIsMove()))
@@ -305,29 +311,28 @@ public class PlayerControl : MonoBehaviour
                     stoptime = 1.5f;
                     col = Instantiate((GameObject)Resources.Load("SenkuCollider"));
 
-                    if(currentinp==lastinp)
+                //    if (currentinp == lastinp) 
                     {
                         col.transform.position = transform.position;
-                        col.transform.position += currentinp * 7 / 2;
-                        float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
-                        col.transform.rotation = Quaternion.Euler(0, 0, ang);
-
-                        transform.position += currentinp * 7;
-                        AfterImage(-(currentinp * 7), -(currentinp * 7) / 2);
-                    }
-                    else
-                    {
-
-                        col.transform.position = transform.position;
-                        col.transform.position += lastinp * 7 / 2;
+                        col.transform.position +=  lastinp * 7 / 2;
                         float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                         col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                         transform.position += lastinp * 7;
                         AfterImage(-(lastinp * 7), -(lastinp * 7) / 2);
                     }
+                    //else
+                    //{
+
+                    //    col.transform.position = transform.position;
+                    //    col.transform.position += secondinp * 7 / 2;
+                    //    float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
+                    //    col.transform.rotation = Quaternion.Euler(0, 0, ang);
+
+                    //    transform.position += secondinp * 7;
+                    //    AfterImage(-(secondinp * 7), -(secondinp * 7) / 2);
+                    //}
                 
-            //        SenkuEffect((senku) / 2);
                     if (moveColider != null)
                     {
                         Destroy(moveColider);
