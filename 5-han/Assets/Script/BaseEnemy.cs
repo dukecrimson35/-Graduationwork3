@@ -61,7 +61,7 @@ public class BaseEnemy : MonoBehaviour
             }
             if (enemyType != 0)
             {
-                Instantiate(deathAnim, this.transform.position, Texture.transform.rotation);
+                Instantiate(deathAnim, Texture.transform.position, Texture.transform.rotation);
             }
             Destroy(gameObject);
             deadFlag = true;
@@ -89,10 +89,10 @@ public class BaseEnemy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "SenkuGiri")
-        {
-            baseEnemyHp -= 10;
-        }
+        //if (collision.gameObject.tag == "SenkuGiri")
+        //{
+        //    baseEnemyHp -= 10;
+        //}
         if (collision.gameObject.tag == "PowerSlash")
         {
             PowerSlashScript power = collision.gameObject.GetComponent<PowerSlashScript>();
@@ -105,6 +105,14 @@ public class BaseEnemy : MonoBehaviour
             PlayerControl p = collision.gameObject.GetComponent<PlayerControl>();
             p.Damage(10);
             p.KnockBack(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "SenkuGiri")
+        {
+            baseEnemyHp -= 10;
         }
     }
 

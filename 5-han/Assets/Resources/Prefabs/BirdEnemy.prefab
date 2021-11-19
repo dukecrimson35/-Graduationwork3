@@ -105,6 +105,7 @@ MonoBehaviour:
   enemyType: 1
   deathAnim: {fileID: 1795711408143376178, guid: c7915af5c2b436c44bf1e9b9f752266d,
     type: 3}
+  se: {fileID: 0}
 --- !u!65 &2736146270167994345
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -360,7 +361,7 @@ GameObject:
   - component: {fileID: 3420747122336548646}
   - component: {fileID: 2484844101121829494}
   - component: {fileID: 5496872749637759395}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SerchRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
