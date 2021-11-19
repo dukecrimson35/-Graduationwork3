@@ -23,7 +23,7 @@ public class ComboSystem : MonoBehaviour
     void Update()
     {
 
-        if(playerControl.GetHitCount()> 0)
+        if(playerControl.GetHitCount()> 0 && !Data.voiceFlag)
         {
             text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
             text.text = playerControl.GetHitCount().ToString() + "連撃";
