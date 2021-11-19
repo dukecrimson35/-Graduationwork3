@@ -93,12 +93,13 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Physics.Simulate(Time.deltaTime);
+        audio.volume = Data.seVol;
         if (Time.timeScale <= 0) return;
         if (!itemManagerScript.GetShopFlag() && !Data.voiceFlag) 
         {
             Move();
-            Direction();
-            
+            Direction();            
             SenkuGiri();
             Special();
             SpecialY();
@@ -122,8 +123,6 @@ public class PlayerControl : MonoBehaviour
         {
             //anim.SetTrigger("Stand");
             velocity = Vector3.zero;
-
-
             anim.SetBool("Walk", false);
 
 
@@ -137,7 +136,6 @@ public class PlayerControl : MonoBehaviour
             if (!kamae && Input.GetAxis("Horizontal") == 1)
             {
                 anim.SetBool("Walk", true);
-
                 velocity.x += 11;
             }
             if (Input.GetAxis("Horizontal") == -1)
@@ -207,7 +205,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void SenkuGiri()
     {
-        Physics.Simulate(Time.deltaTime);
+     
         Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
         thirdinp = secondinp;
         secondinp = lastinp;
@@ -259,7 +257,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         
-            else if (Input.GetButtonUp("A") && move.GetIsMove())
+            else if (Input.GetButtonUp("A") && move.GetIsMove() && inC == InputControl.A)
             {
                 inC = InputControl.N;
                 if (muteki < 0)
@@ -468,7 +466,7 @@ public class PlayerControl : MonoBehaviour
                     sp = lockSp.GetComponent<LockSpecial>();
                     loopCount = 0;
                 }
-              
+                sp.Charge(hitCount);
                 lockSp.transform.position = transform.position;
                 anim.SetBool("Senku", true);
                 anim.SetBool("Senku2", false);
@@ -479,10 +477,33 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-       if (!Input.GetButton("Y") && inC == InputControl.Y) 
+        if (!Input.GetButton("Y") && inC == InputControl.Y)
+        {
+            if (moveColider == null && sp != null)
             {
-                if (lockSpTime >= 0.3f && sp != null) 
+                if (loopCount < sp.GetListCount())
                 {
+                    SpriteRenderer rend;
+                    moveColider = Instantiate((GameObject)Resources.Load("MoveCollider"));
+                    move = moveColider.GetComponent<SenkuMove>();
+                    rend = moveColider.GetComponentInChildren<SpriteRenderer>();
+                    rend.enabled = false;
+                }
+            }
+            if (moveColider != null && sp != null) 
+            {
+                if(loopCount < sp.GetListCount())
+                {
+                    Vector3 vel = sp.GetObjList()[loopCount].transform.position - transform.position;
+                    float ang = Mathf.Atan2(vel.y, vel.x) * 180 / Mathf.PI + 180;
+                    moveColider.transform.position = transform.position;
+                    moveColider.transform.rotation = Quaternion.Euler(0, 0, ang);
+                }
+               
+            }
+
+            if (lockSpTime >= 0.3f && sp != null)
+            {
                 rigid.velocity = new Vector3(0, 0, 0);
                 anim.SetBool("Senku2", true);
                 stoptime = 1.5f;
@@ -501,40 +522,54 @@ public class PlayerControl : MonoBehaviour
                     {
                         currentDirec = Direc.Right;
                     }
-                    float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
-                    transform.position += senku * len + senku * 2;
-                    loopCount++;
-                    lockSpTime = 0;
-                    audio.PlayOneShot(senkugiri);
+                    if (move.GetIsMove())
+                    {
+                        float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
+                        transform.position += senku * len + senku * 2;
+                        loopCount++;
+                        lockSpTime = 0;
+                        audio.PlayOneShot(senkugiri);
+                    }
+                    else
+                    {
+                        float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
+                        transform.position += senku * len - senku * 2;
+                        loopCount++;
+                        lockSpTime = 0;
+                        audio.PlayOneShot(senkugiri);
+
+                    }
 
                 }
+                
 
             }
             if (lockSp != null && sp.GetListCount() == loopCount)
-                {
-                    for (int i = 0; i < sp.GetListCount(); i++) 
-                    {
-                        BaseEnemy be = sp.GetObjList()[i].GetComponent<BaseEnemy>();
-                        be.Damage(10);
-                        if (be == null)
-                        {
-
-                            ShotEnemy st = sp.GetObjList()[i].GetComponent<ShotEnemy>();
-                        }
-                    }
-
-                    inC = InputControl.N;
-                    stoptime = 1.5f;
-                    Destroy(lockSp);
-                    kamae = false;
-                }
-            }
-            if(sp!=null)
             {
-                lockSpTime += Time.deltaTime;
+                for (int i = 0; i < sp.GetListCount(); i++)
+                {
+                    BaseEnemy be = sp.GetObjList()[i].GetComponent<BaseEnemy>();
+                    be.Damage(10);
+                    if (be == null)
+                    {
+
+                        ShotEnemy st = sp.GetObjList()[i].GetComponent<ShotEnemy>();
+                    }
+                }
+
+                inC = InputControl.N;
+                stoptime = 1.5f;
+                Destroy(lockSp);
+                Destroy(moveColider);
+                kamae = false;
             }
-        
-        
+        }
+        if (sp != null)
+        {
+            lockSpTime += Time.deltaTime;
+        }
+
+
     }
     void IsSenkuHit()
     {
