@@ -235,6 +235,13 @@ public class BossEnemy : MonoBehaviour
             damage = true;
             BossEnemyHp -= 10;
         }
+        if (collision.gameObject.tag == "PowerSlash")
+        {
+            PowerSlashScript power = collision.gameObject.GetComponent<PowerSlashScript>();
+
+            BossEnemyHp-= 13 * (power.GetPlayerHitCount() + 1);
+            //  Debug.Log(13 * (power.GetPlayerHitCount() + 1));
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
