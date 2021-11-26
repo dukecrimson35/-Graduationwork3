@@ -103,11 +103,14 @@ public class SceneSelectButton : MonoBehaviour
     }
     public void OnClickStage2Button()
     {
-
+        ButtonAniScript bas = stage2Button.GetComponent<ButtonAniScript>();
+        if (bas.GetButtonStopFlag()) return;
         sceneManagement.OnClickStage2Button();
     }
     public void OnClickStage3Button()
     {
+        ButtonAniScript bas = stage3Button.GetComponent<ButtonAniScript>();
+        if (bas.GetButtonStopFlag()) return;
         sceneManagement.OnClickStage3Button();
     }
     public void OnClickTitleButton()

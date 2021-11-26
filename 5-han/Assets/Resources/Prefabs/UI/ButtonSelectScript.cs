@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ButtonSelectScript : MonoBehaviour
 {
 
-
     public Button[] buttons;
 
     private float yazirusiDelay = 0.2f;
