@@ -14,7 +14,7 @@ public class TitleBGMScript : MonoBehaviour
     {
         if(fl)
         {
-            if (GameObject.Find("TitleBGM"))
+            if (GameObject.Find("TitleBGM(Clone)"))
             {
                 
             }
