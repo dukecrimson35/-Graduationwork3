@@ -205,7 +205,8 @@ public class PlayerControl : MonoBehaviour
     }
     private void SenkuGiri()
     {
-     
+        float tes = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
+
         Vector3 senku = new Vector3(Input.GetAxis("Horizontal") * 7, Input.GetAxis("Vertical") * 7, 0);
         thirdinp = secondinp;
         secondinp = lastinp;
@@ -245,6 +246,24 @@ public class PlayerControl : MonoBehaviour
                 //}
                 rigid.velocity = new Vector3(0, 0, 0);
                 kamae = true;
+
+                if (moveColider != null)
+                {
+                    moveColider.transform.position = transform.position;
+                    if (lookColider != null)
+                    {
+                        if (look.GetLookObject() == null)
+                        {
+                            moveColider.transform.rotation = Quaternion.Euler(0, 0, tes);
+                        }
+                    }
+                }
+                if (lookColider != null)
+                {
+                    lookColider.transform.position = transform.position;
+                    lookColider.transform.rotation = Quaternion.Euler(0, 0, tes);
+
+                }
                 if (senku.magnitude == 0 && moveColider != null) 
                 {
                     Destroy(moveColider);
@@ -394,24 +413,10 @@ public class PlayerControl : MonoBehaviour
             }
          
         }
-        float tes = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
       
         float vert = Input.GetAxis("Vertical");
         //Debug.Log(vert);
-        if (moveColider != null ) 
-        {
-            moveColider.transform.position = transform.position;
-            if(look.GetLookObject()==null)
-            {
-                moveColider.transform.rotation = Quaternion.Euler(0, 0, tes);
-            }
-            
-        }
-        if(lookColider!=null)
-        {
-            lookColider.transform.position = transform.position;
-            lookColider.transform.rotation = Quaternion.Euler(0, 0, tes);
-        }
+       
         stoptime -= Time.deltaTime;
     }
     void AfterImage(Vector3 pos1, Vector3 pos2)
@@ -463,6 +468,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Special()
     {
+        float tes = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
 
         if (stoptime < 0 || hitFlag)
         {
@@ -480,6 +486,13 @@ public class PlayerControl : MonoBehaviour
                 }
                 rigid.velocity = new Vector3(0, 0, 0);
                 kamae = true;
+
+                if (moveColider != null)
+                {
+                    moveColider.transform.position = transform.position;
+                    moveColider.transform.rotation = Quaternion.Euler(0, 0, tes);
+                    
+                }
             }
 
             if (Input.GetButtonUp("X") && inC == InputControl.X)
@@ -549,6 +562,7 @@ public class PlayerControl : MonoBehaviour
                 if(loopCount < sp.GetListCount())
                 {
                     Vector3 vel = sp.GetObjList()[loopCount].transform.position - transform.position;
+                    moveColider.transform.localScale = new Vector3(vel.magnitude + 1, 1, 1);
                     float ang = Mathf.Atan2(vel.y, vel.x) * 180 / Mathf.PI + 180;
                     moveColider.transform.position = transform.position;
                     moveColider.transform.rotation = Quaternion.Euler(0, 0, ang);
@@ -621,6 +635,7 @@ public class PlayerControl : MonoBehaviour
         if (sp != null)
         {
             lockSpTime += Time.deltaTime;
+            inC = InputControl.Y;
         }
 
 
