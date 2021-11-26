@@ -5,7 +5,9 @@ using UnityEngine;
 public class LockSpecial : MonoBehaviour
 {
     float scale = 1;
-    List<GameObject> objList=new List<GameObject>();
+    List<GameObject> objList = new List<GameObject>();
+    List<GameObject> markList = new List<GameObject>();
+
     GameObject currentObj;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,33 @@ public class LockSpecial : MonoBehaviour
     {
         for (int a = 0; a < objList.Count; a++)
         {
-            if(objList[a]==null)
+            if (markList.Count < objList.Count)
+            {
+                markList.Add(Instantiate((GameObject)Resources.Load("LockMark")));
+                markList[a].transform.position = objList[a].transform.position;
+                markList[a].transform.parent = this.gameObject.transform;
+                float scale = 1 / transform.localScale.x;
+                markList[a].transform.localScale = new Vector3(scale, scale, scale);
+
+
+            }
+            else if (markList.Count == objList.Count)
+            {
+                markList[a].transform.position = objList[a].transform.position;
+                markList[a].transform.parent = this.gameObject.transform;
+                float scale = 1 / transform.localScale.x;
+                markList[a].transform.localScale = new Vector3(scale, scale, scale);
+            }
+            else if (markList.Count > objList.Count)
+            {
+                if (a > markList.Count - 1)
+                {
+                    Destroy(markList[a]);
+                }
+            }
+
+          
+            if (objList[a]==null)
             {
                 objList.RemoveAt(a);
                 continue;
@@ -91,6 +119,7 @@ public class LockSpecial : MonoBehaviour
                 if (objList[a] == collision.gameObject)
                 {
                     objList.RemoveAt(a);
+                    markList.RemoveAt(a);
                 }
             }
         }
