@@ -472,7 +472,7 @@ public class PlayerControl : MonoBehaviour
 
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("X") && (inC == InputControl.X || inC == InputControl.N))
+            if (Input.GetButton("X") && (inC == InputControl.X || inC == InputControl.N)) 
             {
                 inC = InputControl.X;
                 anim.SetBool("Power", true);
@@ -522,7 +522,7 @@ public class PlayerControl : MonoBehaviour
       
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("Y") && (inC == InputControl.Y || inC == InputControl.N))
+            if (Input.GetButton("Y") && (inC == InputControl.Y || inC == InputControl.N) && loopCount == 0) 
             {
                
                 rigid.velocity = new Vector3(0, 0, 0);
@@ -531,7 +531,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     lockSp = Instantiate((GameObject)Resources.Load("LockSpecial"));
                     sp = lockSp.GetComponent<LockSpecial>();
-                    loopCount = 0;
+                   
                 }
                 sp.Charge(hitCount);
                 lockSp.transform.position = transform.position;
@@ -555,17 +555,19 @@ public class PlayerControl : MonoBehaviour
                     move = moveColider.GetComponent<SenkuMove>();
                     rend = moveColider.GetComponentInChildren<SpriteRenderer>();
                     rend.enabled = false;
+                    muteki = 0.1f;
                 }
             }
             if (moveColider != null && sp != null) 
             {
-                if(loopCount < sp.GetListCount())
+                if (loopCount < sp.GetListCount())
                 {
                     Vector3 vel = sp.GetObjList()[loopCount].transform.position - transform.position;
-                    moveColider.transform.localScale = new Vector3(vel.magnitude + 1, 1, 1);
+                    moveColider.transform.localScale = new Vector3(vel.magnitude +3, 1, 1);
                     float ang = Mathf.Atan2(vel.y, vel.x) * 180 / Mathf.PI + 180;
                     moveColider.transform.position = transform.position;
                     moveColider.transform.rotation = Quaternion.Euler(0, 0, ang);
+                    muteki = 0.1f;
                 }
                
             }
@@ -575,8 +577,6 @@ public class PlayerControl : MonoBehaviour
                 rigid.velocity = new Vector3(0, 0, 0);
                 anim.SetBool("Senku2", true);
                 stoptime = 1.5f;
-                Debug.Log(loopCount);
-                Debug.Log(sp.GetListCount());
 
                 Vector3 senku;
                 if (loopCount < sp.GetListCount())
@@ -612,7 +612,7 @@ public class PlayerControl : MonoBehaviour
                 
 
             }
-            if (lockSp != null && sp.GetListCount() == loopCount)
+            if (lockSp != null && sp.GetListCount() <= loopCount)
             {
                 for (int i = 0; i < sp.GetListCount(); i++)
                 {
@@ -629,6 +629,7 @@ public class PlayerControl : MonoBehaviour
                 stoptime = 1.5f;
                 Destroy(lockSp);
                 Destroy(moveColider);
+                loopCount = 0;
                 kamae = false;
             }
         }
