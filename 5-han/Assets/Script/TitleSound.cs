@@ -8,11 +8,12 @@ public class TitleSound : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(!GameObject.Find("TitleBGM"))
+        if(!Data.titleBGMFlag)
         {
             GameObject instance =
                     (GameObject)Instantiate(titleBGM,
                     new Vector3(0, 0, 0.0f), Quaternion.identity);
+            Data.titleBGMFlag = true;
         }
       
     }
