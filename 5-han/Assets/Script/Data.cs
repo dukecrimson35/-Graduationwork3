@@ -36,6 +36,8 @@ public  class Data : MonoBehaviour
     public static float bgmVol = 1;
     public static float seVol = 1;
 
+    public static bool titleBGMFlag = false;
+
     //public static bool shopOpenFlag = false;
 
 
