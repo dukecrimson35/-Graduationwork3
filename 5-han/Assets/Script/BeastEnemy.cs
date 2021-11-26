@@ -89,7 +89,7 @@ public class BeastEnemy : MonoBehaviour
         #region 警戒モード
         if (state == State.careful)
         {
-            if(speed <= 5)
+            if(speed <= 2)
             {
                 speed += Time.deltaTime;
             }

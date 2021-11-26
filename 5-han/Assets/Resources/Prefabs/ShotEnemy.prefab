@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseEnemyHp: 10
-  Texture: {fileID: 0}
+  Texture: {fileID: 6536852726436813979}
   enemyType: 0
   deathAnim: {fileID: 0}
   se: {fileID: 0}
@@ -376,7 +376,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 1160138864873310728, guid: 7c30bad137501c049922445f0ac87611,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

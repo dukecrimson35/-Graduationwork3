@@ -20,6 +20,9 @@ public class BaseEnemy : MonoBehaviour
     public GameObject deathAnim;//死亡アニメーションオブジェクト
     private AudioSource audioSource;
     public AudioClip se;//死亡時se
+    
+    SpriteRenderer sprite;//フェードイン用スプライト
+
     void Start()
     {
         damage = false;
@@ -29,11 +32,17 @@ public class BaseEnemy : MonoBehaviour
         player = GameObject.Find("Player");
         playerPos = player.transform.position;
         audioSource = GetComponent<AudioSource>();
+
+        sprite = Texture.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (sprite.color.a <= 1)
+        {
+            sprite.color += new Color(0, 0, 0, Time.deltaTime*4);
+        }
         playerPos = player.transform.position;//プレイヤーの位置取得
         //if(playerPos.x - transform.position.x >= 0)
         //{
