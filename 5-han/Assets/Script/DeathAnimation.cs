@@ -18,6 +18,7 @@ public class DeathAnimation : MonoBehaviour
         sprite.color -= new Color(0,0,0,0.01f);
         if(sprite.color.a <= 0)
         {
+            Destroy(this.gameObject);
             Destroy(this);
         }
     }

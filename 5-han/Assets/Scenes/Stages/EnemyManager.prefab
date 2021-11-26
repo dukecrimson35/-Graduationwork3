@@ -61,3 +61,5 @@ MonoBehaviour:
     type: 3}
   flyenemyDeath: {fileID: 7976731375437133016, guid: 5361eced7f5c08b47b8275c40c67513f,
     type: 3}
+  Enemy_hole: {fileID: 5706634497377904733, guid: d0e13f1e50ddd6f47807e882a8939d12,
+    type: 3}
