@@ -47,7 +47,6 @@ public class BeastEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         #region 通常モード
         if (state == State.normal)
         {
@@ -90,7 +89,10 @@ public class BeastEnemy : MonoBehaviour
         #region 警戒モード
         if (state == State.careful)
         {
-            speed += Time.deltaTime;
+            if(speed <= 5)
+            {
+                speed += Time.deltaTime;
+            }
             playerPos = player.transform.position;//プレイヤーのポジション取得
             //if (Mathf.Abs(transform.position.x - playerPos.x) > 3)//遠くにいるなら
             //{

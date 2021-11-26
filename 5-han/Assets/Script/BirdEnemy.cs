@@ -118,7 +118,7 @@ public class BirdEnemy : MonoBehaviour
         }
         if(state == State.wait)
         {
-            rigidbody.velocity = new Vector3();
+            rigidbody.velocity = new Vector3(0,-0.2f,0);
             count += Time.deltaTime;
             //攻撃待機
             if(count >= 0.75f)//カウントが進んだら
@@ -167,7 +167,7 @@ public class BirdEnemy : MonoBehaviour
                 transform.position = new Vector3(x, y, 0);
             }
             
-            if(transform.position.y >= defaultY)//元の高さに戻ったら
+            if(transform.position.y > defaultY)//元の高さに戻ったら
             {
                 state = State.wait;
             }
