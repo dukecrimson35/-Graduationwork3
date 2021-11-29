@@ -677,6 +677,13 @@ public class PlayerControl : MonoBehaviour
     }
     public void Damage(int _damage)
     {
+
+        anim.SetBool("Senku", false);
+        anim.SetBool("Senku2", false);
+        anim.SetBool("Walk", false);
+        anim.SetBool("Damage", true);
+        anim.SetBool("Power", false);
+        anim.SetBool("Power2", false);
         audio.PlayOneShot(damage);
         if (muteki < 0)
         {
@@ -702,13 +709,16 @@ public class PlayerControl : MonoBehaviour
         muteki -= Time.deltaTime;
         if (muteki < 0)
         {
-            anim.SetBool("Damage", false);
 
             gameObject.layer = 8;
         }
         else if (muteki > 0)
         {
             gameObject.layer = 17;
+        }
+        if (muteki < 0.5f)
+        {
+            anim.SetBool("Damage", false);
         }
         if (hp <= 0)
         {
