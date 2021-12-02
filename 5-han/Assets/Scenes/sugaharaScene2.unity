@@ -836,6 +836,7 @@ MonoBehaviour:
     type: 3}
   flyenemyDeath: {fileID: 7976731375437133016, guid: 5361eced7f5c08b47b8275c40c67513f,
     type: 3}
+  Enemy_hole: {fileID: 0}
 --- !u!4 &137018037
 Transform:
   m_ObjectHideFlags: 0
@@ -10321,13 +10322,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6955860857028433179, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
         type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955860857028433179, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 40396589ad286934fa22ee3e6a15e0fd, type: 2}
+    - target: {fileID: 6955860857028433180, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 6955860857028433180, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
         type: 3}
       propertyPath: RotationModule.enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955860857028433180, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955860857028433180, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955860857028433180, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 6955860857028433180, guid: 00ae2b9fa092fbd4597055bf7be5d9a9,
         type: 3}
