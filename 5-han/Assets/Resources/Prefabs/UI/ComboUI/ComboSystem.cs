@@ -7,6 +7,7 @@ public class ComboSystem : MonoBehaviour
 {
 
     public Text text;
+    public Text text2;
     public GameObject player;
     private PlayerControl playerControl;
 
@@ -27,11 +28,11 @@ public class ComboSystem : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            a++;
-            Debug.Log(a);
-        }
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    a++;
+        //    Debug.Log(a);
+        //}
 
 
         //if (playerControl.GetHitCount() > 1 && !Data.voiceFlag)
@@ -60,29 +61,29 @@ public class ComboSystem : MonoBehaviour
 
         //    string strNum = "";
 
-        //    int keta =a.ToString().Length;
+        //    int keta = a.ToString().Length;
 
         //    string hitString = a.ToString();
 
         //    int count = keta;
 
         //    for (int i = 0; i < keta; i++)
-        //    {               
+        //    {
         //        int n = int.Parse(hitString[i].ToString());
 
-        //        if(count >1 && n == 1)
+        //        if (count > 1 && n == 1)
         //        { }
         //        else
         //        {
         //            strNum += kansuuzi[n];
-        //        }              
+        //        }
 
         //        if (count > -1)
         //        {
-        //            if(n != 0)
+        //            if (n != 0)
         //            {
         //                strNum += kansuuzi10[count - 1];
-        //            }                  
+        //            }
         //        }
 
         //        count--;
@@ -93,6 +94,7 @@ public class ComboSystem : MonoBehaviour
         if (playerControl.GetHitCount() > 1 && !Data.voiceFlag)
         {
             text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+            text2.color = new Color(text.color.r, text.color.g, text.color.b, 1);
 
             string strNum = "";
             int keta = playerControl.GetHitCount().ToString().Length;
@@ -121,13 +123,15 @@ public class ComboSystem : MonoBehaviour
                 count--;
             }
 
-            text.text = strNum + "連撃";
+            text.text = strNum;
         }
         else
         {
             while (text.color.a > 0)
             {
                 text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 1);
+                text2.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 1);
+
                 //text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 2f);
             }
         }

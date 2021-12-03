@@ -34,14 +34,22 @@ public class BaseEnemy : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         sprite = Texture.GetComponent<SpriteRenderer>();
+        if (enemyType != 10)//九尾ボスの分身以外なら
+        {
+            //α値を0に
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (sprite.color.a <= 1)
+        if (enemyType != 10)//九尾ボスの分身以外なら
         {
-            sprite.color += new Color(0, 0, 0, Time.deltaTime*4);
+            if (sprite.color.a <= 1)
+            {
+                sprite.color += new Color(0, 0, 0, Time.deltaTime * 4);
+            }
         }
         playerPos = player.transform.position;//プレイヤーの位置取得
         //if(playerPos.x - transform.position.x >= 0)
