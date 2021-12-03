@@ -38,6 +38,8 @@ public  class Data : MonoBehaviour
 
     public static bool titleBGMFlag = false;
 
+    public static bool bossWallStartFlag = false;
+
     //public static bool shopOpenFlag = false;
 
 
