@@ -43,7 +43,7 @@ public class bossspawn : MonoBehaviour
         }
         if (EnemyMove && !Data.voiceFlag)
         {
-            BossCamera.depth = -2;
+            //BossCamera.depth = -2;
         }
     }
 
