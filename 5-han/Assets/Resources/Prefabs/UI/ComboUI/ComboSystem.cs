@@ -11,8 +11,13 @@ public class ComboSystem : MonoBehaviour
     private PlayerControl playerControl;
 
     private int poolNum;
-   
- 
+
+    private int a = 0;
+
+
+    private string[] kansuuzi10 = new string[] { "", "十", "百","千"};
+    private string[] kansuuzi = new string[] {"", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
+
 
     void Start()
     {
@@ -22,11 +27,101 @@ public class ComboSystem : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            a++;
+            Debug.Log(a);
+        }
 
-        if(playerControl.GetHitCount()> 1 && !Data.voiceFlag)
+
+        //if (playerControl.GetHitCount() > 1 && !Data.voiceFlag)
+        //{
+        //    text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+
+        //    string strNum = "";
+
+        //    int keta = playerControl.GetHitCount().ToString().Length;
+
+        //    string hitString = playerControl.GetHitCount().ToString();
+
+        //    int count = keta;
+        //    for (int i = 0; i < keta; i++)
+        //    {
+        //        strNum += int.Parse(hitString[i].ToString());
+        //        strNum += kansuuzi10[count];
+        //        count--;
+        //    }
+
+        //    text.text = strNum + "連撃";
+        //}
+        //if (a > 1 && !Data.voiceFlag)
+        //{
+        //    text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+
+        //    string strNum = "";
+
+        //    int keta =a.ToString().Length;
+
+        //    string hitString = a.ToString();
+
+        //    int count = keta;
+
+        //    for (int i = 0; i < keta; i++)
+        //    {               
+        //        int n = int.Parse(hitString[i].ToString());
+
+        //        if(count >1 && n == 1)
+        //        { }
+        //        else
+        //        {
+        //            strNum += kansuuzi[n];
+        //        }              
+
+        //        if (count > -1)
+        //        {
+        //            if(n != 0)
+        //            {
+        //                strNum += kansuuzi10[count - 1];
+        //            }                  
+        //        }
+
+        //        count--;
+        //    }
+
+        //    text.text = strNum + "連撃";
+        //}
+        if (playerControl.GetHitCount() > 1 && !Data.voiceFlag)
         {
             text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
-            text.text = playerControl.GetHitCount().ToString() + "連撃";
+
+            string strNum = "";
+            int keta = playerControl.GetHitCount().ToString().Length;
+            int count = keta;
+            string hitString = playerControl.GetHitCount().ToString();
+
+            for (int i = 0; i < keta; i++)
+            {
+                int n = int.Parse(hitString[i].ToString());
+
+                if (count > 1 && n == 1)
+                { }
+                else
+                {
+                    strNum += kansuuzi[n];
+                }
+
+                if (count > -1)
+                {
+                    if (n != 0)
+                    {
+                        strNum += kansuuzi10[count - 1];
+                    }
+                }
+
+                count--;
+            }
+
+            text.text = strNum + "連撃";
         }
         else
         {
