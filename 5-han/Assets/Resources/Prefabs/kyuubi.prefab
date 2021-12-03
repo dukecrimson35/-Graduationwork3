@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 364578007260988757}
   - component: {fileID: 364578007260988756}
   - component: {fileID: 364578007260988759}
+  - component: {fileID: 5979210990664124523}
   m_Layer: 10
   m_Name: kyuubi
   m_TagString: BossEnemy
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 2857278840599988529, guid: 96d51a6b67299ec4aa386eaf4c523b18,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,6 +136,26 @@ MonoBehaviour:
   bullet: {fileID: 6068038905314676613, guid: 460cbdf208379224e857711418993815, type: 3}
   hitGround: 0
   bossspawn: {fileID: 0}
+  avatar: {fileID: 1012788992456724242, guid: 0e7b95d3f1418974ab79ab2fa7659f32, type: 3}
+--- !u!95 &5979210990664124523
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364578007260988754}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fcd2eff868c309e4e8654b78666bb4e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &364578007184090901
 PrefabInstance:
   m_ObjectHideFlags: 0
