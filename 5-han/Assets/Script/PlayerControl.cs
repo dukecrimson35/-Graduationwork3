@@ -313,8 +313,16 @@ public class PlayerControl : MonoBehaviour
                     float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                     col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
-                    transform.position += senku * len - senku * 2;
-                    AfterImage(-(senku * len + senku * 2), -(senku * len + senku * 2) / 2);
+                    if (look.GetLookObject().tag == "BossEnemy")
+                    {
+                        transform.position += senku * len - senku * 4;
+                        AfterImage(-(senku * len + senku * 4), -(senku * len + senku * 4) / 2);
+                    }
+                    else
+                    {
+                        transform.position += senku * len - senku * 2;
+                        AfterImage(-(senku * len - senku * 2), -(senku * len - senku * 2) / 2);
+                    }
                     //   SenkuEffect((senku * len + senku * 2) / 2);
                     if (moveColider != null)
                     {
@@ -352,8 +360,16 @@ public class PlayerControl : MonoBehaviour
                     float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
                     col.transform.rotation = Quaternion.Euler(0, 0, ang);
 
-                    transform.position += senku * len + senku * 2;
-                    AfterImage(-(senku * len + senku * 2), -(senku * len + senku * 2) / 2);
+                    if (look.GetLookObject().tag == "BossEnemy")
+                    {
+                        transform.position += senku * len + senku * 4;
+                        AfterImage(-(senku * len + senku * 4), -(senku * len + senku * 4) / 2);
+                    }
+                    else
+                    {
+                        transform.position += senku * len + senku * 2;
+                        AfterImage(-(senku * len + senku * 2), -(senku * len + senku * 2) / 2);
+                    }
                     //   SenkuEffect((senku * len + senku * 2) / 2);
                     if (moveColider != null)
                     {
