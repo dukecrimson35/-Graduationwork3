@@ -48,6 +48,7 @@ public class SceneManagement : MonoBehaviour
         Application.targetFrameRate = 144;
 
         Data.voiceFlag = false;
+        Data.bossWallStartFlag = false;
 
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
