@@ -10,6 +10,7 @@ public class KyuubiAvatar : MonoBehaviour
     Vector3 playerPos;
     bool leftMove;//左右どちらに移動するか
     bool onGround;//地面にいるかどうか
+    public int junpP;//ジャンプ力
 
     Rigidbody rigidbody;
 
@@ -17,7 +18,10 @@ public class KyuubiAvatar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
+        playerPos = player.transform.position;
+        onGround = false;
     }
 
     // Update is called once per frame
@@ -42,6 +46,20 @@ public class KyuubiAvatar : MonoBehaviour
             {
                 leftMove = true;
                 speed = 1;
+            }
+        }
+
+        if(onGround == true)
+        {
+            if (transform.position.x - playerPos.x >= 0)
+            {
+                rigidbody.AddForce(new Vector3(-700, 300, 0) * junpP);
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            if (transform.position.x - playerPos.x < 0)
+            {
+                rigidbody.AddForce(new Vector3(700, 300, 0) * junpP);
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }
         }
     }

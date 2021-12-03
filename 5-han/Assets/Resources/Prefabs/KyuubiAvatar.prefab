@@ -228,7 +228,8 @@ MonoBehaviour:
   baseEnemyHp: 10
   Texture: {fileID: 8631934334327111383}
   enemyType: 10
-  deathAnim: {fileID: 0}
+  deathAnim: {fileID: 5376096546644676527, guid: 9be915032388f2447881c90564950fa4,
+    type: 3}
   se: {fileID: 0}
 --- !u!114 &430946431782170614
 MonoBehaviour:
@@ -242,6 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fb539e551f21c4da28614850a46441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  Texture: {fileID: 8631934334327111383}
+  junpP: 2
 --- !u!1 &6633446218100394350
 GameObject:
   m_ObjectHideFlags: 0
