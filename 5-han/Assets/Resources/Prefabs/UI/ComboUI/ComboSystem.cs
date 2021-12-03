@@ -27,11 +27,11 @@ public class ComboSystem : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            a++;
-            Debug.Log(a);
-        }
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    a++;
+        //    Debug.Log(a);
+        //}
 
 
         //if (playerControl.GetHitCount() > 1 && !Data.voiceFlag)
@@ -60,29 +60,29 @@ public class ComboSystem : MonoBehaviour
 
         //    string strNum = "";
 
-        //    int keta =a.ToString().Length;
+        //    int keta = a.ToString().Length;
 
         //    string hitString = a.ToString();
 
         //    int count = keta;
 
         //    for (int i = 0; i < keta; i++)
-        //    {               
+        //    {
         //        int n = int.Parse(hitString[i].ToString());
 
-        //        if(count >1 && n == 1)
+        //        if (count > 1 && n == 1)
         //        { }
         //        else
         //        {
         //            strNum += kansuuzi[n];
-        //        }              
+        //        }
 
         //        if (count > -1)
         //        {
-        //            if(n != 0)
+        //            if (n != 0)
         //            {
         //                strNum += kansuuzi10[count - 1];
-        //            }                  
+        //            }
         //        }
 
         //        count--;
