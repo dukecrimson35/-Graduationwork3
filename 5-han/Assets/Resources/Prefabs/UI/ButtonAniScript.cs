@@ -22,6 +22,7 @@ public class ButtonAniScript : MonoBehaviour
     private bool stopButtonFlag = false;
 
     private Button button;
+    private bool startalpha = false;
 
     void Start()
     {
@@ -33,20 +34,27 @@ public class ButtonAniScript : MonoBehaviour
             sprites.Add(sp);
         }
         StartCoroutine(Coroutine());
+        StartCoroutine(TextStartAlpha());
         alpha = text.color.a;
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
 
+    }
+
+    IEnumerator TextStartAlpha()
+    {
+        yield return new WaitForSecondsRealtime(0.6f);
+        startalpha = true;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (text.color.a < 1 && !textFlag)
+        if (text.color.a < 1 && !textFlag && startalpha)
         {
             text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + Time.deltaTime * 0.5f);
         }
-       
+
 
         if (backFlag)
         {
@@ -82,6 +90,7 @@ public class ButtonAniScript : MonoBehaviour
     { return backFlag; }
 
     float delay = 0.08f;
+    //float delay = 0.15f;
     IEnumerator Coroutine()
     {
         stopButtonFlag = true;
