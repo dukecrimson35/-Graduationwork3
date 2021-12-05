@@ -99,8 +99,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.8654394, y: 2.989355, z: 0.2}
-  m_Center: {x: 0.006854534, y: -0.44612527, z: 0}
+  m_Size: {x: 3.8654394, y: 2.5642278, z: 0.2}
+  m_Center: {x: 0.006854534, y: -0.23356164, z: 0}
 --- !u!54 &-1421086259124173136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -230,6 +230,7 @@ MonoBehaviour:
   enemyType: 10
   deathAnim: {fileID: 5376096546644676527, guid: 9be915032388f2447881c90564950fa4,
     type: 3}
+  Ora: {fileID: 0}
   se: {fileID: 0}
 --- !u!114 &430946431782170614
 MonoBehaviour:
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   Texture: {fileID: 8631934334327111383}
-  junpP: 2
+  junpP: 0.01
 --- !u!1 &6633446218100394350
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +420,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2857278840599988529, guid: 96d51a6b67299ec4aa386eaf4c523b18,
+  m_Sprite: {fileID: -1211823242991619023, guid: 61784a3bc94192f4891851bda087e133,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.7490196}
   m_FlipX: 0
