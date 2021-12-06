@@ -23,6 +23,8 @@ public class SceneManagement : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip bgm;
+    public AudioClip titleCallSE;
+    public AudioClip titleCallSE2;
 
     public bool destroyFlag = false;
 
@@ -59,22 +61,21 @@ public class SceneManagement : MonoBehaviour
             bossspawnScript = bossSoawnObj.GetComponent<bossspawn>();
         }
 
+        //if(sceneName == "TitleScene")
+        //{
+        //    if (titleCallSE != null) StartCoroutine(PlayTitleCall());//タイトルコール呼び出し
+        //}
+        
+
         if (sceneName == "Stage01" || sceneName == "Stage02" || sceneName == "Stage03")
         {
             player = GameObject.FindGameObjectWithTag("Player");
             playerControl = player.GetComponent<PlayerControl>();
-            if(sceneName == "Stage01")
-            {
-                Data.stageNum = 1;
-            }
-            else if (sceneName == "Stage02")
-            {
-                Data.stageNum = 2;
-            }
-            else if (sceneName == "Stage03")
-            {
-                Data.stageNum = 3;
-            }
+
+            if      (sceneName == "Stage01") Data.stageNum = 1;
+            else if (sceneName == "Stage02") Data.stageNum = 2;
+            else if (sceneName == "Stage03") Data.stageNum = 3;
+
         }
 
         if(bgm != null)
@@ -99,6 +100,17 @@ public class SceneManagement : MonoBehaviour
         {
             Debug.Log("BGMが入ってないよ");
         }
+    }
+
+    float seVol = 5;
+    IEnumerator PlayTitleCall()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        float v = audioSource.volume;
+        audioSource.volume = seVol;
+        audioSource.volume = v;
+        audioSource.PlayOneShot(titleCallSE);
+        audioSource.volume = v;
     }
 
     float second = 100;
@@ -141,6 +153,7 @@ public class SceneManagement : MonoBehaviour
     void Update()
     {
         audioSource.volume = 0.1f * Data.bgmVol;
+
         switch (Data.bgm)
         {
             case 0:
