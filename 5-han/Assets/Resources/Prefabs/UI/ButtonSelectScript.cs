@@ -57,7 +57,7 @@ public class ButtonSelectScript : MonoBehaviour
         float vert = Input.GetAxis("Vertical");
         float vert2 = Input.GetAxis("CrossUpDown");
 
-        
+        audioSource.volume = Data.seVol;
 
 
         if (vert > 0.3f && !delayFlag && pos > 0)
