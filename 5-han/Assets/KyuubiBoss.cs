@@ -44,6 +44,11 @@ public class KyuubiBoss : MonoBehaviour
 
     //ザコ呼び出し
     public GameObject beastEnemy;//呼び出すザコ敵
+    public GameObject holeBase;//呼び出す予兆基礎
+    public GameObject hole01;//呼び出す予兆1
+    public GameObject hole02;//呼び出す予兆2
+    Vector3 spawnP01;//敵発生位置１
+    Vector3 spawnP02;//敵発生位置１
 
     Rigidbody rigidbody;
 
@@ -90,6 +95,10 @@ public class KyuubiBoss : MonoBehaviour
         onGround = false;
         moveFlag = false;
         runoutdis = Random.Range(6, 10);
+
+        //敵呼び出し用
+        spawnP01 = hole01.transform.position;
+        spawnP02 = hole02.transform.position;
     }
 
     // Update is called once per frame
@@ -215,10 +224,20 @@ public class KyuubiBoss : MonoBehaviour
             if (Type == 0)
             {
                 animator.Play("Call");
-                Instantiate(beastEnemy, new Vector3(transform.position.x-10, transform.position.y + 30, transform.position.z), new Quaternion());
-                Instantiate(beastEnemy, new Vector3(transform.position.x+10, transform.position.y + 30, transform.position.z), new Quaternion());
-                Instantiate(beastEnemy, new Vector3(transform.position.x-20, transform.position.y + 30, transform.position.z), new Quaternion());
-                Instantiate(beastEnemy, new Vector3(transform.position.x+20, transform.position.y + 30, transform.position.z), new Quaternion());
+                Instantiate(holeBase, spawnP01, new Quaternion());//予兆作成
+                Instantiate(holeBase, spawnP02, new Quaternion());//予兆作成
+                if(count >= 2)
+                {
+                    Instantiate(beastEnemy, spawnP01, new Quaternion());
+                    Instantiate(beastEnemy, spawnP02, new Quaternion());
+                    Instantiate(holeBase, spawnP01, new Quaternion());//予兆作成
+                    Instantiate(holeBase, spawnP02, new Quaternion());//予兆作成
+                }
+                if (count >= 4)
+                {
+                    Instantiate(beastEnemy, spawnP01, new Quaternion());
+                    Instantiate(beastEnemy, spawnP02, new Quaternion());
+                }
                 Type++;
             }
 
@@ -234,7 +253,9 @@ public class KyuubiBoss : MonoBehaviour
         #region ダウン状態
         if(state == State.Down)//ダウン状態
         {
-            if(count >= 10)//十秒で切り替え
+            count += Time.deltaTime;
+
+            if(count >= 2)//十秒で切り替え
             {
                 state = State.Bunsin;//分身モード切替
                 count = 0;

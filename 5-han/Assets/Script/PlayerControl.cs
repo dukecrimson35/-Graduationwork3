@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public AudioClip senkugiri;
     public AudioClip damage;
+    public AudioClip damageVoice;
     public AudioClip dead;
     public AudioClip powerslash;
     public AudioClip coin;
@@ -40,7 +41,10 @@ public class PlayerControl : MonoBehaviour
     int hitCount;
     int loopCount;
     Animator anim;
+    bool movieFlag;
+    float movieTime;
     float blinktime = 0;
+    bool clearFlag;
     enum Direc
     {
         Right,Left,
@@ -69,7 +73,8 @@ public class PlayerControl : MonoBehaviour
         itemManagerScript = itemManager.GetComponent<ItemManager>();
         deadFlag = false;
         camera = GameObject.Find("Main Camera").GetComponent<LooKCamera>();
-      
+        movieFlag = false;
+        movieTime = 5;
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -79,6 +84,11 @@ public class PlayerControl : MonoBehaviour
             Money moneyScript = collision.gameObject.GetComponent<Money>();
             itemManagerScript.UpCoin(moneyScript.GetMoney());
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "DropItem")
+        {
+            audio.PlayOneShot(coin);
+            movieFlag = true;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -98,14 +108,21 @@ public class PlayerControl : MonoBehaviour
         if (Time.timeScale <= 0) return;
         if (!itemManagerScript.GetShopFlag() && !Data.voiceFlag) 
         {
-            Move();
-            Direction();            
-            SenkuGiri();
-            Special();
-            SpecialY();
-            IsSenkuHit();
-            CheckDead();
-            Blink();
+            if (!movieFlag) 
+            {
+                Move();
+                Direction();
+                SenkuGiri();
+                Special();
+                SpecialY();
+                IsSenkuHit();
+                CheckDead();
+                Blink();
+            }            
+            else
+            {
+                MovieUpdate();
+            }
         }
         else
         {
@@ -159,7 +176,6 @@ public class PlayerControl : MonoBehaviour
 
             anim.SetBool("Walk", false);
 
-
             if (!kamae && Input.GetAxis("Horizontal") == -1)
             {
 
@@ -201,6 +217,19 @@ public class PlayerControl : MonoBehaviour
         if (currentDirec == Direc.Right)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+    private void MovieUpdate()
+    {
+        movieTime -= Time.deltaTime;
+        if (movieTime >= 0) 
+        {
+            rigid.velocity = Vector3.zero;
+            transform.position += new Vector3(0.05f, 0, 0);          
+        }
+        else
+        {
+            movieFlag = false;
         }
     }
     private void SenkuGiri()
@@ -701,6 +730,8 @@ public class PlayerControl : MonoBehaviour
         anim.SetBool("Power", false);
         anim.SetBool("Power2", false);
         audio.PlayOneShot(damage);
+        audio.PlayOneShot(damageVoice);
+
         if (muteki < 0)
         {
             hp -= _damage;
@@ -776,5 +807,9 @@ public class PlayerControl : MonoBehaviour
 
             sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1.0f);
         }
+    }
+    public bool GetClearFlag()
+    {
+        return clearFlag;
     }
 }

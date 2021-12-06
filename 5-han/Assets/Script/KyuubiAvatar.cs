@@ -31,6 +31,7 @@ public class KyuubiAvatar : MonoBehaviour
         moveFlag = false;
         animator = Texture.GetComponent<Animator>();
         runoutdis = Random.Range(6, 10);
+        speed = 1;
     }
 
     // Update is called once per frame
