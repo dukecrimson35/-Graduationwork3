@@ -33,14 +33,36 @@ public class LookOn : MonoBehaviour
     }
     void SetLookObject()
     {
-        for (int a = 0; a < LookList.Count; a++)
+
+        if (LookObject != null)
         {
-            if (Mathf.Abs((LookList[a].transform.position - transform.position).magnitude) <
-              Mathf.Abs((LookObject.transform.position - transform.position).magnitude)) 
+            for (int a = 0; a < LookList.Count; a++)
             {
-                LookObject = LookList[a];
+                if (LookList[a] != null && transform != null)
+                {
+                    if (Mathf.Abs((LookList[a].transform.position - transform.position).magnitude) <
+                   Mathf.Abs((LookObject.transform.position - transform.position).magnitude))
+                    {
+                        LookObject = LookList[a];
+                    }
+                }
             }
         }
+        else
+        {
+            for (int a = 0; a < LookList.Count; a++)
+            {
+                if (LookList[a] != null && gameObject != null) 
+                {
+                   
+                        LookObject = LookList[a];
+                        break;
+                  
+                }
+
+            }
+        }
+     
     }
     public GameObject GetLookObject()
     {
