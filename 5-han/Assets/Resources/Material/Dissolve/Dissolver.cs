@@ -11,7 +11,15 @@ public class Dissolver : MonoBehaviour
     void Start()
     {
         m_Material = GetComponent<Renderer>().material;
-        StartCoroutine("Animate2");
+       
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            StartCoroutine(Up());
+        }
     }
 
     IEnumerator Animate()
@@ -86,5 +94,42 @@ public class Dissolver : MonoBehaviour
 
             m_Material.SetFloat("_CutOff", t);
         }
+    }
+
+    IEnumerator Up()
+    { 
+        float t = 0;
+        bool fl = false;
+        float num = 5f;
+
+        while (true)
+        {
+            yield return m_Instruction;
+
+            //yield return new WaitForSeconds(0.05f);
+            //100,0.48
+            //200,0.465f
+            //300, 0.48
+            if (t>= 0.48f && !fl)
+            {
+                yield return new WaitForSeconds(0.7f);
+                fl = true;
+                num = 1f;
+            }
+
+            t += Time.deltaTime * (num + t/2);
+       
+            if (t >= 2)
+            {
+                break;
+            }
+
+
+            m_Material.SetFloat("_CutOff", t);
+        }
+        //yield return new WaitForSeconds(0.7f);
+        //m_Material.SetFloat("_CutOff", 0);
+        //yield return new WaitForSeconds(0.7f);
+        //StartCoroutine(Up());
     }
 }
