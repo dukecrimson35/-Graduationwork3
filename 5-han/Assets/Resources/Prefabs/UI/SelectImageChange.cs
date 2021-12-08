@@ -14,10 +14,15 @@ public class SelectImageChange : MonoBehaviour
     public Sprite[] sprites;
 
     public Image image;
+    public SpriteRenderer haikeisprite;
+
+    public GameObject haikei;
+
     
     void Start()
     {
         pos = bss.GetPos();
+        haikeisprite = haikei.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -27,7 +32,9 @@ public class SelectImageChange : MonoBehaviour
 
         if(pos < 3)
         {
-            image.sprite = sprites[pos];
+            //image.sprite = sprites[pos];
+            haikeisprite.sprite = sprites[pos];
+
         }
         
     }

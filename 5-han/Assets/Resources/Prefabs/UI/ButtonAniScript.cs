@@ -46,13 +46,20 @@ public class ButtonAniScript : MonoBehaviour
         startalpha = true;
     }
 
+
+    bool onealphaFlag = false;
     // Update is called once per frame
     void Update()
     {
 
-        if (text.color.a < 1 && !textFlag && startalpha)
+        if (text.color.a < 1 && !textFlag && startalpha && !onealphaFlag)
         {
             text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + Time.deltaTime * 0.5f);
+        }
+
+        if(text.color.a >= 1)
+        {
+            onealphaFlag = true;
         }
 
 
