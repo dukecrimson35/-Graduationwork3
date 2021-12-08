@@ -141,7 +141,7 @@ public class Dissolver : MonoBehaviour
         while(count < 1)
         {
             float alpha = 0;
-            alpha += Time.deltaTime * 1f;
+            alpha += Time.deltaTime * 20f;
             count += alpha;
             text1.color = new Color(text1.color.r, text1.color.g, text1.color.b, text1.color.a - alpha);
             text2.color = new Color(text2.color.r, text2.color.g, text2.color.b, text2.color.a - alpha);
@@ -155,11 +155,11 @@ public class Dissolver : MonoBehaviour
             image1.color = new Color(image1.color.r, image1.color.g, image1.color.b, image1.color.a - alpha);
             image2.color = new Color(image2.color.r, image2.color.g, image2.color.b, image2.color.a - alpha);
             image3.color = new Color(image3.color.r, image3.color.g, image3.color.b, image3.color.a - alpha);           
-            image4.color = new Color(image4.color.r, image4.color.g, image4.color.b, image4.color.a - alpha);  
-            
+            image4.color = new Color(image4.color.r, image4.color.g, image4.color.b, image4.color.a - alpha);
 
+            yield return new WaitForSeconds(0.05f);
 
-            if(count > 1)
+            if (count > 1)
             {
                 float reset = 0;
                 text1.color = new Color(text1.color.r, text1.color.g, text1.color.b, reset);
