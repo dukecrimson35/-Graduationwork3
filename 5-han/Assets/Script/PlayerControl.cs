@@ -170,6 +170,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
+            muteki = 0.1f;
             anim.SetBool("Senku", false);
             anim.SetBool("Senku2", false);
             anim.SetBool("Walk", false);
