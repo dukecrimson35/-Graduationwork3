@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1772192037132988291}
   - component: {fileID: 1772192037132988288}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: GameObject
   m_TagString: MovieArea
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 1772192037966667217}
   - component: {fileID: 1772192037966667216}
   - component: {fileID: 1772192037966667219}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: ClearItem2
   m_TagString: ClearItem
   m_Icon: {fileID: 0}
@@ -117,7 +117,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 10b96b09d4396824998dfdc962878d34, type: 3}
+  m_Sprite: {fileID: 1960259098083339500, guid: 1f682e29d63387445a086778b037b460,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -155,5 +156,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5579579
-  m_Center: {x: -0.17040515, y: -1.1483209, z: 0}
+  m_Radius: 0.9132063
+  m_Center: {x: 0.18484223, y: -1.1483209, z: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5993292810411646296}
   - component: {fileID: 5993292810411646294}
   - component: {fileID: 5993292810411646293}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: ClearItem3
   m_TagString: ClearItem
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5993292811505250053}
   - component: {fileID: 5993292811505250054}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: GameObject
   m_TagString: MovieArea
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2415487322912067557}
   - component: {fileID: 7460962606624016810}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: New Sprite Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -32,6 +32,7 @@ public class BirdBoss : MonoBehaviour
     Rigidbody rigid;
     BoxCollider collider;
     float changeColSize;
+    bool clearItemSpawnFlag;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -144,6 +145,12 @@ public class BirdBoss : MonoBehaviour
             if (BossEnemyHp <= 0)
             {
                 deadFlag = true;
+                if (!clearItemSpawnFlag)
+                {
+                    clearItemSpawnFlag = true;
+                    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem2"));
+                    drop.transform.position = transform.position;
+                }
                 Destroy(gameObject, 2.0f);
             }
             if (Input.GetKey(KeyCode.Q))

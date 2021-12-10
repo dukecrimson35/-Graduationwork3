@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6702260044783864834}
   - component: {fileID: 6702260044783864835}
   - component: {fileID: 6702260044783864832}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: ClearItem
   m_TagString: ClearItem
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6702260045804207696}
   - component: {fileID: 6702260045804207699}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: GameObject
   m_TagString: MovieArea
   m_Icon: {fileID: 0}

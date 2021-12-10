@@ -97,6 +97,7 @@ public class PlayerControl : MonoBehaviour
             //audio.PlayOneShot(coin);
             movieFlag = true;
             moviePos = (transform.position - collision.transform.position) / movieStartTime * Time.deltaTime;
+
             movieCurrentTime = movieStartTime;
 
             anim.SetBool("Senku", false);
@@ -157,6 +158,7 @@ public class PlayerControl : MonoBehaviour
             {
                 muteki = 0.1f;
                 MovieUpdate();
+                CheckDead();
                 Direction();
             }
         }
@@ -394,13 +396,13 @@ public class PlayerControl : MonoBehaviour
 
                     if (look.GetLookObject().tag == "BossEnemy")
                     {
-                        transform.position += senku * len - senku * 4;
-                        AfterImage(-(senku * len + senku * 4), -(senku * len + senku * 4) / 2);
+                        transform.position += senku * len - senku * 2;
+              //          AfterImage(-(senku * len + senku * 2), -(senku * len + senku * 3) / 2);
                     }
                     else
                     {
                         transform.position += senku * len - senku * 2;
-                        AfterImage(-(senku * len - senku * 2), -(senku * len - senku * 2) / 2);
+                 //       AfterImage(-(senku * len - senku * 2), -(senku * len - senku * 2) / 2);
                     }
                     //   SenkuEffect((senku * len + senku * 2) / 2);
                     if (moveColider != null)
