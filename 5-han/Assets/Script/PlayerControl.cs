@@ -569,7 +569,7 @@ public class PlayerControl : MonoBehaviour
 
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("X") && (inC == InputControl.X || inC == InputControl.N)) 
+            if (Input.GetButton("B") && (inC == InputControl.X || inC == InputControl.N)) 
             {
                 inC = InputControl.X;
                 anim.SetBool("Power", true);
@@ -592,7 +592,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonUp("X") && inC == InputControl.X)
+            if (Input.GetButtonUp("B") && inC == InputControl.X)
             {
                 audio.PlayOneShot(powerslash);
                 inC = InputControl.N;
@@ -619,7 +619,7 @@ public class PlayerControl : MonoBehaviour
       
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("Y") && (inC == InputControl.Y || inC == InputControl.N) && loopCount == 0) 
+            if (Input.GetButton("X") && (inC == InputControl.Y || inC == InputControl.N) && loopCount == 0) 
             {
                
                 rigid.velocity = new Vector3(0, 0, 0);
@@ -641,7 +641,7 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-        if (!Input.GetButton("Y") && inC == InputControl.Y)
+        if (!Input.GetButton("X") && inC == InputControl.Y)
         {
             if (moveColider == null && sp != null)
             {
