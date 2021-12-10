@@ -5,6 +5,7 @@ using UnityEngine;
 public class birdBullet : MonoBehaviour
 {
     public GameObject bossEnemy;
+    public GameObject player;
     Vector3 pos;
     public bool RMove;
     public bool LMove;
@@ -14,6 +15,7 @@ public class birdBullet : MonoBehaviour
     {
         pos = Vector3.zero;
         bossEnemy = GameObject.FindGameObjectWithTag("BossEnemy");
+        player = GameObject.FindGameObjectWithTag("Player");
         RMove = bossEnemy.GetComponent<BirdBoss>().GetRight();
         LMove = bossEnemy.GetComponent<BirdBoss>().GetLeft();
         deadSecond = 0;
@@ -23,21 +25,26 @@ public class birdBullet : MonoBehaviour
     void Update()
     {
         if (Time.timeScale <= 0) return;
-        if (LMove && !RMove)
-        {
-            pos.x -= 0.1f;
-        }
-        if (!LMove && RMove)
-        {
-            pos.x += 0.1f;
-        }
+        //if (LMove && !RMove)
+        //{
+        //    pos.x -= 0.1f;
+        //}
+        //if (!LMove && RMove)
+        //{
+        //    pos.x += 0.1f;
+        //}
         deadSecond += Time.deltaTime;
-        if (deadSecond >= 2)
+        if (deadSecond >= 2.5f)
         {
             Destroy(gameObject);
         }
-        transform.position += pos * Time.deltaTime * 100;
-        pos = Vector3.zero;
+        if(deadSecond>=0.1f)
+        {
+            player.transform.position = Vector3.zero;
+        }
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
+        //transform.position += pos * Time.deltaTime * 100;
+        //pos = Vector3.zero;
     }
     private void OnCollisionEnter(Collision collision)
     {
