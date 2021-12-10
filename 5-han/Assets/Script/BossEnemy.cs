@@ -221,7 +221,7 @@ public class BossEnemy : MonoBehaviour
                     //voiceScript.SetKituneEndFlag();
                     Data.voiceFlag = true;
                 }
-                Destroy(gameObject,2.0f);
+                Destroy(gameObject, 2.0f);
             }
             if (Input.GetKey(KeyCode.Q))
             {
