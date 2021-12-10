@@ -5,6 +5,7 @@ using UnityEngine;
 public class BirdBoss : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject player;
     Animator anim;
     public int BossEnemyHp = 150;
     private float nextTime;
@@ -51,7 +52,6 @@ public class BirdBoss : MonoBehaviour
         Meleesecond = 0;
         Rangesecond = 0;
         ResetMelee = 0;
-        
     }
 
     // Update is called once per frame
@@ -65,6 +65,15 @@ public class BirdBoss : MonoBehaviour
         //移動処理
         if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
+            rigid.useGravity = false;
+            if(transform.localPosition.y<=-2.0f)
+            {
+                pos.y += 0.01f;
+            }
+            if(transform.localPosition.y==-2.0f)
+            {
+                pos.y = 0;
+            }
             if (BossEnemyHp <= 130)
             {
                 MoveMode = true;
@@ -84,13 +93,14 @@ public class BirdBoss : MonoBehaviour
             }
             //近接攻撃(突撃)
             Meleesecond += Time.deltaTime;
-            if (Meleesecond >= 7 && BossEnemyHp <= 50)
+            if (Meleesecond >= 7 && BossEnemyHp <= 150)
             {
                 AtkModeMelee = true;
             }
             if (AtkModeRange)
             {
                 ResetMelee += Time.deltaTime;
+                //anim.SetBool("Melee", true);
                 if (LMove && !RMove)
                 {
                     pos.x -= 0.06f;
@@ -98,34 +108,38 @@ public class BirdBoss : MonoBehaviour
                 }
                 if (!LMove && RMove)
                 {
-                    pos.x += 0.03f;
+                    pos.x += 0.06f;
                     this.transform.rotation = new Quaternion(0, 180, 0, 0);
                 }
                 if (ResetMelee >= 5)
                 {
                     Meleesecond = 0;
                     ResetMelee = 0;
+                    anim.SetBool("Melee", false);
                     AtkModeMelee = false;
                 }
             }
-            //遠距離攻撃処理
             Rangesecond += Time.deltaTime;
+
+            //遠距離攻撃処理
             if (hitGround)
             {
-                if (Rangesecond >= 0.5f)
-                {
-
-                }
                 if (Rangesecond >= 1.5f)
+                {
+                    anim.SetBool("Shot", true);
+                }
+                if (Rangesecond >= 2.5f)
                 {
                     Instantiate(bullet, this.transform.position, Quaternion.identity);
                     Rangesecond = 0;
                 }
+
             }
             if (Rangesecond == 0.0f)
             {
-
+                anim.SetBool("Shot", false);
             }
+
             //終わり
             if (BossEnemyHp <= 0)
             {
@@ -153,6 +167,7 @@ public class BirdBoss : MonoBehaviour
             if (deadFlag)
             {
                 //scenechangetime += Time.deltaTime;
+                anim.SetBool("Dead", true);
             }
             transform.position += pos;
             pos = Vector3.zero;
