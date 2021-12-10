@@ -38,6 +38,7 @@ public class BossEnemy : MonoBehaviour
     float changeColSize;
     bool cleaItemSpawnFlag;
     public float chargeTime;
+    public GameObject talkUI;
     void Start()
     {
         chargeTime = 0; 
@@ -208,6 +209,17 @@ public class BossEnemy : MonoBehaviour
                     cleaItemSpawnFlag = true;
                     GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem"));
                     drop.transform.position = transform.position;
+                }
+                if (GameObject.Find("TalkUICanvas(Clone)") == null)
+                {
+                    GameObject instance =
+                       (GameObject)Instantiate(talkUI,
+                       new Vector3(0, 0, 0.0f), Quaternion.identity);
+                    VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
+                    voiceScript.SetOniEndFlag();
+                    //voiceScript.SetToriEndFlag();   ←使うボスに応じて
+                    //voiceScript.SetKituneEndFlag();
+                    Data.voiceFlag = true;
                 }
                 Destroy(gameObject,2.0f);
             }

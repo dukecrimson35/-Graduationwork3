@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5765928, g: 0.46949297, b: 0.25045818, a: 1}
+  m_IndirectSpecularColor: {r: 0.57647014, g: 0.4693972, b: 0.2503144, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10399,6 +10399,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7320754751282558487, guid: cc0937082f0cec1408d3cc5fb130f238,
+        type: 3}
+      propertyPath: talkUI
+      value: 
+      objectReference: {fileID: 5396844019894130117, guid: a4e71ca848195204e8a8e9ef68a932ed,
+        type: 3}
     - target: {fileID: 7320754751282558487, guid: cc0937082f0cec1408d3cc5fb130f238,
         type: 3}
       propertyPath: bossspawn
