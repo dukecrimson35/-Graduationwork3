@@ -65,7 +65,7 @@ public class LockSpecial : MonoBehaviour
     }
    public void Charge(int hitcount)
     {
-        if(Input.GetButton("Y"))
+        if(Input.GetButton("X"))
         {
             scale += Time.deltaTime * 15 *( hitcount+1);
         }

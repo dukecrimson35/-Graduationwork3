@@ -14,20 +14,13 @@ public class KyuubiBoss : MonoBehaviour
     Renderer renderer;
     bool LMove;
     bool RMove;
-    bool MoveMode;
-    bool AtkModeMelee;
-    bool AtkModeRange;
-    public float Meleesecond;
-    public float Rangesecond;
-    public float ResetMelee;
     Vector3 pos;
-    public GameObject bullet;
     //public Sprite aliveBoss;
     //public Sprite deadBoss;
     public bool hitGround;//地面に当たっている判定
     public bossspawn bossspawn;
     Rigidbody rigid;
-    float changeColSize;
+    bool onFlag;//行動ループ開始フラグ
 
     //分身
     public GameObject avatar;//生成する分身
@@ -42,6 +35,12 @@ public class KyuubiBoss : MonoBehaviour
     bool onGround;//地面にいるかどうか
     public float junpP;//ジャンプ力
 
+    //鬼火
+    public GameObject onibiBase;//呼び出す鬼火
+    GameObject[] onibis;
+    Onibi[] onibiscripts;//鬼火のスクリプト配列
+    public GameObject[] TeleportPositions;//移動先オブジェクト配列
+
     //ザコ呼び出し
     public GameObject beastEnemy;//呼び出すザコ敵
     public GameObject holeBase;//呼び出す予兆基礎
@@ -49,6 +48,8 @@ public class KyuubiBoss : MonoBehaviour
     public GameObject hole02;//呼び出す予兆2
     Vector3 spawnP01;//敵発生位置１
     Vector3 spawnP02;//敵発生位置１
+    GameObject[] beasts;//ザコ配列
+    BaseEnemy[] scripts;//パーティクル消すよう
 
     Rigidbody rigidbody;
 
@@ -56,6 +57,7 @@ public class KyuubiBoss : MonoBehaviour
 
     Animator animator;//自身のアニメーター
 
+    bool cleaItemSpawnFlag = false;
     enum State
     {
         Wait,
@@ -77,16 +79,11 @@ public class KyuubiBoss : MonoBehaviour
         rigid.useGravity = false;
         LMove = true;
         RMove = false;
-        MoveMode = false;
-        AtkModeMelee = false;
-        AtkModeRange = false;
         pos = Vector3.zero;
-        Meleesecond = 0;
-        Rangesecond = 0;
-        ResetMelee = 0;
         state = State.Wait;//初期ステート設定
         animator = GetComponent<Animator>();//アニメーターの取得
         avatars = new GameObject[2];
+        onFlag = false;
 
         //分身モード移動用
         rigidbody = GetComponent<Rigidbody>();
@@ -96,9 +93,15 @@ public class KyuubiBoss : MonoBehaviour
         moveFlag = false;
         runoutdis = Random.Range(6, 10);
 
+        //鬼火モード用
+        onibis = new GameObject[4];
+        onibiscripts = new Onibi[4];
+
         //敵呼び出し用
         spawnP01 = hole01.transform.position;
         spawnP02 = hole02.transform.position;
+        beasts = new GameObject[2];
+        scripts = new BaseEnemy[2];
     }
 
     // Update is called once per frame
@@ -109,8 +112,28 @@ public class KyuubiBoss : MonoBehaviour
         {
             state = State.Bunsin;
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            state = State.Onibi;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            state = State.Call;
+        }
 
         if (Time.timeScale <= 0) return;//タイムスケールが0の時は実行しない
+
+        if(onFlag == true && Data.voiceFlag == false)
+        {
+            if(state == State.Wait)
+            {
+                state = State.Bunsin;
+            }
+        }
+        if(deadFlag)
+        {
+            state = State.Wait;
+        }
 
         #region　分身
         if (state == State.Bunsin)//分身モード
@@ -132,15 +155,22 @@ public class KyuubiBoss : MonoBehaviour
                     {
                         if (i == 0)
                         {
-                            avatars[i] = Instantiate(avatar, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), new Quaternion());
+                            avatars[i] = Instantiate(avatar, new Vector3(transform.position.x + 5, transform.position.y, transform.position.z), new Quaternion());
+                            KyuubiAvatar kyuubiAvatar = avatars[0].GetComponent<KyuubiAvatar>();
+                            kyuubiAvatar.SetDelayTime(5);
                         }
                         if (i == 1)
                         {
-                            avatars[i] = Instantiate(avatar, new Vector3(transform.position.x - 3, transform.position.y, transform.position.z), new Quaternion());
+                            avatars[i] = Instantiate(avatar, new Vector3(transform.position.x - 5, transform.position.y, transform.position.z), new Quaternion());
+                            KyuubiAvatar kyuubiAvatar = avatars[1].GetComponent<KyuubiAvatar>();
+                            kyuubiAvatar.SetDelayTime(3);
                         }
                     }
                 }
-                Type++;
+                if (count >= 4)
+                {
+                    Type++;
+                }
             }
 
             //分身と一緒に攻撃
@@ -178,12 +208,12 @@ public class KyuubiBoss : MonoBehaviour
                 {
                     if (transform.position.x - playerPos.x >= 0)
                     {
-                        rigidbody.AddForce(new Vector3(-700, 300 * junpP, 0));
+                        transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
                         //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     }
                     if (transform.position.x - playerPos.x < 0)
                     {
-                        rigidbody.AddForce(new Vector3(700, 300 * junpP, 0));
+                        transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
                         //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                     }
                 }
@@ -204,13 +234,94 @@ public class KyuubiBoss : MonoBehaviour
         {
             count += Time.deltaTime;
 
-            //鬼火発射
+            //遠吠えモーションと移動停止
+            if(Type == 0)
+            {
+                animator.Play("Call");
+                rigidbody.velocity = Vector3.zero;
+                if (count >= 0.2)
+                {
+                    Type++;
+                }
+            }
+
+            //鬼火生成
+            if (Type == 1)
+            {
+                onibis[0] = Instantiate(onibiBase, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), new Quaternion());
+                onibiscripts[0] = onibis[0].GetComponent<Onibi>();
+                onibis[1] = Instantiate(onibiBase, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), new Quaternion());
+                onibiscripts[1] = onibis[1].GetComponent<Onibi>();
+                onibis[2] = Instantiate(onibiBase, new Vector3(transform.position.x - 3, transform.position.y, transform.position.z), new Quaternion());
+                onibiscripts[2] = onibis[2].GetComponent<Onibi>();
+                onibis[3] = Instantiate(onibiBase, new Vector3(transform.position.x, transform.position.y - 3, transform.position.z), new Quaternion());
+                onibiscripts[3] = onibis[3].GetComponent<Onibi>();
+                for (int i = 0;i<4;i++)
+                {
+                    onibiscripts[i].SetMom(this.gameObject);
+                    onibiscripts[i].SetMovetoPos(TeleportPositions[i].transform.position);
+                }
+                Type++;
+            }
+            //鬼火3発発射
+            if(Type == 2)
+            {
+                if(count >= 4)//2秒後
+                {
+                    onibiscripts[0].SetType("bullet");
+                }
+                if(count >= 5)
+                {
+                    onibiscripts[1].SetType("bullet");
+                }
+                if(count >= 6)
+                {
+                    onibiscripts[2].SetType("bullet");
+                }
+                if (count >= 7)
+                {
+                    onibiscripts[3].SetType("bullet");
+                }
+
+                if(count >= 10)
+                {
+                    Type++;
+                }
+            }
+            //瞬間移動
+            if(Type == 3)
+            {
+                int rand = Random.Range(0,3);
+                if(rand == 0)
+                {
+                    transform.position = TeleportPositions[0].transform.position;
+                }
+                if (rand == 1)
+                {
+                    transform.position = TeleportPositions[1].transform.position;
+                }
+                if (rand == 2)
+                {
+                    transform.position = TeleportPositions[2].transform.position;
+                }
+                if (rand == 3)
+                {
+                    transform.position = TeleportPositions[3].transform.position;
+                }
+
+                Type++;
+            }
 
             //ステート切り替え
-            if(count >= 5)
+            if (Type == 4)
             {
-                state = State.Call;//呼びモード切替
+                foreach(var x in onibis)
+                {
+                    Destroy(x);
+                }
                 count = 0;
+                state = State.Call;//呼びモード切替
+                Type = 0;
             }
         }
         #endregion
@@ -226,19 +337,39 @@ public class KyuubiBoss : MonoBehaviour
                 animator.Play("Call");
                 Instantiate(holeBase, spawnP01, new Quaternion());//予兆作成
                 Instantiate(holeBase, spawnP02, new Quaternion());//予兆作成
-                if(count >= 2)
+                Type++;
+            }
+            if(Type == 1)
+            {
+                if (count >= 2)
                 {
-                    Instantiate(beastEnemy, spawnP01, new Quaternion());
-                    Instantiate(beastEnemy, spawnP02, new Quaternion());
+                    beasts[0] = Instantiate(beastEnemy, spawnP01, new Quaternion());
+                    scripts[0] = beasts[0].GetComponent<BaseEnemy>();
+                    beasts[1] = Instantiate(beastEnemy, spawnP02, new Quaternion());
+                    scripts[1] = beasts[1].GetComponent<BaseEnemy>();
                     Instantiate(holeBase, spawnP01, new Quaternion());//予兆作成
                     Instantiate(holeBase, spawnP02, new Quaternion());//予兆作成
+                    foreach(var x in scripts)
+                    {
+                        x.OraNon();
+                    }
+                    Type++;
                 }
+            }
+            if(Type == 2)
+            {
                 if (count >= 4)
                 {
-                    Instantiate(beastEnemy, spawnP01, new Quaternion());
-                    Instantiate(beastEnemy, spawnP02, new Quaternion());
+                    beasts[0] = Instantiate(beastEnemy, spawnP01, new Quaternion());
+                    scripts[0] = beasts[0].GetComponent<BaseEnemy>();
+                    beasts[1] = Instantiate(beastEnemy, spawnP02, new Quaternion());
+                    scripts[1] = beasts[1].GetComponent<BaseEnemy>();
+                    foreach (var x in scripts)
+                    {
+                        x.OraNon();
+                    }
+                    Type++;
                 }
-                Type++;
             }
 
             //ステート切り替え
@@ -246,6 +377,7 @@ public class KyuubiBoss : MonoBehaviour
             {
                 state = State.Down;//ダウン状態切替
                 count = 0;
+                Type = 0;
             }
         }
         #endregion
@@ -254,11 +386,13 @@ public class KyuubiBoss : MonoBehaviour
         if(state == State.Down)//ダウン状態
         {
             count += Time.deltaTime;
+            animator.Play("Down");
 
-            if(count >= 2)//十秒で切り替え
+            if(count >= 2)//2秒で切り替え
             {
                 state = State.Bunsin;//分身モード切替
                 count = 0;
+                Type = 0;
             }
         }
         #endregion
@@ -266,12 +400,29 @@ public class KyuubiBoss : MonoBehaviour
         if (bossspawn.hitBossSpawn)
         {
             rigid.useGravity = true;
+            onFlag = true;
         }
         #region 死亡&ダメージ処理
         //終わり
         if (BossEnemyHp <= 0)
         {
             deadFlag = true;
+            foreach(var x in onibis)
+            {
+                Destroy(x);
+            }
+            foreach(var x in avatars)
+            {
+                Destroy(x);
+            }
+            renderer.material.color = Color.white;
+            animator.Play("Dead");
+            if (!cleaItemSpawnFlag)
+            {
+                cleaItemSpawnFlag = true;
+                GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem3"));
+                drop.transform.position = transform.position;
+            }
             Destroy(gameObject, 2.0f);
         }
         if (damage)//ダメージを受けたとき

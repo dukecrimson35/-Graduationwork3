@@ -15,6 +15,7 @@ public class KyuubiAvatar : MonoBehaviour
     public float junpP;//ジャンプ力
 
     float count;//時間カウント
+    int delayTime;//動くまでの時間
 
     Rigidbody rigidbody;
 
@@ -32,6 +33,7 @@ public class KyuubiAvatar : MonoBehaviour
         animator = Texture.GetComponent<Animator>();
         runoutdis = Random.Range(6, 10);
         speed = 1;
+        delayTime = 3;//動くまでの時間の初期値100秒
     }
 
     // Update is called once per frame
@@ -72,18 +74,19 @@ public class KyuubiAvatar : MonoBehaviour
             {
                 if (transform.position.x - playerPos.x >= 0)
                 {
-                    rigidbody.AddForce(new Vector3(-700, 300 * junpP, 0));
+                    transform.position = new Vector3(transform.position.x,transform.position.y + 0.01f, transform.position.z);
                     //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 }
                 if (transform.position.x - playerPos.x < 0)
                 {
-                    rigidbody.AddForce(new Vector3(700, 300 * junpP, 0));
+                    transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
+                    //rigidbody.AddForce(new Vector3(700, 300 * junpP, 0));
                     //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
             }
         }
 
-        if (count >= 2)
+        if (count >= delayTime)
         {
             if (moveFlag == false)
             {
@@ -106,5 +109,10 @@ public class KyuubiAvatar : MonoBehaviour
         {
             onGround = true;
         }
+    }
+
+    public void SetDelayTime(int delay)//動くまでの時間設定
+    {
+        delayTime = delay;
     }
 }

@@ -94,9 +94,10 @@ public class PlayerControl : MonoBehaviour
         }
         if (collision.gameObject.tag == "MovieArea")
         {
-            audio.PlayOneShot(coin);
+            //audio.PlayOneShot(coin);
             movieFlag = true;
             moviePos = (transform.position - collision.transform.position) / movieStartTime * Time.deltaTime;
+
             movieCurrentTime = movieStartTime;
 
             anim.SetBool("Senku", false);
@@ -118,8 +119,9 @@ public class PlayerControl : MonoBehaviour
         }
         if (collision.gameObject.tag == "ClearItem")
         {
-            audio.PlayOneShot(coin);
+          //  audio.PlayOneShot(coin);
             clearTime = 1;
+            clearFlag = true; 
             movieCurrentTime = 0;
             anim.SetBool("Senku", false);
             anim.SetBool("Senku2", false);
@@ -135,6 +137,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(GetClearFlag());
         Physics.Simulate(Time.deltaTime);
         audio.volume = Data.seVol;
         if (Time.timeScale <= 0) return;
@@ -153,7 +156,9 @@ public class PlayerControl : MonoBehaviour
             }            
             else
             {
+                muteki = 0.1f;
                 MovieUpdate();
+                CheckDead();
                 Direction();
             }
         }
@@ -391,13 +396,13 @@ public class PlayerControl : MonoBehaviour
 
                     if (look.GetLookObject().tag == "BossEnemy")
                     {
-                        transform.position += senku * len - senku * 4;
-                        AfterImage(-(senku * len + senku * 4), -(senku * len + senku * 4) / 2);
+                        transform.position += senku * len - senku * 2;
+              //          AfterImage(-(senku * len + senku * 2), -(senku * len + senku * 3) / 2);
                     }
                     else
                     {
                         transform.position += senku * len - senku * 2;
-                        AfterImage(-(senku * len - senku * 2), -(senku * len - senku * 2) / 2);
+                 //       AfterImage(-(senku * len - senku * 2), -(senku * len - senku * 2) / 2);
                     }
                     //   SenkuEffect((senku * len + senku * 2) / 2);
                     if (moveColider != null)
@@ -564,7 +569,7 @@ public class PlayerControl : MonoBehaviour
 
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("X") && (inC == InputControl.X || inC == InputControl.N)) 
+            if (Input.GetButton("B") && (inC == InputControl.X || inC == InputControl.N)) 
             {
                 inC = InputControl.X;
                 anim.SetBool("Power", true);
@@ -587,7 +592,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonUp("X") && inC == InputControl.X)
+            if (Input.GetButtonUp("B") && inC == InputControl.X)
             {
                 audio.PlayOneShot(powerslash);
                 inC = InputControl.N;
@@ -614,7 +619,7 @@ public class PlayerControl : MonoBehaviour
       
         if (stoptime < 0 || hitFlag)
         {
-            if (Input.GetButton("Y") && (inC == InputControl.Y || inC == InputControl.N) && loopCount == 0) 
+            if (Input.GetButton("X") && (inC == InputControl.Y || inC == InputControl.N) && loopCount == 0) 
             {
                
                 rigid.velocity = new Vector3(0, 0, 0);
@@ -636,7 +641,7 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-        if (!Input.GetButton("Y") && inC == InputControl.Y)
+        if (!Input.GetButton("X") && inC == InputControl.Y)
         {
             if (moveColider == null && sp != null)
             {
@@ -857,7 +862,7 @@ public class PlayerControl : MonoBehaviour
     }
     public bool GetClearFlag()
     {
-        if (clearTime < 0 && clearFlag) 
+        if (clearTime <= 0 && clearFlag) 
         {
             return true;
         }
