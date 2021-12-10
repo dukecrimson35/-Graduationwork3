@@ -20,7 +20,8 @@ public class CoinSEScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i< seFlags.Length;i++)//フラグの更新
+        audioSource.volume = Data.seVol;
+        for (int i = 0; i< seFlags.Length;i++)//フラグの更新
         {
             if(seCheckFlags[i] == false && seFlags[i] == true)
             {

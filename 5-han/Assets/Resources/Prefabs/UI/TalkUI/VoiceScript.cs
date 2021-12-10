@@ -66,7 +66,7 @@ public class VoiceScript : MonoBehaviour
                 string line = reader.ReadLine(); // 一行ずつ読み込み
                 messageList.Add(line);
             }
-
+            Data.bossWallStartFlag = true;
             oneFlag = true;
         }
         else if(oniBossEndFlag)
@@ -87,6 +87,7 @@ public class VoiceScript : MonoBehaviour
                 string line = reader.ReadLine(); // 一行ずつ読み込み
                 messageList.Add(line);
             }
+            Data.bossWallStartFlag = true;
             oneFlag = true;
         }
         else if (kituneBossStartFlag)
@@ -98,6 +99,7 @@ public class VoiceScript : MonoBehaviour
                 messageList.Add(line);
             }
             oneFlag = true;
+            Data.bossWallStartFlag = true;
         }
 
         if (oneFlag) return;//テキストが読み込めなかった場合

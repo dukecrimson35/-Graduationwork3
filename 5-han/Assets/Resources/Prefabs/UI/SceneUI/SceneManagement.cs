@@ -23,12 +23,17 @@ public class SceneManagement : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip bgm;
+    public AudioClip titleCallSE;
+    public AudioClip titleCallSE2;
 
     public bool destroyFlag = false;
 
     public GameObject bossSoawnObj;
     private bossspawn bossspawnScript;
     public GameObject talkUI;
+
+    public GameObject CutFade;
+    public Dissolver dissolver;
 
     public enum SceneNames
     {
@@ -48,6 +53,7 @@ public class SceneManagement : MonoBehaviour
         Application.targetFrameRate = 144;
 
         Data.voiceFlag = false;
+        Data.bossWallStartFlag = false;
 
         //gameData = GetComponent<GameData>();
         sceneName = SceneManager.GetActiveScene().name;
@@ -58,22 +64,25 @@ public class SceneManagement : MonoBehaviour
             bossspawnScript = bossSoawnObj.GetComponent<bossspawn>();
         }
 
+        //if(sceneName == "TitleScene")
+        //{
+        //    if (titleCallSE != null) StartCoroutine(PlayTitleCall());//タイトルコール呼び出し
+        //}
+
+        if(sceneName == "SelectScene")
+        {
+            dissolver = CutFade.GetComponent<Dissolver>();
+        }
+
         if (sceneName == "Stage01" || sceneName == "Stage02" || sceneName == "Stage03")
         {
             player = GameObject.FindGameObjectWithTag("Player");
             playerControl = player.GetComponent<PlayerControl>();
-            if(sceneName == "Stage01")
-            {
-                Data.stageNum = 1;
-            }
-            else if (sceneName == "Stage02")
-            {
-                Data.stageNum = 2;
-            }
-            else if (sceneName == "Stage03")
-            {
-                Data.stageNum = 3;
-            }
+
+            if      (sceneName == "Stage01") Data.stageNum = 1;
+            else if (sceneName == "Stage02") Data.stageNum = 2;
+            else if (sceneName == "Stage03") Data.stageNum = 3;
+
         }
 
         if(bgm != null)
@@ -98,6 +107,17 @@ public class SceneManagement : MonoBehaviour
         {
             Debug.Log("BGMが入ってないよ");
         }
+    }
+
+    float seVol = 5;
+    IEnumerator PlayTitleCall()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        float v = audioSource.volume;
+        audioSource.volume = seVol;
+        audioSource.volume = v;
+        audioSource.PlayOneShot(titleCallSE);
+        audioSource.volume = v;
     }
 
     float second = 100;
@@ -140,6 +160,7 @@ public class SceneManagement : MonoBehaviour
     void Update()
     {
         audioSource.volume = 0.1f * Data.bgmVol;
+
         switch (Data.bgm)
         {
             case 0:
@@ -395,13 +416,15 @@ public class SceneManagement : MonoBehaviour
     public void OnClickStage1Button()
     {
         //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage01.ToString());
-        StartCoroutine(Coroutine(SceneNames.Stage01.ToString()));
+        //StartCoroutine(Coroutine(SceneNames.Stage01.ToString()));
+        StartCoroutine(StageStart(SceneNames.Stage01.ToString()));
     }
 
     public void OnClickStage2Button()
     {
         //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage02.ToString());
-        StartCoroutine(Coroutine(SceneNames.Stage02.ToString()));
+        //StartCoroutine(Coroutine(SceneNames.Stage02.ToString()));
+        StartCoroutine(StageStart(SceneNames.Stage02.ToString()));
     }
 
     public void OnClickStage3Button()
@@ -433,6 +456,18 @@ public class SceneManagement : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         fade.GetComponent<FadeStart>().FadeOutNextScene(str);
+        if (GameObject.Find("TitleBGM") && SceneNames.SelectScene.ToString() == sceneName)
+        {
+            Destroy(GameObject.Find("TitleBGM"));
+        }
+    }
+
+    IEnumerator StageStart(string str)
+    {
+        yield return new WaitForSecondsRealtime(1.3f);
+        //fade.GetComponent<FadeStart>().FadeOutNextScene(str);
+        dissolver.CutStart(str);
+
         if (GameObject.Find("TitleBGM") && SceneNames.SelectScene.ToString() == sceneName)
         {
             Destroy(GameObject.Find("TitleBGM"));

@@ -79,8 +79,8 @@ public class PauseSceneJump : MonoBehaviour
             message.text = "";
         }
 
-
-        Debug.Log(messeDire);
+        audioSource.volume = Data.seVol;
+        
         // ディレイ関係
         //矢印移動ディレイ
         if (yazirusiDelay > 0)

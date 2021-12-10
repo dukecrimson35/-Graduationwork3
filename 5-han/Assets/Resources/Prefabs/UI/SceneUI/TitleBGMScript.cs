@@ -43,7 +43,7 @@ public class TitleBGMScript : MonoBehaviour
         //    DontDestroyOnLoad(this);
         //}
 
-        audioSource.volume = 0.3f;
+        audioSource.volume = 0.2f;
         audioSource.clip = bgm;
         audioSource.Play();
         DontDestroyOnLoad(this);

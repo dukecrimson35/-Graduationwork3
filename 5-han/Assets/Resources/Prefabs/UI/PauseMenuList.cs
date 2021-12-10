@@ -64,7 +64,7 @@ public class PauseMenuList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        audioSource.volume = Data.seVol;
         // ディレイ関係
         //矢印移動ディレイ
         if (yazirusiDelay > 0)

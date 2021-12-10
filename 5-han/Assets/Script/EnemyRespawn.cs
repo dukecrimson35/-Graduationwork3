@@ -24,6 +24,8 @@ public class EnemyRespawn : MonoBehaviour
     List<float> counts = new List<float>();
     List<float> coincounts = new List<float>();//コインドロップ用のカウント
     List<GameObject> holes = new List<GameObject>();//出現予兆管理用リスト
+    List<bool> coinResed = new List<bool>();//コイン生成したことあるかどうか
+    List<BaseEnemy> scripts = new List<BaseEnemy>();//敵のスクリプトリスト
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class EnemyRespawn : MonoBehaviour
             positions1.Add(x.transform.position);
             positions2.Add(x.transform.position);
             enemyNames.Add(x.name);
+            scripts.Add(x.GetComponent<BaseEnemy>());
             i++;
         }
         for(int ii = 0;ii <enemys.Length;ii++)
@@ -43,6 +46,7 @@ public class EnemyRespawn : MonoBehaviour
             counts.Add(0);
             coincounts.Add(0);
             holes.Add(null);
+            coinResed.Add(false);
         }
     }
 
@@ -86,22 +90,32 @@ public class EnemyRespawn : MonoBehaviour
                         if (enemyNames[i].Contains("boxEnemy"))
                         {
                             enemys[i] = Instantiate(StopEnemy, positions1[i], new Quaternion());
+                            scripts[i] = enemys[i].GetComponent<BaseEnemy>();
+                            scripts[i].OraNon();
                         }
                         if(enemyNames[i].Contains("ShotEnemy"))
                         {
                             enemys[i] = Instantiate(FlyingEnemy, positions1[i], new Quaternion());
+                            scripts[i] = enemys[i].GetComponent<BaseEnemy>();
+                            scripts[i].OraNon();
                         }
                         if (enemyNames[i].Contains("BirdEnemy"))
                         {
                             enemys[i] = Instantiate(BirdEnemy, positions1[i], new Quaternion());
+                            scripts[i] = enemys[i].GetComponent<BaseEnemy>();
+                            scripts[i].OraNon();
                         }
                         if (enemyNames[i].Contains("GoblinEnemy"))
                         {
                             enemys[i] = Instantiate(GoblinEnemy, positions1[i], new Quaternion());
+                            scripts[i] = enemys[i].GetComponent<BaseEnemy>();
+                            scripts[i].OraNon();
                         }
                         if (enemyNames[i].Contains("BeastEnemy"))
                         {
                             enemys[i] = Instantiate(DogEnemy, positions1[i], new Quaternion());
+                            scripts[i] = enemys[i].GetComponent<BaseEnemy>();
+                            scripts[i].OraNon();
                         }
                         delays.Remove(i);
                     }
@@ -116,13 +130,17 @@ public class EnemyRespawn : MonoBehaviour
                 }
                 if(delays2.Contains(i))
                 {
-                    coincounts[i] += Time.deltaTime;
-                    if (coincounts[i] >= 0.5f)
+                    if (coinResed[i] == false)
                     {
-                        coincounts[i] = 0;
-                        //コインドロップ
-                        CoinDrop(positions2[i]);
-                        delays2.Remove(i);
+                        coincounts[i] += Time.deltaTime;
+                        if (coincounts[i] >= 0.5f)
+                        {
+                            coincounts[i] = 0;
+                            //コインドロップ
+                            CoinDrop(positions2[i]);
+                            delays2.Remove(i);
+                            coinResed[i] = true;
+                        }
                     }
                 }
             }

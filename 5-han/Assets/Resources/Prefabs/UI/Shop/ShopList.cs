@@ -95,6 +95,7 @@ public class ShopList : MonoBehaviour
     {
         coinText.text = Data.coin.ToString() + "銭";
         HaveItemUpdate();
+        audioSource.volume = Data.seVol;
 
         // ディレイ関係
         //矢印移動ディレイ
@@ -255,7 +256,7 @@ public class ShopList : MonoBehaviour
             }
             MesseDelaySet();
         }
-        else if (itemName == "かいふく")
+        else if (itemName == Data.kaihukuStr)
         {
             
             if (Data.kaihuku < 9)
@@ -270,7 +271,7 @@ public class ShopList : MonoBehaviour
             }
             MesseDelaySet();
         }
-        else if (itemName == "かいふく2")
+        else if (itemName == Data.kaihuku2Str)
         {
 
             if (Data.kaihuku2 < 9)
@@ -291,12 +292,12 @@ public class ShopList : MonoBehaviour
 
     public void ItemExposition()
     {
-        if (itemList[yazirusiCout] == "かいふく")
+        if (itemList[yazirusiCout] == Data.kaihukuStr)
         {
 
             message2.text = "効果:HP10回復する";
         }
-        if (itemList[yazirusiCout] == "かいふく2")
+        if (itemList[yazirusiCout] == Data.kaihuku2Str)
         {
 
             message2.text = "効果:HP20回復する";
@@ -316,6 +317,7 @@ public class ShopList : MonoBehaviour
         }
     }
 
+    //ここは手動でアイテムの名前変更
     public void HaveNumver()
     {
         if(haveItems != null) haveItems.Clear();

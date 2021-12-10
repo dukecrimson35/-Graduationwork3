@@ -4,7 +4,9 @@ using UnityEngine;
 
 public  class Data : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static readonly string kaihukuStr = "かいふく";
+    public static readonly string kaihuku2Str = "かいふく2";
+
     public static readonly int maxStageNumber = 3;
     public const int maxStageNumber2 = 3;
 
@@ -38,6 +40,10 @@ public  class Data : MonoBehaviour
 
     public static bool titleBGMFlag = false;
 
+    public static bool bossWallStartFlag = false;
+
+    
+
     //public static bool shopOpenFlag = false;
 
 
@@ -63,12 +69,12 @@ public  class Data : MonoBehaviour
         if (kaihuku > 0)
         {
             dataItemIntList.Add(kaihuku);
-            dataItemStringList.Add("かいふく");
+            dataItemStringList.Add(Data.kaihukuStr);
         }
         if (kaihuku2 > 0)
         {
             dataItemIntList.Add(kaihuku2);
-            dataItemStringList.Add("かいふく2");
+            dataItemStringList.Add(Data.kaihuku2Str);
         }
         dataItemStringList.Add("もどる");
     }

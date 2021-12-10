@@ -29,13 +29,36 @@ public class KyuubiBoss : MonoBehaviour
     Rigidbody rigid;
     float changeColSize;
 
+    //分身
     public GameObject avatar;//生成する分身
     GameObject[] avatars;//分身格納配列
+    int Type;//行動ループの現在位置
+    public float speed;//通常時の移動速度
+    public GameObject Texture;//自分の画像
+    GameObject player;
+    Vector3 playerPos;
+    bool leftMove;//左右どちらに移動するか
+    bool moveFlag;
+    bool onGround;//地面にいるかどうか
+    public float junpP;//ジャンプ力
+
+    //ザコ呼び出し
+    public GameObject beastEnemy;//呼び出すザコ敵
+    public GameObject holeBase;//呼び出す予兆基礎
+    public GameObject hole01;//呼び出す予兆1
+    public GameObject hole02;//呼び出す予兆2
+    Vector3 spawnP01;//敵発生位置１
+    Vector3 spawnP02;//敵発生位置１
+
+    Rigidbody rigidbody;
+
+    float runoutdis;//走り抜ける処理
 
     Animator animator;//自身のアニメーター
 
     enum State
     {
+        Wait,
         Call,
         Onibi,
         Bunsin,
@@ -61,14 +84,32 @@ public class KyuubiBoss : MonoBehaviour
         Meleesecond = 0;
         Rangesecond = 0;
         ResetMelee = 0;
-        state = State.Bunsin;//初期ステート設定
+        state = State.Wait;//初期ステート設定
         animator = GetComponent<Animator>();//アニメーターの取得
         avatars = new GameObject[2];
+
+        //分身モード移動用
+        rigidbody = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
+        playerPos = player.transform.position;
+        onGround = false;
+        moveFlag = false;
+        runoutdis = Random.Range(6, 10);
+
+        //敵呼び出し用
+        spawnP01 = hole01.transform.position;
+        spawnP02 = hole02.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //デバッグ用ステート切り替え
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            state = State.Bunsin;
+        }
+
         if (Time.timeScale <= 0) return;//タイムスケールが0の時は実行しない
 
         #region　分身
@@ -77,31 +118,83 @@ public class KyuubiBoss : MonoBehaviour
             count += Time.deltaTime;
 
             //遠吠えをする
-            animator.Play("Call");
-
-            //分身を作る
-            for(int i = 0; i < 2; i++) 
+            if (Type == 0)
             {
-                if (avatars[i] == null)
+                animator.Play("Call");
+                Type++;
+            }
+            //分身を作る
+            if (Type == 1)
+            {
+                for (int i = 0; i < 2; i++)
                 {
-                    if (i == 0)
+                    if (avatars[i] == null)
                     {
-                        avatars[i] = Instantiate(avatar, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), new Quaternion());
-                    }
-                    if (i == 1)
-                    {
-                        avatars[i] = Instantiate(avatar, new Vector3(transform.position.x - 3, transform.position.y, transform.position.z), new Quaternion());
+                        if (i == 0)
+                        {
+                            avatars[i] = Instantiate(avatar, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), new Quaternion());
+                        }
+                        if (i == 1)
+                        {
+                            avatars[i] = Instantiate(avatar, new Vector3(transform.position.x - 3, transform.position.y, transform.position.z), new Quaternion());
+                        }
                     }
                 }
+                Type++;
             }
 
             //分身と一緒に攻撃
-
-            //ステート切り替え
-            if (avatars[0] == null && avatars[1] == null)
+            if(Type == 2)
             {
-                state = State.Onibi;//鬼火モード切替
-                count = 0;
+                animator.Play("Walk");
+                if (speed <= 3)
+                {
+                    speed += Time.deltaTime;
+                }
+
+                playerPos = player.transform.position;//プレイヤーのポジション取得
+                if (leftMove)//左に移動
+                {
+                    rigidbody.velocity = new Vector3(-Mathf.Pow(speed, 2) * 1.75f, rigidbody.velocity.y, 0);
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    if (transform.position.x - playerPos.x <= -runoutdis)
+                    {
+                        leftMove = false;
+                        speed = 1;
+                    }
+                }
+                if (leftMove == false)//右に移動
+                {
+                    rigidbody.velocity = new Vector3(Mathf.Pow(speed, 2) * 1.75f, rigidbody.velocity.y, 0);
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    if (transform.position.x - playerPos.x >= runoutdis)
+                    {
+                        leftMove = true;
+                        speed = 1;
+                    }
+                }
+
+                if (onGround == true)
+                {
+                    if (transform.position.x - playerPos.x >= 0)
+                    {
+                        rigidbody.AddForce(new Vector3(-700, 300 * junpP, 0));
+                        //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    }
+                    if (transform.position.x - playerPos.x < 0)
+                    {
+                        rigidbody.AddForce(new Vector3(700, 300 * junpP, 0));
+                        //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    }
+                }
+
+                //ステート切り替え
+                if (avatars[0] == null && avatars[1] == null)//分身がいなくなったら
+                {
+                    state = State.Onibi;//鬼火モード切替
+                    count = 0;
+                    Type = 0;
+                }
             }
         }
         #endregion
@@ -128,8 +221,25 @@ public class KyuubiBoss : MonoBehaviour
             count += Time.deltaTime;
 
             //遠吠えして仲間よび
-            animator.Play("Call");
-
+            if (Type == 0)
+            {
+                animator.Play("Call");
+                Instantiate(holeBase, spawnP01, new Quaternion());//予兆作成
+                Instantiate(holeBase, spawnP02, new Quaternion());//予兆作成
+                if(count >= 2)
+                {
+                    Instantiate(beastEnemy, spawnP01, new Quaternion());
+                    Instantiate(beastEnemy, spawnP02, new Quaternion());
+                    Instantiate(holeBase, spawnP01, new Quaternion());//予兆作成
+                    Instantiate(holeBase, spawnP02, new Quaternion());//予兆作成
+                }
+                if (count >= 4)
+                {
+                    Instantiate(beastEnemy, spawnP01, new Quaternion());
+                    Instantiate(beastEnemy, spawnP02, new Quaternion());
+                }
+                Type++;
+            }
 
             //ステート切り替え
             if(count >= 5)//五秒で切り替え
@@ -143,7 +253,9 @@ public class KyuubiBoss : MonoBehaviour
         #region ダウン状態
         if(state == State.Down)//ダウン状態
         {
-            if(count >= 10)//十秒で切り替え
+            count += Time.deltaTime;
+
+            if(count >= 2)//十秒で切り替え
             {
                 state = State.Bunsin;//分身モード切替
                 count = 0;

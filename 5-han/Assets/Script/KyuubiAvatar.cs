@@ -6,13 +6,19 @@ public class KyuubiAvatar : MonoBehaviour
 {
     public float speed;//通常時の移動速度
     public GameObject Texture;//自分の画像
+    Animator animator;//画像のアニメーター
     GameObject player;
     Vector3 playerPos;
     bool leftMove;//左右どちらに移動するか
+    bool moveFlag;
     bool onGround;//地面にいるかどうか
-    public int junpP;//ジャンプ力
+    public float junpP;//ジャンプ力
+
+    float count;//時間カウント
 
     Rigidbody rigidbody;
+
+    float runoutdis;//走り抜ける処理
 
 
     // Start is called before the first frame update
@@ -22,44 +28,66 @@ public class KyuubiAvatar : MonoBehaviour
         player = GameObject.Find("Player");
         playerPos = player.transform.position;
         onGround = false;
+        moveFlag = false;
+        animator = Texture.GetComponent<Animator>();
+        runoutdis = Random.Range(6, 10);
+        speed = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPos = player.transform.position;//プレイヤーのポジション取得
-        if (leftMove)//左に移動
+        count += Time.deltaTime;
+        if (moveFlag)
         {
-            rigidbody.velocity = new Vector3(-Mathf.Pow(speed, 2) * 1.75f, rigidbody.velocity.y, 0);
-            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            if (transform.position.x - playerPos.x <= -5)
+            animator.Play("Walk");
+            if (speed <= 3)
             {
-                leftMove = false;
-                speed = 1;
+                speed += Time.deltaTime;
             }
-        }
-        if (leftMove == false)//右に移動
-        {
-            rigidbody.velocity = new Vector3(Mathf.Pow(speed, 2) * 1.75f, rigidbody.velocity.y, 0);
-            Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            if (transform.position.x - playerPos.x >= 5)
+
+            playerPos = player.transform.position;//プレイヤーのポジション取得
+            if (leftMove)//左に移動
             {
-                leftMove = true;
-                speed = 1;
+                rigidbody.velocity = new Vector3(-Mathf.Pow(speed, 2) * 1.75f, rigidbody.velocity.y, 0);
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                if (transform.position.x - playerPos.x <= -runoutdis)
+                {
+                    leftMove = false;
+                    speed = 1;
+                }
+            }
+            if (leftMove == false)//右に移動
+            {
+                rigidbody.velocity = new Vector3(Mathf.Pow(speed, 2) * 1.75f, rigidbody.velocity.y, 0);
+                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                if (transform.position.x - playerPos.x >= runoutdis)
+                {
+                    leftMove = true;
+                    speed = 1;
+                }
+            }
+
+            if (onGround == true)
+            {
+                if (transform.position.x - playerPos.x >= 0)
+                {
+                    rigidbody.AddForce(new Vector3(-700, 300 * junpP, 0));
+                    //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
+                if (transform.position.x - playerPos.x < 0)
+                {
+                    rigidbody.AddForce(new Vector3(700, 300 * junpP, 0));
+                    //Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                }
             }
         }
 
-        if(onGround == true)
+        if (count >= 2)
         {
-            if (transform.position.x - playerPos.x >= 0)
+            if (moveFlag == false)
             {
-                rigidbody.AddForce(new Vector3(-700, 300, 0) * junpP);
-                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
-            if (transform.position.x - playerPos.x < 0)
-            {
-                rigidbody.AddForce(new Vector3(700, 300, 0) * junpP);
-                Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                moveFlag = true;
             }
         }
     }

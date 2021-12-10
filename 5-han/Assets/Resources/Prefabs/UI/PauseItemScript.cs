@@ -101,6 +101,7 @@ public class PauseItemScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        audioSource.volume = Data.seVol;
         // ディレイ関係
         //矢印移動ディレイ
         if (yazirusiDelay > 0)
@@ -188,11 +189,11 @@ public class PauseItemScript : MonoBehaviour
         {
             KetteiSEPlay();
 
-            if (Data.dataItemStringList[yazirusiCout] == "かいふく")
+            if (Data.dataItemStringList[yazirusiCout] == Data.kaihukuStr)
             {
                 if (Data.kaihuku > 0 && playerControl.GetHp() < 100 && playerControl.GetHp() >0)
                 {
-                    int num = itemHavelistName.IndexOf("かいふく");
+                    int num = itemHavelistName.IndexOf(Data.kaihukuStr);
                     itemHavelistNum[num]--;
                     Data.kaihuku--;
                     hpGauge.Heal(10);
@@ -206,11 +207,11 @@ public class PauseItemScript : MonoBehaviour
 
 
             }
-            if (Data.dataItemStringList[yazirusiCout] == "かいふく2")
+            if (Data.dataItemStringList[yazirusiCout] == Data.kaihuku2Str)
             {
                 if (Data.kaihuku2 > 0 && playerControl.GetHp()<100 && playerControl.GetHp() > 0)
                 {
-                    int num = itemHavelistName.IndexOf("かいふく2");
+                    int num = itemHavelistName.IndexOf(Data.kaihuku2Str);
                     itemHavelistNum[num]--;
                     Data.kaihuku2--;
                     hpGauge.Heal(20);
@@ -317,11 +318,11 @@ public class PauseItemScript : MonoBehaviour
     public void ItemExposition()
     {
         if (flag) return;
-        if (Data.dataItemStringList[yazirusiCout] == "かいふく")
+        if (Data.dataItemStringList[yazirusiCout] == Data.kaihukuStr)
         {         
             message.text = "HP10回復する";
         }
-        if (Data.dataItemStringList[yazirusiCout] == "かいふく2")
+        if (Data.dataItemStringList[yazirusiCout] == Data.kaihuku2Str)
         {
             message.text = "HP20回復する";
         }

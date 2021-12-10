@@ -19,6 +19,7 @@ public class BaseEnemy : MonoBehaviour
     public int enemyType;//種類
     public GameObject deathAnim;//死亡アニメーションオブジェクト
     private AudioSource audioSource;
+    public GameObject Ora;//金持ってるぞオーラ
     public AudioClip se;//死亡時se
     
     SpriteRenderer sprite;//フェードイン用スプライト
@@ -145,5 +146,13 @@ public class BaseEnemy : MonoBehaviour
     public void Damage(int damage)
     {
         baseEnemyHp -= damage;
+    }
+
+    public void OraNon()
+    {
+        ParticleSystem p = transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        p.Stop();
+        //Ora.SetActive(false);
+        //Destroy(transform.GetChild(1).gameObject);
     }
 }
