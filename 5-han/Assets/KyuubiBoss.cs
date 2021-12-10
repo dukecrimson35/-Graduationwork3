@@ -57,6 +57,7 @@ public class KyuubiBoss : MonoBehaviour
 
     Animator animator;//自身のアニメーター
 
+    bool cleaItemSpawnFlag = false;
     enum State
     {
         Wait,
@@ -404,6 +405,12 @@ public class KyuubiBoss : MonoBehaviour
             }
             renderer.material.color = Color.white;
             animator.Play("Dead");
+            if (!cleaItemSpawnFlag)
+            {
+                cleaItemSpawnFlag = true;
+                GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem"));
+                drop.transform.position = transform.position;
+            }
             Destroy(gameObject, 2.0f);
         }
         if (damage)//ダメージを受けたとき

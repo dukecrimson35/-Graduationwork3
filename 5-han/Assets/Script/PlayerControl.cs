@@ -94,7 +94,7 @@ public class PlayerControl : MonoBehaviour
         }
         if (collision.gameObject.tag == "MovieArea")
         {
-            audio.PlayOneShot(coin);
+            //audio.PlayOneShot(coin);
             movieFlag = true;
             moviePos = (transform.position - collision.transform.position) / movieStartTime * Time.deltaTime;
             movieCurrentTime = movieStartTime;
@@ -118,8 +118,9 @@ public class PlayerControl : MonoBehaviour
         }
         if (collision.gameObject.tag == "ClearItem")
         {
-            audio.PlayOneShot(coin);
+          //  audio.PlayOneShot(coin);
             clearTime = 1;
+            clearFlag = true; 
             movieCurrentTime = 0;
             anim.SetBool("Senku", false);
             anim.SetBool("Senku2", false);
@@ -135,6 +136,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(GetClearFlag());
         Physics.Simulate(Time.deltaTime);
         audio.volume = Data.seVol;
         if (Time.timeScale <= 0) return;
@@ -153,6 +155,7 @@ public class PlayerControl : MonoBehaviour
             }            
             else
             {
+                muteki = 0.1f;
                 MovieUpdate();
                 Direction();
             }
@@ -857,7 +860,7 @@ public class PlayerControl : MonoBehaviour
     }
     public bool GetClearFlag()
     {
-        if (clearTime < 0 && clearFlag) 
+        if (clearTime <= 0 && clearFlag) 
         {
             return true;
         }
