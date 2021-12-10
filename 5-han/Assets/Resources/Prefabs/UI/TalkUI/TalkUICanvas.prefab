@@ -196,12 +196,16 @@ MonoBehaviour:
   oniBossEndFlag: 0
   toriBossStartFlag: 0
   kituneBossStartFlag: 0
+  toriBossEndFlag: 0
+  kituneBossEndFlag: 0
   messageList: []
   text: {fileID: 5396844020031838214}
   oniStartTxt: {fileID: 4900000, guid: fac454a49e6a05048a44d260c50e9763, type: 3}
   oniEndTxt: {fileID: 4900000, guid: a7fdcf8a5cfa5444fb091ed415a4bb08, type: 3}
   toriStartTxt: {fileID: 4900000, guid: 0b3dacee995efee45a066862cfc90373, type: 3}
   kituneStartTxt: {fileID: 4900000, guid: 912fd6eec0ba330438f52e3147ea76ad, type: 3}
+  kituneEndTxt: {fileID: 4900000, guid: 764321db22d61e94a8e0b0cbc91c93c1, type: 3}
+  toriEndTxt: {fileID: 4900000, guid: b1f6b9c95caf49a4ba7356d405e887c8, type: 3}
   audioSource: {fileID: -6561115782600348097}
   katakata: {fileID: 8300000, guid: 59ed0d03d49d8fe4198a27e332726db4, type: 3}
 --- !u!114 &5396844019894130126

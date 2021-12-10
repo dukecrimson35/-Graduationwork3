@@ -21,6 +21,10 @@ public class VoiceScript : MonoBehaviour
     public bool toriBossStartFlag = false;
     [Header("狐ボス開始セリフ")]
     public bool kituneBossStartFlag = false;
+    [Header("鳥ボス終了セリフ")]
+    public bool toriBossEndFlag = false;
+    [Header("狐ボス終了セリフ")]
+    public bool kituneBossEndFlag = false;
 
     //[Header("鬼ボス開始セリフ")]
     //public string[] bossStartTexts;
@@ -42,6 +46,8 @@ public class VoiceScript : MonoBehaviour
     public TextAsset oniEndTxt;
     public TextAsset toriStartTxt;
     public TextAsset kituneStartTxt;
+    public TextAsset kituneEndTxt;
+    public TextAsset toriEndTxt;
 
     public AudioSource audioSource;
     public AudioClip katakata;
@@ -100,6 +106,28 @@ public class VoiceScript : MonoBehaviour
         else if (kituneBossStartFlag)
         {
             StringReader reader = new StringReader(kituneStartTxt.text);
+            while (reader.Peek() != -1)
+            {
+                string line = reader.ReadLine(); // 一行ずつ読み込み
+                messageList.Add(line);
+            }
+            oneFlag = true;
+            Data.bossWallStartFlag = true;
+        }
+        else if(kituneBossEndFlag)
+        {
+            StringReader reader = new StringReader(kituneEndTxt.text);
+            while (reader.Peek() != -1)
+            {
+                string line = reader.ReadLine(); // 一行ずつ読み込み
+                messageList.Add(line);
+            }
+            oneFlag = true;
+            Data.bossWallStartFlag = true;
+        }
+        else if(toriBossEndFlag)
+        {
+            StringReader reader = new StringReader(toriEndTxt.text);
             while (reader.Peek() != -1)
             {
                 string line = reader.ReadLine(); // 一行ずつ読み込み
@@ -232,9 +260,19 @@ public class VoiceScript : MonoBehaviour
     {
         toriBossStartFlag = true;
     }
+
+    public void SetToriEndFlag()
+    {
+        toriBossStartFlag = true;
+    }
     public void SetKituneStartFlag()
     {
         kituneBossStartFlag = true;
+    }
+
+    public void SetKituneEndFlag()
+    {
+        kituneBossEndFlag = true;
     }
 
 
