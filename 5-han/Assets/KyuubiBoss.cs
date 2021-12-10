@@ -130,6 +130,10 @@ public class KyuubiBoss : MonoBehaviour
                 state = State.Bunsin;
             }
         }
+        if(deadFlag)
+        {
+            state = State.Wait;
+        }
 
         #region　分身
         if (state == State.Bunsin)//分身モード
@@ -152,14 +156,18 @@ public class KyuubiBoss : MonoBehaviour
                         if (i == 0)
                         {
                             avatars[i] = Instantiate(avatar, new Vector3(transform.position.x + 5, transform.position.y, transform.position.z), new Quaternion());
+                            KyuubiAvatar kyuubiAvatar = avatars[0].GetComponent<KyuubiAvatar>();
+                            kyuubiAvatar.SetDelayTime(5);
                         }
                         if (i == 1)
                         {
                             avatars[i] = Instantiate(avatar, new Vector3(transform.position.x - 5, transform.position.y, transform.position.z), new Quaternion());
+                            KyuubiAvatar kyuubiAvatar = avatars[1].GetComponent<KyuubiAvatar>();
+                            kyuubiAvatar.SetDelayTime(3);
                         }
                     }
                 }
-                if (count >= 3)
+                if (count >= 4)
                 {
                     Type++;
                 }
@@ -400,6 +408,10 @@ public class KyuubiBoss : MonoBehaviour
         {
             deadFlag = true;
             foreach(var x in onibis)
+            {
+                Destroy(x);
+            }
+            foreach(var x in avatars)
             {
                 Destroy(x);
             }
