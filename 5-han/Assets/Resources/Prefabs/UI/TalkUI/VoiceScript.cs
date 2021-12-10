@@ -62,7 +62,7 @@ public class VoiceScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             novelSpeed = 0;
         }
