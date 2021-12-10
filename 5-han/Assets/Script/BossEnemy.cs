@@ -36,6 +36,7 @@ public class BossEnemy : MonoBehaviour
     ParticleSystem particle;
     BoxCollider collider;
     float changeColSize;
+    bool cleaItemSpawnFlag;
     void Start()
     {
         changeColSize = 0.5f;
@@ -66,6 +67,7 @@ public class BossEnemy : MonoBehaviour
         anim.SetBool("Dead", false);
         //anim.Play("OniStand");
         //particle.Stop();
+        cleaItemSpawnFlag = false;
     }
 
     // Update is called once per frame
@@ -186,6 +188,12 @@ public class BossEnemy : MonoBehaviour
                 //anim.SetBool("Dead", true);
                 //anim.Play("OniBossDead");
                 //Destroy(gameObject);
+                if(!cleaItemSpawnFlag)
+                {
+                    cleaItemSpawnFlag = true;
+                    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem"));
+                    drop.transform.position = transform.position;
+                }
                 Destroy(gameObject,2.0f);
             }
             if (Input.GetKey(KeyCode.Q))
