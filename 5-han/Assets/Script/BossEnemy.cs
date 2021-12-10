@@ -37,8 +37,10 @@ public class BossEnemy : MonoBehaviour
     BoxCollider collider;
     float changeColSize;
     bool cleaItemSpawnFlag;
+    public float chargeTime;
     void Start()
     {
+        chargeTime = 0; 
         changeColSize = 0.5f;
         anim = GetComponent<Animator>();
         damage = false;
@@ -104,6 +106,7 @@ public class BossEnemy : MonoBehaviour
             //近接攻撃処理
             if (Meleesecond >= 5)
             {
+                renderer.material.color = Color.green;
                 //MeleeSecが10になったら近接攻撃モードON
                 AtkModeMelee = true;
             }
@@ -118,8 +121,18 @@ public class BossEnemy : MonoBehaviour
                 //    pos.x += 0.01f;
                 //}
                 //モードリセットの時間計算
-                anim.SetBool("Melee", true);
+                //anim.SetBool("Melee", true);
                 ResetMelee += Time.deltaTime;
+                //if (LMove && !RMove)
+                //{
+                //    pos.x -= 0.03f;
+                //    //武器表示
+                //    MeleeWepon.SetActive(true);
+                //    RMeleeWepon.SetActive(false);
+                //    //武器回転
+                //    MeleeWepon.transform.Rotate(0, 0, wepRot);
+                //}
+                anim.SetBool("Melee", true);
                 if (LMove && !RMove)
                 {
                     pos.x -= 0.03f;
@@ -133,7 +146,7 @@ public class BossEnemy : MonoBehaviour
                 {
                     pos.x += 0.03f;
                     MeleeWepon.SetActive(false);
-                    RMeleeWepon.SetActive(true);    
+                    RMeleeWepon.SetActive(true);
                     RMeleeWepon.transform.Rotate(0, 0, wepRot);
                 }
                 if (ResetMelee >= 2)
@@ -149,6 +162,7 @@ public class BossEnemy : MonoBehaviour
                     //攻撃モードをOFFにする
                     anim.SetBool("Melee", false);
                     AtkModeMelee = false;
+                    renderer.material.color = Color.white;
                 }
 
             }
@@ -159,6 +173,7 @@ public class BossEnemy : MonoBehaviour
                 if (Rangesecond >= 1.5f)
                 {
                     anim.SetBool("Shot",true);
+                    pos.x = 0.0f;
                 }
                 if (Rangesecond >= 2.5f)
                 {
