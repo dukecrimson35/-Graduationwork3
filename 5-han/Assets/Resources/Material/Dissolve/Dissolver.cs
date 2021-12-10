@@ -31,6 +31,9 @@ public class Dissolver : MonoBehaviour
     public Image image3;
     public Image image4;
 
+    public AudioSource audioSource;
+    public AudioClip se;
+
 
     void Start()
     {
@@ -129,6 +132,7 @@ public class Dissolver : MonoBehaviour
     {
         if(!oneFlag)
         {
+           
             StartCoroutine(Up(sceneName));
             oneFlag = true;
         }
@@ -177,10 +181,12 @@ public class Dissolver : MonoBehaviour
             }
         }
 
-
+        Data.selectBgmFlag = true;
+        audioSource.PlayOneShot(se);
         float t = 0;
         bool fl = false;
         float num = 5f;
+
 
         while (true)
         {

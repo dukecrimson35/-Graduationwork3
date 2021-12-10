@@ -42,6 +42,7 @@ public  class Data : MonoBehaviour
 
     public static bool bossWallStartFlag = false;
 
+    public static bool selectBgmFlag = false;
     
 
     //public static bool shopOpenFlag = false;

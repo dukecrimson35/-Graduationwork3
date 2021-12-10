@@ -52,6 +52,7 @@ public class SceneManagement : MonoBehaviour
         audioSource.volume = 0.1f;
         Application.targetFrameRate = 144;
 
+        Data.selectBgmFlag = false;
         Data.voiceFlag = false;
         Data.bossWallStartFlag = false;
 

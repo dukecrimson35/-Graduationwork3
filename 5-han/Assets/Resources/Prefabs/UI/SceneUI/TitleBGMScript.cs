@@ -60,5 +60,10 @@ public class TitleBGMScript : MonoBehaviour
             Destroy(this.gameObject);
            
         }
+
+        if(Data.selectBgmFlag)
+        {
+            audioSource.Stop();
+        }
     }
 }
