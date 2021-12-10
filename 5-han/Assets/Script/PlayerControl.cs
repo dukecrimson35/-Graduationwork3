@@ -42,9 +42,13 @@ public class PlayerControl : MonoBehaviour
     int loopCount;
     Animator anim;
     bool movieFlag;
-    float movieTime;
+    float movieCurrentTime;
+    float movieStartTime;
+
+    Vector3 moviePos;
     float blinktime = 0;
     bool clearFlag;
+    float clearTime;
     enum Direc
     {
         Right,Left,
@@ -74,7 +78,10 @@ public class PlayerControl : MonoBehaviour
         deadFlag = false;
         camera = GameObject.Find("Main Camera").GetComponent<LooKCamera>();
         movieFlag = false;
-        movieTime = 5;
+        movieCurrentTime = 0;
+        movieStartTime = 5;
+        moviePos = Vector3.zero;
+        clearTime = 0;
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -85,11 +92,21 @@ public class PlayerControl : MonoBehaviour
             itemManagerScript.UpCoin(moneyScript.GetMoney());
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "DropItem")
+        if (collision.gameObject.tag == "MovieArea")
         {
             audio.PlayOneShot(coin);
             movieFlag = true;
+            moviePos = (transform.position - collision.transform.position) / movieStartTime * Time.deltaTime;
+            movieCurrentTime = movieStartTime;
+
+            anim.SetBool("Senku", false);
+            anim.SetBool("Senku2", false);
+            anim.SetBool("Walk", true);
+            anim.SetBool("Damage", false);
+            anim.SetBool("Power", false);
+            anim.SetBool("Power2", false);
         }
+       
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -97,6 +114,21 @@ public class PlayerControl : MonoBehaviour
         {
             Money moneyScript = collision.gameObject.GetComponent<Money>();
             itemManagerScript.UpCoin(moneyScript.GetMoney());
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "ClearItem")
+        {
+            audio.PlayOneShot(coin);
+            clearTime = 1;
+            movieCurrentTime = 0;
+            anim.SetBool("Senku", false);
+            anim.SetBool("Senku2", false);
+            anim.SetBool("Walk", false);
+            anim.SetBool("Damage", false);
+            anim.SetBool("Power", false);
+            anim.SetBool("Power2", false);
+            anim.SetBool("Clear", true);
+
             Destroy(collision.gameObject);
         }
     }
@@ -122,6 +154,7 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 MovieUpdate();
+                Direction();
             }
         }
         else
@@ -221,15 +254,29 @@ public class PlayerControl : MonoBehaviour
     }
     private void MovieUpdate()
     {
-        movieTime -= Time.deltaTime;
-        if (movieTime >= 0) 
+        if (clearTime > 0) 
         {
-            rigid.velocity = Vector3.zero;
-            transform.position += new Vector3(0.05f, 0, 0);          
+            clearTime -= Time.deltaTime;
+        }
+        movieCurrentTime -= Time.deltaTime;
+        if (moviePos.x<0)
+        {
+            currentDirec = Direc.Right;
         }
         else
         {
-            movieFlag = false;
+            currentDirec = Direc.Left;
+        }
+        if (movieCurrentTime >= 0) 
+        {
+            //  Vector3 vel = ((transform.position - moviePos)  / (movieStartTime) * Time.deltaTime);
+            rigid.velocity = new Vector3(0, rigid.velocity.y, 0);
+            transform.position -= moviePos;  
+        }
+        else
+        {
+            
+          //  movieFlag = false;
         }
     }
     private void SenkuGiri()
@@ -810,6 +857,13 @@ public class PlayerControl : MonoBehaviour
     }
     public bool GetClearFlag()
     {
-        return clearFlag;
+        if (clearTime < 0 && clearFlag) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
