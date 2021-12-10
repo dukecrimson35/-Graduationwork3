@@ -35,6 +35,7 @@ public class SceneManagement : MonoBehaviour
     public GameObject CutFade;
     public Dissolver dissolver;
 
+
     public enum SceneNames
     {
         TitleScene,
@@ -247,7 +248,7 @@ public class SceneManagement : MonoBehaviour
             }
        
 
-            if ( clearFlag)
+            if (playerControl.GetClearFlag())
             {
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
@@ -275,7 +276,7 @@ public class SceneManagement : MonoBehaviour
                 }
             }
 
-            if (clearFlag)
+            if (playerControl.GetClearFlag())
             {
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
@@ -288,7 +289,7 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage03")
         {
-            if (clearFlag)
+            if (playerControl.GetClearFlag())//clearFlag
             {
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
