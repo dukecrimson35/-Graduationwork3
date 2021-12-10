@@ -11,6 +11,8 @@ public class KumoMove : MonoBehaviour
     public GameObject cameraPos;
     public int num;
 
+    bool fl = false;
+
     void Start()
     {
         
@@ -19,7 +21,11 @@ public class KumoMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (fl)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         count += speed * Time.deltaTime;
         transform.position -= new Vector3(speed, 0, 0) * Time.deltaTime;
 
@@ -32,5 +38,10 @@ public class KumoMove : MonoBehaviour
             count = 0;
             transform.position = new Vector3(cameraPos.transform.position.x + 50, 0, 0);
         }
+    }
+
+    public void SetFl( bool flag)
+    {
+        fl = flag;
     }
 }
