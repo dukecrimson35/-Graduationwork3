@@ -420,7 +420,7 @@ public class KyuubiBoss : MonoBehaviour
             if (!cleaItemSpawnFlag)
             {
                 cleaItemSpawnFlag = true;
-                GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem"));
+                GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem3"));
                 drop.transform.position = transform.position;
             }
             Destroy(gameObject, 2.0f);
