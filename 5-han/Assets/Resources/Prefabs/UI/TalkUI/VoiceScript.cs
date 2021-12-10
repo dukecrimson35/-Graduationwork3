@@ -55,7 +55,14 @@ public class VoiceScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
+        {
+            novelSpeed = 0;
+        }
         if (oneFlag) return;//一回しか呼ばないため
+
+       
 
 
         if(oniBossStartFlag)
@@ -109,6 +116,8 @@ public class VoiceScript : MonoBehaviour
     }
     bool oneBGMFlag = false;
 
+    int skip = 1;
+
     IEnumerator Novel()
     {      
         int messageCount = 0; 
@@ -135,6 +144,9 @@ public class VoiceScript : MonoBehaviour
             }
             
             messageCount++;//現在の文字数
+
+           
+            Debug.Log(novelSpeed);
             yield return new WaitForSeconds(novelSpeed);//読むスピード
         }
 
