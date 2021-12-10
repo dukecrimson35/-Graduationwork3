@@ -70,7 +70,7 @@ public class ShopList : MonoBehaviour
 
             Text instance =
                 (Text)Instantiate(text,
-                new Vector3(pos.x + 400.0f +textWidthmove, pos.y - 15 - height *i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+                new Vector3(pos.x + 445.0f +textWidthmove, pos.y - 15 - height *i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
 
             instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
         }
@@ -83,7 +83,7 @@ public class ShopList : MonoBehaviour
 
             Text instance =
                 (Text)Instantiate(text,
-                new Vector3(pos.x + 300.0f + textWidthmove, pos.y - 15  - height *i - i * textHeightmove,  0.0f), Quaternion.identity, this.transform);
+                new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15  - height *i - i * textHeightmove,  0.0f), Quaternion.identity, this.transform);
 
             instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
             haveItemText.Add(instance);
@@ -212,11 +212,11 @@ public class ShopList : MonoBehaviour
 
     public void BuyItem(string itemName)
     {
-        if (itemName == "まきもの")
+        if (itemName == Data.bSkillName)
         {
-            if(Data.makimono < 1)
+            if(Data.bSkillCount < 1)
             {
-                Data.makimono++;
+                Data.bSkillCount++;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
             }
@@ -227,12 +227,12 @@ public class ShopList : MonoBehaviour
             MesseDelaySet();
 
         }
-        else if (itemName == "まきもの2")
+        else if (itemName == Data.xSkillName)
         {
             
-            if (Data.makimono2 < 1)
+            if (Data.xSkillCount < 1)
             {
-                Data.makimono2++;
+                Data.xSkillCount++;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
             }
@@ -303,11 +303,11 @@ public class ShopList : MonoBehaviour
             message2.text = "効果:HP20回復する";
         }
 
-        if (itemList[yazirusiCout] == "まきもの")
+        if (itemList[yazirusiCout] == Data.bSkillName)
         {
             message2.text = "効果:必殺技1を使えるようになる";
         }
-        if (itemList[yazirusiCout] == "まきもの2")
+        if (itemList[yazirusiCout] == Data.xSkillName)
         {
             message2.text = "効果:必殺技2を使えるようになる";
         }
@@ -326,11 +326,11 @@ public class ShopList : MonoBehaviour
         {            
             switch(itemList[i])
             {
-                case "まきもの":
-                    haveItems.Add(Data.makimono);
+                case "紅月刀の書":
+                    haveItems.Add(Data.bSkillCount);
                     break;
-                case "まきもの2":
-                    haveItems.Add(Data.makimono2);
+                case "青天刀の書":
+                    haveItems.Add(Data.xSkillCount);
                     break;
                 case "まきもの3":
                     haveItems.Add(Data.makimono3);

@@ -432,7 +432,8 @@ public class SceneManagement : MonoBehaviour
     public void OnClickStage3Button()
     {
         //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.Stage03.ToString());
-        StartCoroutine(Coroutine(SceneNames.Stage03.ToString()));
+        //StartCoroutine(Coroutine(SceneNames.Stage03.ToString()));
+        StartCoroutine(StageStart(SceneNames.Stage03.ToString()));
     }
 
     public void OnClickTitleButton()

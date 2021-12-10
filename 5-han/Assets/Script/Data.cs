@@ -6,6 +6,10 @@ public  class Data : MonoBehaviour
 {
     public static readonly string kaihukuStr = "かいふく";
     public static readonly string kaihuku2Str = "かいふく2";
+    public static readonly string ySkillName = "";
+    public static readonly string bSkillName = "紅月刀の書";
+    public static readonly string xSkillName = "青天刀の書";
+
 
     public static readonly int maxStageNumber = 3;
     public const int maxStageNumber2 = 3;
@@ -16,11 +20,13 @@ public  class Data : MonoBehaviour
     public static bool shopFlag = false;
     //デバックのため後で0に戻す
     public static int coin = 0;
-    public static int makimono = 0;
+
+    public static int bSkillCount = 0;
     public static int kaihuku = 0;
     public static int kaihuku2 = 0;
-    public static int makimono2 = 0;
+    public static int xSkillCount = 0;
     public static int makimono3 = 0;
+
     public static bool pauseWindFlag = false;
     public static bool pauseItemListFlag = false;
 
@@ -43,6 +49,10 @@ public  class Data : MonoBehaviour
     public static bool bossWallStartFlag = false;
 
     public static bool selectBgmFlag = false;
+
+    public static bool bSkill = false;
+    public static bool xSkill = false;
+    public static bool ySkill = false;
     
 
     //public static bool shopOpenFlag = false;
@@ -52,15 +62,15 @@ public  class Data : MonoBehaviour
     {
         dataItemIntList.Clear();
         dataItemStringList.Clear();
-        if(makimono>0)
+        if(bSkillCount>0)
         {
-            dataItemIntList.Add(makimono);
-            dataItemStringList.Add("まきもの");
+            dataItemIntList.Add(bSkillCount);
+            dataItemStringList.Add(bSkillName);
         }
-        if(makimono2 > 0)
+        if(xSkillCount > 0)
         {
-            dataItemIntList.Add(makimono2);
-            dataItemStringList.Add("まきもの2");
+            dataItemIntList.Add(xSkillCount);
+            dataItemStringList.Add(xSkillName);
         }
         if (makimono3 > 0)
         {
@@ -93,7 +103,7 @@ public  class Data : MonoBehaviour
 
     public static void GetMakimono(int num)
     {
-        makimono += num;
+        bSkillCount += num;
     }
 
     public static void UseCoin(int num)
@@ -103,7 +113,7 @@ public  class Data : MonoBehaviour
 
     public static void UseMakimono(int num)
     {
-        makimono -= num;
+        bSkillCount -= num;
     }
 
     

@@ -112,7 +112,9 @@ public class ButtonSelectScript : MonoBehaviour
             StartCoroutine(Timer());
         }
 
-       
+        buttons[pos].Select();
+
+
     }
 
     public int GetPos()

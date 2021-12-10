@@ -89,7 +89,7 @@ public class PauseItemScript : MonoBehaviour
 
             Text instance =
                 (Text)Instantiate(text,
-                new Vector3(pos.x + 300.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+                new Vector3(pos.x + 330.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
 
             instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
             //haveItemText.Add(instance);
@@ -226,22 +226,24 @@ public class PauseItemScript : MonoBehaviour
 
             }
 
-            if (Data.dataItemStringList[yazirusiCout] == "まきもの")
+            if (Data.dataItemStringList[yazirusiCout] == Data.bSkillName)
             {
-                if (Data.makimono > 0)
+                if (Data.bSkillCount > 0)
                 {
-                    int num = itemHavelistName.IndexOf("まきもの");
+                    int num = itemHavelistName.IndexOf(Data.bSkillName);
                     itemHavelistNum[num]--;
-                    Data.makimono--;
+                    Data.bSkill = true;
+                    Data.bSkillCount--;
                 }
             }
-            if (Data.dataItemStringList[yazirusiCout] == "まきもの2")
+            if (Data.dataItemStringList[yazirusiCout] == Data.xSkillName)
             {
-                if (Data.makimono2 > 0)
+                if (Data.xSkillCount > 0)
                 {
-                    int num = itemHavelistName.IndexOf("まきもの2");
+                    int num = itemHavelistName.IndexOf(Data.xSkillName);
                     itemHavelistNum[num]--;
-                    Data.makimono2--;
+                    Data.xSkill = true;
+                    Data.xSkillCount--;
                 }
             }
             if (Data.dataItemStringList[yazirusiCout] == "まきもの3")
@@ -327,11 +329,11 @@ public class PauseItemScript : MonoBehaviour
             message.text = "HP20回復する";
         }
 
-        if (Data.dataItemStringList[yazirusiCout] == "まきもの")
+        if (Data.dataItemStringList[yazirusiCout] == Data.bSkillName)
         {
             message.text = "必殺技1を使えるようになる";
         }
-        if (Data.dataItemStringList[yazirusiCout] == "まきもの2")
+        if (Data.dataItemStringList[yazirusiCout] == Data.xSkillName)
         {
             message.text = "必殺技2を使えるようになる";
         }

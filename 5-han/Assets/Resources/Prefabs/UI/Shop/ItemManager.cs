@@ -23,7 +23,7 @@ public class ItemManager : MonoBehaviour
     void Update()
     {
         coin = Data.coin;
-        makimono = Data.makimono;
+        makimono = Data.bSkillCount;
     }
 
     public int GetCoin()
