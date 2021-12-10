@@ -148,8 +148,14 @@ public class PlayerControl : MonoBehaviour
                 Move();
                 Direction();
                 SenkuGiri();
-                Special();
-                SpecialY();
+                if(Data.bSkill)
+                {
+                    Special();
+                }
+                if(Data.xSkill)
+                {
+                    SpecialY();
+                }
                 IsSenkuHit();
                 CheckDead();
                 Blink();
