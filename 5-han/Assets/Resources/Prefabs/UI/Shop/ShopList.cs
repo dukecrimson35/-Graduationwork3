@@ -311,11 +311,11 @@ public class ShopList : MonoBehaviour
 
         if (itemList[yazirusiCout] == Data.bSkillName)
         {
-            message2.text = "効果:連撃数に応じて\n　　　威力が上がる技";
+            message2.text = "効果:連撃数に応じて\n　　 威力が上がる技";
         }
         if (itemList[yazirusiCout] == Data.xSkillName)
         {
-            message2.text = "効果:長押しで範囲攻撃を\n　　　する技";
+            message2.text = "効果:長押しで範囲攻撃を\n　　 する技";
         }
         if (itemList[yazirusiCout] == "まきもの3")
         {
