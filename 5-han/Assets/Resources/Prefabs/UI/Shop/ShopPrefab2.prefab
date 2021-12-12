@@ -143,7 +143,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1de18880c6aa442448dab07c996c0dcf, type: 3}
+    m_Font: {fileID: 12800000, guid: cb742fe486d815f478b9ec57d4016029, type: 3}
     m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 1
@@ -206,12 +206,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList:
-  - "\u304B\u3044\u3075\u304F"
-  - "\u304B\u3044\u3075\u304F2"
+  - "\u56DE\u5FA9\u85AC"
+  - "\u4E0A\u56DE\u5FA9\u85AC"
   - "\u7D05\u6708\u5200\u306E\u66F8"
   - "\u9752\u5929\u5200\u306E\u66F8"
   - "\u3082\u3069\u308B"
-  coinList: 580200001a0400000a0000000a00000000000000
+  coinList: 580200001a040000c8000000c800000000000000
   yazirusiText: {fileID: 6885400418917352208}
   text: {fileID: 4021199938807867173, guid: 37468b69a1295344198d0b9bff45bec3, type: 3}
   coinText: {fileID: 6885400418280835486}
@@ -546,7 +546,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u30B7\u30E7\u30C3\u30D7"
+  m_Text: "\u304A\u54C1\u66F8\u304D"
 --- !u!1 &6885400418421900346
 GameObject:
   m_ObjectHideFlags: 0
