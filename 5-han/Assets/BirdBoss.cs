@@ -5,6 +5,7 @@ using UnityEngine;
 public class BirdBoss : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject talkUI;
     public GameObject player;
     Animator anim;
     public int BossEnemyHp = 150;
@@ -22,6 +23,7 @@ public class BirdBoss : MonoBehaviour
     bool AtkModeRange;
     public float Meleesecond;
     public float Rangesecond;
+    public float singleRangesec;
     public float ResetMelee;
     Vector3 pos;
     public GameObject bullet;
@@ -33,6 +35,11 @@ public class BirdBoss : MonoBehaviour
     BoxCollider collider;
     float changeColSize;
     bool clearItemSpawnFlag;
+    public bool down;
+    public float downTimer;
+    bool firstdown;
+    float deadTimer;
+    float itemZ;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -47,12 +54,18 @@ public class BirdBoss : MonoBehaviour
         LMove = true;
         RMove = false;
         MoveMode = false;
+        down = false;
         AtkModeMelee = false;
         AtkModeRange = false;
+        firstdown = true;
         pos = Vector3.zero;
         Meleesecond = 0;
         Rangesecond = 0;
+        singleRangesec = 0;
         ResetMelee = 0;
+        downTimer = 0;
+        deadTimer = 0;
+        itemZ = 0.9f;
     }
 
     // Update is called once per frame
@@ -66,81 +79,129 @@ public class BirdBoss : MonoBehaviour
         //移動処理
         if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
-            rigid.useGravity = false;
-            if(transform.localPosition.y<=-2.0f)
+            if (!down)
             {
-                pos.y += 0.01f;
-            }
-            if(transform.localPosition.y==-2.0f)
-            {
-                pos.y = 0;
-            }
-            if (BossEnemyHp <= 130)
-            {
-                MoveMode = true;
-            }
-            if (MoveMode)
-            {
-                if (LMove && !RMove)
+                rigid.useGravity = false;
+                if (transform.localPosition.y <= -2.0f)
                 {
-                    pos.x -= 0.03f;
-                    this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    pos.y += 0.01f;
                 }
-                if (!LMove && RMove)
+                if (transform.localPosition.y == -2.0f)
                 {
-                    pos.x += 0.03f;
-                    this.transform.rotation = new Quaternion(0, 180, 0, 0);
+                    pos.y = 0;
                 }
-            }
-            //近接攻撃(突撃)
-            Meleesecond += Time.deltaTime;
-            if (Meleesecond >= 7 && BossEnemyHp <= 150)
-            {
-                AtkModeMelee = true;
-            }
-            if (AtkModeRange)
-            {
-                ResetMelee += Time.deltaTime;
-                //anim.SetBool("Melee", true);
-                if (LMove && !RMove)
+                if (BossEnemyHp <= 130)
                 {
-                    pos.x -= 0.06f;
-                    this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    MoveMode = true;
                 }
-                if (!LMove && RMove)
+                if (MoveMode)
                 {
-                    pos.x += 0.06f;
-                    this.transform.rotation = new Quaternion(0, 180, 0, 0);
+                    Meleesecond += Time.deltaTime;
+                    if (LMove && !RMove)
+                    {
+                        pos.x -= 0.03f;
+                        this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    }
+                    if (!LMove && RMove)
+                    {
+                        pos.x += 0.03f;
+                        this.transform.rotation = new Quaternion(0, 180, 0, 0);
+                    }
                 }
-                if (ResetMelee >= 5)
+                //近接攻撃(突撃)
+                if (Meleesecond >= 7.0f)
                 {
-                    Meleesecond = 0;
-                    ResetMelee = 0;
+                    AtkModeMelee = true;
+                }
+                if (AtkModeMelee)
+                {
+                    ResetMelee += Time.deltaTime;
+                    anim.SetBool("Melee", true);
+                    rigid.useGravity = true;
+                    if (LMove && !RMove)
+                    {
+                        pos.x -= 0.03f;
+                        this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    }
+                    if (!LMove && RMove)
+                    {
+                        pos.x += 0.03f;
+                        this.transform.rotation = new Quaternion(0, 180, 0, 0);
+                    }
+                    if (ResetMelee >= 5.0f)
+                    {
+                        Meleesecond = 0;
+                        ResetMelee = 0;
+                        AtkModeMelee = false;
+                        rigid.useGravity = false;
+                    }
+                }
+                if(Meleesecond==0.0f||ResetMelee==0.0f)
+                {
                     anim.SetBool("Melee", false);
-                    AtkModeMelee = false;
                 }
-            }
-            Rangesecond += Time.deltaTime;
-
-            //遠距離攻撃処理
-            if (hitGround)
-            {
-                if (Rangesecond >= 1.5f)
+                Rangesecond += Time.deltaTime;
+                singleRangesec += Time.deltaTime;
+                ////遠距離攻撃処理
+                if (hitGround)
                 {
-                    anim.SetBool("Shot", true);
+                    if (singleRangesec >= 1.5f)
+                    {
+                        anim.SetBool("Shot", true);
+                    }
+                    if (singleRangesec >= 2.5f)
+                    {
+                        Instantiate(bullet, this.transform.position, Quaternion.identity);
+                        //Rangesecond = 0;
+                        anim.SetBool("Shot", false);
+                        singleRangesec = 0;
+                    }
                 }
-                if (Rangesecond >= 2.5f)
+                if (hitGround)
                 {
-                    Instantiate(bullet, this.transform.position, Quaternion.identity);
-                    Rangesecond = 0;
+                    if (Rangesecond >= 4.0f)
+                    {
+                        anim.SetBool("Shot", true);
+                    }
+                    if (Rangesecond >= 5.0f)
+                    {
+                        //Instantiate(bullet, new Vector3(transform.position.x, transform.position.y - 2, transform.position.z), Quaternion.identity);
+                        Instantiate(bullet, new Vector3(transform.position.x - 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
+                        Instantiate(bullet, new Vector3(transform.position.x + 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
+                        Rangesecond = 0;
+                    }
                 }
-
+                if (Rangesecond == 0.0f)
+                {
+                    anim.SetBool("Shot", false);
+                }
+                if (singleRangesec == 0.0f)
+                {
+                    anim.SetBool("Shot", false);
+                }
             }
-            if (Rangesecond == 0.0f)
+            if(BossEnemyHp<=50)
             {
-                anim.SetBool("Shot", false);
+                down = true;
+                rigid.useGravity = true;
             }
-
+            if (firstdown)
+            {
+                if (down)
+                {
+                    collider.size = new Vector3(1, 6.74f, 1);
+                    downTimer += Time.deltaTime;
+                    anim.SetBool("Down", true);
+                }
+            }
+            if (downTimer >= 5.0f)
+            {
+                down = false;
+                collider.size = new Vector3(1, 14.45f, 1);
+                anim.SetBool("Down", false);
+                firstdown = false;
+                rigid.useGravity = false;
+            }
             //終わり
             if (BossEnemyHp <= 0)
             {
@@ -149,13 +210,28 @@ public class BirdBoss : MonoBehaviour
                 {
                     clearItemSpawnFlag = true;
                     GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem2"));
-                    drop.transform.position = transform.position;
+                    drop.transform.position = new Vector3(transform.position.x,transform.position.y,0.19f);
                 }
-                Destroy(gameObject, 2.0f);
+                if (GameObject.Find("TalkUICanvas(Clone)") == null)
+                {
+                    GameObject instance =
+                       (GameObject)Instantiate(talkUI,
+                       new Vector3(0, 0, 0.0f), Quaternion.identity);
+                    VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
+                    //voiceScript.SetOniEndFlag();
+                    voiceScript.SetToriEndFlag();   //←使うボスに応じて
+                    //voiceScript.SetKituneEndFlag();
+                    Data.voiceFlag = true;
+                }
+                Destroy(gameObject, 12.0f);
             }
             if (Input.GetKey(KeyCode.Q))
             {
                 BossEnemyHp = 0;
+            }
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                BossEnemyHp = BossEnemyHp - 10;
             }
             if (damage)
             {
@@ -174,7 +250,14 @@ public class BirdBoss : MonoBehaviour
             if (deadFlag)
             {
                 //scenechangetime += Time.deltaTime;
-                anim.SetBool("Dead", true);
+                deadTimer += Time.deltaTime;
+                if (deadTimer >= 10)
+                {
+                    anim.SetBool("Dead", true);
+                    anim.SetBool("Shot", false);
+                    anim.SetBool("Down", false);
+                    anim.SetBool("Melee", false);
+                }
             }
             transform.position += pos;
             pos = Vector3.zero;
