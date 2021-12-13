@@ -21,6 +21,12 @@ public class BaseEnemy : MonoBehaviour
     private AudioSource audioSource;
     public GameObject Ora;//金持ってるぞオーラ
     public AudioClip se;//死亡時se
+    public bool isBossDeath;//ボスを倒した時にしぬやつ
+    GameObject boss;
+    KyuubiBoss kyuubisc;//それぞれのボスのスクリプト
+    BirdBoss birdBosc;
+    BossEnemy bosssc;
+
     
     SpriteRenderer sprite;//フェードイン用スプライト
 
@@ -40,11 +46,53 @@ public class BaseEnemy : MonoBehaviour
             //α値を0に
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
         }
+
+        if (isBossDeath)
+        {
+            if(GameObject.Find("BossBird") != null)
+            {
+                boss = GameObject.Find("BossBird");
+                birdBosc = boss.GetComponent<BirdBoss>();
+            }
+            if (GameObject.Find("oni_tati") != null)
+            {
+                boss = GameObject.Find("oni_tati");
+                bosssc = boss.GetComponent<BossEnemy>();
+            }
+            if (GameObject.Find("BossBird") != null)
+            {
+                boss = GameObject.Find("kyuubi");
+                kyuubisc = boss.GetComponent<KyuubiBoss>();
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (bosssc != null)
+        {
+            if (bosssc.GetHp() <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        if (birdBosc != null)
+        {
+            if (birdBosc.GetHp() <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        if (kyuubisc != null)
+        {
+            if (kyuubisc.GetHp() <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        
+
         if (enemyType != 10)//九尾ボスの分身以外なら
         {
             if (sprite.color.a <= 1)

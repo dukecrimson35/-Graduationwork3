@@ -27,6 +27,12 @@ public class EnemyRespawn : MonoBehaviour
     List<bool> coinResed = new List<bool>();//コイン生成したことあるかどうか
     List<BaseEnemy> scripts = new List<BaseEnemy>();//敵のスクリプトリスト
 
+    bool isRespawn;//生成するかしないか
+    GameObject boss;
+    KyuubiBoss kyuubisc;//それぞれのボスのスクリプト
+    BirdBoss birdBosc;
+    BossEnemy bosssc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,11 +54,52 @@ public class EnemyRespawn : MonoBehaviour
             holes.Add(null);
             coinResed.Add(false);
         }
+
+        if (GameObject.Find("BossBird") != null)
+        {
+            boss = GameObject.Find("BossBird");
+            birdBosc = boss.GetComponent<BirdBoss>();
+        }
+        if (GameObject.Find("oni_tati") != null)
+        {
+            boss = GameObject.Find("oni_tati");
+            bosssc = boss.GetComponent<BossEnemy>();
+        }
+        if (GameObject.Find("BossBird") != null)
+        {
+            boss = GameObject.Find("kyuubi");
+            kyuubisc = boss.GetComponent<KyuubiBoss>();
+        }
+        isRespawn = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (bosssc != null)
+        {
+            if (bosssc.GetHp() <= 0)
+            {
+                isRespawn = false;
+            }
+        }
+        if (birdBosc != null)
+        {
+            if (birdBosc.GetHp() <= 0)
+            {
+                isRespawn = false;
+            }
+        }
+        if (kyuubisc != null)
+        {
+            if (kyuubisc.GetHp() <= 0)
+            {
+                isRespawn = false;
+            }
+        }
+
+        if (isRespawn == false) return;
+
         for (int i = 0; i < enemys.Length; i++)
         {
             if (enemys[i] != null)

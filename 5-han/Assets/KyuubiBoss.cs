@@ -24,6 +24,7 @@ public class KyuubiBoss : MonoBehaviour
     public GameObject talkUI;
     public GameObject reverse;//反転判定
     WallRange range;
+    bool voicedflag;//セリフが呼ばれた後かどうか
 
     //分身
     public GameObject avatar;//生成する分身
@@ -90,6 +91,7 @@ public class KyuubiBoss : MonoBehaviour
         animator = GetComponent<Animator>();//アニメーターの取得
         avatars = new GameObject[2];
         onFlag = false;
+        voicedflag = false;
 
         //分身モード移動用
         rigidbody = GetComponent<Rigidbody>();
@@ -119,34 +121,38 @@ public class KyuubiBoss : MonoBehaviour
     void Update()
     {
         //デバッグ用ステート切り替え
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            state = State.Bunsin;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            state = State.Onibi;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            state = State.Call;
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    state = State.Bunsin;
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    state = State.Onibi;
+        //}
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    state = State.Call;
+        //}
 
         if (Time.timeScale <= 0) return;//タイムスケールが0の時は実行しない
 
-        if (onFlag == true && Data.voiceFlag == false)
+        if (onFlag == true && Data.voiceFlag == false && voicedflag == true)
         {
             if (state == State.Wait)
             {
                 state = State.Bunsin;
             }
         }
+        if (Data.voiceFlag == true)
+        {
+            voicedflag = true;
+        }
         if (deadFlag)
         {
             state = State.Wait;
         }
 
-        if(hitflag)
+        if (hitflag)
         {
             hitcount += Time.deltaTime;
             if(hitcount >= 0.1f)
@@ -448,6 +454,7 @@ public class KyuubiBoss : MonoBehaviour
         if (BossEnemyHp <= 0)
         {
             deadFlag = true;
+            transform.position = TeleportPositions[2].transform.position;
             foreach (var x in onibis)
             {
                 Destroy(x);
