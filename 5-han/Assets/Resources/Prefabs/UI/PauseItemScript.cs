@@ -331,11 +331,11 @@ public class PauseItemScript : MonoBehaviour
 
         if (Data.dataItemStringList[yazirusiCout] == Data.bSkillName)
         {
-            message.text = "必殺技1を使えるようになる";
+            message.text = "効果:連撃数に応じて\n　　 威力が上がる技";
         }
         if (Data.dataItemStringList[yazirusiCout] == Data.xSkillName)
         {
-            message.text = "必殺技2を使えるようになる";
+            message.text = "効果:長押しで範囲攻撃を\n　　 する技";
         }
         if (Data.dataItemStringList[yazirusiCout] == "まきもの3")
         {

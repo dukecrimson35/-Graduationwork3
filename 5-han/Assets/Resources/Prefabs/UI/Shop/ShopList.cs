@@ -177,7 +177,7 @@ public class ShopList : MonoBehaviour
             if (Data.coin >= coinList[yazirusiCout])
             {
                 BuyItem(itemList[yazirusiCout]);
-                audioSource.PlayOneShot(kauSE);
+                
             }
             else
             {
@@ -214,15 +214,17 @@ public class ShopList : MonoBehaviour
     {
         if (itemName == Data.bSkillName)
         {
-            if(Data.bSkillCount < 1)
+            if(Data.bSkillCount < 1 && !Data.bSkill)
             {
                 Data.bSkillCount++;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
+                audioSource.PlayOneShot(kauSE);
             }
             else
             {
                 message.text = "すでに持っています";
+                audioSource.PlayOneShot(kaenaiSE);
             }
             MesseDelaySet();
 
@@ -230,15 +232,17 @@ public class ShopList : MonoBehaviour
         else if (itemName == Data.xSkillName)
         {
             
-            if (Data.xSkillCount < 1)
+            if (Data.xSkillCount < 1 && !Data.xSkill)
             {
                 Data.xSkillCount++;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
+                audioSource.PlayOneShot(kauSE);
             }
             else
             {
                 message.text = "すでに持っています";
+                audioSource.PlayOneShot(kaenaiSE);
             }
             MesseDelaySet();
         }
@@ -264,6 +268,7 @@ public class ShopList : MonoBehaviour
                 Data.kaihuku++;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
+                audioSource.PlayOneShot(kauSE);
             }
             else
             {
@@ -279,6 +284,7 @@ public class ShopList : MonoBehaviour
                 Data.kaihuku2++;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
+                audioSource.PlayOneShot(kauSE);
             }
             else
             {
@@ -305,11 +311,11 @@ public class ShopList : MonoBehaviour
 
         if (itemList[yazirusiCout] == Data.bSkillName)
         {
-            message2.text = "効果:必殺技1を使えるようになる";
+            message2.text = "効果:連撃数に応じて\n　　 威力が上がる技";
         }
         if (itemList[yazirusiCout] == Data.xSkillName)
         {
-            message2.text = "効果:必殺技2を使えるようになる";
+            message2.text = "効果:長押しで範囲攻撃を\n　　 する技";
         }
         if (itemList[yazirusiCout] == "まきもの3")
         {
@@ -335,10 +341,10 @@ public class ShopList : MonoBehaviour
                 case "まきもの3":
                     haveItems.Add(Data.makimono3);
                     break;
-                case "かいふく":
+                case "回復薬":
                     haveItems.Add(Data.kaihuku);
                     break;
-                case "かいふく2":
+                case "上回復薬":
                     haveItems.Add(Data.kaihuku2);
                     break;
             }

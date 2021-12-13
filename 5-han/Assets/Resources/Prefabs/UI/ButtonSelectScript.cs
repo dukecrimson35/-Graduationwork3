@@ -30,7 +30,7 @@ public class ButtonSelectScript : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if(SceneManager.GetActiveScene().name == "SelectScene")
         {
-            delay = 0.6f;
+            delay = 0.4f;
         }
     }
 
