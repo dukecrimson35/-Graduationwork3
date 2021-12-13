@@ -19,12 +19,16 @@ public class SyouninShopScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (GameObject.Find("ShopPrefab(Clone)") == null)
-        //{
-        //    GameObject instance =
-        //       (GameObject)Instantiate(shopPrefab,
-        //       new Vector3(0, 0, 0.0f), Quaternion.identity);
-        //}
+        if(Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.Alpha3) )
+        {
+            if (GameObject.Find("ShopPrefab(Clone)") == null)
+            {
+                GameObject instance =
+                   (GameObject)Instantiate(shopPrefab,
+                   new Vector3(0, 0, 0.0f), Quaternion.identity);
+            }
+        }
+        
     }
 
     public void OnTriggerEnter(Collider other)

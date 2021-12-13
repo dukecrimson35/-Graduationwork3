@@ -20,23 +20,23 @@ public class SugaharaTestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //コインを増やすコマンド
-        if (Input.GetKeyDown(KeyCode.A))
+        ////コインを増やすコマンド
+        if (Input.GetKeyDown(KeyCode.A) && Input.GetKey(KeyCode.Alpha0))
         {
             itemManagerScript.UpCoin(100);
         }
-        //ショップを開くコマンド
-        if (Input.GetKeyDown(KeyCode.S) && GameObject.Find("ShopPrefab(Clone)") == null)
-        {
-            GameObject instance =
-               (GameObject)Instantiate(shopPrefab,
-               new Vector3(0, 0, 0.0f), Quaternion.identity);
-        }
+        ////ショップを開くコマンド
+        //if (Input.GetKeyDown(KeyCode.S) && GameObject.Find("ShopPrefab(Clone)") == null)
+        //{
+        //    GameObject instance =
+        //       (GameObject)Instantiate(shopPrefab,
+        //       new Vector3(0, 0, 0.0f), Quaternion.identity);
+        //}
 
-        if(itemManagerScript.GetShopFlag())
-        {
-            Debug.Log(itemManagerScript.GetShopFlag());
-        }
+        //if(itemManagerScript.GetShopFlag())
+        //{
+        //    Debug.Log(itemManagerScript.GetShopFlag());
+        //}
 
     }
 

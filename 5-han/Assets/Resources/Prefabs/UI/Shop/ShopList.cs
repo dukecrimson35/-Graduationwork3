@@ -93,7 +93,7 @@ public class ShopList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinText.text = Data.coin.ToString() + "銭";
+        coinText.text = "×" + Data.coin.ToString() + "";
         HaveItemUpdate();
         audioSource.volume = Data.seVol;
 
