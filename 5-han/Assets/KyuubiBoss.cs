@@ -53,8 +53,8 @@ public class KyuubiBoss : MonoBehaviour
     public GameObject hole02;//呼び出す予兆2
     Vector3 spawnP01;//敵発生位置１
     Vector3 spawnP02;//敵発生位置１
-    List<GameObject> beasts;//ザコ配列
-    List<BaseEnemy> scripts;//パーティクル消すよう
+    GameObject[] beasts;//ザコ配列
+    BaseEnemy[] scripts;//パーティクル消すよう
     List<GameObject> enemys;//敵消すよう
 
     Rigidbody rigidbody;
@@ -110,8 +110,8 @@ public class KyuubiBoss : MonoBehaviour
         //敵呼び出し用
         spawnP01 = hole01.transform.position;
         spawnP02 = hole02.transform.position;
-        beasts = new List<GameObject>();
-        scripts = new List<BaseEnemy>();
+        beasts = new GameObject[2];
+        scripts = new BaseEnemy[2];
         enemys = new List<GameObject>();
     }
 
