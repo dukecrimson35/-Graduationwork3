@@ -107,7 +107,20 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Power", false);
             anim.SetBool("Power2", false);
         }
-       
+
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "MovieArea")
+        {
+            
+            anim.SetBool("Senku", false);
+            anim.SetBool("Senku2", false);
+            anim.SetBool("Walk", true);
+            anim.SetBool("Damage", false);
+            anim.SetBool("Power", false);
+            anim.SetBool("Power2", false);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -163,14 +176,17 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 muteki = 0.1f;
+            //    CheckDead();
                 MovieUpdate();
-                CheckDead();
+
+                Blink();
                 Direction();
             }
         }
         else
         {
             muteki = 0.1f;
+            Blink();
             anim.SetBool("Senku", false);
             anim.SetBool("Senku2", false);
             anim.SetBool("Walk", false);
@@ -843,7 +859,7 @@ public class PlayerControl : MonoBehaviour
     void Blink()
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
-        if (muteki > 0.1) 
+        if (muteki > 0.1f) 
         {
             blinktime += Time.deltaTime;
             if (blinktime % 0.3 < 0.1f)

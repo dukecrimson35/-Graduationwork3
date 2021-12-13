@@ -38,6 +38,8 @@ public class BirdBoss : MonoBehaviour
     public bool down;
     public float downTimer;
     bool firstdown;
+    float deadTimer;
+    float itemZ;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -62,6 +64,8 @@ public class BirdBoss : MonoBehaviour
         singleRangesec = 0;
         ResetMelee = 0;
         downTimer = 0;
+        deadTimer = 0;
+        itemZ = 0.9f;
     }
 
     // Update is called once per frame
@@ -116,22 +120,25 @@ public class BirdBoss : MonoBehaviour
                     rigid.useGravity = true;
                     if (LMove && !RMove)
                     {
-                        pos.x -= 0.06f;
+                        pos.x -= 0.03f;
                         this.transform.rotation = new Quaternion(0, 0, 0, 0);
                     }
                     if (!LMove && RMove)
                     {
-                        pos.x += 0.06f;
+                        pos.x += 0.03f;
                         this.transform.rotation = new Quaternion(0, 180, 0, 0);
                     }
                     if (ResetMelee >= 5.0f)
                     {
                         Meleesecond = 0;
                         ResetMelee = 0;
-                        anim.SetBool("Melee", false);
                         AtkModeMelee = false;
                         rigid.useGravity = false;
                     }
+                }
+                if(Meleesecond==0.0f||ResetMelee==0.0f)
+                {
+                    anim.SetBool("Melee", false);
                 }
                 Rangesecond += Time.deltaTime;
                 singleRangesec += Time.deltaTime;
@@ -182,6 +189,7 @@ public class BirdBoss : MonoBehaviour
             {
                 if (down)
                 {
+                    collider.size = new Vector3(1, 6.74f, 1);
                     downTimer += Time.deltaTime;
                     anim.SetBool("Down", true);
                 }
@@ -189,6 +197,7 @@ public class BirdBoss : MonoBehaviour
             if (downTimer >= 5.0f)
             {
                 down = false;
+                collider.size = new Vector3(1, 14.45f, 1);
                 anim.SetBool("Down", false);
                 firstdown = false;
                 rigid.useGravity = false;
@@ -201,7 +210,7 @@ public class BirdBoss : MonoBehaviour
                 {
                     clearItemSpawnFlag = true;
                     GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem2"));
-                    drop.transform.position = transform.position;
+                    drop.transform.position = new Vector3(transform.position.x,transform.position.y,0.19f);
                 }
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
                 {
@@ -214,7 +223,7 @@ public class BirdBoss : MonoBehaviour
                     //voiceScript.SetKituneEndFlag();
                     Data.voiceFlag = true;
                 }
-                Destroy(gameObject, 2.0f);
+                Destroy(gameObject, 12.0f);
             }
             if (Input.GetKey(KeyCode.Q))
             {
@@ -241,7 +250,14 @@ public class BirdBoss : MonoBehaviour
             if (deadFlag)
             {
                 //scenechangetime += Time.deltaTime;
-                anim.SetBool("Dead", true);
+                deadTimer += Time.deltaTime;
+                if (deadTimer >= 10)
+                {
+                    anim.SetBool("Dead", true);
+                    anim.SetBool("Shot", false);
+                    anim.SetBool("Down", false);
+                    anim.SetBool("Melee", false);
+                }
             }
             transform.position += pos;
             pos = Vector3.zero;

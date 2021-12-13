@@ -4,8 +4,8 @@ using UnityEngine;
 
 public  class Data : MonoBehaviour
 {
-    public static readonly string kaihukuStr = "かいふく";
-    public static readonly string kaihuku2Str = "かいふく2";
+    public static readonly string kaihukuStr = "回復薬";
+    public static readonly string kaihuku2Str = "上回復薬";
     public static readonly string ySkillName = "";
     public static readonly string bSkillName = "紅月刀の書";
     public static readonly string xSkillName = "青天刀の書";
