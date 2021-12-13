@@ -19,6 +19,8 @@ public class BirdEnemy : MonoBehaviour
     float size = 0.08f;
     public GameObject Texture;//自分の画像
     GameObject player;
+    GameObject bossArea;//ボス演出判定
+    bossspawn bossspawn;//ボス演出用
 
     Vector3 playerPos;//プレイヤーのポジション
     float alfa;//関数上の傾き
@@ -35,6 +37,7 @@ public class BirdEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UnityEditor.EditorApplication.isPaused = true;
         //初期値の設定
         defaultX = transform.position.x;
         defaultY = transform.position.y;
@@ -46,6 +49,8 @@ public class BirdEnemy : MonoBehaviour
         alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);//傾きの設定
         searchScript = searchRange.GetComponent<SearchRange>();
         player = GameObject.Find("Player");
+        bossArea = GameObject.Find("BossSpawn");
+        bossspawn = bossArea.GetComponent<bossspawn>();
     }
 
     // Update is called once per frame
@@ -113,7 +118,10 @@ public class BirdEnemy : MonoBehaviour
             }
             if (searchScript.GetinRange())//プレイヤーが索敵範囲に入ったら
             {
-                state = State.wait;
+                if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
+                {
+                    state = State.wait;
+                }
             }
         }
         if(state == State.wait)
@@ -124,7 +132,10 @@ public class BirdEnemy : MonoBehaviour
             if(count >= 0.75f)//カウントが進んだら
             {
                 //攻撃状態に切り替え
-                state = State.attack;
+                if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
+                {
+                    state = State.attack;
+                }
                 count = 0;
                 playerPos = GameObject.Find("Player").transform.position;
                 alfa = (transform.position.y - playerPos.y) / Mathf.Pow(transform.position.x - playerPos.x, 2);//傾きの設定
