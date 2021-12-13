@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneManagement : MonoBehaviour
 {
+    private bool oneVFlag = false;
 
     private string sceneName = "";
 
@@ -52,7 +53,7 @@ public class SceneManagement : MonoBehaviour
     {
         audioSource.volume = 0.1f;
         Application.targetFrameRate = 144;
-
+        oneVFlag = false;
         Data.selectBgmFlag = false;
         Data.voiceFlag = false;
         Data.bossWallStartFlag = false;
@@ -232,7 +233,7 @@ public class SceneManagement : MonoBehaviour
 
             //Debug.Log(Data.voiceFlag);
 
-            if(!bossspawnScript.GetEnemyMove())
+            if(!bossspawnScript.GetEnemyMove() && !oneVFlag)
             {
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
                 {
@@ -242,7 +243,7 @@ public class SceneManagement : MonoBehaviour
                     VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
                     voiceScript.SetOniStartFlag();
                     Data.voiceFlag = true;
-
+                    oneVFlag = true;
                     //voiceScript.SetOniEndFlag();
                 }
             }
@@ -261,7 +262,7 @@ public class SceneManagement : MonoBehaviour
         }
         else if (sceneName == "Stage02")
         {
-            if (!bossspawnScript.GetEnemyMove())
+            if (!bossspawnScript.GetEnemyMove() &&!oneVFlag)
             {
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
                 {
@@ -271,6 +272,7 @@ public class SceneManagement : MonoBehaviour
                     VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
                     voiceScript.SetToriStartFlag();
                     Data.voiceFlag = true;
+                    oneVFlag = true;
 
                     //voiceScript.SetOniEndFlag();
                 }
@@ -299,7 +301,7 @@ public class SceneManagement : MonoBehaviour
                 //SceneManager.LoadScene(SceneNames.GameOverScene.ToString());
                 fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameOverScene.ToString());
             }
-            if (!bossspawnScript.GetEnemyMove())
+            if (!bossspawnScript.GetEnemyMove() && !oneVFlag)
             {
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
                 {
@@ -309,7 +311,7 @@ public class SceneManagement : MonoBehaviour
                     VoiceScript voiceScript = instance.GetComponent<VoiceScript>();
                     voiceScript.SetKituneStartFlag();
                     Data.voiceFlag = true;
-
+                    oneVFlag = true;
                     //voiceScript.SetOniEndFlag();
                 }
             }

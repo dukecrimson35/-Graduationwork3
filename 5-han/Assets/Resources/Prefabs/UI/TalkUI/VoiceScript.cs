@@ -69,8 +69,6 @@ public class VoiceScript : MonoBehaviour
         if (oneFlag) return;//一回しか呼ばないため
 
        
-
-
         if(oniBossStartFlag)
         {          
             StringReader reader = new StringReader(oniStartTxt.text);
@@ -192,8 +190,6 @@ public class VoiceScript : MonoBehaviour
             StartCoroutine(BGMFadeOutCoroutine());
         }
        
-
-
         yield return new WaitForSeconds(0.4f);//待ち時間
 
 
