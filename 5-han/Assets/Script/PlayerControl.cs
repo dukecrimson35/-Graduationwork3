@@ -165,6 +165,7 @@ public class PlayerControl : MonoBehaviour
                 muteki = 0.1f;
                 MovieUpdate();
                 CheckDead();
+                Blink();
                 Direction();
             }
         }
