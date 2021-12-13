@@ -176,9 +176,9 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 muteki = 0.1f;
-                //CheckDead();
+            //    CheckDead();
                 MovieUpdate();
-                
+
                 Blink();
                 Direction();
             }
@@ -186,6 +186,7 @@ public class PlayerControl : MonoBehaviour
         else
         {
             muteki = 0.1f;
+            Blink();
             anim.SetBool("Senku", false);
             anim.SetBool("Senku2", false);
             anim.SetBool("Walk", false);
@@ -858,7 +859,7 @@ public class PlayerControl : MonoBehaviour
     void Blink()
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
-        if (muteki > 0.1) 
+        if (muteki > 0.1f) 
         {
             blinktime += Time.deltaTime;
             if (blinktime % 0.3 < 0.1f)
