@@ -259,7 +259,7 @@ public class VoiceScript : MonoBehaviour
 
     public void SetToriEndFlag()
     {
-        toriBossStartFlag = true;
+        toriBossEndFlag = true;
     }
     public void SetKituneStartFlag()
     {
