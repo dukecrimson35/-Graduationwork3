@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   senkugiri: {fileID: 8300000, guid: f2b362d364876394f9e4a6bce84b00c0, type: 3}
   damage: {fileID: 8300000, guid: dac16bbfb73534b4cbdf8ea8741806a2, type: 3}
+  damageVoice: {fileID: 8300000, guid: 49fdc2488cc91514b9a88afafab41705, type: 3}
   dead: {fileID: 0}
   powerslash: {fileID: 8300000, guid: 2494ac9039fb95e4898c09f03ed6f4f5, type: 3}
   coin: {fileID: 8300000, guid: bf546994806c52647bdb250632af155a, type: 3}

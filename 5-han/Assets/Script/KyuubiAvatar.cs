@@ -20,6 +20,11 @@ public class KyuubiAvatar : MonoBehaviour
     Rigidbody rigidbody;
 
     float runoutdis;//走り抜ける処理
+    bool hitflag;
+    float hitcount;//左右壁に当たってからの時間
+
+    public GameObject reverse;//反転判定
+    WallRange range;
 
 
     // Start is called before the first frame update
@@ -33,13 +38,26 @@ public class KyuubiAvatar : MonoBehaviour
         animator = Texture.GetComponent<Animator>();
         runoutdis = Random.Range(6, 10);
         speed = 1;
-        delayTime = 3;//動くまでの時間の初期値100秒
+        if (reverse != null)
+        {
+            range = reverse.GetComponent<WallRange>();
+        }
+        //delayTime = 3;//動くまでの時間の初期値100秒
     }
 
     // Update is called once per frame
     void Update()
     {
         count += Time.deltaTime;
+        if (hitflag)
+        {
+            hitcount += Time.deltaTime;
+            if (hitcount >= 0.1f)
+            {
+                hitflag = false;
+                hitcount = 0;
+            }
+        }
         if (moveFlag)
         {
             animator.Play("Walk");
@@ -91,6 +109,18 @@ public class KyuubiAvatar : MonoBehaviour
             if (moveFlag == false)
             {
                 moveFlag = true;
+            }
+        }
+
+        if (range != null)//左右壁判定処理
+        {
+            if (range.GetinRange())//壁に当たったら
+            {
+                if (hitflag == false)
+                {
+                    leftMove = !leftMove;
+                    hitflag = true;
+                }
             }
         }
     }
