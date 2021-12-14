@@ -53,6 +53,10 @@ public  class Data : MonoBehaviour
     public static bool bSkill = false;
     public static bool xSkill = false;
     public static bool ySkill = false;
+
+    public static bool stage1 = true;
+    public static bool stage2 = false;
+    public static bool stage3 = false;
     
 
     //public static bool shopOpenFlag = false;

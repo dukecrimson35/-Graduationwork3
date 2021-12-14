@@ -72,6 +72,15 @@ public class SceneManagement : MonoBehaviour
         //    if (titleCallSE != null) StartCoroutine(PlayTitleCall());//タイトルコール呼び出し
         //}
 
+        if(sceneName == "EndingScene")
+        {
+            StartCoroutine(NextSceneTitle());
+        }
+        if(sceneName == "OP")
+        {
+            StartCoroutine(NextSceneTitle2());
+        }
+
         if(sceneName == "SelectScene")
         {
             dissolver = CutFade.GetComponent<Dissolver>();
@@ -159,10 +168,35 @@ public class SceneManagement : MonoBehaviour
         StartCoroutine(BGMFadeInCoroutine());
     }
 
+    IEnumerator NextSceneTitle()
+    {
+       
+        yield return new WaitForSecondsRealtime(50);
+        OnClickTitleButton();
+
+    }
+
+    IEnumerator NextSceneTitle2()
+    {
+
+        yield return new WaitForSecondsRealtime(15);
+        OnClickTitleButton();
+
+    }
+
     // Update is called once per frame
     void Update()
     {
         audioSource.volume = 0.1f * Data.bgmVol;
+
+        if(sceneName == "EndingScene")
+        {
+            if(Input.GetKeyDown(KeyCode.M))
+            {
+                OnClickTitleButton();
+            }
+        }
+
 
         switch (Data.bgm)
         {
@@ -294,7 +328,8 @@ public class SceneManagement : MonoBehaviour
             if (playerControl.GetClearFlag())//clearFlag
             {
                 //SceneManager.LoadScene(SceneNames.GameClearScene.ToString());
-                fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
+                //fade.GetComponent<FadeStart>().FadeOutNextScene(SceneNames.GameClearScene.ToString());
+                fade.GetComponent<FadeStart>().FadeOutNextScene("EndingScene");
             }
             else if (deadFlag)
             {
@@ -415,6 +450,19 @@ public class SceneManagement : MonoBehaviour
             StartCoroutine(Coroutine(SceneNames.Stage03.ToString()));
         }
 
+    }
+
+    public void OnNextStageButton()
+    {
+       
+        if (Data.stageNum == 1)
+        {
+            StartCoroutine(Coroutine(SceneNames.Stage02.ToString()));
+        }
+        if (Data.stageNum == 2)
+        {
+            StartCoroutine(Coroutine(SceneNames.Stage03.ToString()));
+        }
     }
 
     public void OnClickStage1Button()

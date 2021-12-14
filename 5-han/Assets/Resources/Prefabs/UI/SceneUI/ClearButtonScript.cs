@@ -19,6 +19,14 @@ public class ClearButtonScript : MonoBehaviour
         titleButton.Select();
 
         sceneManagement = sceneManagerOBJ.GetComponent<SceneManagement>();
+        if(Data.stageNum == 1)
+        {
+            Data.stage2 = true;
+        }
+        if(Data.stageNum == 2)
+        {
+            Data.stage3 = true;
+        }
     }
 
     // Update is called once per frame
@@ -38,6 +46,7 @@ public class ClearButtonScript : MonoBehaviour
     {
         ButtonAniScript bas = selectButton.GetComponent<ButtonAniScript>();
         if (bas.GetButtonStopFlag()) return;
-        sceneManagement.OnClickSelectButton();
+        //sceneManagement.OnClickSelectButton();
+        sceneManagement.OnNextStageButton();
     }
 }

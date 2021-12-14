@@ -17,11 +17,16 @@ public class ButtonSelectScript : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip ketteiSE;
     public AudioClip senntakuSE;
+    public AudioClip batuSE;
     private bool onSEFlag = false;
 
     public int num = 0;
 
     float delay = 0.2f;
+
+    string sceneName = "";
+
+    bool check = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +36,27 @@ public class ButtonSelectScript : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "SelectScene")
         {
             delay = 0.4f;
+
+            check = true;
         }
+
+        //sceneName = SceneManager.GetActiveScene().name;
+
+        if(!Data.stage2)
+        {
+            //buttons[2].
+            buttons[1].GetComponentInChildren<Image>().color
+                = new Color(0.3f, 0.3f, 0.3f, 1);
+
+        }
+        if (!Data.stage3)
+        {
+            //buttons[2].
+            buttons[2].GetComponentInChildren<Image>().color
+                = new Color(0.3f, 0.3f,0.3f, 1);
+
+        }
+
     }
 
 
@@ -100,7 +125,17 @@ public class ButtonSelectScript : MonoBehaviour
 
         if(Input.GetKeyDown("joystick button 0") && !onSEFlag )
         {
-            
+            if(pos == 1 && !Data.stage2 && check)
+            {
+                audioSource.PlayOneShot(batuSE);
+                return;
+            }
+            if (pos == 2 && !Data.stage3 && check)
+            {
+                audioSource.PlayOneShot(batuSE);
+                return;
+            }
+
             ButtonAniScript bas = buttons[pos].GetComponent<ButtonAniScript>();
 
             if (bas.GetButtonStopFlag()) return;

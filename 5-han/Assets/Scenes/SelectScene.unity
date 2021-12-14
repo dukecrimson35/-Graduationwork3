@@ -2497,6 +2497,7 @@ MonoBehaviour:
   - {fileID: 693772105}
   ketteiSE: {fileID: 8300000, guid: 932994c7604b79e4288979eaa76aa9f5, type: 3}
   senntakuSE: {fileID: 8300000, guid: c8525477c3f615446b31b9513c63bfa1, type: 3}
+  batuSE: {fileID: 8300000, guid: 319a4beaab8f0284bb9f0f73b3562d73, type: 3}
   num: 0
 --- !u!114 &2788197390691173770
 MonoBehaviour:
