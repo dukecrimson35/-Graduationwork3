@@ -37,7 +37,7 @@ public class BirdEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnityEditor.EditorApplication.isPaused = true;
+        //UnityEditor.EditorApplication.isPaused = true;
         //初期値の設定
         defaultX = transform.position.x;
         defaultY = transform.position.y;

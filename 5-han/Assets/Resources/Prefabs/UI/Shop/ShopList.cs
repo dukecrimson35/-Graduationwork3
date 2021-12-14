@@ -39,6 +39,11 @@ public class ShopList : MonoBehaviour
     public AudioClip kauSE;
     public AudioClip kaenaiSE;
 
+    public List<int> delItem = new List<int>();
+
+    public Text kesisen;
+    public Text kesisen2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,11 +55,28 @@ public class ShopList : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
+        if(Data.bSkill)
+        {
+            kesisen.color = new Color(kesisen.color.r, kesisen.color.g, kesisen.color.b,1);
+        }
+        if(Data.xSkill)
+        {
+            kesisen2.color = new Color(kesisen2.color.r, kesisen2.color.g, kesisen2.color.b,1);
+        }
+
         //リストに入っているテキストをメニューに並べる(アイテム名)
         for (int i = 0; i < itemList.Count; i++)
         {
-            text.text = itemList[i];
+            if(itemList[i] == Data.bSkillName && Data.bSkill)
+            {
+                delItem.Add(i);             
+            }
+            if(itemList[i] == Data.xSkillName && Data.xSkill)
+            {
+                delItem.Add(i);
+            }
 
+            text.text = itemList[i];
          
             Text instance =
                 (Text)Instantiate(text,
@@ -66,6 +88,24 @@ public class ShopList : MonoBehaviour
         //リストに入っているテキストをメニューに並べる(アイテム値段)
         for (int i = 0; i < coinList.Count - 1; i++)
         {
+            bool check = false;
+            for(int j = 0; j< delItem.Count; j++)
+            {
+                if(delItem[j] == i)
+                {
+                    text.text = "売り切れ";
+
+                    Text instance2 =
+                        (Text)Instantiate(text,
+                        new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+                    instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+                    check = true;
+                }
+            }
+
+            if (check) continue;
+
             text.text = coinList[i].ToString();
 
             Text instance =
@@ -79,6 +119,16 @@ public class ShopList : MonoBehaviour
         //リストに入っているテキストをメニューに並べる(アイテム数)
         for (int i = 0; i < haveItems.Count; i++)
         {
+            bool check = false;
+            for (int j = 0; j < delItem.Count; j++)
+            {
+                if (delItem[j] == i)
+                {
+                    check = true;
+                }
+            }
+            if (check) continue;
+
             text.text = "(" + haveItems[i].ToString() + ")";
 
             Text instance =
@@ -311,7 +361,14 @@ public class ShopList : MonoBehaviour
 
         if (itemList[yazirusiCout] == Data.bSkillName)
         {
-            message2.text = "効果:連撃数に応じて\n　　 威力が上がる技";
+            if (Data.bSkill)
+            {
+                message2.text = "すでに買っています。";
+            }
+            else
+            {
+                message2.text = "効果:連撃数に応じて\n　　 威力が上がる技";
+            }
         }
         if (itemList[yazirusiCout] == Data.xSkillName)
         {
