@@ -807,13 +807,14 @@ public class PlayerControl : MonoBehaviour
         anim.SetBool("Damage", true);
         anim.SetBool("Power", false);
         anim.SetBool("Power2", false);
-        audio.PlayOneShot(damage);
-        audio.PlayOneShot(damageVoice);
-
+      
         if (muteki < 0)
         {
             hp -= _damage;
             muteki = 1.5f;
+            audio.PlayOneShot(damage);
+            audio.PlayOneShot(damageVoice);
+
         }
     }
     public void HealHp(int num)
