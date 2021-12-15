@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.52791786, g: 0.58942765, b: 0.40823337, a: 1}
+  m_IndirectSpecularColor: {r: 0.52783346, g: 0.58925104, b: 0.40805274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -54846,6 +54846,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BossBird
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326896795851565991, guid: cfcc44c703189cb41b3e7ec6b8334c6e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 5326896796311649006, guid: cfcc44c703189cb41b3e7ec6b8334c6e,
         type: 3}

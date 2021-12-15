@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5765928, g: 0.46949297, b: 0.25045818, a: 1}
+  m_IndirectSpecularColor: {r: 0.57647014, g: 0.4693972, b: 0.2503144, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12180,6 +12180,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4895808891451525602, guid: cc0937082f0cec1408d3cc5fb130f238,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351674766406942685, guid: cc0937082f0cec1408d3cc5fb130f238,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 6351674766406942686, guid: cc0937082f0cec1408d3cc5fb130f238,
         type: 3}
       propertyPath: m_Enabled
@@ -12200,6 +12210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: oni_tati
+      objectReference: {fileID: 0}
+    - target: {fileID: 7681459552849642218, guid: cc0937082f0cec1408d3cc5fb130f238,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 8108340511902152190, guid: cc0937082f0cec1408d3cc5fb130f238,
         type: 3}
