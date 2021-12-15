@@ -48,6 +48,8 @@ public class KyuubiAvatar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;//ポーズ中は動かない
+
         count += Time.deltaTime;
         if (hitflag)
         {
