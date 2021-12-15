@@ -37,6 +37,7 @@ public class BirdBoss : MonoBehaviour
     bool clearItemSpawnFlag;
     public bool down;
     public float downTimer;
+    public float SpecialShot;
     bool firstdown;
     float deadTimer;
     float itemZ;
@@ -161,6 +162,7 @@ public class BirdBoss : MonoBehaviour
                 }
                 Rangesecond += Time.deltaTime;
                 singleRangesec += Time.deltaTime;
+                SpecialShot += Time.deltaTime;
                 ////遠距離攻撃処理
                 if (hitGround)
                 {
@@ -170,9 +172,9 @@ public class BirdBoss : MonoBehaviour
                     }
                     if (singleRangesec >= 2.5f)
                     {
-                        Instantiate(bullet, this.transform.position, Quaternion.identity);
-                        //Rangesecond = 0;
-                        anim.SetBool("Shot", false);
+                        //Instantiate(bullet, this.transform.position, Quaternion.identity);
+                        ///Rangesecond = 0;
+                        ///anim.SetBool("Shot", false);
                         singleRangesec = 0;
                     }
                 }
@@ -184,10 +186,28 @@ public class BirdBoss : MonoBehaviour
                     }
                     if (Rangesecond >= 5.0f)
                     {
-                        //Instantiate(bullet, new Vector3(transform.position.x, transform.position.y - 2, transform.position.z), Quaternion.identity);
-                        Instantiate(bullet, new Vector3(transform.position.x - 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
-                        Instantiate(bullet, new Vector3(transform.position.x + 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
+                        ///Instantiate(bullet, new Vector3(transform.position.x, transform.position.y - 2, transform.position.z), Quaternion.identity);
+                        //Instantiate(bullet, new Vector3(transform.position.x - 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
+                        //Instantiate(bullet, new Vector3(transform.position.x + 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
                         Rangesecond = 0;
+                    }
+                }
+                if(hitGround)
+                {
+                    if (SpecialShot >= 9.0f)
+                    {
+                        anim.SetBool("Shot", true);
+                    }
+                    if (SpecialShot >= 10.0f)
+                    {
+                        for (int index = 0; index < 10; index++)
+                        {
+                            Instantiate(bullet, transform.position, Quaternion.identity);
+                        }
+                    }
+                    if(SpecialShot>=10.5f)
+                    {
+                        SpecialShot = 0;
                     }
                 }
                 if (Rangesecond == 0.0f)
@@ -195,6 +215,10 @@ public class BirdBoss : MonoBehaviour
                     anim.SetBool("Shot", false);
                 }
                 if (singleRangesec == 0.0f)
+                {
+                    anim.SetBool("Shot", false);
+                }
+                if (SpecialShot == 0.0f)
                 {
                     anim.SetBool("Shot", false);
                 }
