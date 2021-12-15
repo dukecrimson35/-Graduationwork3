@@ -10,7 +10,8 @@ public class ShopList : MonoBehaviour
     public List<int> coinList;
 
     private List<int> haveItems;
-    private List<Text> haveItemText;
+    private List<Text> haveItemText = new List<Text>();
+    private List<Text> itemNedanText = new List<Text>();
 
     public Text yazirusiText;
     private Vector3 pos;//矢印の初期Pos
@@ -101,6 +102,7 @@ public class ShopList : MonoBehaviour
 
                     instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
                     check = true;
+                    itemNedanText.Add(instance2);
                 }
             }
 
@@ -113,6 +115,7 @@ public class ShopList : MonoBehaviour
                 new Vector3(pos.x + 445.0f +textWidthmove, pos.y - 15 - height *i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
 
             instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+            itemNedanText.Add(instance);
         }
 
         HaveNumver();
@@ -125,11 +128,19 @@ public class ShopList : MonoBehaviour
                 if (delItem[j] == i)
                 {
                     check = true;
+                    text.text = "";
+
+                    Text instance2 =
+                        (Text)Instantiate(text,
+                        new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+                    instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+                    haveItemText.Add(instance2);
                 }
             }
             if (check) continue;
 
-            text.text = "(" + haveItems[i].ToString() + ")";
+            text.text = "("  + ")";//+ haveItems[i].ToString()
 
             Text instance =
                 (Text)Instantiate(text,
@@ -143,6 +154,35 @@ public class ShopList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Data.bSkill)
+        {
+            kesisen.color = new Color(kesisen.color.r, kesisen.color.g, kesisen.color.b, 1);
+        }
+        if (Data.xSkill)
+        {
+            kesisen2.color = new Color(kesisen2.color.r, kesisen2.color.g, kesisen2.color.b, 1);
+        }
+        if (Data.xSkill || Data.xSkillCount > 0)
+        {
+            //3
+            haveItemText[3].text = "売り切れ";
+            itemNedanText[3].text = "";
+        }
+        if(Data.bSkill || Data.bSkillCount > 0)
+        {
+            //2
+            haveItemText[2].text = "売り切れ";
+            itemNedanText[2].text = "";
+        }
+        if (Data.bSkill || Data.bSkillCount > 0)
+        {
+            kesisen.color = new Color(kesisen.color.r, kesisen.color.g, kesisen.color.b, 1);
+        }
+        if (Data.xSkill || Data.xSkillCount > 0)
+        {
+            kesisen2.color = new Color(kesisen2.color.r, kesisen2.color.g, kesisen2.color.b, 1);
+        }
+
         coinText.text = "×" + Data.coin.ToString() + "";
         HaveItemUpdate();
         audioSource.volume = Data.seVol;
@@ -372,7 +412,15 @@ public class ShopList : MonoBehaviour
         }
         if (itemList[yazirusiCout] == Data.xSkillName)
         {
-            message2.text = "効果:長押しで範囲攻撃を\n　　 する技";
+            if (Data.xSkill)
+            {
+                message2.text = "すでに買っています。";
+            }
+            else
+            {
+                message2.text = "効果:長押しで範囲攻撃を\n　　 する技";
+            }
+           
         }
         if (itemList[yazirusiCout] == "まきもの3")
         {
@@ -413,6 +461,30 @@ public class ShopList : MonoBehaviour
         HaveNumver();
         for(int i = 0; i< haveItemText.Count; i++)
         {
+            bool check = false;
+            for (int j = 0; j < delItem.Count; j++)
+            {
+                if (delItem[j] == i)
+                {
+                    check = true;
+                    //haveItemText[i].text = "";
+                }
+            }
+            if (check) continue;
+
+            bool check2 = false;
+            if(i == 2 && Data.bSkillCount > 0)
+            {
+                check2 = true;
+                //haveItemText[i].text = "";
+            }
+            if (i == 3 && Data.xSkillCount > 0)
+            {
+                check2 = true;
+                //haveItemText[i].text = "";
+            }
+            if (check2) continue;
+
             haveItemText[i].text = "(" + haveItems[i].ToString() + ")";
         }
     }
