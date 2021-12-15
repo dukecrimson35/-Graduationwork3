@@ -197,6 +197,12 @@ public class SceneManagement : MonoBehaviour
             }
         }
 
+        if(Input.GetKey(KeyCode.Alpha0) && Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            Data.stage2 = true;
+            Data.stage3 = true;
+        }
+
 
         switch (Data.bgm)
         {

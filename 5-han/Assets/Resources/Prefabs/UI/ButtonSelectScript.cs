@@ -38,24 +38,26 @@ public class ButtonSelectScript : MonoBehaviour
             delay = 0.4f;
 
             check = true;
+
+            if (!Data.stage2)
+            {
+                //buttons[2].
+                buttons[1].GetComponentInChildren<Image>().color
+                    = new Color(0.3f, 0.3f, 0.3f, 1);
+
+            }
+            if (!Data.stage3)
+            {
+                //buttons[2].
+                buttons[2].GetComponentInChildren<Image>().color
+                    = new Color(0.3f, 0.3f, 0.3f, 1);
+
+            }
         }
 
         //sceneName = SceneManager.GetActiveScene().name;
 
-        if(!Data.stage2)
-        {
-            //buttons[2].
-            buttons[1].GetComponentInChildren<Image>().color
-                = new Color(0.3f, 0.3f, 0.3f, 1);
-
-        }
-        if (!Data.stage3)
-        {
-            //buttons[2].
-            buttons[2].GetComponentInChildren<Image>().color
-                = new Color(0.3f, 0.3f,0.3f, 1);
-
-        }
+      
 
     }
 
