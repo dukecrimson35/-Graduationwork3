@@ -76,6 +76,25 @@ public class BirdBoss : MonoBehaviour
             rigid.useGravity = true;
         }
         if (Time.timeScale <= 0) return;
+        if (deadFlag)
+        {
+            //scenechangetime += Time.deltaTime;
+            deadTimer += Time.deltaTime;
+            if (deadTimer >= 10)
+            {
+                anim.SetBool("Dead", true);
+            }
+            if (deadTimer >= 12)
+            {
+                Destroy(gameObject);
+                if (!clearItemSpawnFlag)
+                {
+                    clearItemSpawnFlag = true;
+                    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem2"));
+                    drop.transform.position = transform.position;
+                }
+            }
+        }
         //移動処理
         if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
@@ -206,12 +225,12 @@ public class BirdBoss : MonoBehaviour
             if (BossEnemyHp <= 0)
             {
                 deadFlag = true;
-                if (!clearItemSpawnFlag)
-                {
-                    clearItemSpawnFlag = true;
-                    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem2"));
-                    drop.transform.position = new Vector3(transform.position.x,transform.position.y,0.19f);
-                }
+                //if (!clearItemSpawnFlag)
+                //{
+                //    clearItemSpawnFlag = true;
+                //    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem2"));
+                //    drop.transform.position = new Vector3(transform.position.x,transform.position.y,0.19f);
+                //}
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
                 {
                     GameObject instance =
@@ -223,7 +242,7 @@ public class BirdBoss : MonoBehaviour
                     //voiceScript.SetKituneEndFlag();
                     Data.voiceFlag = true;
                 }
-                Destroy(gameObject, 12.0f);
+                //Destroy(gameObject, 12.0f);
             }
             if (Input.GetKey(KeyCode.Q))
             {
@@ -246,18 +265,6 @@ public class BirdBoss : MonoBehaviour
             if (!damage)
             {
                 renderer.material.color = Color.white;
-            }
-            if (deadFlag)
-            {
-                //scenechangetime += Time.deltaTime;
-                deadTimer += Time.deltaTime;
-                if (deadTimer >= 10)
-                {
-                    anim.SetBool("Dead", true);
-                    anim.SetBool("Shot", false);
-                    anim.SetBool("Down", false);
-                    anim.SetBool("Melee", false);
-                }
             }
             transform.position += pos;
             pos = Vector3.zero;

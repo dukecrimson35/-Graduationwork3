@@ -27,6 +27,7 @@ public class BossEnemy : MonoBehaviour
     public GameObject MeleeWepon;
     public GameObject RMeleeWepon;
     float wepRot;
+    float deadTimer;
     //public Sprite aliveBoss;
     //public Sprite deadBoss;
     public float scenechangetime;
@@ -81,6 +82,25 @@ public class BossEnemy : MonoBehaviour
             rigid.useGravity = true;
         }
         if (Time.timeScale <= 0) return;
+        if (deadFlag)
+        {
+            deadTimer += Time.deltaTime;
+            if (deadTimer >= 9)
+            {
+                anim.SetBool("Dead", true);
+                collider.size = new Vector3(1, 0.4f, 1);
+            }
+            if (deadTimer >= 11)
+            {
+                Destroy(gameObject);
+                if (!cleaItemSpawnFlag)
+                {
+                    cleaItemSpawnFlag = true;
+                    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem"));
+                    drop.transform.position = transform.position;
+                }
+            }
+        }
         //移動処理
         if (bossspawn.GetEnemyMove() && Data.voiceFlag == false)
         {
@@ -194,22 +214,15 @@ public class BossEnemy : MonoBehaviour
             }
             if (BossEnemyHp <= 0)
             {
-                deadFlag = true;
-                collider.size = new Vector3(1, 0.4f, 1);
-                //spr.sprite = deadBoss;
-                //if(scenechangetime>=2)
-                //{;
                 Destroy(MeleeWepon);
                 Destroy(RMeleeWepon);
-                //anim.SetBool("Dead", true);
-                //anim.Play("OniBossDead");
-                //Destroy(gameObject);
-                if(!cleaItemSpawnFlag)
-                {
-                    cleaItemSpawnFlag = true;
-                    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem"));
-                    drop.transform.position = transform.position;
-                }
+                deadFlag = true;
+                //if (!cleaItemSpawnFlag)
+                //{
+                //    cleaItemSpawnFlag = true;
+                //    GameObject drop = Instantiate((GameObject)Resources.Load("ClearItem"));
+                //    drop.transform.position = transform.position;
+                //}
                 if (GameObject.Find("TalkUICanvas(Clone)") == null)
                 {
                     GameObject instance =
@@ -221,24 +234,10 @@ public class BossEnemy : MonoBehaviour
                     //voiceScript.SetKituneEndFlag();
                     Data.voiceFlag = true;
                 }
-                Destroy(gameObject, 2.0f);
             }
             if (Input.GetKey(KeyCode.Q))
             {
                 BossEnemyHp = 0;
-                //deadFlag = true;
-                ////scenechangetime += Time.deltaTime;
-                //Destroy(MeleeWepon);
-                //Destroy(RMeleeWepon);
-                ////spr.sprite = deadBoss;
-                ////if (scenechangetime >= 2)
-                ////{
-                ////anim.Play("OniBossDead"); 
-                //anim.SetBool("Dead", true);
-                //if (scenechangetime >= 1.0f)
-                //{
-                //    Destroy(gameObject);
-                //}
             }
             if (damage)
             {
@@ -253,11 +252,6 @@ public class BossEnemy : MonoBehaviour
             if (!damage)
             {
                 renderer.material.color = Color.white;
-            }
-            if (deadFlag)
-            {
-                //scenechangetime += Time.deltaTime;
-                anim.SetBool("Dead", true);
             }
             transform.position += pos;
             pos = Vector3.zero;
