@@ -49,6 +49,7 @@ public class PlayerControl : MonoBehaviour
     float blinktime = 0;
     bool clearFlag;
     float clearTime;
+    StartMovie startMovie;
     enum Direc
     {
         Right,Left,
@@ -82,6 +83,7 @@ public class PlayerControl : MonoBehaviour
         movieStartTime = 5;
         moviePos = Vector3.zero;
         clearTime = 0;
+        startMovie = GetComponentInChildren<StartMovie>();
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -154,12 +156,13 @@ public class PlayerControl : MonoBehaviour
         Physics.Simulate(Time.deltaTime);
         audio.volume = Data.seVol;
         if (Time.timeScale <= 0) return;
-        if (!itemManagerScript.GetShopFlag() && !Data.voiceFlag) 
+        if (!itemManagerScript.GetShopFlag() && !Data.voiceFlag)
         {
-            if (!movieFlag) 
+            Direction();
+            if (!movieFlag && startMovie.GetMovieEnd()) 
             {
                 Move();
-                Direction();
+               
                 SenkuGiri();
                 if(Data.bSkill)
                 {
@@ -173,14 +176,14 @@ public class PlayerControl : MonoBehaviour
                 CheckDead();
                 Blink();
             }            
-            else
+            else if(movieFlag)
             {
                 muteki = 0.1f;
             //    CheckDead();
                 MovieUpdate();
 
                 Blink();
-                Direction();
+              
             }
         }
         else
