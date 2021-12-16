@@ -207,11 +207,11 @@ public class BossEnemy : MonoBehaviour
                 anim.SetBool("Shot", false);
             }
             //終わり
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                BossEnemyHp--;
-                damage = true;
-            }
+            //if (Input.GetKeyDown(KeyCode.W))
+            //{
+            //    BossEnemyHp--;
+            //    damage = true;
+            //}
             if (BossEnemyHp <= 0)
             {
                 Destroy(MeleeWepon);
