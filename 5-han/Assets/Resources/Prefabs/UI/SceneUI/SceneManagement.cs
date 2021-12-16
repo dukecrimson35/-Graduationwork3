@@ -171,7 +171,7 @@ public class SceneManagement : MonoBehaviour
     IEnumerator NextSceneTitle()
     {
        
-        yield return new WaitForSecondsRealtime(50);
+        yield return new WaitForSecondsRealtime(46);
         OnClickTitleButton();
 
     }
@@ -189,19 +189,19 @@ public class SceneManagement : MonoBehaviour
     {
         audioSource.volume = 0.1f * Data.bgmVol;
 
-        if(sceneName == "EndingScene")
-        {
-            if(Input.GetKeyDown(KeyCode.M))
-            {
-                OnClickTitleButton();
-            }
-        }
+        //if(sceneName == "EndingScene")
+        //{
+        //    if(Input.GetKeyDown(KeyCode.M))
+        //    {
+        //        OnClickTitleButton();
+        //    }
+        //}
 
-        if(Input.GetKey(KeyCode.Alpha0) && Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            Data.stage2 = true;
-            Data.stage3 = true;
-        }
+        //if(Input.GetKey(KeyCode.Alpha0) && Input.GetKeyDown(KeyCode.Alpha7))
+        //{
+        //    Data.stage2 = true;
+        //    Data.stage3 = true;
+        //}
 
 
         switch (Data.bgm)
