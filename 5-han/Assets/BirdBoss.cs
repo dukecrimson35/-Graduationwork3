@@ -172,7 +172,7 @@ public class BirdBoss : MonoBehaviour
                     }
                     if (singleRangesec >= 2.5f)
                     {
-                        //Instantiate(bullet, this.transform.position, Quaternion.identity);
+                        Instantiate(bullet, this.transform.position, Quaternion.identity);
                         ///Rangesecond = 0;
                         ///anim.SetBool("Shot", false);
                         singleRangesec = 0;
@@ -187,8 +187,8 @@ public class BirdBoss : MonoBehaviour
                     if (Rangesecond >= 5.0f)
                     {
                         ///Instantiate(bullet, new Vector3(transform.position.x, transform.position.y - 2, transform.position.z), Quaternion.identity);
-                        //Instantiate(bullet, new Vector3(transform.position.x - 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
-                        //Instantiate(bullet, new Vector3(transform.position.x + 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
+                        Instantiate(bullet, new Vector3(transform.position.x - 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
+                        Instantiate(bullet, new Vector3(transform.position.x + 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
                         Rangesecond = 0;
                     }
                 }
