@@ -32,21 +32,21 @@ public class TitleCallScript : MonoBehaviour
     void Update()
     {
         //**********************************************************************
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            float v = audioSource.volume;
-            audioSource.volume = seVol;
-            if (titleCallSE != null) audioSource.PlayOneShot(titleCallSE);
-            audioSource.volume = v;
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    float v = audioSource.volume;
+        //    audioSource.volume = seVol;
+        //    if (titleCallSE != null) audioSource.PlayOneShot(titleCallSE);
+        //    audioSource.volume = v;
 
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            float v = audioSource.volume;
-            audioSource.volume = seVol;
-            if (titleCallSE2 != null) audioSource.PlayOneShot(titleCallSE2);
-            audioSource.volume = v;
-        }
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    float v = audioSource.volume;
+        //    audioSource.volume = seVol;
+        //    if (titleCallSE2 != null) audioSource.PlayOneShot(titleCallSE2);
+        //    audioSource.volume = v;
+        //}
         //**********************************************************************
     }
 }

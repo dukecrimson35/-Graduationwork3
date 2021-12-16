@@ -25,10 +25,7 @@ public class SousaUIScript : MonoBehaviour
         {
             x.sprite = x2;
         }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            y.sprite = y2;
-        }
+       
         if (Data.bSkill)
         {
             b.sprite = b2;

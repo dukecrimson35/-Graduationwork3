@@ -19,9 +19,9 @@ public class CoinTextUIScript : MonoBehaviour
         text.text = "×" + Data.coin.ToString();
 
 
-        if(Input.GetKey(KeyCode.A))
-        {
-            Data.coin += 100;
-        }
+        //if(Input.GetKey(KeyCode.A))
+        //{
+        //    Data.coin += 100;
+        //}
     }
 }
