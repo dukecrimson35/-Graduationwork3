@@ -108,6 +108,7 @@ MonoBehaviour:
   deathAnim: {fileID: 0}
   Ora: {fileID: 0}
   se: {fileID: 0}
+  isBossDeath: 1
 --- !u!65 &2736146270167994345
 BoxCollider:
   m_ObjectHideFlags: 0
