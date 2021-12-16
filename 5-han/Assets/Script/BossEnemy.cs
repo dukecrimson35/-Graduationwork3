@@ -207,11 +207,11 @@ public class BossEnemy : MonoBehaviour
                 anim.SetBool("Shot", false);
             }
             //終わり
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                BossEnemyHp--;
-                damage = true;
-            }
+            //if (Input.GetKeyDown(KeyCode.W))
+            //{
+            //    BossEnemyHp--;
+            //    damage = true;
+            //}
             if (BossEnemyHp <= 0)
             {
                 Destroy(MeleeWepon);
@@ -235,10 +235,10 @@ public class BossEnemy : MonoBehaviour
                     Data.voiceFlag = true;
                 }
             }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                BossEnemyHp = 0;
-            }
+            //if (Input.GetKey(KeyCode.Q))
+            //{
+            //    BossEnemyHp = 0;
+            //}
             if (damage)
             {
                 renderer.material.color = Color.red;

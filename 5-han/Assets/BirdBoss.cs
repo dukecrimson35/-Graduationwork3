@@ -268,14 +268,14 @@ public class BirdBoss : MonoBehaviour
                 }
                 //Destroy(gameObject, 12.0f);
             }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                BossEnemyHp = 0;
-            }
-            if(Input.GetKeyDown(KeyCode.W))
-            {
-                BossEnemyHp = BossEnemyHp - 10;
-            }
+            //if (Input.GetKey(KeyCode.Q))
+            //{
+            //    BossEnemyHp = 0;
+            //}
+            //if(Input.GetKeyDown(KeyCode.W))
+            //{
+            //    BossEnemyHp = BossEnemyHp - 10;
+            //}
             if (damage)
             {
                 renderer.material.color = Color.red;

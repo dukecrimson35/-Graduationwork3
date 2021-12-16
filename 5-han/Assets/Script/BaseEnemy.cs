@@ -110,11 +110,11 @@ public class BaseEnemy : MonoBehaviour
         //    Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         //}
         if (Time.timeScale <= 0) return;
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            baseEnemyHp--;
-            damage = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    baseEnemyHp--;
+        //    damage = true;
+        //}
         if (baseEnemyHp <= 0)
         {
             if (se != null)
@@ -132,11 +132,11 @@ public class BaseEnemy : MonoBehaviour
             Destroy(gameObject);
             deadFlag = true;
         }
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Destroy(gameObject);
-            deadFlag = true;
-        }
+        //if(Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    Destroy(gameObject);
+        //    deadFlag = true;
+        //}
         if (damage)
         {
             if (Time.time > nextTime)

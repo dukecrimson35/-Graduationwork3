@@ -189,21 +189,6 @@ public class SceneManagement : MonoBehaviour
     {
         audioSource.volume = 0.1f * Data.bgmVol;
 
-        //if(sceneName == "EndingScene")
-        //{
-        //    if(Input.GetKeyDown(KeyCode.M))
-        //    {
-        //        OnClickTitleButton();
-        //    }
-        //}
-
-        //if(Input.GetKey(KeyCode.Alpha0) && Input.GetKeyDown(KeyCode.Alpha7))
-        //{
-        //    Data.stage2 = true;
-        //    Data.stage3 = true;
-        //}
-
-
         switch (Data.bgm)
         {
             case 0:
@@ -271,7 +256,7 @@ public class SceneManagement : MonoBehaviour
         else if (sceneName == "Stage01")
         {
 
-            //Debug.Log(Data.voiceFlag);
+           
 
             if(!bossspawnScript.GetEnemyMove() && !oneVFlag)
             {
