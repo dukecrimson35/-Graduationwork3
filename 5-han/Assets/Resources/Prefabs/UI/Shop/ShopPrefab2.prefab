@@ -183,14 +183,14 @@ RectTransform:
   m_GameObject: {fileID: 6804172581225172237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 0.2, z: 1}
+  m_LocalScale: {x: 1.1, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 6885400418421900294}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 361, y: -3}
+  m_AnchoredPosition: {x: 346, y: -3}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2979002780150719100
@@ -286,8 +286,8 @@ MonoBehaviour:
   itemList:
   - "\u56DE\u5FA9\u85AC"
   - "\u4E0A\u56DE\u5FA9\u85AC"
-  - "\u7D05\u6708\u5200\u306E\u66F8"
-  - "\u9752\u5929\u5200\u306E\u66F8"
+  - "\u7D05\u6708\u306E\u66F8"
+  - "\u9752\u5929\u306E\u66F8"
   - "\u3082\u3069\u308B"
   coinList: 580200001a040000c8000000c800000000000000
   yazirusiText: {fileID: 6885400418917352208}
@@ -952,14 +952,14 @@ RectTransform:
   m_GameObject: {fileID: 8812687949287932960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 0.2, z: 1}
+  m_LocalScale: {x: 1.1, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 6885400418421900294}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 361, y: 95}
+  m_AnchoredPosition: {x: 346, y: 95}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1339006400100552719

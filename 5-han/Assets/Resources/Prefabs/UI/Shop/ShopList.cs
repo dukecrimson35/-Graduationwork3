@@ -437,10 +437,10 @@ public class ShopList : MonoBehaviour
         {            
             switch(itemList[i])
             {
-                case "紅月刀の書":
+                case "紅月の書":
                     haveItems.Add(Data.bSkillCount);
                     break;
-                case "青天刀の書":
+                case "青天の書":
                     haveItems.Add(Data.xSkillCount);
                     break;
                 case "まきもの3":
