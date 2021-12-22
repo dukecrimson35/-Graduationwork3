@@ -189,6 +189,16 @@ public class SceneManagement : MonoBehaviour
     {
         audioSource.volume = 0.1f * Data.bgmVol;
 
+        if(Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            SceneManager.LoadScene("sugaharaScene2");
+        }
+        if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
+
+
         switch (Data.bgm)
         {
             case 0:

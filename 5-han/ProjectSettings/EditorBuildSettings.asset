@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndingScene.unity
     guid: 93f7b7fcce7f6d442abd8dbe868147ed
+  - enabled: 1
+    path: Assets/Scenes/sugaharaScene2.unity
+    guid: 2b06c7d9ab36a4b40851838bedefdc7a
   m_configObjects: {}
