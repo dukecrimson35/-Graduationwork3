@@ -716,6 +716,7 @@ public class PlayerControl : MonoBehaviour
                     if (move.GetIsMove())
                     {
                         float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
+                        AfterImage(Vector3.zero, Vector3.zero);
                         transform.position += senku * len + senku * 2;
                         loopCount++;
                         lockSpTime = 0;
@@ -724,6 +725,7 @@ public class PlayerControl : MonoBehaviour
                     else
                     {
                         float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
+                        AfterImage(Vector3.zero, Vector3.zero);
                         transform.position += senku * len - senku * 2;
                         loopCount++;
                         lockSpTime = 0;
@@ -743,7 +745,6 @@ public class PlayerControl : MonoBehaviour
                     be.Damage(10);
                     if (be == null)
                     {
-
                         ShotEnemy st = sp.GetObjList()[i].GetComponent<ShotEnemy>();
                     }
                 }
