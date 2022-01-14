@@ -558,7 +558,7 @@ public class PlayerControl : MonoBehaviour
     void SenkuEffect(Vector3 pos)
     {
         GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
-        after.transform.position += pos;
+        after.transform.position = pos;
         float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI;
         after.transform.rotation = Quaternion.Euler(0, 0, ang);
         if (currentDirec == Direc.Left)
@@ -584,11 +584,22 @@ public class PlayerControl : MonoBehaviour
         camera.StartCameraShock();
 
     }
-    void SenkuEffect()
+    void SenkuEffect(Vector3 pos, float ang)
     {
-      
-
+        GameObject after = Instantiate((GameObject)Resources.Load("SenkuEffect"));
+        after.transform.position = pos;
+        // float ang = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI;
+        after.transform.rotation = Quaternion.Euler(0, 0, ang);
+        SenkuEffect se = after.GetComponent<SenkuEffect>();
+        se.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        if (currentDirec == Direc.Right)
+        {
+           se = after.GetComponent<SenkuEffect>();
+            se.gameObject.GetComponent<SpriteRenderer>().flipY = true;
+        }
     }
+
+
     void Special()
     {
         float tes = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI + 180;
@@ -686,7 +697,7 @@ public class PlayerControl : MonoBehaviour
                 if (loopCount < sp.GetListCount())
                 {
                     Vector3 vel = sp.GetObjList()[loopCount].transform.position - transform.position;
-                    moveColider.transform.localScale = new Vector3(vel.magnitude +3, 1, 1);
+                    moveColider.transform.localScale = new Vector3(vel.magnitude + 3, 1, 1);
                     float ang = Mathf.Atan2(vel.y, vel.x) * 180 / Mathf.PI + 180;
                     moveColider.transform.position = transform.position;
                     moveColider.transform.rotation = Quaternion.Euler(0, 0, ang);
@@ -717,15 +728,23 @@ public class PlayerControl : MonoBehaviour
                     {
                         float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
                         AfterImage(Vector3.zero, Vector3.zero);
+
+                        Vector3 vel = sp.GetObjList()[loopCount].transform.position - transform.position;
+                        float ang = Mathf.Atan2(vel.y, vel.x) * 180 / Mathf.PI + 180;
+                        SenkuEffect(sp.GetObjList()[loopCount].transform.position,ang);
                         transform.position += senku * len + senku * 2;
                         loopCount++;
                         lockSpTime = 0;
                         audio.PlayOneShot(senkugiri);
                     }
+                   
                     else
                     {
+                        Vector3 vel = sp.GetObjList()[loopCount].transform.position - transform.position;
+                        float ang = Mathf.Atan2(vel.y, vel.x) * 180 / Mathf.PI + 180;
                         float len = (transform.position - sp.GetObjList()[loopCount].transform.position).magnitude;
                         AfterImage(Vector3.zero, Vector3.zero);
+                        SenkuEffect(sp.GetObjList()[loopCount].transform.position,ang);
                         transform.position += senku * len - senku * 2;
                         loopCount++;
                         lockSpTime = 0;
