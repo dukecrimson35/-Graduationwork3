@@ -50,6 +50,7 @@ public class PlayerControl : MonoBehaviour
     bool clearFlag;
     float clearTime;
     StartMovie startMovie;
+    bool keyDown = false;
     enum Direc
     {
         Right,Left,
@@ -152,7 +153,6 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GetClearFlag());
         Physics.Simulate(Time.deltaTime);
         audio.volume = Data.seVol;
         if (Time.timeScale <= 0) return;
@@ -162,7 +162,7 @@ public class PlayerControl : MonoBehaviour
             if (!movieFlag && startMovie.GetMovieEnd()) 
             {
                 Move();
-               
+                Heel();
                 SenkuGiri();
                 if(Data.bSkill)
                 {
@@ -855,7 +855,6 @@ public class PlayerControl : MonoBehaviour
         muteki -= Time.deltaTime;
         if (muteki < 0)
         {
-
             gameObject.layer = 8;
         }
         else if (muteki > 0)
@@ -916,6 +915,26 @@ public class PlayerControl : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+    void Heel()
+    {
+        if (Input.GetAxis("Heel") < 0 && !keyDown) 
+        {
+            GameObject ef = Instantiate((GameObject)Resources.Load("HeelEffect"));
+            ef.transform.position = transform.position;
+            ef.transform.parent = gameObject.transform;
+            ef.transform.localScale = new Vector3(1, 1, 1);
+            Debug.Log("heel");
+            keyDown = true;
+        }
+       else  if (Input.GetAxis("Heel") < 0 && keyDown)
+        {
+            keyDown = true;
+        }
+        else
+        {
+            keyDown = false;
         }
     }
 }
