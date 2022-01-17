@@ -14,6 +14,12 @@ public class SyouninShopScript : MonoBehaviour
     {
         itemManager = GameObject.Find("ItemManagerOBJ");
         itemManagerScript = itemManager.GetComponent<ItemManager>();
+
+        Data.oneShopFlag = false;
+        GameObject instance =
+                   (GameObject)Instantiate(shopPrefab,
+                   new Vector3(0, 0, 0.0f), Quaternion.identity);
+        
     }
 
     // Update is called once per frame

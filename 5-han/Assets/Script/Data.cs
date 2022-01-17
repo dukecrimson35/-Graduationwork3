@@ -57,7 +57,8 @@ public  class Data : MonoBehaviour
     public static bool stage1 = true;
     public static bool stage2 = false;
     public static bool stage3 = false;
-    
+
+    public static bool oneShopFlag = false;
 
     //public static bool shopOpenFlag = false;
 
