@@ -35,13 +35,21 @@ public class SyouninShopScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (GameObject.Find("ShopPrefab(Clone)") == null)
+            if(!Data.shopFlag)
             {
+                Time.timeScale = 0;
                 GameObject instance =
                    (GameObject)Instantiate(shopPrefab,
                    new Vector3(0, 0, 0.0f), Quaternion.identity);
-                //Time.timeScale = 0;
+                
             }
+            //if (GameObject.Find("ShopPrefab(Clone)") == null)
+            //{
+            //    GameObject instance =
+            //       (GameObject)Instantiate(shopPrefab,
+            //       new Vector3(0, 0, 0.0f), Quaternion.identity);
+            //    //Time.timeScale = 0;
+            //}
         }
     }
 

@@ -52,7 +52,7 @@ public class SceneManagement : MonoBehaviour
     void Start()
     {
         audioSource.volume = 0.1f;
-        Application.targetFrameRate = 144;
+        Application.targetFrameRate = 100;
         oneVFlag = false;
         Data.selectBgmFlag = false;
         Data.voiceFlag = false;
@@ -189,14 +189,15 @@ public class SceneManagement : MonoBehaviour
     {
         audioSource.volume = 0.1f * Data.bgmVol;
 
-        if(Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            SceneManager.LoadScene("sugaharaScene2");
-        }
-        if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            SceneManager.LoadScene("TitleScene");
-        }
+        //ボタン消えてるタイトルシーン（動画用コマンド）
+        //if(Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha9))
+        //{
+        //    SceneManager.LoadScene("sugaharaScene2");
+        //}
+        //if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    SceneManager.LoadScene("TitleScene");
+        //}
 
 
         switch (Data.bgm)

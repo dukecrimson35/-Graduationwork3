@@ -56,104 +56,218 @@ public class ShopList : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        if(Data.bSkill)
+        //if (Data.bSkill)
+        //{
+        //    kesisen.color = new Color(kesisen.color.r, kesisen.color.g, kesisen.color.b, 1);
+        //}
+        //if (Data.xSkill)
+        //{
+        //    kesisen2.color = new Color(kesisen2.color.r, kesisen2.color.g, kesisen2.color.b, 1);
+        //}
+
+        ////リストに入っているテキストをメニューに並べる(アイテム名)
+        //for (int i = 0; i < itemList.Count; i++)
+        //{
+        //    if (itemList[i] == Data.bSkillName && Data.bSkill)
+        //    {
+        //        delItem.Add(i);
+        //    }
+        //    if (itemList[i] == Data.xSkillName && Data.xSkill)
+        //    {
+        //        delItem.Add(i);
+        //    }
+
+        //    text.text = itemList[i];
+
+        //    Text instance =
+        //        (Text)Instantiate(text,
+        //        new Vector3(pos.x + 50.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+        //    instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+        //}
+
+        ////リストに入っているテキストをメニューに並べる(アイテム値段)
+        //for (int i = 0; i < coinList.Count - 1; i++)
+        //{
+        //    bool check = false;
+        //    for (int j = 0; j < delItem.Count; j++)
+        //    {
+        //        if (delItem[j] == i)
+        //        {
+        //            text.text = "売り切れ";
+
+        //            Text instance2 =
+        //                (Text)Instantiate(text,
+        //                new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+        //            instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+        //            check = true;
+        //            itemNedanText.Add(instance2);
+        //        }
+        //    }
+
+        //    if (check) continue;
+
+        //    text.text = coinList[i].ToString();
+
+        //    Text instance =
+        //        (Text)Instantiate(text,
+        //        new Vector3(pos.x + 445.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+        //    instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+        //    itemNedanText.Add(instance);
+        //}
+
+        //HaveNumver();
+        ////リストに入っているテキストをメニューに並べる(アイテム数)
+        //for (int i = 0; i < haveItems.Count; i++)
+        //{
+        //    bool check = false;
+        //    for (int j = 0; j < delItem.Count; j++)
+        //    {
+        //        if (delItem[j] == i)
+        //        {
+        //            check = true;
+        //            text.text = "";
+
+        //            Text instance2 =
+        //                (Text)Instantiate(text,
+        //                new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+        //            instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+        //            haveItemText.Add(instance2);
+        //        }
+        //    }
+        //    if (check) continue;
+
+        //    text.text = "(" + ")";//+ haveItems[i].ToString()
+
+        //    Text instance =
+        //        (Text)Instantiate(text,
+        //        new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+        //    instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+        //    haveItemText.Add(instance);
+        //}
+
+
+
+        //******************************************************************************
+        if (Data.bSkill)
         {
-            kesisen.color = new Color(kesisen.color.r, kesisen.color.g, kesisen.color.b,1);
+            kesisen.color = new Color(kesisen.color.r, kesisen.color.g, kesisen.color.b, 1);
         }
-        if(Data.xSkill)
+        if (Data.xSkill)
         {
-            kesisen2.color = new Color(kesisen2.color.r, kesisen2.color.g, kesisen2.color.b,1);
+            kesisen2.color = new Color(kesisen2.color.r, kesisen2.color.g, kesisen2.color.b, 1);
         }
 
         //リストに入っているテキストをメニューに並べる(アイテム名)
         for (int i = 0; i < itemList.Count; i++)
         {
-            if(itemList[i] == Data.bSkillName && Data.bSkill)
+            if (itemList[i] == Data.bSkillName && Data.bSkill)
             {
-                delItem.Add(i);             
+                delItem.Add(i);
             }
-            if(itemList[i] == Data.xSkillName && Data.xSkill)
+            if (itemList[i] == Data.xSkillName && Data.xSkill)
             {
                 delItem.Add(i);
             }
 
             text.text = itemList[i];
-         
+
             Text instance =
                 (Text)Instantiate(text,
-                new Vector3(pos.x + 50.0f +textWidthmove, pos.y - 15  - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+                new Vector3(pos.x + 50.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
 
             instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
         }
 
-        //リストに入っているテキストをメニューに並べる(アイテム値段)
-        for (int i = 0; i < coinList.Count - 1; i++)
-        {
-            bool check = false;
-            for(int j = 0; j< delItem.Count; j++)
-            {
-                if(delItem[j] == i)
-                {
-                    text.text = "売り切れ";
-
-                    Text instance2 =
-                        (Text)Instantiate(text,
-                        new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
-
-                    instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
-                    check = true;
-                    itemNedanText.Add(instance2);
-                }
-            }
-
-            if (check) continue;
-
-            text.text = coinList[i].ToString();
-
-            Text instance =
-                (Text)Instantiate(text,
-                new Vector3(pos.x + 445.0f +textWidthmove, pos.y - 15 - height *i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
-
-            instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
-            itemNedanText.Add(instance);
-        }
-
-        HaveNumver();
-        //リストに入っているテキストをメニューに並べる(アイテム数)
-        for (int i = 0; i < haveItems.Count; i++)
-        {
-            bool check = false;
-            for (int j = 0; j < delItem.Count; j++)
-            {
-                if (delItem[j] == i)
-                {
-                    check = true;
-                    text.text = "";
-
-                    Text instance2 =
-                        (Text)Instantiate(text,
-                        new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
-
-                    instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
-                    haveItemText.Add(instance2);
-                }
-            }
-            if (check) continue;
-
-            text.text = "("  + ")";//+ haveItems[i].ToString()
-
-            Text instance =
-                (Text)Instantiate(text,
-                new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15  - height *i - i * textHeightmove,  0.0f), Quaternion.identity, this.transform);
-
-            instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
-            haveItemText.Add(instance);
-        }
     }
+
+    bool oneFlag = false;
+    bool oneFlag2 = false;
 
     // Update is called once per frame
     void Update()
     {
+        if(!oneFlag)
+        {
+            //リストに入っているテキストをメニューに並べる(アイテム値段)
+            for (int i = 0; i < coinList.Count - 1; i++)
+            {
+                bool check = false;
+                for (int j = 0; j < delItem.Count; j++)
+                {
+                    if (delItem[j] == i)
+                    {
+                        text.text = "売り切れ";
+
+                        Text instance2 =
+                            (Text)Instantiate(text,
+                            new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+                        instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+                        check = true;
+                        itemNedanText.Add(instance2);
+                    }
+                }
+
+                if (check) continue;
+
+                text.text = coinList[i].ToString();
+
+                Text instance =
+                    (Text)Instantiate(text,
+                    new Vector3(pos.x + 445.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+                instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+                itemNedanText.Add(instance);
+            }
+
+            HaveNumver();
+            
+            oneFlag = true;
+            return;
+        }
+
+        if(!oneFlag2)
+        {
+            //リストに入っているテキストをメニューに並べる(アイテム数)
+            for (int i = 0; i < haveItems.Count; i++)
+            {
+                bool check = false;
+                for (int j = 0; j < delItem.Count; j++)
+                {
+                    if (delItem[j] == i)
+                    {
+                        check = true;
+                        text.text = "";
+
+                        Text instance2 =
+                            (Text)Instantiate(text,
+                            new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+                        instance2.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+                        haveItemText.Add(instance2);
+                    }
+                }
+                if (check) continue;
+
+                text.text = "(" + ")";//+ haveItems[i].ToString()
+
+                Text instance =
+                    (Text)Instantiate(text,
+                    new Vector3(pos.x + 360.0f + textWidthmove, pos.y - 15 - height * i - i * textHeightmove, 0.0f), Quaternion.identity, this.transform);
+
+                instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.1f);
+                haveItemText.Add(instance);
+            }
+            oneFlag2 = true;
+            Time.timeScale = 1;
+            return;
+        }
+
         if (Data.bSkill)
         {
             kesisen.color = new Color(kesisen.color.r, kesisen.color.g, kesisen.color.b, 1);
