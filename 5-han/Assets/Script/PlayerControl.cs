@@ -51,6 +51,7 @@ public class PlayerControl : MonoBehaviour
     float clearTime;
     StartMovie startMovie;
     bool keyDown = false;
+    float coolTime;
     enum Direc
     {
         Right,Left,
@@ -919,17 +920,28 @@ public class PlayerControl : MonoBehaviour
     }
     void Heel()
     {
-        if (Input.GetAxis("Heel") < 0 && !keyDown) 
+        coolTime += Time.deltaTime;
+        if(coolTime>1)
         {
+            coolTime = 1;
+        }
+        if (Input.GetAxis("Heel") < 0 && !keyDown && coolTime >= 0.5f)
+        {
+            coolTime = 0;
             GameObject ef = Instantiate((GameObject)Resources.Load("HeelEffect"));
             ef.transform.position = transform.position;
             ef.transform.parent = gameObject.transform;
             ef.transform.localScale = new Vector3(1, 1, 1);
             Debug.Log("heel");
             keyDown = true;
+
+            //
+
+            //
         }
-       else  if (Input.GetAxis("Heel") < 0 && keyDown)
+        else if (Input.GetAxis("Heel") < 0 && keyDown) 
         {
+            coolTime = 0;
             keyDown = true;
         }
         else
