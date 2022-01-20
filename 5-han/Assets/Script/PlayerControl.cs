@@ -52,6 +52,10 @@ public class PlayerControl : MonoBehaviour
     StartMovie startMovie;
     bool keyDown = false;
     float coolTime;
+
+    public GameObject playerHPUI;
+    public PlayerHpGauge hpGauge;
+
     enum Direc
     {
         Right,Left,
@@ -86,6 +90,12 @@ public class PlayerControl : MonoBehaviour
         moviePos = Vector3.zero;
         clearTime = 0;
         startMovie = GetComponentInChildren<StartMovie>();
+
+        if (GameObject.Find("HPBar"))
+        {
+            playerHPUI = GameObject.Find("HPBar");
+            hpGauge = playerHPUI.GetComponent<PlayerHpGauge>();
+        }
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -925,7 +935,7 @@ public class PlayerControl : MonoBehaviour
         {
             coolTime = 1;
         }
-        if (Input.GetAxis("Heel") < 0 && !keyDown && coolTime >= 0.5f)
+        if (Input.GetAxis("Heel") < 0 && !keyDown && coolTime >= 0.5f && Data.kaihuku > 0 && hp <= 90)
         {
             coolTime = 0;
             GameObject ef = Instantiate((GameObject)Resources.Load("HeelEffect"));
@@ -936,17 +946,32 @@ public class PlayerControl : MonoBehaviour
             keyDown = true;
 
             //
-
+            Data.kaihuku--;
+            hpGauge.Heal(10);
+            HealHp(10);
             //
         }
-        else if (Input.GetAxis("Heel") < 0 && keyDown) 
+        else if (Input.GetAxis("Heel") > 0 && !keyDown && coolTime >= 0.5f && Data.kaihuku2 > 0 && hp <= 80) 
         {
             coolTime = 0;
+            GameObject ef = Instantiate((GameObject)Resources.Load("HeelEffect"));
+            ef.transform.position = transform.position;
+            ef.transform.parent = gameObject.transform;
+            ef.transform.localScale = new Vector3(1, 1, 1);
+            Debug.Log("heel");
             keyDown = true;
+
+            //
+            Data.kaihuku2--;
+            hpGauge.Heal(20);
+            HealHp(20);
+            //
         }
         else
         {
             keyDown = false;
         }
+
+      
     }
 }

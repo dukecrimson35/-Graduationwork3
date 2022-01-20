@@ -7,7 +7,7 @@ public class Money : MonoBehaviour
     //プロパティ
     public int amount;//金額
     Rigidbody rb;
-
+    bool oneFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,18 @@ public class Money : MonoBehaviour
     {
         if(Data.shopFlag == true)
         {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            
+
+            if(!Data.oneShopFlag)
+            {
+
+            }
+            else
+            {
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+            }
+
+           
         }
     }
 
