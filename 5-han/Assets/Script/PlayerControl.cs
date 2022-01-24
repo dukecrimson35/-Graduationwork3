@@ -931,11 +931,11 @@ public class PlayerControl : MonoBehaviour
     void Heel()
     {
         coolTime += Time.deltaTime;
-        if(coolTime>1)
+        if (coolTime > 1) 
         {
             coolTime = 1;
         }
-        if (Input.GetAxis("Heel") < 0 && !keyDown && coolTime >= 0.5f && Data.kaihuku > 0 && hp <= 90)
+        if (Input.GetAxis("Heel") < 0 && !keyDown && coolTime >= 1f && Data.kaihuku > 0 && hp <= 90)
         {
             coolTime = 0;
             GameObject ef = Instantiate((GameObject)Resources.Load("HeelEffect"));
@@ -951,7 +951,7 @@ public class PlayerControl : MonoBehaviour
             HealHp(10);
             //
         }
-        else if (Input.GetAxis("Heel") > 0 && !keyDown && coolTime >= 0.5f && Data.kaihuku2 > 0 && hp <= 80) 
+        else if (Input.GetAxis("Heel") > 0 && !keyDown && coolTime >=1 && Data.kaihuku2 > 0 && hp <= 80) 
         {
             coolTime = 0;
             GameObject ef = Instantiate((GameObject)Resources.Load("HeelEffect"));
