@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossHpGauge : MonoBehaviour
 {
@@ -21,21 +22,58 @@ public class BossHpGauge : MonoBehaviour
 
     public GameObject boss;
     private BossEnemy bossScript;
+    private BirdBoss birdBoss;
+    private KyuubiBoss kyuubiBoss;
     private float bossHp;
     private float oldBossHp;
     private float bossMaxHP;
+
+    private string sceneName = "";
+
     // Start is called before the first frame update
     void Start()
     {
+        sceneName = SceneManager.GetActiveScene().name;
         //boss = GameObject.FindGameObjectWithTag("Player");
-        bossScript = boss.GetComponent<BossEnemy>();
+        if(sceneName == "Stage01")
+        {
+            bossScript = boss.GetComponent<BossEnemy>();
+            bossMaxHP = bossScript.GetHp();
+        }
+        else if(sceneName == "Stage02")
+        {
+            birdBoss = boss.GetComponent<BirdBoss>();
+            bossMaxHP = birdBoss.GetHp();
+        }
+        else if(sceneName == "Stage03")
+        {
+            kyuubiBoss = boss.GetComponent<KyuubiBoss>();
+            bossMaxHP = kyuubiBoss.GetHp();
+        }
+       
         
-        bossMaxHP = bossScript.GetHp();
+       
         bossHp = (bossMaxHP / bossMaxHP) * 100;
         oldBossHp = bossHp;
         GreenGauge.color = new Color(GreenGauge.color.r, GreenGauge.color.g, GreenGauge.color.b, alpha);
         RedGauge.color = new Color(RedGauge.color.r, RedGauge.color.g, RedGauge.color.b, alpha);
         Waku.color = new Color(Waku.color.r, Waku.color.g, Waku.color.b, alpha);
+    }
+
+    public void BossHpGet()
+    {
+        if (sceneName == "Stage01")
+        {
+            bossHp = (bossScript.GetHp() / bossMaxHP) * 100;
+        }
+        else if (sceneName == "Stage02")
+        {
+            bossHp = (birdBoss.GetHp() / bossMaxHP) * 100;
+        }
+        else if (sceneName == "Stage03")
+        {
+            bossHp = (kyuubiBoss.GetHp() / bossMaxHP) * 100;
+        }
     }
 
     // Update is called once per frame
@@ -81,7 +119,8 @@ public class BossHpGauge : MonoBehaviour
             RedGauge.fillAmount = GreenGauge.fillAmount;
         }
         oldBossHp = bossHp;
-        bossHp = (bossScript.GetHp()/ bossMaxHP) * 100;
+        BossHpGet();
+       // bossHp = (bossScript.GetHp()/ bossMaxHP) * 100;
     }
 
     public void Damage(float dame)
