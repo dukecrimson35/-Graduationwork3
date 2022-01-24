@@ -20,7 +20,7 @@ public class PauseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("joystick button 7"))
+        if (Input.GetKeyDown("joystick button 7") && !Data.voiceFlag && !Data.shopFlag)
         {
    
             if (pauseUIInstance == null)
