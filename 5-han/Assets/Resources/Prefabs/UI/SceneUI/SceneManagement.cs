@@ -51,6 +51,7 @@ public class SceneManagement : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         audioSource.volume = 0.1f;
         Application.targetFrameRate = 100;
         oneVFlag = false;
