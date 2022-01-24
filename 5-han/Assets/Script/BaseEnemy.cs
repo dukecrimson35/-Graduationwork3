@@ -59,7 +59,7 @@ public class BaseEnemy : MonoBehaviour
                 boss = GameObject.Find("oni_tati");
                 bosssc = boss.GetComponent<BossEnemy>();
             }
-            if (GameObject.Find("BossBird") != null)
+            if (GameObject.Find("kyuubi") != null)
             {
                 boss = GameObject.Find("kyuubi");
                 kyuubisc = boss.GetComponent<KyuubiBoss>();
