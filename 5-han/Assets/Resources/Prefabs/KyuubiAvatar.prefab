@@ -100,8 +100,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.8654394, y: 2.5642278, z: 0.2}
-  m_Center: {x: 0.006854534, y: -0.23356164, z: 0}
+  m_Size: {x: 2.8254356, y: 2.5642278, z: 0.2}
+  m_Center: {x: -0.09111661, y: -0.23356164, z: 0}
 --- !u!54 &-1421086259124173136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -233,6 +233,7 @@ MonoBehaviour:
     type: 3}
   Ora: {fileID: 0}
   se: {fileID: 0}
+  isBossDeath: 0
 --- !u!114 &430946431782170614
 MonoBehaviour:
   m_ObjectHideFlags: 0

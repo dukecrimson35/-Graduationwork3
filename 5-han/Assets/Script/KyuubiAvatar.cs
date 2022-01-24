@@ -90,7 +90,7 @@ public class KyuubiAvatar : MonoBehaviour
                 }
             }
 
-            if (onGround == true)
+            if (onGround == true)//ちょっと浮かす処理
             {
                 if (transform.position.x - playerPos.x >= 0)
                 {

@@ -12,12 +12,16 @@ public class Onibi : MonoBehaviour
     Vector3 axis;
     PlayerControl playerScript;//プレイヤーのスクリプト(ダメージ与えるよう)
     Vector3 movetoPos;//直線移動時の移動先
+    Vector3 toPlayer;//プレイヤーの単位ベクトル
+    GameObject player;
+    float c;
 
     enum Movetype
     {
         rotate,//円運動
         bullet,//直線移動
-        stay//とどまる
+        stay,//とどまる
+        bust,//発射
     }
     Movetype type;//移動パターン
 
@@ -26,6 +30,11 @@ public class Onibi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (speed <= 0)
+        {
+            speed = 1;
+        }
+        player = GameObject.Find("Player");
         axis = Vector3.forward;
         rigidbody = GetComponent<Rigidbody>();
     }
@@ -50,7 +59,7 @@ public class Onibi : MonoBehaviour
             tr.position = pos;
         }
 
-        if(type == Movetype.bullet)
+        if(type == Movetype.bullet)//指定地点まで移動
         {
             if (transform.position != movetoPos)
             {
@@ -59,6 +68,19 @@ public class Onibi : MonoBehaviour
             else
             {
                 type = Movetype.stay;
+            }
+        }
+
+        if(type == Movetype.bust)//弾として撃つ
+        {
+            c += Time.deltaTime;
+            rigidbody.velocity = toPlayer * speed;
+            
+            //そのうち消える処理
+            if(c >= 5)
+            {
+                Destroy(this.gameObject);
+                Destroy(this);
             }
         }
 
@@ -101,5 +123,20 @@ public class Onibi : MonoBehaviour
         {
             type = Movetype.stay;
         }
+        if(Typename == "bust")
+        {
+            type = Movetype.bust;
+        }
+    }
+
+    public void SetPlayer()
+    {
+        //プレイヤーがいる方向の単位ベクトルを取得
+        toPlayer = Vector3.Normalize(player.transform.position - transform.position);
+    }
+
+    public void SetSpeed(float value)
+    {
+        speed = value;
     }
 }

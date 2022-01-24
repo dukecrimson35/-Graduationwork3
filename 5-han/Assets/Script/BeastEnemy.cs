@@ -136,6 +136,11 @@ public class BeastEnemy : MonoBehaviour
                     state = State.normal;//通常モードに
                 }
             }
+
+            if (onGround == true)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
+            }
         }
         #endregion
 
@@ -153,6 +158,7 @@ public class BeastEnemy : MonoBehaviour
                 {
                     Texture.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
             }
             playerPos = player.transform.position;
             if (count >= 1)//攻撃に入って３秒後
