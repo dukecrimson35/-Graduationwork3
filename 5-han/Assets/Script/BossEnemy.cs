@@ -255,6 +255,8 @@ public class BossEnemy : MonoBehaviour
             }
             transform.position += pos;
             pos = Vector3.zero;
+
+            
         }
     }
     private void OnTriggerEnter(Collider collision)

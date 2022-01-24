@@ -57,7 +57,7 @@ public class BossHpGauge : MonoBehaviour
         //ゲームが始まったら出てくる
         if (!UIStartFlag)
         {
-            StartUIAlpha();
+            //StartUIAlpha();
         }
 
         if (greenDamage != 0)
@@ -100,19 +100,19 @@ public class BossHpGauge : MonoBehaviour
         GreenGauge.fillAmount += heal / 100;
     }
 
-    public void StartUIAlpha()
-    {
-        GreenGauge.color = new Color(GreenGauge.color.r, GreenGauge.color.g, GreenGauge.color.b, alpha);
-        RedGauge.color = new Color(RedGauge.color.r, RedGauge.color.g, RedGauge.color.b, alpha);
-        Waku.color = new Color(Waku.color.r, Waku.color.g, Waku.color.b, alpha);
+    //public void StartUIAlpha()
+    //{
+    //    GreenGauge.color = new Color(GreenGauge.color.r, GreenGauge.color.g, GreenGauge.color.b, alpha);
+    //    RedGauge.color = new Color(RedGauge.color.r, RedGauge.color.g, RedGauge.color.b, alpha);
+    //    Waku.color = new Color(Waku.color.r, Waku.color.g, Waku.color.b, alpha);
 
-        alpha += 2.5f * Time.deltaTime;
+    //    alpha += 2.5f * Time.deltaTime;
 
-        if (alpha >= 1.0f)
-        {
-            UIStartFlag = true;
-        }
-    }
+    //    if (alpha >= 1.0f)
+    //    {
+    //        UIStartFlag = true;
+    //    }
+    //}
 
     public void SetStartUIflag(bool fl)
     {
