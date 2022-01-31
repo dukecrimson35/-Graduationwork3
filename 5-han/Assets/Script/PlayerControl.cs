@@ -948,12 +948,12 @@ public class PlayerControl : MonoBehaviour
 
             //
             Data.kaihuku--;
-            hpGauge.Heal(10);
-            HealHp(10);
+            hpGauge.Heal(Data.heal1);
+            HealHp(Data.heal1);
             audio.PlayOneShot(healSE);
             //
         }
-        else if (Input.GetAxis("Heel") > 0 && !keyDown && coolTime >=1 && Data.kaihuku2 > 0 && hp <= 80) 
+        else if (Input.GetAxis("Heel") > 0 && !keyDown && coolTime >=1 && Data.kaihuku2 > 0 && hp <= 90) 
         {
             coolTime = 0;
             GameObject ef = Instantiate((GameObject)Resources.Load("HeelEffect"));
@@ -965,8 +965,9 @@ public class PlayerControl : MonoBehaviour
 
             //
             Data.kaihuku2--;
-            hpGauge.Heal(20);
-            HealHp(20);
+            hpGauge.Heal(Data.heal2);
+            HealHp(Data.heal2);
+            
             audio.PlayOneShot(healSE);
             //
         }

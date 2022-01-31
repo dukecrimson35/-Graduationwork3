@@ -61,6 +61,8 @@ public  class Data : MonoBehaviour
     public static bool oneShopFlag = false;
     public static bool oneUIFlag = false;
 
+    public static readonly int heal1 = 20;
+    public static readonly int heal2 = 40;
     //public static bool shopOpenFlag = false;
 
 

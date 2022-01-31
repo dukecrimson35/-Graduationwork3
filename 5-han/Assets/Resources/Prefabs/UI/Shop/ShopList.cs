@@ -525,12 +525,12 @@ public class ShopList : MonoBehaviour
         if (itemList[yazirusiCout] == Data.kaihukuStr)
         {
 
-            message2.text = "効果:HP10回復する";
+            message2.text = "効果:HP20回復する";
         }
         if (itemList[yazirusiCout] == Data.kaihuku2Str)
         {
 
-            message2.text = "効果:HP20回復する";
+            message2.text = "効果:HP40回復する";
         }
 
         if (itemList[yazirusiCout] == Data.bSkillName)

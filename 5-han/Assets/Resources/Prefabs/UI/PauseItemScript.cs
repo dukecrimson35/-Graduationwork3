@@ -322,11 +322,11 @@ public class PauseItemScript : MonoBehaviour
         if (flag) return;
         if (Data.dataItemStringList[yazirusiCout] == Data.kaihukuStr)
         {         
-            message.text = "HP10回復する";
+            message.text = "HP20回復する";
         }
         if (Data.dataItemStringList[yazirusiCout] == Data.kaihuku2Str)
         {
-            message.text = "HP20回復する";
+            message.text = "HP40回復する";
         }
 
         if (Data.dataItemStringList[yazirusiCout] == Data.bSkillName)
