@@ -122,6 +122,50 @@ public class SceneManagement : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        Data.shopFlag = false;
+        //デバックのため後で0に戻す
+        Data.coin = 0;
+
+        Data.bSkillCount = 0;
+        Data.kaihuku = 0;
+        Data.kaihuku2 = 0;
+        Data.xSkillCount = 0;
+        Data.makimono3 = 0;
+
+        Data.pauseWindFlag = false;
+        Data.pauseItemListFlag = false;
+
+        //急遽作ったやつ、後で別仕様に変更
+        Data.titleSceneFlag = false;
+        Data.selectSceneFlag = false;
+
+        //プレイしたステージ番号　
+        Data.stageNum = 0;
+        //
+        Data.voiceFlag = false;
+
+        Data.bgm = 2;
+        Data.se = 2;
+        Data.bgmVol = 1;
+        Data.seVol = 1;
+
+        Data.bossWallStartFlag = false;
+
+        Data.bSkill = false;
+        Data.xSkill = false;
+        Data.ySkill = false;
+
+        Data.stage1 = true;
+        Data.stage2 = false;
+        Data.stage3 = false;
+
+        Data.oneShopFlag = false;
+        Data.oneUIFlag = false;
+
+    }
+
     float seVol = 5;
     IEnumerator PlayTitleCall()
     {
@@ -200,6 +244,11 @@ public class SceneManagement : MonoBehaviour
         //    SceneManager.LoadScene("TitleScene");
         //}
 
+        //プレイ会デバッグ
+        if(Input.GetKey(KeyCode.R)  && Input.GetKeyDown(KeyCode.Return))
+        {
+            Reset();
+        }
 
         switch (Data.bgm)
         {
