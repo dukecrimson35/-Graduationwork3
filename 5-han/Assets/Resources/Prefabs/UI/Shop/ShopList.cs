@@ -439,6 +439,7 @@ public class ShopList : MonoBehaviour
             if(Data.bSkillCount < 1 && !Data.bSkill)
             {
                 Data.bSkillCount++;
+                Data.bSkill = true;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
                 audioSource.PlayOneShot(kauSE);
@@ -457,6 +458,7 @@ public class ShopList : MonoBehaviour
             if (Data.xSkillCount < 1 && !Data.xSkill)
             {
                 Data.xSkillCount++;
+                Data.xSkill = true;
                 Data.coin -= coinList[yazirusiCout];
                 message.text = itemName + "を買いました";
                 audioSource.PlayOneShot(kauSE);

@@ -228,23 +228,23 @@ public class PauseItemScript : MonoBehaviour
 
             if (Data.dataItemStringList[yazirusiCout] == Data.bSkillName)
             {
-                if (Data.bSkillCount > 0)
-                {
-                    int num = itemHavelistName.IndexOf(Data.bSkillName);
-                    itemHavelistNum[num]--;
-                    Data.bSkill = true;
-                    Data.bSkillCount--;
-                }
+                //if (Data.bSkillCount > 0)
+                //{
+                //    int num = itemHavelistName.IndexOf(Data.bSkillName);
+                //    itemHavelistNum[num]--;
+                //    Data.bSkill = true;
+                //    Data.bSkillCount--;
+                //}
             }
             if (Data.dataItemStringList[yazirusiCout] == Data.xSkillName)
             {
-                if (Data.xSkillCount > 0)
-                {
-                    int num = itemHavelistName.IndexOf(Data.xSkillName);
-                    itemHavelistNum[num]--;
-                    Data.xSkill = true;
-                    Data.xSkillCount--;
-                }
+                //if (Data.xSkillCount > 0)
+                //{
+                //    int num = itemHavelistName.IndexOf(Data.xSkillName);
+                //    itemHavelistNum[num]--;
+                //    Data.xSkill = true;
+                //    Data.xSkillCount--;
+                //}
             }
             if (Data.dataItemStringList[yazirusiCout] == "まきもの3")
             {
