@@ -2600,6 +2600,11 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 6733681255487032541, guid: 03489c61db68ec74794717c2033ad7a2,
+        type: 3}
+      propertyPath: healSE
+      value: 
+      objectReference: {fileID: 8300000, guid: dbdfe287da36ccc40b1d2ee12eac7eef, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03489c61db68ec74794717c2033ad7a2, type: 3}
 --- !u!1001 &252195047

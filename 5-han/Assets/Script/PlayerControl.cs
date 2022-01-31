@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour
     public AudioClip dead;
     public AudioClip powerslash;
     public AudioClip coin;
+    public AudioClip healSE;
     AudioSource audio;
     int hp = 100;
     private GameObject itemManager;
@@ -949,6 +950,7 @@ public class PlayerControl : MonoBehaviour
             Data.kaihuku--;
             hpGauge.Heal(10);
             HealHp(10);
+            audio.PlayOneShot(healSE);
             //
         }
         else if (Input.GetAxis("Heel") > 0 && !keyDown && coolTime >=1 && Data.kaihuku2 > 0 && hp <= 80) 
@@ -965,6 +967,7 @@ public class PlayerControl : MonoBehaviour
             Data.kaihuku2--;
             hpGauge.Heal(20);
             HealHp(20);
+            audio.PlayOneShot(healSE);
             //
         }
         else
