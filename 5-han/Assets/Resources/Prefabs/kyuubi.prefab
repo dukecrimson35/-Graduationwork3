@@ -156,6 +156,7 @@ MonoBehaviour:
     type: 3}
   hole01: {fileID: 3640324421659814457}
   hole02: {fileID: 4618888010935807781}
+  shadow: {fileID: 8876072828204578034, guid: 4a02869ea1969f046812fb235276371e, type: 3}
 --- !u!95 &5979210990664124523
 Animator:
   serializedVersion: 3

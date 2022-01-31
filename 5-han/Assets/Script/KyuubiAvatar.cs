@@ -13,6 +13,7 @@ public class KyuubiAvatar : MonoBehaviour
     bool moveFlag;
     bool onGround;//地面にいるかどうか
     public float junpP;//ジャンプ力
+    SpriteRenderer sprite;
 
     float count;//時間カウント
     int delayTime;//動くまでの時間
@@ -42,6 +43,7 @@ public class KyuubiAvatar : MonoBehaviour
         {
             range = reverse.GetComponent<WallRange>();
         }
+        sprite = Texture.GetComponent<SpriteRenderer>();
         //delayTime = 3;//動くまでの時間の初期値100秒
     }
 
@@ -49,6 +51,11 @@ public class KyuubiAvatar : MonoBehaviour
     void Update()
     {
         if (Time.timeScale <= 0) return;//ポーズ中は動かない
+
+        if(sprite.color.a < 0.75f)
+        {
+            sprite.color += new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.01f);
+        }
 
         count += Time.deltaTime;
         if (hitflag)
