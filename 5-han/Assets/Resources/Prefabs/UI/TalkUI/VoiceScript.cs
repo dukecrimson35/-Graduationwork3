@@ -62,10 +62,10 @@ public class VoiceScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            novelSpeed = 0;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    novelSpeed = 0;
+        //}
         if (oneFlag) return;//一回しか呼ばないため
 
        
