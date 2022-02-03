@@ -245,10 +245,10 @@ public class SceneManagement : MonoBehaviour
         //}
 
         //プレイ会デバッグ
-        //if (Input.GetKey(KeyCode.R) && Input.GetKeyDown(KeyCode.Return))
-        //{
-        //    Reset();
-        //}
+        if (Input.GetKey(KeyCode.R) && Input.GetKeyDown(KeyCode.Return))
+        {
+            Reset();
+        }
 
         switch (Data.bgm)
         {
