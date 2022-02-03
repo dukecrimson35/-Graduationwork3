@@ -158,7 +158,7 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Power", false);
             anim.SetBool("Power2", false);
             anim.SetBool("Clear", true);
-
+            rigid.velocity = new Vector3(0, 0, 0);
             Destroy(collision.gameObject);
         }
     }
