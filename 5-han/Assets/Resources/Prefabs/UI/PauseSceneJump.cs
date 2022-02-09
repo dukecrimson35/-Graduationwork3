@@ -156,6 +156,17 @@ public class PauseSceneJump : MonoBehaviour
             StartCoroutine(Coroutine());
         }
 
+        if (Data.pauseWindFlag == false)
+        {
+            Data.pauseWindFlag = false;
+            Destroy(this.gameObject.transform.parent.parent.gameObject);
+        }
+        if(Input.GetKeyDown("joystick button 7"))
+        {
+            Data.pauseWindFlag = false;
+            Destroy(this.gameObject.transform.parent.parent.gameObject);
+        }
+
 
         //メニュー閉じる処理
         if (Input.GetKeyDown("joystick button 0") && yazirusiCout == itemList.Count - 1)
