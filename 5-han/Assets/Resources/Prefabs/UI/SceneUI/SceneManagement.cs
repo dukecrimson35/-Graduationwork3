@@ -235,7 +235,7 @@ public class SceneManagement : MonoBehaviour
         audioSource.volume = 0.1f * Data.bgmVol;
 
         //ボタン消えてるタイトルシーン（動画用コマンド）
-        //if(Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha9))
+        //if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha9))
         //{
         //    SceneManager.LoadScene("sugaharaScene2");
         //}
@@ -248,6 +248,8 @@ public class SceneManagement : MonoBehaviour
         //if (Input.GetKey(KeyCode.R) && Input.GetKeyDown(KeyCode.Return))
         //{
         //    Reset();
+        //    Time.timeScale = 1.0f;
+        //    SceneManager.LoadScene("TitleScene");
         //}
 
         switch (Data.bgm)
